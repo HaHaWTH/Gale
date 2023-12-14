@@ -13,10 +13,10 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index db0aa97608cc209ad63a93443498c7ffa362968f..a684be3ed6a464816eabdfe94f0ce1bf5bd91b54 100644
+index 5ed738854aebc3ca56dfba72e91971593c7a0db9..9701f93f0b6c51b01b05a54ed7482dbff75d9e8e 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-@@ -268,6 +268,7 @@ public class ServerPlayer extends Player {
+@@ -275,6 +275,7 @@ public class ServerPlayer extends Player {
      public boolean joining = true;
      public boolean sentListPacket = false;
      public boolean supressTrackerForLogin = false; // Paper
@@ -25,25 +25,25 @@ index db0aa97608cc209ad63a93443498c7ffa362968f..a684be3ed6a464816eabdfe94f0ce1bf
      public boolean isRealPlayer; // Paper
      public final com.destroystokyo.paper.util.misc.PooledLinkedHashSets.PooledObjectLinkedOpenHashSet<ServerPlayer> cachedSingleHashSet; // Paper
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index fd01a4ffb44024e46ea6d45dabd8f851cb8ebfa5..80140474fc1b43009e757d1fa7d1324ee9f35bca 100644
+index ec436869418f7c983d635e662b7c0d9eb77c6d13..6f3d36758bbeb6a5f0c3d7681fa09d09ce25a721 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2258,6 +2258,10 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
-             if (this.player.isRemoved() || this.player.getChatVisibility() == ChatVisiblity.HIDDEN) { // CraftBukkit - dead men tell no tales
-                 this.send(new ClientboundSystemChatPacket(PaperAdventure.asAdventure(Component.translatable("chat.disabled.options").withStyle(ChatFormatting.RED)), false)); // Paper - Adventure
-                 return Optional.empty();
-+                // Gale start - EMC - do not process chat/commands before player has joined
-+            } else if (!player.didPlayerJoinEvent) {
-+                return Optional.empty();
-+                // Gale end - EMC - do not process chat/commands before player has joined
-             } else {
-                 this.player.resetLastActionTime();
-                 return optional;
+@@ -2274,6 +2274,10 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+         if (this.player.isRemoved() || this.player.getChatVisibility() == ChatVisiblity.HIDDEN) { // CraftBukkit - dead men tell no tales
+             this.send(new ClientboundSystemChatPacket(Component.translatable("chat.disabled.options").withStyle(ChatFormatting.RED), false));
+             return Optional.empty();
++            // Gale start - EMC - do not process chat/commands before player has joined
++        } else if (!player.didPlayerJoinEvent) {
++            return Optional.empty();
++            // Gale end - EMC - do not process chat/commands before player has joined
+         } else {
+             this.player.resetLastActionTime();
+             return optional;
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 33abcf12b4426572b74ca4c813e4392c823494bc..0f8eac5bf5e8f59c511f4b0040bc8a84b8a05c5c 100644
+index a35638a92479b90afa89cf201fc45b49c9e767f3..05eaf2174e055bb78c58c8c2a2b51b17c898ff47 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -349,6 +349,8 @@ public abstract class PlayerList {
+@@ -347,6 +347,8 @@ public abstract class PlayerList {
              return;
          }
  

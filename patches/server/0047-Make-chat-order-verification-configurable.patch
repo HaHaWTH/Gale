@@ -12,22 +12,27 @@ By: Kevin Raneri <kevin.raneri@gmail.com>
 As part of: Pufferfish (https://github.com/pufferfish-gg/Pufferfish)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
-diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 11c0f81a6966ba07be793cd6778a5ce14b156898..fd01a4ffb44024e46ea6d45dabd8f851cb8ebfa5 100644
---- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-+++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2281,6 +2281,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
-     }
+diff --git a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
+index 85a8a687b1568a56e3e646b37ef78b562c1b8a82..992617212932a38f5586cd3d0e1fbebb3a8d4f14 100644
+--- a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
++++ b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
+@@ -9,6 +9,7 @@ import net.minecraft.util.SignatureUpdater;
+ import net.minecraft.util.SignatureValidator;
+ import net.minecraft.util.Signer;
+ import net.minecraft.world.entity.player.ProfilePublicKey;
++import org.galemc.gale.configuration.GaleGlobalConfiguration;
+ import org.slf4j.Logger;
  
-     private boolean updateChatOrder(Instant timestamp) {
-+        // Gale start - Pufferfish - make chat order verification configurable
-+        if (!GaleGlobalConfiguration.get().misc.verifyChatOrder) {
-+            return true;
-+        }
-+        // Gale end - Pufferfish - make chat order verification configurable
-         Instant instant1;
- 
-         do {
+ public class SignedMessageChain {
+@@ -38,7 +39,7 @@ public class SignedMessageChain {
+                 throw new SignedMessageChain.DecodeException(Component.translatable("chat.disabled.chain_broken"), false); // Paper - diff on change (if disconnects, need a new kick event cause)
+             } else if (playerPublicKey.data().hasExpired()) {
+                 throw new SignedMessageChain.DecodeException(Component.translatable("chat.disabled.expiredProfileKey", org.bukkit.event.player.PlayerKickEvent.Cause.EXPIRED_PROFILE_PUBLIC_KEY), false); // Paper - kick event causes
+-            } else if (body.timeStamp().isBefore(this.lastTimeStamp)) {
++            } else if (body.timeStamp().isBefore(this.lastTimeStamp) && GaleGlobalConfiguration.get().misc.verifyChatOrder) { // Gale - Pufferfish - make chat order verification configurable
+                 throw new SignedMessageChain.DecodeException(Component.translatable("multiplayer.disconnect.out_of_order_chat", org.bukkit.event.player.PlayerKickEvent.Cause.OUT_OF_ORDER_CHAT), true); // Paper - kick event causes
+             } else {
+                 this.lastTimeStamp = body.timeStamp();
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 index 346fdf6f8a76539fa9ca46015ee122417e4a8102..7c781eabbb6df5df9f9f2cbdeef4e116ca30b645 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java

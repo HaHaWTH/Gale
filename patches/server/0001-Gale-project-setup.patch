@@ -7,20 +7,20 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 57f2c414dbfe127c193002fbc8eeb22e94e9cb55..f84011f83ebf238023ae6900873b0dfc9dfd0bd4 100644
+index 170a915098f09ace226648da342a04c5c7583d11..7d3a506ed7c4e966baf5c17fba76fd08ac218e3b 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -13,8 +13,14 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
- val alsoShade: Configuration by configurations.creating
+@@ -27,8 +27,14 @@ repositories {
  
  dependencies {
+     extraRuntime(platform("net.kyori:adventure-bom:4.15.0-SNAPSHOT"))
 -    implementation(project(":paper-api"))
 -    implementation(project(":paper-mojangapi"))
 +    // Gale start - project setup
 +    // Depend on own API
 +    implementation(project(":gale-api"))
 +    // Depend on Paper MojangAPI
-+    implementation("io.papermc.paper:paper-mojangapi:1.20.1-R0.1-SNAPSHOT") {
++    implementation("io.papermc.paper:paper-mojangapi:${project.version}") {
 +        exclude("io.papermc.paper", "paper-api")
 +    }
 +    // Gale end - project setup

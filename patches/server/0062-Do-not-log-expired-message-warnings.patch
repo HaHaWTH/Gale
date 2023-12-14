@@ -7,18 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
-index c0a80824a0307ea673805015119cc834b268f0dc..d7c6e90ccf3a8ce58e5533c5158ce62668cbcb78 100644
+index 992617212932a38f5586cd3d0e1fbebb3a8d4f14..a61b904b59651b2b9d4dfab7126677ec08a376ac 100644
 --- a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
 +++ b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
-@@ -8,6 +8,7 @@ import net.minecraft.util.SignatureUpdater;
- import net.minecraft.util.SignatureValidator;
- import net.minecraft.util.Signer;
- import net.minecraft.world.entity.player.ProfilePublicKey;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
- import org.slf4j.Logger;
- 
- public class SignedMessageChain {
-@@ -42,7 +43,7 @@ public class SignedMessageChain {
+@@ -48,7 +48,7 @@ public class SignedMessageChain {
                      throw new SignedMessageChain.DecodeException(Component.translatable("multiplayer.disconnect.unsigned_chat"), true, org.bukkit.event.player.PlayerKickEvent.Cause.UNSIGNED_CHAT); // Paper - kick event causes
                  } else {
                      if (playerChatMessage.hasExpiredServer(Instant.now())) {

@@ -17,7 +17,7 @@ Licensed under: MIT (https://opensource.org/licenses/MIT)
 Only do an item "suck in" action once per second
 
 diff --git a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
-index eb0351aa12eebcefab1d1d14641fc3c60cbbcab8..760e54d74fc027e631e45b07b729d060511d5bfd 100644
+index a39db702063887cf530f272deaf4f334047cc7d4..2abd920e78a4da56654da87034c36c77d2fc6b35 100644
 --- a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
 @@ -14,11 +14,13 @@ import net.minecraft.world.entity.Entity;
@@ -34,7 +34,7 @@ index eb0351aa12eebcefab1d1d14641fc3c60cbbcab8..760e54d74fc027e631e45b07b729d060
  import net.minecraft.world.phys.Vec3;
  import net.minecraft.core.BlockPos;
  import net.minecraft.nbt.CompoundTag;
-@@ -209,11 +211,31 @@ public class ItemEntity extends Entity implements TraceableEntity {
+@@ -227,11 +229,31 @@ public class ItemEntity extends Entity implements TraceableEntity {
                  }
                  // CraftBukkit end
                  this.discard();
@@ -66,7 +66,7 @@ index eb0351aa12eebcefab1d1d14641fc3c60cbbcab8..760e54d74fc027e631e45b07b729d060
      // Spigot start - copied from above
      @Override
      public void inactiveTick() {
-@@ -233,7 +255,13 @@ public class ItemEntity extends Entity implements TraceableEntity {
+@@ -251,7 +273,13 @@ public class ItemEntity extends Entity implements TraceableEntity {
              }
              // CraftBukkit end
              this.discard();
@@ -119,7 +119,7 @@ index a05acf709735b40ca86f978508c63a86065fd405..3752b4ba7fb0d680d4b4a61bf44d54d5
  
      double getLevelY();
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-index f30278bb704ecfb5746e798b97e6e945bc6bfce7..f44372ec510273c8507865cd079f60bbd6fc586c 100644
+index 90c354d37a8db3bcad79aa882d52d5d25482c02d..375d1dc3a7897007f8d0997153fd77d16ff07388 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 @@ -11,6 +11,7 @@ import net.minecraft.core.Direction;

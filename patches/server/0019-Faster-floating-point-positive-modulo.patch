@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/util/Mth.java b/src/main/java/net/minecraft/util/Mth.java
-index d04586223a9b2a30efb17da01fb7f3e8f2a6af7b..bae83b708cafb867f43d5378fa78818fc382e2fa 100644
+index d9e0224dc108a99c194d4947d18f2d855a341534..79419f6e1ba900c1686fa9b43866fc43649123a1 100644
 --- a/src/main/java/net/minecraft/util/Mth.java
 +++ b/src/main/java/net/minecraft/util/Mth.java
-@@ -143,14 +143,26 @@ public class Mth {
+@@ -148,14 +148,26 @@ public class Mth {
          return Math.floorMod(dividend, divisor);
      }
  

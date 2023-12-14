@@ -37,19 +37,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 47fcfa2a3358766dfda2efc9bbcf5b50e3f2f7c1..a47be0fb0220e46cc360729fdf6cc113cdd05a39 100644
+index a8d3451ccfcd21a9e80adc2feab8fc9c2926c753..d323109ef01bcd31970a749854eeaf8805e8de6b 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -7,6 +7,8 @@ import java.time.Instant;
- import java.util.Collection;
- import java.util.Date;
- import java.util.Map;
-+import java.util.UUID;
-+
- import org.bukkit.BanEntry;
- import org.bukkit.DyeColor;
- import org.bukkit.Effect;
-@@ -1927,6 +1929,16 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -1928,6 +1928,16 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
      boolean listPlayer(@NotNull Player other);
      // Paper end
  

@@ -22,10 +22,10 @@ you to easily disable books, should you want to preemptively remove this
 functionality before additional exploits are found.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 65bb221993147a558995b36fb835f7b82e0eb4bd..11c0f81a6966ba07be793cd6778a5ce14b156898 100644
+index 30ccbab1586a656e0ae41d7406525fb02d9e025b..ec436869418f7c983d635e662b7c0d9eb77c6d13 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -178,6 +178,8 @@ import net.minecraft.world.phys.Vec3;
+@@ -186,6 +186,8 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.phys.shapes.BooleanOp;
  import net.minecraft.world.phys.shapes.Shapes;
  import net.minecraft.world.phys.shapes.VoxelShape;
@@ -34,7 +34,7 @@ index 65bb221993147a558995b36fb835f7b82e0eb4bd..11c0f81a6966ba07be793cd6778a5ce1
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -1119,6 +1121,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1124,6 +1126,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
  
      @Override
      public void handleEditBook(ServerboundEditBookPacket packet) {

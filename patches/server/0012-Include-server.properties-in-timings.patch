@@ -27,10 +27,10 @@ index 1b9d997c31ab281ce9f4719f53b0ad78a430789d..758cb80e64520ff085c4ef5ca8b2ed77
              pair("bukkit", mapAsJSON(Bukkit.spigot().getBukkitConfig(), null)),
              // Gale start - Gale configuration - include in timings
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
-index c5598adb8cbcbcf7277c2fd4dd72c243d44d9700..4cd514fd09689c0d1527a53dfe8cb6acb280c1ee 100644
+index 1643186bcb2caf5d29fd551afd35830726dbb80a..96c79afbdc824257b4225a85ff9b2fe2d8310f57 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
-@@ -68,6 +68,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
+@@ -67,6 +67,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
      public final Difficulty difficulty;
      public final GameType gamemode;
      public final String levelName;
@@ -38,7 +38,7 @@ index c5598adb8cbcbcf7277c2fd4dd72c243d44d9700..4cd514fd09689c0d1527a53dfe8cb6ac
      public final int serverPort;
      @Nullable
      public final Boolean announcePlayerAchievements;
-@@ -100,13 +101,14 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
+@@ -99,13 +100,14 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
      public final boolean hideOnlinePlayers;
      public final int entityBroadcastRangePercentage;
      public final String textFilteringConfig;
@@ -54,7 +54,7 @@ index c5598adb8cbcbcf7277c2fd4dd72c243d44d9700..4cd514fd09689c0d1527a53dfe8cb6ac
      public final WorldOptions worldOptions;
  
      public final String rconIp; // Paper - Add rcon ip
-@@ -158,6 +160,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
+@@ -157,6 +159,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
          this.enforceSecureProfile = this.get("enforce-secure-profile", true);
          this.logIPs = this.get("log-ips", true);
          String s = this.get("level-seed", "");
@@ -62,14 +62,14 @@ index c5598adb8cbcbcf7277c2fd4dd72c243d44d9700..4cd514fd09689c0d1527a53dfe8cb6ac
          boolean flag = this.get("generate-structures", true);
          long i = WorldOptions.parseSeed(s).orElse(WorldOptions.randomSeed());
  
-@@ -167,7 +170,10 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
+@@ -166,7 +169,10 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
          }, new JsonObject()), (String) this.get("level-type", (s1) -> {
              return s1.toLowerCase(Locale.ROOT);
          }, WorldPresets.NORMAL.location().toString()));
--        this.serverResourcePackInfo = DedicatedServerProperties.getServerPackInfo(this.get("resource-pack", ""), this.get("resource-pack-sha1", ""), this.getLegacyString("resource-pack-hash"), this.get("require-resource-pack", false), this.get("resource-pack-prompt", ""));
+-        this.serverResourcePackInfo = DedicatedServerProperties.getServerPackInfo(this.get("resource-pack-id", ""), this.get("resource-pack", ""), this.get("resource-pack-sha1", ""), this.getLegacyString("resource-pack-hash"), this.get("require-resource-pack", false), this.get("resource-pack-prompt", ""));
 +        // Gale start - include server.properties in timings
 +        this.resourcePackPrompt = this.get("resource-pack-prompt", "");
-+        this.serverResourcePackInfo = DedicatedServerProperties.getServerPackInfo(this.get("resource-pack", ""), this.get("resource-pack-sha1", ""), this.getLegacyString("resource-pack-hash"), this.get("require-resource-pack", false), this.resourcePackPrompt);
++        this.serverResourcePackInfo = DedicatedServerProperties.getServerPackInfo(this.get("resource-pack-id", ""), this.get("resource-pack", ""), this.get("resource-pack-sha1", ""), this.getLegacyString("resource-pack-hash"), this.get("require-resource-pack", false), this.resourcePackPrompt);
 +        // Gale end - include server.properties in timings
          this.initialDataPackConfiguration = DedicatedServerProperties.getDatapackConfig(this.get("initial-enabled-packs", String.join(",", WorldDataConfiguration.DEFAULT.dataPacks().getEnabled())), this.get("initial-disabled-packs", String.join(",", WorldDataConfiguration.DEFAULT.dataPacks().getDisabled())));
          // Paper start - Configurable rcon ip

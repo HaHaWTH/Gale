@@ -99,10 +99,10 @@ public class Main {
 ```
 
 diff --git a/src/main/java/io/papermc/paper/util/MCUtil.java b/src/main/java/io/papermc/paper/util/MCUtil.java
-index d02546b18cb689724887b4e85e8d32a18828a4ad..3bf983d4c51d517db613a00cb31dea5440cec300 100644
+index 200ed770b57e1a9240abf0473968d4b85cbefe3c..adfb793ba2ca4552e0b800d37f166ea55562a57a 100644
 --- a/src/main/java/io/papermc/paper/util/MCUtil.java
 +++ b/src/main/java/io/papermc/paper/util/MCUtil.java
-@@ -166,13 +166,11 @@ public final class MCUtil {
+@@ -165,13 +165,11 @@ public final class MCUtil {
      }
  
      public static int fastFloor(double x) {
@@ -118,7 +118,7 @@ index d02546b18cb689724887b4e85e8d32a18828a4ad..3bf983d4c51d517db613a00cb31dea54
      }
  
      public static float normalizeYaw(float f) {
-@@ -233,11 +231,11 @@ public final class MCUtil {
+@@ -232,11 +230,11 @@ public final class MCUtil {
      }
  
      public static int getChunkCoordinate(final double coordinate) {
@@ -133,10 +133,10 @@ index d02546b18cb689724887b4e85e8d32a18828a4ad..3bf983d4c51d517db613a00cb31dea54
  
      public static long getBlockKey(final int x, final int y, final int z) {
 diff --git a/src/main/java/net/minecraft/util/Mth.java b/src/main/java/net/minecraft/util/Mth.java
-index 33ace08d15bbcad66c09c7bd65dd03e784246e8f..d04586223a9b2a30efb17da01fb7f3e8f2a6af7b 100644
+index 03854a2d26a3cfc1817acfdc28cbf151ba59e05b..d9e0224dc108a99c194d4947d18f2d855a341534 100644
 --- a/src/main/java/net/minecraft/util/Mth.java
 +++ b/src/main/java/net/minecraft/util/Mth.java
-@@ -51,13 +51,11 @@ public class Mth {
+@@ -56,13 +56,11 @@ public class Mth {
      }
  
      public static int floor(float value) {
@@ -152,7 +152,7 @@ index 33ace08d15bbcad66c09c7bd65dd03e784246e8f..d04586223a9b2a30efb17da01fb7f3e8
      }
  
      public static long lfloor(double value) {
-@@ -74,13 +72,11 @@ public class Mth {
+@@ -79,13 +77,11 @@ public class Mth {
      }
  
      public static int ceil(float value) {
@@ -168,7 +168,7 @@ index 33ace08d15bbcad66c09c7bd65dd03e784246e8f..d04586223a9b2a30efb17da01fb7f3e8
      }
  
      public static int clamp(int value, int min, int max) {
-@@ -116,15 +112,7 @@ public class Mth {
+@@ -121,15 +117,7 @@ public class Mth {
      }
  
      public static double absMax(double a, double b) {

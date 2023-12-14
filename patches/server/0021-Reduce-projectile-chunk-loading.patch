@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/projectile/Projectile.java b/src/main/java/net/minecraft/world/entity/projectile/Projectile.java
-index a90317100d32974e481e14476843f66997a2cf3a..e799b199bee08bfaf5575eb0c0d2194af495d43e 100644
+index 2f058cec80c6ef7a5a5ca065dc6c9fe353c521de..f2854247ceff3d99f29ced43daa9537aa2ce7549 100644
 --- a/src/main/java/net/minecraft/world/entity/projectile/Projectile.java
 +++ b/src/main/java/net/minecraft/world/entity/projectile/Projectile.java
-@@ -44,6 +44,45 @@ public abstract class Projectile extends Entity implements TraceableEntity {
+@@ -45,6 +45,45 @@ public abstract class Projectile extends Entity implements TraceableEntity {
          super(type, world);
      }
  

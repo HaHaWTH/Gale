@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 8abeb9dc5c0e2fe95ea408fbaab9c359cb7cd69f..c0b66b8455c35794c055651b687ba9ca2b89af4c 100644
+index efebe795001058270ec92fdd8e86fd84589e8563..7ff1a1a258e181b6ab0e23374177eb006fd6da05 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1125,6 +1125,13 @@ public final class CraftServer implements Server {
+@@ -1120,6 +1120,13 @@ public final class CraftServer implements Server {
                  plugin.getPluginMeta().getDisplayName(),
                  "This plugin is not properly shutting down its async tasks when it is being shut down. This task may throw errors during the final shutdown logs and might not complete before process dies."
              ));

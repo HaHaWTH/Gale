@@ -37,10 +37,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/PlayerAdvancements.java b/src/main/java/net/minecraft/server/PlayerAdvancements.java
-index e38e2e5a7ddba9c140f362021b6be0b0974f7cd1..33c36779548332a8c3653c6b829d941b6dc5fd49 100644
+index f655e0ae4a287886d0291cd0089bad2000249d0f..e15409231e56f5bbbfbcd19cea2c7e3fbc612886 100644
 --- a/src/main/java/net/minecraft/server/PlayerAdvancements.java
 +++ b/src/main/java/net/minecraft/server/PlayerAdvancements.java
-@@ -46,6 +46,7 @@ import net.minecraft.server.level.ServerPlayer;
+@@ -45,6 +45,7 @@ import net.minecraft.server.level.ServerPlayer;
  import net.minecraft.server.players.PlayerList;
  import net.minecraft.util.datafix.DataFixTypes;
  import net.minecraft.world.level.GameRules;
@@ -48,7 +48,7 @@ index e38e2e5a7ddba9c140f362021b6be0b0974f7cd1..33c36779548332a8c3653c6b829d941b
  import org.slf4j.Logger;
  
  public class PlayerAdvancements {
-@@ -200,7 +201,7 @@ public class PlayerAdvancements {
+@@ -199,7 +200,7 @@ public class PlayerAdvancements {
  
              if (advancementholder == null) {
                  if (!minecraftkey.getNamespace().equals("minecraft")) return; // CraftBukkit

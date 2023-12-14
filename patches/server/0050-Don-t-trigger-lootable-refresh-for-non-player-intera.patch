@@ -13,14 +13,14 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java
-index b71638976cacf542662beb1f77fc40182be65215..5ac1667dd79389195f656eff97f83a2dafaf1c28 100644
+index 1de09539877d40b7bdcdc8a10d1d30c81420aa5b..57be35f6a3954aec8b3b039c1d7bb02f8359cf5b 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java
-@@ -70,6 +70,7 @@ public abstract class RandomizableContainerBlockEntity extends BaseContainerBloc
-     }
+@@ -68,6 +68,7 @@ public abstract class RandomizableContainerBlockEntity extends BaseContainerBloc
  
-     public void unpackLootTable(@Nullable Player player) {
+     @Override
+     public void unpackLootTable(@org.jetbrains.annotations.Nullable final Player player) {
 +        if (player == null) return; // Gale - EMC - don't trigger lootable refresh for non-player interaction
-         if (this.level != null && this.lootableData.shouldReplenish(player) && this.level.getServer() != null) { // Paper - don't unpack loot table if not in world
-             LootTable lootTable = this.level.getServer().getLootData().getLootTable(this.lootTable);
-             if (player instanceof ServerPlayer) {
+         // Copied from super with changes, always check the original method
+         net.minecraft.world.level.Level level = this.getLevel();
+         BlockPos blockPos = this.getBlockPos();

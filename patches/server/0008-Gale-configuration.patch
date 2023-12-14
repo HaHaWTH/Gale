@@ -188,7 +188,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index d3b16342a44dabb9e14451f68af65d2d6407ef85..9d89b38ad6a0df62c920512c8873e4cb95210571 100644
+index 90a06994220979be88ce54c487809e1e7c1b5cdd..6bcfcc5bf869d63618b8df0d9382a0a37193fff1 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -201,7 +201,7 @@ index d3b16342a44dabb9e14451f68af65d2d6407ef85..9d89b38ad6a0df62c920512c8873e4cb
  import com.google.common.collect.Lists;
  import com.google.common.collect.Maps;
  import com.google.common.collect.Sets;
-@@ -86,7 +83,6 @@ import net.minecraft.server.level.ServerChunkCache;
+@@ -85,7 +82,6 @@ import net.minecraft.server.level.ServerChunkCache;
  import net.minecraft.server.level.ServerLevel;
  import net.minecraft.server.level.ServerPlayer;
  import net.minecraft.server.level.ServerPlayerGameMode;
@@ -209,16 +209,16 @@ index d3b16342a44dabb9e14451f68af65d2d6407ef85..9d89b38ad6a0df62c920512c8873e4cb
  import net.minecraft.server.level.progress.ChunkProgressListener;
  import net.minecraft.server.level.progress.ChunkProgressListenerFactory;
  import net.minecraft.server.network.ServerConnectionListener;
-@@ -109,7 +105,6 @@ import net.minecraft.util.NativeModuleLister;
- import net.minecraft.util.ProgressListener;
+@@ -109,7 +105,6 @@ import net.minecraft.util.ProgressListener;
  import net.minecraft.util.RandomSource;
  import net.minecraft.util.SignatureValidator;
+ import net.minecraft.util.TimeUtil;
 -import net.minecraft.util.Unit;
  import net.minecraft.util.datafix.DataFixers;
  import net.minecraft.util.profiling.EmptyProfileResults;
  import net.minecraft.util.profiling.ProfileResults;
-@@ -160,6 +155,9 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
- import net.minecraft.world.level.storage.ServerLevelData;
+@@ -152,6 +147,9 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
  import net.minecraft.world.level.storage.WorldData;
  import net.minecraft.world.level.storage.loot.LootDataManager;
 +import net.minecraft.world.phys.Vec2;
@@ -227,7 +227,7 @@ index d3b16342a44dabb9e14451f68af65d2d6407ef85..9d89b38ad6a0df62c920512c8873e4cb
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -300,6 +298,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -306,6 +304,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      public final double[] recentTps = new double[ 3 ];
      // Spigot end
      public final io.papermc.paper.configuration.PaperConfigurations paperConfigurations;
@@ -235,7 +235,7 @@ index d3b16342a44dabb9e14451f68af65d2d6407ef85..9d89b38ad6a0df62c920512c8873e4cb
      public static long currentTickLong = 0L; // Paper
  
      public volatile Thread shutdownThread; // Paper
-@@ -405,6 +404,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -414,6 +413,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          Runtime.getRuntime().addShutdownHook(new org.bukkit.craftbukkit.util.ServerShutdownThread(this));
          // CraftBukkit end
          this.paperConfigurations = services.paperConfigurations(); // Paper
@@ -244,7 +244,7 @@ index d3b16342a44dabb9e14451f68af65d2d6407ef85..9d89b38ad6a0df62c920512c8873e4cb
  
      private void readScoreboard(DimensionDataStorage persistentStateManager) {
 diff --git a/src/main/java/net/minecraft/server/Services.java b/src/main/java/net/minecraft/server/Services.java
-index a9b2c8cd4dcd3f884e4306bebee9334d3848fce5..3430a1ac3252ff9a457ee36ffc112503a25e4272 100644
+index a5450eeeab5a6b0ab273810063806d11107d6b26..79e2eff81b267608253e820817862768693ea7ef 100644
 --- a/src/main/java/net/minecraft/server/Services.java
 +++ b/src/main/java/net/minecraft/server/Services.java
 @@ -9,12 +9,13 @@ import java.io.File;
@@ -288,7 +288,7 @@ index a9b2c8cd4dcd3f884e4306bebee9334d3848fce5..3430a1ac3252ff9a457ee36ffc112503
      }
  
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 1c9742ad81f04052d2c3bc18c7636f45b2fc5160..ad9eccd0fc981dbbf8e5bea191119afe2e7a7018 100644
+index 58536aabf607015939a1326f80207c0a06eed8ff..0ce390a0ffb021f58dd763e44ebe9dabf62472bc 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -1,20 +1,15 @@
@@ -325,10 +325,10 @@ index 1c9742ad81f04052d2c3bc18c7636f45b2fc5160..ad9eccd0fc981dbbf8e5bea191119afe
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index c88d5b9125f6ee43bf2be60fd1745d836f271b78..6421edda569ae8953f23ccd78996ab3ab811264a 100644
+index b78a9628a88f2a495ef6de74446a02a14d41a1f6..5a2e9043c671a7274baa9f9944c7db4883844026 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -132,12 +132,10 @@ import net.minecraft.world.level.chunk.storage.EntityStorage;
+@@ -134,12 +134,10 @@ import net.minecraft.world.level.chunk.storage.EntityStorage;
  import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
  import net.minecraft.world.level.dimension.LevelStem;
  import net.minecraft.world.level.dimension.end.EndDragonFight;
@@ -341,7 +341,7 @@ index c88d5b9125f6ee43bf2be60fd1745d836f271b78..6421edda569ae8953f23ccd78996ab3a
  import net.minecraft.world.level.gameevent.DynamicGameEventListener;
  import net.minecraft.world.level.gameevent.GameEvent;
  import net.minecraft.world.level.gameevent.GameEventDispatcher;
-@@ -691,7 +689,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -693,7 +691,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
@@ -351,7 +351,7 @@ index c88d5b9125f6ee43bf2be60fd1745d836f271b78..6421edda569ae8953f23ccd78996ab3a
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 2354a0e5d15e9be633d9fe3a1a9feefe7b9b7782..e9ea666a09c9f04e37621bf38e61f698f3aaa43a 100644
+index 0b56e5f7f18fc4286992af22d402205b771165a3..d58865422bc63a55cb42acc7ec59d4310d34bfed 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -1,10 +1,7 @@
@@ -373,7 +373,7 @@ index 2354a0e5d15e9be633d9fe3a1a9feefe7b9b7782..e9ea666a09c9f04e37621bf38e61f698
  import net.minecraft.core.BlockPos;
  import net.minecraft.core.Direction;
  import net.minecraft.core.Holder;
-@@ -44,8 +40,6 @@ import net.minecraft.world.DifficultyInstance;
+@@ -47,8 +43,6 @@ import net.minecraft.world.TickRateManager;
  import net.minecraft.world.damagesource.DamageSource;
  import net.minecraft.world.damagesource.DamageSources;
  import net.minecraft.world.entity.Entity;
@@ -382,7 +382,7 @@ index 2354a0e5d15e9be633d9fe3a1a9feefe7b9b7782..e9ea666a09c9f04e37621bf38e61f698
  import net.minecraft.world.entity.item.ItemEntity;
  import net.minecraft.world.entity.player.Player;
  import net.minecraft.world.item.ItemStack;
-@@ -91,17 +85,15 @@ import net.minecraft.network.protocol.game.ClientboundSetBorderSizePacket;
+@@ -94,17 +88,15 @@ import net.minecraft.network.protocol.game.ClientboundSetBorderSizePacket;
  import net.minecraft.network.protocol.game.ClientboundSetBorderWarningDelayPacket;
  import net.minecraft.network.protocol.game.ClientboundSetBorderWarningDistancePacket;
  import org.bukkit.Bukkit;
@@ -401,7 +401,7 @@ index 2354a0e5d15e9be633d9fe3a1a9feefe7b9b7782..e9ea666a09c9f04e37621bf38e61f698
  // CraftBukkit end
  
  public abstract class Level implements LevelAccessor, AutoCloseable {
-@@ -174,6 +166,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -177,6 +169,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          return this.paperConfig;
      }
      // Paper end
@@ -414,7 +414,7 @@ index 2354a0e5d15e9be633d9fe3a1a9feefe7b9b7782..e9ea666a09c9f04e37621bf38e61f698
  
      public final com.destroystokyo.paper.antixray.ChunkPacketBlockController chunkPacketBlockController; // Paper - Anti-Xray
      public final co.aikar.timings.WorldTimingsHandler timings; // Paper
-@@ -210,9 +208,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -213,9 +211,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
  
      public abstract ResourceKey<LevelStem> getTypeKey();
  
@@ -427,10 +427,10 @@ index 2354a0e5d15e9be633d9fe3a1a9feefe7b9b7782..e9ea666a09c9f04e37621bf38e61f698
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index d948e78fcd2d8e9af2a9c0057e9a52384b3b0951..8abeb9dc5c0e2fe95ea408fbaab9c359cb7cd69f 100644
+index 0929290650e17f08adfcb93b37554f22562f8a10..efebe795001058270ec92fdd8e86fd84589e8563 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1041,6 +1041,7 @@ public final class CraftServer implements Server {
+@@ -1036,6 +1036,7 @@ public final class CraftServer implements Server {
  
          org.spigotmc.SpigotConfig.init((File) this.console.options.valueOf("spigot-settings")); // Spigot
          this.console.paperConfigurations.reloadConfigs(this.console);
@@ -438,7 +438,7 @@ index d948e78fcd2d8e9af2a9c0057e9a52384b3b0951..8abeb9dc5c0e2fe95ea408fbaab9c359
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters, config.spawnAnimals); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -2978,6 +2979,14 @@ public final class CraftServer implements Server {
+@@ -3010,6 +3011,14 @@ public final class CraftServer implements Server {
              return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
          }
  

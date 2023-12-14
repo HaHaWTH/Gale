@@ -13,10 +13,10 @@ As part of: Pufferfish (https://github.com/pufferfish-gg/Pufferfish)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 266e5e177b23b48eb880565dcafdc16419e516db..de7a3389c66d5cb3123cf4c85d854bc727528b65 100644
+index c26c71c8613012c142be24711cb637717e07b6b8..e800e16e408d8a2f79c98bba229e878665b332db 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -71,6 +71,7 @@ tasks.withType<JavaCompile> {
+@@ -85,6 +85,7 @@ tasks.withType<JavaCompile> {
      compilerArgs.add("-Xlint:-module")
      compilerArgs.add("-Xlint:-removal")
      compilerArgs.add("-Xlint:-dep-ann")
@@ -24,7 +24,7 @@ index 266e5e177b23b48eb880565dcafdc16419e516db..de7a3389c66d5cb3123cf4c85d854bc7
  }
  // Gale end - hide irrelevant compilation warnings
  
-@@ -195,6 +196,7 @@ fun TaskContainer.registerRunTask(
+@@ -209,6 +210,7 @@ fun TaskContainer.registerRunTask(
      minHeapSize = "${memoryGb}G"
      maxHeapSize = "${memoryGb}G"
      jvmArgs("--enable-preview") // Gale - enable preview features for development runs
@@ -84,7 +84,7 @@ index 2acad4c3fd58178b0f8b22bdb04eeeeb689d5afa..850ccd53c5007e8b18344ba76c9e7f00
  
          }
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 5ae5eba9b42b3a5adbad4896e692be0b7338ebaa..0c90a38ee504b2cc22d3bdcd57fbcd83f8bf9e6c 100644
+index 06ae3f1fee154d8f283fad6eeb06582ec647d519..d47e5442de3c6bf731b1b31454493855bc1e61e3 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -14,6 +14,8 @@ import java.util.Locale;
