@@ -117,6 +117,32 @@ index 38854a047c6da7e2551f206478d17628e765168d..cc827443a812735336e18ff3c7b7f15a
      }
  
      public int forkLimit() {
+diff --git a/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java b/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
+index 446b7e585afccb034816a5371a3b7376cbef7177..f8e7b0336ca2545312d877db5a0f05386b025aed 100644
+--- a/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
++++ b/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
+@@ -43,11 +43,7 @@ public class BuildContexts<T extends ExecutionCommandSource<T>> {
+         ChainModifiers chainModifiers = flags;
+         List<T> list = sources;
+         if (contextChain.getStage() != Stage.EXECUTE) {
+-            context.profiler().push(() -> {
+-                return "prepare " + this.commandInput;
+-            });
+ 
+-            try {
+                 for(int i = context.forkLimit(); contextChain.getStage() != Stage.EXECUTE; contextChain = contextChain.nextStage()) {
+                     CommandContext<T> commandContext = contextChain.getTopContext();
+                     if (commandContext.isForked()) {
+@@ -87,9 +83,6 @@ public class BuildContexts<T extends ExecutionCommandSource<T>> {
+                         list = list2;
+                     }
+                 }
+-            } finally {
+-                context.profiler().pop();
+-            }
+         }
+ 
+         if (list.isEmpty()) {
 diff --git a/src/main/java/net/minecraft/commands/execution/tasks/ExecuteCommand.java b/src/main/java/net/minecraft/commands/execution/tasks/ExecuteCommand.java
 index 821dc4aeaf48460000682604fba51b340b9738e7..4f4540ed9b3e603eec0d46fb5b58de24f27e734b 100644
 --- a/src/main/java/net/minecraft/commands/execution/tasks/ExecuteCommand.java
