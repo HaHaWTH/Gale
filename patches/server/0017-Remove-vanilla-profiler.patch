@@ -1634,6 +1634,21 @@ index 05b4c054327bb86cf3b08e45916aac31aa9e000b..3e79562f51efbac51785fa0998d6a1a6
          this.updateActivity();
      }
  
+diff --git a/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java b/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java
+index 1268ce642a79495450845734085f281589415fef..9672afb372e3b376d46864fed5bc8af12aaae48a 100644
+--- a/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java
++++ b/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java
+@@ -200,10 +200,7 @@ public class Breeze extends Monster {
+ 
+     @Override
+     protected void customServerAiStep() {
+-        this.level().getProfiler().push("breezeBrain");
+         this.getBrain().tick((ServerLevel)this.level(), this);
+-        this.level().getProfiler().popPush("breezeActivityUpdate");
+-        this.level().getProfiler().pop();
+         super.customServerAiStep();
+     }
+ 
 diff --git a/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java b/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java
 index 4257f2282152aee09533c9a2e53018d3e49effa4..024e2da8673a837a1185351bb211414e19a7f393 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java
