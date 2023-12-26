@@ -13,12 +13,12 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index 0466ad371e26fb49a7a58f12f1d5e2ddafa0c6c7..8e398384000390f55bfdc081e02d04a5d17026b3 100644
+index 51f86a87c89057351d6984e655674212da8c7dcc..6dce2cb25a5e8b7c979a3f515e4c6c9cfbacd305 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-@@ -506,11 +506,16 @@ public class ServerChunkCache extends ChunkSource {
-             // Paper - optimise chunk tick iteration
+@@ -507,11 +507,16 @@ public class ServerChunkCache extends ChunkSource {
  
+             this.level.resetIceAndSnowTick(); // Gale - Airplane - optimize random calls in chunk ticking - reset ice & snow tick random
              if (this.level.getServer().tickRateManager().runsNormally()) {
 +                // Gale start - MultiPaper - skip unnecessary mob spawning computations
 +                NaturalSpawner.SpawnState spawnercreature_d; // moved down
@@ -34,7 +34,7 @@ index 0466ad371e26fb49a7a58f12f1d5e2ddafa0c6c7..8e398384000390f55bfdc081e02d04a5
                  if ((this.spawnFriendlies || this.spawnEnemies) && this.level.paperConfig().entities.spawning.perPlayerMobSpawns) { // don't count mobs when animals and monsters are disabled
                      // re-set mob counts
                      for (ServerPlayer player : this.level.players) {
-@@ -534,7 +539,11 @@ public class ServerChunkCache extends ChunkSource {
+@@ -535,7 +540,11 @@ public class ServerChunkCache extends ChunkSource {
                  this.level.timings.countNaturalMobs.stopTiming(); // Paper - timings
  
                  this.lastSpawnState = spawnercreature_d;
