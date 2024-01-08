@@ -64,10 +64,10 @@ index 7bde3392d46fb1be3d04db97a5ec02ecc4a5ca0a..51f86a87c89057351d6984e655674212
                  this.level.timings.countNaturalMobs.startTiming(); // Paper - timings
                  int k = this.distanceManager.getNaturalSpawnChunkCount();
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index e38cd60ba31129ed53c8c3839fedd6f77440f4b1..be1dbe955461823de7b3dbf032d399837be62ea9 100644
+index 97a5034ff7faf16f179aca13234f35a515cf808f..7212d15b58d9045bd4a30d11a3dac5eb395d00df 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -958,6 +958,8 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -963,6 +963,8 @@ public class ServerLevel extends Level implements WorldGenLevel {
      private final BlockPos.MutableBlockPos chunkTickMutablePosition = new BlockPos.MutableBlockPos();
      // Paper end
  
@@ -76,7 +76,7 @@ index e38cd60ba31129ed53c8c3839fedd6f77440f4b1..be1dbe955461823de7b3dbf032d39983
      public void tickChunk(LevelChunk chunk, int randomTickSpeed) {
          ChunkPos chunkcoordintpair = chunk.getPos();
          boolean flag = this.isRaining();
-@@ -965,7 +967,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -970,7 +972,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
          int k = chunkcoordintpair.getMinBlockZ();
          final BlockPos.MutableBlockPos blockposition = this.chunkTickMutablePosition; // Paper - use mutable to reduce allocation rate, final to force compile fail on change
  
@@ -85,7 +85,7 @@ index e38cd60ba31129ed53c8c3839fedd6f77440f4b1..be1dbe955461823de7b3dbf032d39983
              blockposition.set(this.findLightningTargetAround(this.getBlockRandomPos(j, 0, k, 15))); // Paper
  
              if (this.isRainingAt(blockposition)) {
-@@ -993,7 +995,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -998,7 +1000,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
              }
          }
  

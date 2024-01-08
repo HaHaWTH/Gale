@@ -319,10 +319,10 @@ index 4b002e8b75d117b726b0de274a76d3596fce015b..2868dab7b100d9c325b0e5056f86660d
  
          }
 diff --git a/src/main/java/io/papermc/paper/chunk/system/scheduling/ChunkTaskScheduler.java b/src/main/java/io/papermc/paper/chunk/system/scheduling/ChunkTaskScheduler.java
-index f975cb93716e137d973ff2f9011acdbef58859a2..d94eb8ca7ce18364d58d05592bbdf3637581460f 100644
+index 17ce14f2dcbf900890efbc2351782bc6f8867068..fd099f8a7d95f46de7380c8280623bf5eb427eaa 100644
 --- a/src/main/java/io/papermc/paper/chunk/system/scheduling/ChunkTaskScheduler.java
 +++ b/src/main/java/io/papermc/paper/chunk/system/scheduling/ChunkTaskScheduler.java
-@@ -42,7 +42,7 @@ public final class ChunkTaskScheduler {
+@@ -43,7 +43,7 @@ public final class ChunkTaskScheduler {
  
      private static final Logger LOGGER = LogUtils.getClassLogger();
  

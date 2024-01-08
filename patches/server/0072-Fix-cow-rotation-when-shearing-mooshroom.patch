@@ -37,10 +37,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/animal/MushroomCow.java b/src/main/java/net/minecraft/world/entity/animal/MushroomCow.java
-index e42b0b19019ef74733fd19b08f882cccff920142..d3982fc50ab87f64893ae5838d0256576912d311 100644
+index a7e8b544d7b05efe95182a03cabaf1993da9d839..36cae2cddf9f4acec436338e81576b122d209d89 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/MushroomCow.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/MushroomCow.java
-@@ -176,12 +176,21 @@ public class MushroomCow extends Cow implements Shearable, VariantHolder<Mushroo
+@@ -199,12 +199,21 @@ public class MushroomCow extends Cow implements Shearable, VariantHolder<Mushroo
                  // this.discard(); // CraftBukkit - moved down
                  entitycow.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
                  entitycow.setHealth(this.getHealth());

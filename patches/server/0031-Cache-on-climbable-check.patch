@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index f0cc2a0ce82071cf04fa5e885943cc72c44e1eab..93c810fe4c392b20295f73044470aa45f13d857f 100644
+index c4c7970e3dce12985c401d23d288bd8d9bca6913..e4c1afec0d90c8131e210b7676733e355f2b08b9 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -142,7 +142,6 @@ import org.bukkit.event.entity.EntityTeleportEvent;
@@ -64,15 +64,15 @@ index f0cc2a0ce82071cf04fa5e885943cc72c44e1eab..93c810fe4c392b20295f73044470aa45
          if (this.isSpectator()) {
              return false;
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index 59103744ac6beeb12719fdefcda54eeff498229e..4bce0b788b441afd5ba939cc6d37d6c7072a9155 100644
+index 2d31752478636bd21bbff5b430e5acb76b5d91c2..ef7a25818781af4ce4e1f1a63ab62abff8013ed4 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
 @@ -297,7 +297,7 @@ public class ActivationRange
          if ( entity instanceof LivingEntity )
          {
              LivingEntity living = (LivingEntity) entity;
--            if ( living.onClimbable() || living.jumping || living.hurtTime > 0 || living.activeEffects.size() > 0 ) // Paper
-+            if ( living.onClimbableCached() || living.jumping || living.hurtTime > 0 || living.activeEffects.size() > 0 ) // Paper // Gale - Airplane - cache on climbable check - use cached
+-            if ( living.onClimbable() || living.jumping || living.hurtTime > 0 || living.activeEffects.size() > 0 || living.isFreezing()) // Paper
++            if ( living.onClimbableCached() || living.jumping || living.hurtTime > 0 || living.activeEffects.size() > 0 || living.isFreezing()) // Paper // Gale - Airplane - cache on climbable check - use cached
              {
                  return 1; // Paper
              }

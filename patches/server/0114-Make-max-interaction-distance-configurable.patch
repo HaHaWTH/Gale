@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 58f972832c39a27a8ccd606f9144e1c54adbf6f3..c0b368b8137ca6d90c4e6ec931e07b7ea69f8d9b 100644
+index a0d69082f5fdeee15bba0d76b940aa48cff36fa9..bda773986fbe422840874e0934f805a5c2ffab21 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 @@ -174,7 +174,7 @@ public class ServerPlayerGameMode {
@@ -20,7 +20,7 @@ index 58f972832c39a27a8ccd606f9144e1c54adbf6f3..c0b368b8137ca6d90c4e6ec931e07b7e
              this.debugLogging(pos, false, sequence, "too far");
          } else if (pos.getY() >= worldHeight) {
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 347b1d225d2e7084d13ea9a633f50e08bf8e58b4..7b955100e39a935259887475278b24cf29905577 100644
+index 9583caa7434a20c1c5d1bbd601aec988d2dfb97b..02b80a9ecfffb83f05c9a36c91c9508cada0062d 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -251,7 +251,7 @@ import org.bukkit.inventory.SmithingInventory;
@@ -32,8 +32,8 @@ index 347b1d225d2e7084d13ea9a633f50e08bf8e58b4..7b955100e39a935259887475278b24cf
      private static final int NO_BLOCK_UPDATES_TO_ACK = -1;
      private static final int TRACKED_MESSAGE_DISCONNECT_THRESHOLD = 4096;
      private static final Component CHAT_VALIDATION_FAILED = Component.translatable("multiplayer.disconnect.chat_validation_failed");
-@@ -330,6 +330,13 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
-     private boolean hasMoved; // Spigot
+@@ -329,6 +329,13 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+     private boolean justTeleported = false;
      // CraftBukkit end
  
 +    // Gale start - make max interaction distance configurable
@@ -46,7 +46,7 @@ index 347b1d225d2e7084d13ea9a633f50e08bf8e58b4..7b955100e39a935259887475278b24cf
      @Override
      public void tick() {
          if (this.ackBlockChangesUpTo > -1) {
-@@ -1928,7 +1935,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1932,7 +1939,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
              BlockPos blockposition = movingobjectpositionblock.getBlockPos();
              Vec3 vec3d1 = Vec3.atCenterOf(blockposition);
  
@@ -55,7 +55,7 @@ index 347b1d225d2e7084d13ea9a633f50e08bf8e58b4..7b955100e39a935259887475278b24cf
                  Vec3 vec3d2 = vec3d.subtract(vec3d1);
                  double d0 = 1.0000001D;
  
-@@ -2713,7 +2720,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2720,7 +2727,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
  
              AABB axisalignedbb = entity.getBoundingBox();
  

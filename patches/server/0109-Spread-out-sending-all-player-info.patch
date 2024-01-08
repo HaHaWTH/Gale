@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 2cbdd62e7b8a40ccdc8622c35fd94ae60d083531..81eb658675ffaf0ee61bf7e04a02dd0c8a2d3da3 100644
+index 5eadc4ce30f77794f50b612549557f8b5d81f21a..45ed45e636421cc49d78f05a0e75c9a88f13c112 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -13,6 +13,8 @@ import java.net.SocketAddress;
@@ -94,8 +94,8 @@ index 2cbdd62e7b8a40ccdc8622c35fd94ae60d083531..81eb658675ffaf0ee61bf7e04a02dd0c
              this.playersByName.put(entityplayer1.getScoreboardName().toLowerCase(java.util.Locale.ROOT), entityplayer1); // Spigot
              this.playersByUUID.put(entityplayer1.getUUID(), entityplayer1);
          }
-@@ -1020,20 +1027,55 @@ public abstract class PlayerList {
-         this.sendPlayerPermissionLevel(player, i);
+@@ -1026,20 +1033,55 @@ public abstract class PlayerList {
+         this.sendPlayerPermissionLevel(player, i, recalculatePermissions); // Paper - avoid recalculating permissions if possible
      }
  
 -    public void tick() {
@@ -157,7 +157,7 @@ index 2cbdd62e7b8a40ccdc8622c35fd94ae60d083531..81eb658675ffaf0ee61bf7e04a02dd0c
          }
  
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index 5005d9ba125fb96900c01098a9a2e5f5d7a5cba6..b6c2044d9688c352b96a81c8d0abc4028fbe0ad1 100644
+index 544b610f7c42a57099115fb5f76245f6c7a6eca3..d96e4d710ceedb80e1c12c88705181eb12975ca7 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
 @@ -39,6 +39,7 @@ import net.minecraft.network.syncher.SynchedEntityData;

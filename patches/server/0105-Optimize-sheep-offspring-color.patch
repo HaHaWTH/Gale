@@ -46,10 +46,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/animal/Sheep.java b/src/main/java/net/minecraft/world/entity/animal/Sheep.java
-index 55afa58f3df53ce548c7484d8fff62c903f9dc07..ba33c7047c4039691ac4e85400ac305185dcffd4 100644
+index 1d80678f7e8f658e43616f0baf723f096a99122a..865f244de1605303f22d8944174b0fe00115cab0 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/Sheep.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/Sheep.java
-@@ -394,7 +394,59 @@ public class Sheep extends Animal implements Shearable {
+@@ -418,7 +418,59 @@ public class Sheep extends Animal implements Shearable {
          return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt);
      }
  

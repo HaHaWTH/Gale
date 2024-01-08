@@ -325,7 +325,7 @@ index 58536aabf607015939a1326f80207c0a06eed8ff..0ce390a0ffb021f58dd763e44ebe9dab
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index b78a9628a88f2a495ef6de74446a02a14d41a1f6..5a2e9043c671a7274baa9f9944c7db4883844026 100644
+index 7c31f619a6e8e3539c547fc43d821d2cce7df7e7..516aaf7a9e77bcbb40124acb3f5ffadfa439d1f1 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -134,12 +134,10 @@ import net.minecraft.world.level.chunk.storage.EntityStorage;
@@ -341,7 +341,7 @@ index b78a9628a88f2a495ef6de74446a02a14d41a1f6..5a2e9043c671a7274baa9f9944c7db48
  import net.minecraft.world.level.gameevent.DynamicGameEventListener;
  import net.minecraft.world.level.gameevent.GameEvent;
  import net.minecraft.world.level.gameevent.GameEventDispatcher;
-@@ -693,7 +691,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -698,7 +696,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
@@ -351,7 +351,7 @@ index b78a9628a88f2a495ef6de74446a02a14d41a1f6..5a2e9043c671a7274baa9f9944c7db48
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index f8e519684d02dff0e26734eb89eca54ae1d9b1ee..88ffde2dbbb94f1c542f6040fc9983d20e7af3b7 100644
+index 6403341f2e9d7ac4251336cb0bcc5d79dbb7bb0e..5dc2e7c5087dc29fd2726053f5561409c9e05163 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -1,10 +1,7 @@

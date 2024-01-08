@@ -28,7 +28,7 @@ index e4fd372a1d585887287253a02531cd192929377b..397f985756c5bc6c11a32c844d536000
      }
  
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 05eaf2174e055bb78c58c8c2a2b51b17c898ff47..206f179a4c6ea8eab75200ee72efb21e29d28a53 100644
+index 75b9b73b7938816337a4ba7a65cb631051498751..b4baebee042e3287fa24f3865c1ec01efbde6b3b 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -100,6 +100,7 @@ import net.minecraft.world.phys.Vec3;
@@ -39,7 +39,7 @@ index 05eaf2174e055bb78c58c8c2a2b51b17c898ff47..206f179a4c6ea8eab75200ee72efb21e
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -1427,7 +1428,7 @@ public abstract class PlayerList {
+@@ -1433,7 +1434,7 @@ public abstract class PlayerList {
          // Paper end
          boolean flag = this.verifyChatTrusted(message);
  
