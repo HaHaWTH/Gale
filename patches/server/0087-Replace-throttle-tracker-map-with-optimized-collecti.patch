@@ -33,7 +33,7 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRA
 IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
-index c6bcf4a5d5c48e6f73b8e5d3662ec0d7c288c6c8..8e7488277bc30f83fa39f7435ca9f1724452e92e 100644
+index 6a3be2fe851e14f2c9f8b38ad8d27fe36b5240d3..94827fd9a779ccd50b8a4d46f7aae6ca8111fb4a 100644
 --- a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
 @@ -1,5 +1,7 @@
@@ -86,4 +86,4 @@ index c6bcf4a5d5c48e6f73b8e5d3662ec0d7c288c6c8..8e7488277bc30f83fa39f7435ca9f172
 +                            throttleTracker.object2LongEntrySet().removeIf(entry -> entry.getLongValue() > connectionThrottle); // Gale - Dionysus - replace throttle tracker map with optimized collection
                          }
                      }
-                     } // Paper - add closing bracket for if check above
+                     } // Paper - Unix domain socket support

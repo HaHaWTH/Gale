@@ -13,10 +13,10 @@ As part of: VMP (https://github.com/RelativityMC/VMP-fabric)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 15a03c560dc546eaae54c6ca34fbe298adae77be..b9e736bff38d275ce41d626910791ad38aabe128 100644
+index f97790842558577238949efbbb21fc31de6b5141..dd8eb98086c4d303c54d0f8bf45fcabd7039686c 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -315,6 +315,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -317,6 +317,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
      public float yRotO;
      public float xRotO;
      private AABB bb;
@@ -24,7 +24,7 @@ index 15a03c560dc546eaae54c6ca34fbe298adae77be..b9e736bff38d275ce41d626910791ad3
      public boolean onGround;
      public boolean horizontalCollision;
      public boolean verticalCollision;
-@@ -1075,6 +1076,11 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -1077,6 +1078,11 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
      // Paper end - detailed watchdog information
  
      public void move(MoverType movementType, Vec3 movement) {

@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 7212d15b58d9045bd4a30d11a3dac5eb395d00df..b1e45275dd05d2d7ea163582354575bd0c896f8a 100644
+index 62eac1a915177ffe935f6a19a567932f6c787f75..ec840eb5438eaa9aadfdf62b0c7d4810e83d6402 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -900,7 +900,20 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -899,7 +899,20 @@ public class ServerLevel extends Level implements WorldGenLevel {
                                  entity.stopRiding();
                              }
  
@@ -57,7 +57,7 @@ index 7212d15b58d9045bd4a30d11a3dac5eb395d00df..b1e45275dd05d2d7ea163582354575bd
                      }
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 554a6c088d10e129cdbb7c2ca1f8c0757c0568fa..6d5a7d4609ec9068c60ac29a8fad2807d0abd48c 100644
+index ff484009c8e0f9ecf0381e33670c13d30f47829d..5ddae106ccd4a81dd0e3f873f7f64c0061814669 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -1329,13 +1329,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable {

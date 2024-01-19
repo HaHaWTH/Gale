@@ -17,7 +17,7 @@ Licensed under: MIT (https://opensource.org/licenses/MIT)
 Only do an item "suck in" action once per second
 
 diff --git a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
-index a39db702063887cf530f272deaf4f334047cc7d4..2abd920e78a4da56654da87034c36c77d2fc6b35 100644
+index 491a521f0e5e272fbad7870fa3adefdea22e179f..3ff5c1b932bb28203aa5b48393ff41724c93618a 100644
 --- a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
 @@ -14,11 +14,13 @@ import net.minecraft.world.entity.Entity;
@@ -119,7 +119,7 @@ index a05acf709735b40ca86f978508c63a86065fd405..3752b4ba7fb0d680d4b4a61bf44d54d5
  
      double getLevelY();
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-index 90c354d37a8db3bcad79aa882d52d5d25482c02d..375d1dc3a7897007f8d0997153fd77d16ff07388 100644
+index 5a199935865979adf2f81ff6459299c4c7b9003b..5a5347ee033db890872193f22a7b63c1af0e79b7 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 @@ -11,6 +11,7 @@ import net.minecraft.core.Direction;
@@ -141,7 +141,7 @@ index 90c354d37a8db3bcad79aa882d52d5d25482c02d..375d1dc3a7897007f8d0997153fd77d1
 @@ -575,7 +577,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
                  return false;
              }
-             // Paper end
+             // Paper end - Perf: Optimize Hoppers
 -        } else {
 +        } else if (shouldSuckIn(world, hopper)) { // Gale - EMC - reduce hopper item checks
              Iterator iterator = HopperBlockEntity.getItemsAtAndAbove(world, hopper).iterator();
@@ -156,7 +156,7 @@ index 90c354d37a8db3bcad79aa882d52d5d25482c02d..375d1dc3a7897007f8d0997153fd77d1
  
      @io.papermc.paper.annotation.DoNotUse // Paper - method unused as logic is inlined above
 @@ -900,6 +903,31 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
-         return first.getCount() < first.getMaxStackSize() && first.is(second.getItem()) && first.getDamageValue() == second.getDamageValue() && ((first.isEmpty() && second.isEmpty()) || java.util.Objects.equals(first.getTag(), second.getTag())); // Paper - used to return true for full itemstacks?!
+         return first.getCount() < first.getMaxStackSize() && first.is(second.getItem()) && first.getDamageValue() == second.getDamageValue() && ((first.isEmpty() && second.isEmpty()) || java.util.Objects.equals(first.getTag(), second.getTag())); // Paper - Perf: Optimize Hoppers; used to return true for full itemstacks?!
      }
  
 +    // Gale start - EMC - reduce hopper item checks

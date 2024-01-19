@@ -23,7 +23,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 69f2d3bb9ec491d3953b84619c7b0067f844e3a1..6e20843dce5a3446d7c11ad1c0fb85639bb6981f 100644
+index 8ef27f52b8eda633135f59e68e53b5db271b65f7..e9fc86639a7e7ba6525d63059aed412b8effd2d0 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -1106,6 +1106,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -50,7 +50,7 @@ index 69f2d3bb9ec491d3953b84619c7b0067f844e3a1..6e20843dce5a3446d7c11ad1c0fb8563
                  this.mayHaveDelayedTasks = true;
                  this.delayedTasksMaxNextTickTimeNanos = Math.max(Util.getNanos() + i, this.nextTickTimeNanos);
                  this.waitUntilNextTick();
-@@ -1304,9 +1311,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1298,9 +1305,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      protected void waitUntilNextTick() {
          //this.executeAll(); // Paper - move this into the tick method for timings

@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 5eadc4ce30f77794f50b612549557f8b5d81f21a..45ed45e636421cc49d78f05a0e75c9a88f13c112 100644
+index 65cc4cc0051476e761b6b0584f5e7281b7a2fac6..294b612534194180a9af7d9039bf3df5c08c176d 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -13,6 +13,8 @@ import java.net.SocketAddress;
@@ -79,7 +79,7 @@ index 5eadc4ce30f77794f50b612549557f8b5d81f21a..45ed45e636421cc49d78f05a0e75c9a8
          this.server.getCustomBossEvents().onPlayerDisconnect(entityplayer);
          UUID uuid = entityplayer.getUUID();
 @@ -832,6 +837,7 @@ public abstract class PlayerList {
-         // Paper end
+         // Paper end - Expand PlayerRespawnEvent
          entityplayer.stopRiding(); // CraftBukkit
          this.players.remove(entityplayer);
 +        this.removeFromSendAllPlayerInfoBuckets(entityplayer); // Gale - Purpur - spread out sending all player info
@@ -157,7 +157,7 @@ index 5eadc4ce30f77794f50b612549557f8b5d81f21a..45ed45e636421cc49d78f05a0e75c9a8
          }
  
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index 544b610f7c42a57099115fb5f76245f6c7a6eca3..d96e4d710ceedb80e1c12c88705181eb12975ca7 100644
+index ad291fa31741af85c86dab66b753705f96a0634a..878c545c6f8e97fdcbf00cc413898919e534aa81 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
 @@ -39,6 +39,7 @@ import net.minecraft.network.syncher.SynchedEntityData;

@@ -13,7 +13,7 @@ As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
 Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/level/GameRules.java b/src/main/java/net/minecraft/world/level/GameRules.java
-index 4f2fa47d094348bb8f86a86e808019ddba56e187..5c7e6b320566473a295f1979d68b3e3edf138895 100644
+index afe91d02363bf7385d34447dda8960980ec48443..817556fdee3551c44a5a83f174496d7fd9c6387e 100644
 --- a/src/main/java/net/minecraft/world/level/GameRules.java
 +++ b/src/main/java/net/minecraft/world/level/GameRules.java
 @@ -19,6 +19,8 @@ import java.util.function.BiConsumer;
@@ -32,5 +32,5 @@ index 4f2fa47d094348bb8f86a86e808019ddba56e187..5c7e6b320566473a295f1979d68b3e3e
 -        this.rules = rules;
 +        this.rules = new Object2ObjectOpenHashMap<>(rules); // Gale - Lithium - replace game rules map with optimized collection
  
-         // Paper start
+         // Paper start - Perf: Use array for gamerule storage
          int arraySize = rules.keySet().stream().mapToInt(key -> key.gameRuleIndex).max().orElse(-1) + 1;

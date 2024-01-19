@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java b/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java
-index 2677e21d8239bf0361a3bc5c9a50c328e54d70f6..36b39517ef0aa817c5a10d6d7f4904a87c346b47 100644
+index fde9aadd6c688b9797a6755f9d214918047598a0..0f47ee4193aa834e23b1c5bfc992881cd5872e8a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java
 +++ b/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java
 @@ -31,6 +31,7 @@ import org.bukkit.Material;
@@ -52,8 +52,8 @@ index 2677e21d8239bf0361a3bc5c9a50c328e54d70f6..36b39517ef0aa817c5a10d6d7f4904a8
      }
  
      static {
--        LOGGER.warn("Initializing Legacy Material Support. Unless you have legacy plugins and/or data this is a bug!"); // Paper - doesn't need to be an error
-+        if (GaleGlobalConfiguration.get().logToConsole.legacyMaterialInitialization) LOGGER.warn("Initializing Legacy Material Support. Unless you have legacy plugins and/or data this is a bug!"); // Paper - doesn't need to be an error // Gale - Purpur - do not log legacy Material initialization
+-        LOGGER.warn("Initializing Legacy Material Support. Unless you have legacy plugins and/or data this is a bug!"); // Paper - Improve logging and errors; doesn't need to be an error
++        if (GaleGlobalConfiguration.get().logToConsole.legacyMaterialInitialization) LOGGER.warn("Initializing Legacy Material Support. Unless you have legacy plugins and/or data this is a bug!"); // Paper - Improve logging and errors; doesn't need to be an error // Gale - Purpur - do not log legacy Material initialization
          if (MinecraftServer.getServer() != null && MinecraftServer.getServer().isDebugging()) {
              new Exception().printStackTrace();
          }

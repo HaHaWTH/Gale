@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java b/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
-index 8f8b29f80d1573981ccffd207dd6e0941e71a352..aed7e9affaae1e0d1e3324a41e5818435f76fd0f 100644
+index abcc3ef59475ac170fd10b4dd4a4f3371faf17e0..aed7e9affaae1e0d1e3324a41e5818435f76fd0f 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
 @@ -13,6 +13,7 @@ import net.minecraft.core.BlockPos;
@@ -66,7 +66,7 @@ index 8f8b29f80d1573981ccffd207dd6e0941e71a352..aed7e9affaae1e0d1e3324a41e581843
                          return false;
                      } else {
                          mutableLong.setValue(time + 20L + (long)world.getRandom().nextInt(20));
--                        if (entity.getNavigation().isStuck()) mutableLong.add(200); // Paper - Wait an additional 10s to check again if they're stuck
+-                        if (entity.getNavigation().isStuck()) mutableLong.add(200); // Paper - Perf: Wait an additional 10s to check again if they're stuck
 +                        addAdditionalTimeToMutableLongIfEntityIsStuck(mutableLong, world, entity); // Gale - Airplane - reduce acquire POI for stuck entities
                          PoiManager poiManager = world.getPoiManager();
                          long2ObjectMap.long2ObjectEntrySet().removeIf((entry) -> {

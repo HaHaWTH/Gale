@@ -188,7 +188,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 90a06994220979be88ce54c487809e1e7c1b5cdd..6bcfcc5bf869d63618b8df0d9382a0a37193fff1 100644
+index bad84f8d6a9b4807af580efc3f082a6379962f9c..7adffbc9e737354a2644a12bc9b067e57bec756a 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -230,21 +230,21 @@ index 90a06994220979be88ce54c487809e1e7c1b5cdd..6bcfcc5bf869d63618b8df0d9382a0a3
 @@ -306,6 +304,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      public final double[] recentTps = new double[ 3 ];
      // Spigot end
-     public final io.papermc.paper.configuration.PaperConfigurations paperConfigurations;
+     public final io.papermc.paper.configuration.PaperConfigurations paperConfigurations; // Paper - add paper configuration files
 +    public final GaleConfigurations galeConfigurations; // Gale - Gale configuration
-     public static long currentTickLong = 0L; // Paper
+     public static long currentTickLong = 0L; // Paper - track current tick as a long
  
      public volatile Thread shutdownThread; // Paper
 @@ -414,6 +413,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          Runtime.getRuntime().addShutdownHook(new org.bukkit.craftbukkit.util.ServerShutdownThread(this));
          // CraftBukkit end
-         this.paperConfigurations = services.paperConfigurations(); // Paper
+         this.paperConfigurations = services.paperConfigurations(); // Paper - add paper configuration files
 +        this.galeConfigurations = services.galeConfigurations(); // Gale - Gale configuration
      }
  
      private void readScoreboard(DimensionDataStorage persistentStateManager) {
 diff --git a/src/main/java/net/minecraft/server/Services.java b/src/main/java/net/minecraft/server/Services.java
-index a5450eeeab5a6b0ab273810063806d11107d6b26..79e2eff81b267608253e820817862768693ea7ef 100644
+index d89c624554ab08bd1b33a3f62b52aa57aaafb8b4..2f76d1be6b26e516d1ab13df8d05b1f54f1ff558 100644
 --- a/src/main/java/net/minecraft/server/Services.java
 +++ b/src/main/java/net/minecraft/server/Services.java
 @@ -9,12 +9,13 @@ import java.io.File;
@@ -253,7 +253,7 @@ index a5450eeeab5a6b0ab273810063806d11107d6b26..79e2eff81b267608253e820817862768
  import net.minecraft.util.SignatureValidator;
 +import org.galemc.gale.configuration.GaleConfigurations;
  
- // Paper start
+ // Paper start - add paper configuration files
 -public record Services(MinecraftSessionService sessionService, ServicesKeySet servicesKeySet, GameProfileRepository profileRepository, GameProfileCache profileCache, @javax.annotation.Nullable io.papermc.paper.configuration.PaperConfigurations paperConfigurations) {
 +public record Services(MinecraftSessionService sessionService, ServicesKeySet servicesKeySet, GameProfileRepository profileRepository, GameProfileCache profileCache, @javax.annotation.Nullable io.papermc.paper.configuration.PaperConfigurations paperConfigurations, @javax.annotation.Nullable GaleConfigurations galeConfigurations) { // Gale - Gale configuration
  
@@ -266,7 +266,7 @@ index a5450eeeab5a6b0ab273810063806d11107d6b26..79e2eff81b267608253e820817862768
 @@ -22,6 +23,11 @@ public record Services(MinecraftSessionService sessionService, ServicesKeySet se
          return java.util.Objects.requireNonNull(this.paperConfigurations);
      }
-     // Paper end
+     // Paper end - add paper configuration files
 +    // Gale start - Gale configuration
 +    public GaleConfigurations galeConfigurations() {
 +        return java.util.Objects.requireNonNull(this.galeConfigurations);
@@ -274,7 +274,7 @@ index a5450eeeab5a6b0ab273810063806d11107d6b26..79e2eff81b267608253e820817862768
 +    // Gale end - Gale configuration
      public static final String USERID_CACHE_FILE = "usercache.json"; // Paper - private -> public
  
-     public static Services create(YggdrasilAuthenticationService authenticationService, File rootDirectory, File userCacheFile, joptsimple.OptionSet optionSet) throws Exception { // Paper
+     public static Services create(YggdrasilAuthenticationService authenticationService, File rootDirectory, File userCacheFile, joptsimple.OptionSet optionSet) throws Exception { // Paper - add optionset to load paper config files; add userCacheFile parameter
 @@ -32,7 +38,10 @@ public record Services(MinecraftSessionService sessionService, ServicesKeySet se
          final java.nio.file.Path legacyConfigPath = ((File) optionSet.valueOf("paper-settings")).toPath();
          final java.nio.file.Path configDirPath = ((File) optionSet.valueOf("paper-settings-directory")).toPath();
@@ -284,11 +284,11 @@ index a5450eeeab5a6b0ab273810063806d11107d6b26..79e2eff81b267608253e820817862768
 +        GaleConfigurations galeConfigurations = GaleConfigurations.setup(configDirPath);
 +        return new Services(minecraftSessionService, authenticationService.getServicesKeySet(), gameProfileRepository, gameProfileCache, paperConfigurations, galeConfigurations);
 +        // Gale end - Gale configuration
-         // Paper end
+         // Paper end - load paper config files from cli options
      }
  
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 58536aabf607015939a1326f80207c0a06eed8ff..0ce390a0ffb021f58dd763e44ebe9dabf62472bc 100644
+index 00c47942a3690df565bd0ea76b8abbf2dc50c4e2..bb6246da25e756348d2dc0152d487f99054b5203 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -1,20 +1,15 @@
@@ -313,19 +313,19 @@ index 58536aabf607015939a1326f80207c0a06eed8ff..0ce390a0ffb021f58dd763e44ebe9dab
  import java.util.Locale;
  import java.util.Optional;
  import java.util.function.BooleanSupplier;
-@@ -208,6 +203,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         io.papermc.paper.util.ObfHelper.INSTANCE.getClass(); // Paper - load mappings for stacktrace deobf and etc.
-         paperConfigurations.initializeGlobalConfiguration(this.registryAccess());
-         paperConfigurations.initializeWorldDefaultsConfiguration(this.registryAccess());
+@@ -209,6 +204,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         this.paperConfigurations.initializeGlobalConfiguration(this.registryAccess());
+         this.paperConfigurations.initializeWorldDefaultsConfiguration(this.registryAccess());
+         // Paper end - initialize global and world-defaults configuration
 +        // Gale start - Gale configuration
 +        galeConfigurations.initializeGlobalConfiguration(this.registryAccess());
 +        galeConfigurations.initializeWorldDefaultsConfiguration(this.registryAccess());
 +        // Gale end - Gale configuration
-         // Paper start - moved up to right after PlayerList creation but before file load/save
+         // Paper start - convert old users earlier after PlayerList creation but before file load/save
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 7c31f619a6e8e3539c547fc43d821d2cce7df7e7..516aaf7a9e77bcbb40124acb3f5ffadfa439d1f1 100644
+index 9b0b2510edb4984b0714244bbe513e077af7b455..ab0ab5574dc3a19b133262b9c17d62a36df15566 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -134,12 +134,10 @@ import net.minecraft.world.level.chunk.storage.EntityStorage;
@@ -341,17 +341,17 @@ index 7c31f619a6e8e3539c547fc43d821d2cce7df7e7..516aaf7a9e77bcbb40124acb3f5ffadf
  import net.minecraft.world.level.gameevent.DynamicGameEventListener;
  import net.minecraft.world.level.gameevent.GameEvent;
  import net.minecraft.world.level.gameevent.GameEventDispatcher;
-@@ -698,7 +696,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -697,7 +695,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
--        super(iworlddataserver, resourcekey, minecraftserver.registryAccess(), worlddimension.type(), minecraftserver::getProfiler, false, flag, i, minecraftserver.getMaxChainedNeighborUpdates(), gen, biomeProvider, env, spigotConfig -> minecraftserver.paperConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess())), executor); // Paper - Async-Anti-Xray - Pass executor
-+        super(iworlddataserver, resourcekey, minecraftserver.registryAccess(), worlddimension.type(), minecraftserver::getProfiler, false, flag, i, minecraftserver.getMaxChainedNeighborUpdates(), gen, biomeProvider, env, spigotConfig -> minecraftserver.paperConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess())), spigotConfig -> minecraftserver.galeConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess())), executor); // Paper - Async-Anti-Xray - Pass executor // Gale - Gale configuration
+-        super(iworlddataserver, resourcekey, minecraftserver.registryAccess(), worlddimension.type(), minecraftserver::getProfiler, false, flag, i, minecraftserver.getMaxChainedNeighborUpdates(), gen, biomeProvider, env, spigotConfig -> minecraftserver.paperConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess())), executor); // Paper - create paper world configs; Async-Anti-Xray: Pass executor
++        super(iworlddataserver, resourcekey, minecraftserver.registryAccess(), worlddimension.type(), minecraftserver::getProfiler, false, flag, i, minecraftserver.getMaxChainedNeighborUpdates(), gen, biomeProvider, env, spigotConfig -> minecraftserver.paperConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess())), spigotConfig -> minecraftserver.galeConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess())), executor); // Paper - create paper world configs; Async-Anti-Xray: Pass executor // Gale - Gale configuration
          this.pvpMode = minecraftserver.isPvpAllowed();
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 6403341f2e9d7ac4251336cb0bcc5d79dbb7bb0e..5dc2e7c5087dc29fd2726053f5561409c9e05163 100644
+index dce7be16854faa3e297815e794cae6b0bd42bd4f..6a9ffef1b09b70e460fbd3aa90e34104057c0007 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -1,10 +1,7 @@
@@ -404,7 +404,7 @@ index 6403341f2e9d7ac4251336cb0bcc5d79dbb7bb0e..5dc2e7c5087dc29fd2726053f5561409
 @@ -177,6 +169,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          return this.paperConfig;
      }
-     // Paper end
+     // Paper end - add paper world config
 +    // Gale start - Gale configuration
 +    private final GaleWorldConfiguration galeConfig;
 +    public GaleWorldConfiguration galeConfig() {
@@ -418,16 +418,16 @@ index 6403341f2e9d7ac4251336cb0bcc5d79dbb7bb0e..5dc2e7c5087dc29fd2726053f5561409
  
      public abstract ResourceKey<LevelStem> getTypeKey();
  
--    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - Async-Anti-Xray - Pass executor
-+    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - Async-Anti-Xray - Pass executor // Gale - Gale configuration
+-    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config; Async-Anti-Xray: Pass executor
++    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config; Async-Anti-Xray: Pass executor // Gale - Gale configuration
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig(((net.minecraft.world.level.storage.PrimaryLevelData) worlddatamutable).getLevelName()); // Spigot
-         this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper
+         this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper - create paper world config
 +        this.galeConfig = galeWorldConfigCreator.apply(this.spigotConfig); // Gale - Gale configuration
          this.generator = gen;
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b13c8d00dbb07674e46d4142605469661c17a2e1..6c453bbb929007d9bcd041f856eb65d409bac32a 100644
+index 2e6206bc868480cb1866e77421374c0b632e8c1d..8f234dfe047fe8f93f160c1b794b88b3357e1d93 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1037,6 +1037,7 @@ public final class CraftServer implements Server {
@@ -438,7 +438,7 @@ index b13c8d00dbb07674e46d4142605469661c17a2e1..6c453bbb929007d9bcd041f856eb65d4
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters, config.spawnAnimals); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -3011,6 +3012,14 @@ public final class CraftServer implements Server {
+@@ -3010,6 +3011,14 @@ public final class CraftServer implements Server {
              return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
          }
  

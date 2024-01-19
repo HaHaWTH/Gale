@@ -390,7 +390,7 @@ index a71414397bd45ee7bcacfeef0041d80dfa25f114..7743f185672e977520218c3ce6b8ddc9
  
      @Override
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-index d4dcf7fe26474ae07374e7761d823bc5c8b54f97..90c354d37a8db3bcad79aa882d52d5d25482c02d 100644
+index a61d7cd2b078fe511ff00344197b6ea11feebfb2..5a199935865979adf2f81ff6459299c4c7b9003b 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 @@ -47,7 +47,10 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
@@ -448,8 +448,8 @@ index d4dcf7fe26474ae07374e7761d823bc5c8b54f97..90c354d37a8db3bcad79aa882d52d5d2
                      flag = HopperBlockEntity.ejectItems(world, pos, state, (Container) blockEntity, blockEntity); // CraftBukkit
                  }
  
--                if (fullState != HOPPER_IS_FULL || flag) { // Paper - optimize hoppers
-+                if (!blockEntity.optimizedItems.hasFullStacks() || fullState != HOPPER_IS_FULL || flag) { // Paper - optimize hoppers // Gale - Airplane - improve container checking with a bitset - use bitset first
+-                if (fullState != HOPPER_IS_FULL || flag) { // Paper - Perf: Optimize Hoppers
++                if (!blockEntity.optimizedItems.hasFullStacks() || fullState != HOPPER_IS_FULL || flag) { // Paper - Perf: Optimize Hoppers // Gale - Airplane - improve container checking with a bitset - use bitset first
                      flag |= booleansupplier.getAsBoolean();
                  }
  
@@ -466,8 +466,8 @@ index d4dcf7fe26474ae07374e7761d823bc5c8b54f97..90c354d37a8db3bcad79aa882d52d5d2
      }
  
      private static boolean isEmptyContainer(Container inv, Direction facing) {
--        return allMatch(inv, facing, IS_EMPTY_TEST);
-+        return inv.isCompletelyEmpty(facing); // Gale - Airplane - improve container checking with a bitset - use bitsets
+-        return allMatch(inv, facing, IS_EMPTY_TEST); // Paper - Perf: Optimize Hoppers
++        return inv.isCompletelyEmpty(facing); // Paper - Perf: Optimize Hoppers // Gale - Airplane - improve container checking with a bitset - use bitsets
      }
  
      public static boolean suckInItems(Level world, Hopper hopper) {
@@ -493,13 +493,13 @@ index d4dcf7fe26474ae07374e7761d823bc5c8b54f97..90c354d37a8db3bcad79aa882d52d5d2
  
      public static void entityInside(Level world, BlockPos pos, BlockState state, Entity entity, HopperBlockEntity blockEntity) {
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java
-index 64875525df244db838560f5fefb7b1b07b0f1f51..1de09539877d40b7bdcdc8a10d1d30c81420aa5b 100644
+index a94300a457b25f0e33a8eeabba6dd5720ca9ab1e..f1ea82072cb13e255fa6ca90b0753ed232697275 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java
 @@ -94,12 +94,7 @@ public abstract class RandomizableContainerBlockEntity extends BaseContainerBloc
      public boolean isEmpty() {
          this.unpackLootTable((Player)null);
-         // Paper start
+         // Paper start - Perf: Optimize Hoppers
 -        for (final ItemStack itemStack : this.getItems()) {
 -            if (!itemStack.isEmpty()) {
 -                return false;
@@ -507,6 +507,6 @@ index 64875525df244db838560f5fefb7b1b07b0f1f51..1de09539877d40b7bdcdc8a10d1d30c8
 -        }
 -        return true;
 +        return this.isCompletelyEmpty(null); // Gale - Airplane - improve container checking with a bitset - use super
-         // Paper end
+         // Paper end - Perf: Optimize Hoppers
      }
  

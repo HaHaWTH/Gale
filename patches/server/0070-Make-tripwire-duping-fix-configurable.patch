@@ -7,15 +7,15 @@ License: MIT (https://opensource.org/licenses/MIT)
 Leaf - https://github.com/Winds-Studio/Leaf
 
 diff --git a/src/main/java/net/minecraft/world/level/block/TripWireBlock.java b/src/main/java/net/minecraft/world/level/block/TripWireBlock.java
-index 2f947997ca746d18544940ef67ff550a95946edd..cc7096d54a5b9412c3cda4d1a0d99d042739a789 100644
+index 3cb1db27dba902678a5848a1fb5e2c6ec6241e60..c615d528610168c4ad52730079f3525ab211b89e 100644
 --- a/src/main/java/net/minecraft/world/level/block/TripWireBlock.java
 +++ b/src/main/java/net/minecraft/world/level/block/TripWireBlock.java
 @@ -91,7 +91,7 @@ public class TripWireBlock extends Block {
      public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
          if (io.papermc.paper.configuration.GlobalConfiguration.get().blockUpdates.disableTripwireUpdates) return; // Paper - prevent adjacent tripwires from updating
          if (!moved && !state.is(newState.getBlock())) {
--            this.updateSource(world, pos, (BlockState) state.setValue(TripWireBlock.POWERED, true), true); // Paper - fix state inconsistency
-+            this.updateSource(world, pos, (BlockState) state.setValue(TripWireBlock.POWERED, true), world.galeConfig().gameplayMechanics.fixes.tripwireDuping); // Paper - fix state inconsistency // Gale - Leaf - make tripwire duping fix configurable
+-            this.updateSource(world, pos, (BlockState) state.setValue(TripWireBlock.POWERED, true), true); // Paper - fix tripwire state inconsistency
++            this.updateSource(world, pos, (BlockState) state.setValue(TripWireBlock.POWERED, true), world.galeConfig().gameplayMechanics.fixes.tripwireDuping); // Paper - fix tripwire state inconsistency // Gale - Leaf - make tripwire duping fix configurable
          }
      }
  

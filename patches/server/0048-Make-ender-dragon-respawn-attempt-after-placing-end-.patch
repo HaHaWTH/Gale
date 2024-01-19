@@ -26,7 +26,7 @@ search to attempt respawning the ender dragon whenever a player places
 an end crystal.
 
 diff --git a/src/main/java/net/minecraft/world/item/EndCrystalItem.java b/src/main/java/net/minecraft/world/item/EndCrystalItem.java
-index 5a19875cbc603acea95193d969d2e1dc1e0bfd78..702f9ad3d7a27060bf3328192a32ea2807fbaa3b 100644
+index e1696f6b77df4c8fceaece64701d4db78b0a4c42..a0bc8bb8d88e96457a2be0befe1fd69ef4973e11 100644
 --- a/src/main/java/net/minecraft/world/item/EndCrystalItem.java
 +++ b/src/main/java/net/minecraft/world/item/EndCrystalItem.java
 @@ -53,11 +53,13 @@ public class EndCrystalItem extends Item {
@@ -37,7 +37,7 @@ index 5a19875cbc603acea95193d969d2e1dc1e0bfd78..702f9ad3d7a27060bf3328192a32ea28
                          EndDragonFight enderdragonbattle = ((ServerLevel) world).getDragonFight();
  
                          if (enderdragonbattle != null) {
-                             enderdragonbattle.tryRespawn(aboveBlockPosition); // Paper - pass placed end crystal position to pre-check proximity to portal
+                             enderdragonbattle.tryRespawn(aboveBlockPosition); // Paper - Perf: Do crystal-portal proximity check before entity lookup
                          }
 +                        } // Gale - Pufferfish - make ender dragon respawn attempt after placing end crystals configurable
                      }

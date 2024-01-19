@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index 9e014a140262f5dfcdcb9b21afd18ca275930bb2..e716cbde9bbf3837b614ea1ddd4f881178d938d0 100644
+index 6ddb0abcc89af93e4cff5b0e461bc8490aacbbc3..bd08b6f29177cdfc165416790cac3093499b1871 100644
 --- a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 @@ -4,6 +4,9 @@ import com.mojang.authlib.GameProfile;
@@ -129,7 +129,7 @@ index 9e014a140262f5dfcdcb9b21afd18ca275930bb2..e716cbde9bbf3837b614ea1ddd4f8811
  
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 5a2b43ea98478a67ad712980ee8e6dbe98871433..9583caa7434a20c1c5d1bbd601aec988d2dfb97b 100644
+index a4b86d40728341cf9baeacc8c0478cc30c0b4f50..d9c6d49aed9d84c1f317748e113acb068d1e488d 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -8,6 +8,8 @@ import com.mojang.brigadier.StringReader;
@@ -141,7 +141,7 @@ index 5a2b43ea98478a67ad712980ee8e6dbe98871433..9583caa7434a20c1c5d1bbd601aec988
  import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
  import it.unimi.dsi.fastutil.objects.ObjectIterator;
  import java.net.SocketAddress;
-@@ -3411,6 +3413,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -3413,6 +3415,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
      }
  
      @Override

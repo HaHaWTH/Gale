@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index c4c7970e3dce12985c401d23d288bd8d9bca6913..e4c1afec0d90c8131e210b7676733e355f2b08b9 100644
+index d8c899566533dda4cf5e700769c842f93e5c0b49..8df80c5cfaee022e5796dcced0185ddcd794fa0d 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -142,7 +142,6 @@ import org.bukkit.event.entity.EntityTeleportEvent;
@@ -42,7 +42,7 @@ index c4c7970e3dce12985c401d23d288bd8d9bca6913..e4c1afec0d90c8131e210b7676733e35
  
  public abstract class LivingEntity extends Entity implements Attackable {
  
-@@ -1999,6 +1998,20 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -2000,6 +1999,20 @@ public abstract class LivingEntity extends Entity implements Attackable {
          return this.lastClimbablePos;
      }
  
@@ -64,7 +64,7 @@ index c4c7970e3dce12985c401d23d288bd8d9bca6913..e4c1afec0d90c8131e210b7676733e35
          if (this.isSpectator()) {
              return false;
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index 2d31752478636bd21bbff5b430e5acb76b5d91c2..ef7a25818781af4ce4e1f1a63ab62abff8013ed4 100644
+index fafc8b84d6b6368c70b8eedfdb4c3a9deace9c26..9153d333f17d8b2864d1572473fdf561881905b0 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
 @@ -297,7 +297,7 @@ public class ActivationRange

@@ -26,7 +26,7 @@ index b47a8a082170bcb630c4354be7c77a4cac71d105..b49e3f2cdc1fa5ff3723fae452404664
              double d1 = (double) (center.y - maxRange);
              double d2 = (double) (center.x + maxRange);
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 6f03370c6c05cbbbadf28f19c4263ded15b559d7..a9d6870abe34e929c476ae199549e26643ef3343 100644
+index 09e13d3bf936e8a4b1352a4733b7525c1886d8fa..0a0106d9192e6913f7579a4fdd77a9c0fc8366ba 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -453,7 +453,7 @@ public class ServerPlayer extends Player {
@@ -61,7 +61,7 @@ index 1ef089dbf83de35d875c00efdf468c397be56978..b9f5dc95f859acb8f8fd4739537485af
          }
  
 diff --git a/src/main/java/net/minecraft/world/entity/projectile/FishingHook.java b/src/main/java/net/minecraft/world/entity/projectile/FishingHook.java
-index a2093158e57d5f43c4afa66386481b82b3c4c3c4..52506b0b2909cc1b4d3999a99bd012401dbc5bd8 100644
+index 5706c9b744b660d6f7639b8152dce82799c4b466..460aba465eac5cb8d25456c0d4d04a132cee43c7 100644
 --- a/src/main/java/net/minecraft/world/entity/projectile/FishingHook.java
 +++ b/src/main/java/net/minecraft/world/entity/projectile/FishingHook.java
 @@ -86,7 +86,7 @@ public class FishingHook extends Projectile {
@@ -96,7 +96,7 @@ index ea0df00966cf9900a8a0153099bbb04e5b47116d..1168465f6b9414b08680660413c62967
          this.level = world;
          this.id = nbt.getInt("Id");
 diff --git a/src/main/java/net/minecraft/world/level/Explosion.java b/src/main/java/net/minecraft/world/level/Explosion.java
-index 3fde433edfd8835bf162cf39dd9999aa6dc5832d..ee76770b4f0cfadd2f7953c1328a2b6144379742 100644
+index ce8e39d4bf4c7474e1e8694312e1985327a88e62..525e41f3c38c9a79e237f32ac49ba02ab3438c30 100644
 --- a/src/main/java/net/minecraft/world/level/Explosion.java
 +++ b/src/main/java/net/minecraft/world/level/Explosion.java
 @@ -92,7 +92,7 @@ public class Explosion {
@@ -109,7 +109,7 @@ index 3fde433edfd8835bf162cf39dd9999aa6dc5832d..ee76770b4f0cfadd2f7953c1328a2b61
          this.hitPlayers = Maps.newHashMap();
          this.level = world;
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/TheEndGatewayBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/TheEndGatewayBlockEntity.java
-index 9a14425e7de3eeca8f489bce03f5c9127811a6aa..c7ebc50201a96b58dd3828a30eff1292a48a532e 100644
+index 850fc0906f23f1073e6d799222ed442b88af1bff..ff92b93dbffa6f3463c62d55cec535a3871ed7d8 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/TheEndGatewayBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/TheEndGatewayBlockEntity.java
 @@ -360,7 +360,7 @@ public class TheEndGatewayBlockEntity extends TheEndPortalBlockEntity {
@@ -122,7 +122,7 @@ index 9a14425e7de3eeca8f489bce03f5c9127811a6aa..c7ebc50201a96b58dd3828a30eff1292
  
      @Override
 diff --git a/src/main/java/net/minecraft/world/level/dimension/end/EndDragonFight.java b/src/main/java/net/minecraft/world/level/dimension/end/EndDragonFight.java
-index c1ff2e15bc5da1a642872ac0fdcdc457e8abb063..5493a50ff2b188fb485210c1dcd6d52ecebb39e4 100644
+index 8d57a03793934c8c0b259974bd4d9f9c2cab884d..2bff5f04e67b47bb3fbd6c9b1d235be1bb829b03 100644
 --- a/src/main/java/net/minecraft/world/level/dimension/end/EndDragonFight.java
 +++ b/src/main/java/net/minecraft/world/level/dimension/end/EndDragonFight.java
 @@ -472,7 +472,7 @@ public class EndDragonFight {
@@ -137,7 +137,7 @@ index c1ff2e15bc5da1a642872ac0fdcdc457e8abb063..5493a50ff2b188fb485210c1dcd6d52e
 @@ -490,7 +490,7 @@ public class EndDragonFight {
              this.portalLocation = this.portalLocation.atY(this.level.getMinBuildHeight() + 1);
          }
-         // Paper end
+         // Paper end - Prevent "softlocked" exit portal generation
 -        if (worldgenendtrophy.place(FeatureConfiguration.NONE, this.level, this.level.getChunkSource().getGenerator(), RandomSource.create(), this.portalLocation)) {
 +        if (worldgenendtrophy.place(FeatureConfiguration.NONE, this.level, this.level.getChunkSource().getGenerator(), this.level.random, this.portalLocation)) { // Gale - Patina - reduce RandomSource instances
              int i = Mth.positiveCeilDiv(4, 16);

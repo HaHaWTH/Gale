@@ -54,7 +54,7 @@ index 5a0a6de4c6f0d554b9efbb8b3dcf4e0c5bee7baf..ea0df00966cf9900a8a0153099bbb04e
      public Raider getLeader(int wave) {
          return (Raider) this.groupToLeaderMap.get(wave);
 diff --git a/src/main/java/net/minecraft/world/entity/raid/Raider.java b/src/main/java/net/minecraft/world/entity/raid/Raider.java
-index cdbc925ef61b8b439415f0a89368227890bcecb2..8a467b21867c4c624bbefd0aef5cc14d40391ca2 100644
+index 226fb5c88dd43c8008c5237299ef80db9e847af7..a71e6206c6a89708c5d312a73b1144c38f1271c8 100644
 --- a/src/main/java/net/minecraft/world/entity/raid/Raider.java
 +++ b/src/main/java/net/minecraft/world/entity/raid/Raider.java
 @@ -47,7 +47,7 @@ public abstract class Raider extends PatrollingMonster {
@@ -81,7 +81,7 @@ index cdbc925ef61b8b439415f0a89368227890bcecb2..8a467b21867c4c624bbefd0aef5cc14d
  
 -        if (this.hasActiveRaid() && !flag && ItemStack.matches(itemstack, Raid.getLeaderBannerInstance())) {
 +        if (this.hasActiveRaid() && !flag && ItemStack.matches(itemstack, Raid.LEADER_BANNER)) { // Gale - Lithium - cache ominous banner item
-             // Paper start
+             // Paper start - EntityPickupItemEvent fixes
              if (org.bukkit.craftbukkit.event.CraftEventFactory.callEntityPickupItemEvent(this, item, 0, false).isCancelled()) {
                  return;
 @@ -322,7 +322,7 @@ public abstract class Raider extends PatrollingMonster {

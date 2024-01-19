@@ -64,10 +64,10 @@ index 7bde3392d46fb1be3d04db97a5ec02ecc4a5ca0a..51f86a87c89057351d6984e655674212
                  this.level.timings.countNaturalMobs.startTiming(); // Paper - timings
                  int k = this.distanceManager.getNaturalSpawnChunkCount();
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 97a5034ff7faf16f179aca13234f35a515cf808f..7212d15b58d9045bd4a30d11a3dac5eb395d00df 100644
+index 3f637a3e666c24ed2d293f86824e91c751a3095e..62eac1a915177ffe935f6a19a567932f6c787f75 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -963,6 +963,8 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -962,6 +962,8 @@ public class ServerLevel extends Level implements WorldGenLevel {
      private final BlockPos.MutableBlockPos chunkTickMutablePosition = new BlockPos.MutableBlockPos();
      // Paper end
  
@@ -76,7 +76,7 @@ index 97a5034ff7faf16f179aca13234f35a515cf808f..7212d15b58d9045bd4a30d11a3dac5eb
      public void tickChunk(LevelChunk chunk, int randomTickSpeed) {
          ChunkPos chunkcoordintpair = chunk.getPos();
          boolean flag = this.isRaining();
-@@ -970,7 +972,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -969,7 +971,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
          int k = chunkcoordintpair.getMinBlockZ();
          final BlockPos.MutableBlockPos blockposition = this.chunkTickMutablePosition; // Paper - use mutable to reduce allocation rate, final to force compile fail on change
  
@@ -85,7 +85,7 @@ index 97a5034ff7faf16f179aca13234f35a515cf808f..7212d15b58d9045bd4a30d11a3dac5eb
              blockposition.set(this.findLightningTargetAround(this.getBlockRandomPos(j, 0, k, 15))); // Paper
  
              if (this.isRainingAt(blockposition)) {
-@@ -998,7 +1000,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -997,7 +999,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
              }
          }
  
@@ -95,7 +95,7 @@ index 97a5034ff7faf16f179aca13234f35a515cf808f..7212d15b58d9045bd4a30d11a3dac5eb
              if (this.random.nextInt(48) == 0) {
                  // Paper start
 diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
-index c5ab3058f66a54dba397aa4b562ec95e4fd25686..cd375184c63453829be96449c4df88372f905d9e 100644
+index 0daa7dac5e1c64da86d6c26c9399363105b926a5..d13a61ad34c00e5ad67adc64e919c4f559621cc9 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 @@ -85,6 +85,18 @@ public class LevelChunk extends ChunkAccess {

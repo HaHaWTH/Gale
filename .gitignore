@@ -48,6 +48,7 @@ run/
 
 gale-server
 gale-api
+paper-api-generator
 
 
 !gradle/wrapper/gradle-wrapper.jar

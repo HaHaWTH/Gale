@@ -13,7 +13,7 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 30ce82ac25fb5f93d01b0088822355c78383507e..c5b8b8cf9be9e9088877562a3994be9d7f988cc9 100644
+index f077ecfd1d65ca42e6a5dc12d9bfa09688cfe587..d1563e21e22c92465db57521ee4fc3619c286997 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -3696,6 +3696,13 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
@@ -28,8 +28,8 @@ index 30ce82ac25fb5f93d01b0088822355c78383507e..c5b8b8cf9be9e9088877562a3994be9d
 +                    }
 +                    // Gale end - MultiPaper - load portal destination chunk before entity teleport
                      entity.restoreFrom(this);
-                     entity.moveTo(position.x, position.y, position.z, yaw, pitch); // Paper - use EntityPortalExitEvent values
-                     entity.setDeltaMovement(velocity); // Paper - use EntityPortalExitEvent values
+                     entity.moveTo(position.x, position.y, position.z, yaw, pitch); // Paper - EntityPortalExitEvent
+                     entity.setDeltaMovement(velocity); // Paper - EntityPortalExitEvent
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 index 68373c02373d9452613710915beb0d5951c2b531..04e7ba1e2a80dffacc4063872ce4458577876f9f 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java

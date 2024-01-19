@@ -13,10 +13,10 @@ As part of: Pufferfish (https://github.com/pufferfish-gg/Pufferfish)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 7613c2789b3bf67a7da3806cfd04c918cba58344..dfd92a33497785f28c7ade16da900f7bb851cada 100644
+index be2cc4ff2109d6a8c04075bf645fa1fff3374799..fefe852c5376274f606ededeaf6c741f43ab19f9 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -71,6 +71,7 @@ tasks.withType<JavaCompile> {
+@@ -70,6 +70,7 @@ tasks.withType<JavaCompile> {
      compilerArgs.add("-Xlint:-module")
      compilerArgs.add("-Xlint:-removal")
      compilerArgs.add("-Xlint:-dep-ann")
@@ -24,7 +24,7 @@ index 7613c2789b3bf67a7da3806cfd04c918cba58344..dfd92a33497785f28c7ade16da900f7b
  }
  // Gale end - hide irrelevant compilation warnings
  
-@@ -195,6 +196,7 @@ fun TaskContainer.registerRunTask(
+@@ -194,6 +195,7 @@ fun TaskContainer.registerRunTask(
      minHeapSize = "${memoryGb}G"
      maxHeapSize = "${memoryGb}G"
      jvmArgs("--enable-preview") // Gale - enable preview features for development runs
@@ -84,7 +84,7 @@ index 2acad4c3fd58178b0f8b22bdb04eeeeb689d5afa..850ccd53c5007e8b18344ba76c9e7f00
  
          }
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 06ae3f1fee154d8f283fad6eeb06582ec647d519..d47e5442de3c6bf731b1b31454493855bc1e61e3 100644
+index 6fd999a40643cd3068cfdd80347d2cc117a409db..4ed9b8d14eac0e202e76371a9726fab5040effb0 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -14,6 +14,8 @@ import java.util.Locale;
@@ -105,8 +105,8 @@ index 06ae3f1fee154d8f283fad6eeb06582ec647d519..d47e5442de3c6bf731b1b31454493855
  
  // CraftBukkit start
 @@ -223,6 +226,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         io.papermc.paper.brigadier.PaperBrigadierProviderImpl.INSTANCE.getClass(); // init PaperBrigadierProvider
-         // Paper end
+         com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // Paper - load version history now
+         io.papermc.paper.brigadier.PaperBrigadierProviderImpl.INSTANCE.getClass(); // Paper - init PaperBrigadierProvider
  
 +        // Gale start - Pufferfish - SIMD support
 +        // Initialize vectorization
