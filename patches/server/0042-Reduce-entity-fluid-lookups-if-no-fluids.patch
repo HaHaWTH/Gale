@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 5724f794b898f439a0f0929bbf2937b3b9de1a9f..f06db4f9cdddcbedaa3cb047ed4dd81be8547f13 100644
+index 71d9ed6d3067c64165c41b35f2ea41791dd597b9..683ec06badc4943d80e51ee3f9bd58f4be5e2b16 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -4394,16 +4394,18 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -4386,16 +4386,18 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
      }
  
      public boolean updateFluidHeightAndDoFluidPushing(TagKey<Fluid> tag, double speed) {
@@ -60,7 +60,7 @@ index 5724f794b898f439a0f0929bbf2937b3b9de1a9f..f06db4f9cdddcbedaa3cb047ed4dd81b
              double d1 = 0.0D;
              boolean flag = this.isPushedByFluid();
              boolean flag1 = false;
-@@ -4411,14 +4413,61 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -4403,14 +4405,61 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
              int k1 = 0;
              BlockPos.MutableBlockPos blockposition_mutableblockposition = new BlockPos.MutableBlockPos();
  
@@ -128,7 +128,7 @@ index 5724f794b898f439a0f0929bbf2937b3b9de1a9f..f06db4f9cdddcbedaa3cb047ed4dd81b
  
                              if (d2 >= axisalignedbb.minY) {
                                  flag1 = true;
-@@ -4440,9 +4489,12 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -4432,9 +4481,12 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
                                  // CraftBukkit end
                              }
                          }
@@ -142,7 +142,7 @@ index 5724f794b898f439a0f0929bbf2937b3b9de1a9f..f06db4f9cdddcbedaa3cb047ed4dd81b
              if (vec3d.length() > 0.0D) {
                  if (k1 > 0) {
 diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
-index f0de72afad4bb571153436399386a6a8a70582a6..9712e6d62fab5d99dcc9644b1708c30d7d78af34 100644
+index 796bbef3544e06b8e7aac7e8ac5f740a2613f4bd..f34b5ecf71602c95208d0f72e56c636b3a2bc34a 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
 @@ -25,6 +25,7 @@ public class LevelChunkSection {
@@ -169,11 +169,11 @@ index f0de72afad4bb571153436399386a6a8a70582a6..9712e6d62fab5d99dcc9644b1708c30d
          }
  
          this.updateBlockCallback(x, y, z, iblockdata1, state); // Paper - optimise collisions
-@@ -161,6 +164,7 @@ public class LevelChunkSection {
-                 if (fluid.isRandomlyTicking()) {
-                     this.tickingFluidCount = (short) (this.tickingFluidCount + 1);
-                 }
+@@ -162,6 +165,7 @@ public class LevelChunkSection {
+                     if (fluid.isRandomlyTicking()) {
+                         this.tickingFluidCount = (short) (this.tickingFluidCount + 1);
+                     }
 +                this.fluidStateCount++; // Gale - Airplane - reduce entity fluid lookups if no fluids
-             }
+                 }
  
-             // Paper start - optimise collisions
+                 // Paper start - optimise collisions

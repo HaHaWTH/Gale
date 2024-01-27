@@ -22,7 +22,7 @@ you to easily disable books, should you want to preemptively remove this
 functionality before additional exploits are found.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index e5d734234ae0543b0772e8a12da3f60b3a97a6cb..054119323bcb5efb6688a68dbe47818fb79e8c71 100644
+index 8ca5d7c1bfacb1b47aa680eee167af08d0396ae0..521153303fca35df7d4589abda772cc27b565ede 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -186,6 +186,8 @@ import net.minecraft.world.phys.Vec3;
@@ -34,7 +34,7 @@ index e5d734234ae0543b0772e8a12da3f60b3a97a6cb..054119323bcb5efb6688a68dbe47818f
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -1124,6 +1126,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1121,6 +1123,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
  
      @Override
      public void handleEditBook(ServerboundEditBookPacket packet) {
@@ -43,7 +43,7 @@ index e5d734234ae0543b0772e8a12da3f60b3a97a6cb..054119323bcb5efb6688a68dbe47818f
 +            return;
 +        }
 +        // Gale end - Pufferfish - make book writing configurable
-         // Paper start
+         // Paper start - Book size limits
          if (!this.cserver.isPrimaryThread()) {
              List<String> pageList = packet.getPages();
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.java b/src/main/java/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.java

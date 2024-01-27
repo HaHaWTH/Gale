@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index 6ddb0abcc89af93e4cff5b0e461bc8490aacbbc3..bd08b6f29177cdfc165416790cac3093499b1871 100644
+index e7583996cc6d750cbd72f749de39ecded56d7f7c..d791c2f2facfc46d8664225c8b28f95f92df3413 100644
 --- a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 @@ -4,6 +4,9 @@ import com.mojang.authlib.GameProfile;
@@ -77,7 +77,7 @@ index 6ddb0abcc89af93e4cff5b0e461bc8490aacbbc3..bd08b6f29177cdfc165416790cac3093
 @@ -92,6 +100,16 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
      @Override
      public void handleKeepAlive(ServerboundKeepAlivePacket packet) {
-         //PacketUtils.ensureRunningOnSameThread(packet, this, this.player.serverLevel()); // CraftBukkit // Paper - This shouldn't be on the main thread
+         //PacketUtils.ensureRunningOnSameThread(packet, this, this.player.serverLevel()); // CraftBukkit // Paper - handle ServerboundKeepAlivePacket async
 +        // Gale start - Purpur - send multiple keep-alive packets
 +        if (GaleGlobalConfiguration.get().misc.keepalive.sendMultiple) {
 +            long id = packet.getId();
@@ -93,7 +93,7 @@ index 6ddb0abcc89af93e4cff5b0e461bc8490aacbbc3..bd08b6f29177cdfc165416790cac3093
  
 @@ -104,6 +122,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
              });
-             // Paper endg
+             // Paper end - This needs to be handled on the main thread for plugins
          }
 +        } // Gale - Purpur - send multiple keep-alive packets
  
@@ -125,11 +125,11 @@ index 6ddb0abcc89af93e4cff5b0e461bc8490aacbbc3..bd08b6f29177cdfc165416790cac3093
              }
          }
 +        } // Gale - Purpur - send multiple keep-alive packets
-         // Paper end
+         // Paper end - give clients a longer time to respond to pings as per pre 1.12.2 timings
  
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index a4b86d40728341cf9baeacc8c0478cc30c0b4f50..d9c6d49aed9d84c1f317748e113acb068d1e488d 100644
+index 7ca3cddf3a25d01cc02599873f7661e87fe16f93..15be6d4c333f6e48608becb6ace7f7d201afa81a 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -8,6 +8,8 @@ import com.mojang.brigadier.StringReader;
@@ -141,7 +141,7 @@ index a4b86d40728341cf9baeacc8c0478cc30c0b4f50..d9c6d49aed9d84c1f317748e113acb06
  import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
  import it.unimi.dsi.fastutil.objects.ObjectIterator;
  import java.net.SocketAddress;
-@@ -3413,6 +3415,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -3393,6 +3395,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
      }
  
      @Override

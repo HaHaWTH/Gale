@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/item/FallingBlockEntity.java b/src/main/java/net/minecraft/world/entity/item/FallingBlockEntity.java
-index 45c07733f03b5c11f6d8e820f65dc950c70d9a67..fa1888db518d22e4069b4dcc42d80560181243e7 100644
+index 9daf8aa557d9f4fdbcc138a47892ea5a061dd877..af1baf10490f5792481f072ca34fba9494dcd1e2 100644
 --- a/src/main/java/net/minecraft/world/entity/item/FallingBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/item/FallingBlockEntity.java
 @@ -133,7 +133,7 @@ public class FallingBlockEntity extends Entity {
@@ -49,9 +49,9 @@ index 45c07733f03b5c11f6d8e820f65dc950c70d9a67..fa1888db518d22e4069b4dcc42d80560
              return;
          }
          // Paper end - fix sand duping
-@@ -150,7 +150,7 @@ public class FallingBlockEntity extends Entity {
-             this.move(MoverType.SELF, this.getDeltaMovement());
+@@ -149,7 +149,7 @@ public class FallingBlockEntity extends Entity {
  
+             this.move(MoverType.SELF, this.getDeltaMovement());
              // Paper start - fix sand duping
 -            if (this.isRemoved()) {
 +            if (this.level().galeConfig().gameplayMechanics.fixes.sandDuping && this.isRemoved()) { // Gale - Purpur - make sand duping fix configurable

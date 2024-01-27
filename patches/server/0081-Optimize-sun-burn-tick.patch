@@ -13,10 +13,10 @@ As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 1939f5037376d5968a649c9d90f74edd592a7d5e..f97790842558577238949efbbb21fc31de6b5141 100644
+index a1cbb62b518d14a605bda2e9c5b0bd0289d84a60..81163774d783bfdefaf0031b589e8496ab0d3a92 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -308,7 +308,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -307,7 +307,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
      public double xo;
      public double yo;
      public double zo;
@@ -45,7 +45,7 @@ index 1939f5037376d5968a649c9d90f74edd592a7d5e..f97790842558577238949efbbb21fc31
          this.absMoveTo(x, y, z);
          this.setYRot(yaw % 360.0F);
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index cd5c19380a808719476acc51e8d5c022e627992c..465cfffbbc5db5fb2c95e953db09d3169b52060d 100644
+index 40edbefa9efaa897d203d4cf13ea796d6f35b965..d3a1af49024c7cd2854dc8a715450adc64aa083e 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
 @@ -1690,13 +1690,29 @@ public abstract class Mob extends LivingEntity implements Targeting {

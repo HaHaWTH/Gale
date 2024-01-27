@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index 16e73128115ef92adefbd7818fef3a4b9bcebad2..f0953c110177a3000d857dea49cc1a4b88db1c2f 100644
+index ce341f42b3a5e17fb6d1f7de8057e73137ae2a6e..4ef9e98891a85e4b81f7d3f011bee5ad0eaee4f9 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -2,6 +2,7 @@ package org.bukkit.craftbukkit;
@@ -45,7 +45,7 @@ index 16e73128115ef92adefbd7818fef3a4b9bcebad2..f0953c110177a3000d857dea49cc1a4b
      public static void main(String[] args) {
          // Paper start
          final String warnWhenLegacyFormattingDetected = String.join(".", "net", "kyori", "adventure", "text", "warnWhenLegacyFormattingDetected");
-@@ -315,13 +336,13 @@ public class Main {
+@@ -315,14 +336,14 @@ public class Main {
                      String javaInfo = "Java " + runtimeMX.getSpecVersion() + " (" + runtimeMX.getVmName() + " " + runtimeMX.getVmVersion() + ")";
                      String osInfo = "Host: " + osMX.getName() + " " + osMX.getVersion() + " (" + osMX.getArch() + ")";
  
@@ -55,8 +55,9 @@ index 16e73128115ef92adefbd7818fef3a4b9bcebad2..f0953c110177a3000d857dea49cc1a4b
 -                    System.out.println("Unable to read system info");
 +                    printlnStartupInfoToSystemOut("Unable to read system info"); // Gale - include time in startup logs
                  }
-                 // Paper end
-                 System.setProperty( "library.jansi.version", "Paper" ); // Paper - set meaningless jansi version to prevent git builds from crashing on Windows
+                 // Paper end - Log Java and OS versioning to help with debugging plugin issues
+ 
+                 System.setProperty("library.jansi.version", "Paper"); // Paper - set meaningless jansi version to prevent git builds from crashing on Windows
 -                System.out.println("Loading libraries, please wait...");
 +                printlnStartupInfoToSystemOut("Loading libraries, please wait..."); // Gale - include time in startup logs
                  net.minecraft.server.Main.main(options);

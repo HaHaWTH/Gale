@@ -31,19 +31,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index d1bdfda6f24d6c9a103e20eb36e6ca3ff6466b6c..66e10dd20961d49742a5f016dab9c2cd1a2b64b6 100644
+index df915549b366d25727ac9c6ff4e9521927ad50c8..71d9ed6d3067c64165c41b35f2ea41791dd597b9 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -440,6 +440,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
-         return this.originWorld;
+@@ -501,6 +501,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+         return chunkMap.playerEntityTrackerTrackMaps[type.ordinal()].getObjectsInRange(MCUtil.getCoordinateKey(this));
      }
-     // Paper end
+     // Paper end - optimise entity tracking
 +
      public float getBukkitYaw() {
          return this.yRot;
      }
 diff --git a/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java b/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java
-index 7204b973c3ad9239e82355513f6d538107102e48..526494aab4212311c3a8cdb9288629a39cc0eeb9 100644
+index 897d7632ecfea40890433474870dd7a5e534d8ab..58b82ac5b861ccb489f5586452ae020050be5ec8 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 @@ -23,9 +23,11 @@ public class AttributeMap {

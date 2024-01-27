@@ -37,32 +37,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/com/destroystokyo/paper/gui/RAMDetails.java b/src/main/java/com/destroystokyo/paper/gui/RAMDetails.java
-index 066b9e4c4f0e7773548eda045cdd1ca8445221d2..6be80b8dfd28a5e25a7f6ae603d8510e52b89085 100644
+index 039a86034928a5eb7aaa2d7ca76a7bddcca346bd..7c32c60100cf2bd109eb8762efa856c10b704fdd 100644
 --- a/src/main/java/com/destroystokyo/paper/gui/RAMDetails.java
 +++ b/src/main/java/com/destroystokyo/paper/gui/RAMDetails.java
-@@ -58,7 +58,7 @@ public class RAMDetails extends JList<String> {
+@@ -59,7 +59,7 @@ public class RAMDetails extends JList<String> {
          GraphData data = RAMGraph.DATA.peekLast();
          Vector<String> vector = new Vector<>();
  
--        double[] tps = new double[] {server.tps1.getAverage(), server.tps5.getAverage(), server.tps15.getAverage()};
-+        double[] tps = new double[] {server.tps5s.getAverage(), server.tps1.getAverage(), server.tps5.getAverage(), server.tps15.getAverage()}; // Gale - Purpur - 5 second TPS average
+-        double[] tps = org.bukkit.Bukkit.getTPS();
++        double[] tps = org.bukkit.Bukkit.getTPSIncluding5SecondAverage(); // Gale - Purpur - 5 second TPS average
          String[] tpsAvg = new String[tps.length];
  
          for ( int g = 0; g < tps.length; g++) {
-@@ -67,7 +67,7 @@ public class RAMDetails extends JList<String> {
+@@ -68,7 +68,7 @@ public class RAMDetails extends JList<String> {
          vector.add("Memory use: " + (data.getUsedMem() / 1024L / 1024L) + " mb (" + (data.getFree() * 100L / data.getMax()) + "% free)");
          vector.add("Heap: " + (data.getTotal() / 1024L / 1024L) + " / " + (data.getMax() / 1024L / 1024L) + " mb");
-         vector.add("Avg tick: " + DECIMAL_FORMAT.format(this.getAverage(server.getTickTimesNanos())) + " ms");
+         vector.add("Avg tick: " + DECIMAL_FORMAT.format((double)this.server.getAverageTickTimeNanos() / (double) TimeUtil.NANOSECONDS_PER_MILLISECOND) + " ms");
 -        vector.add("TPS from last 1m, 5m, 15m: " + String.join(", ", tpsAvg));
 +        vector.add("TPS from last 5s, 1m, 5m, 15m: " + String.join(", ", tpsAvg)); // Gale - Purpur - 5 second TPS average
- 
          setListData(vector);
      }
+ 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 36fc043b282f64f329e5fcf00c81f5d9f2412ece..8ef27f52b8eda633135f59e68e53b5db271b65f7 100644
+index 377cf883f6a78d3d2ccbbcae451d1358295b20c8..3f7be2c6c95f23e7ea1b03d4083e93c920ccdcf7 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1056,6 +1056,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1055,6 +1055,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      private static final long MAX_CATCHUP_BUFFER = TICK_TIME * TPS * 60L;
      private long lastTick = 0;
      private long catchupTime = 0;
@@ -70,19 +70,19 @@ index 36fc043b282f64f329e5fcf00c81f5d9f2412ece..8ef27f52b8eda633135f59e68e53b5db
      public final RollingAverage tps1 = new RollingAverage(60);
      public final RollingAverage tps5 = new RollingAverage(60 * 5);
      public final RollingAverage tps15 = new RollingAverage(60 * 15);
-@@ -1166,6 +1167,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
-                     curTime = Util.getNanos();
-                     final long diff = curTime - tickSection;
-                     java.math.BigDecimal currentTps = TPS_BASE.divide(new java.math.BigDecimal(diff), 30, java.math.RoundingMode.HALF_UP);
+@@ -1167,6 +1168,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+                 if (++MinecraftServer.currentTick % MinecraftServer.SAMPLE_INTERVAL == 0) {
+                     final long diff = currentTime - tickSection;
+                     final java.math.BigDecimal currentTps = TPS_BASE.divide(new java.math.BigDecimal(diff), 30, java.math.RoundingMode.HALF_UP);
 +                    tps5s.add(currentTps, diff); // Gale - Purpur - 5 second TPS average
                      tps1.add(currentTps, diff);
                      tps5.add(currentTps, diff);
                      tps15.add(currentTps, diff);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index fe076da59b91301db720c0d06cd6596aa201814a..1b58377593cba07101d714e38592041df78d3e52 100644
+index 62de14156e7fd08e4a9d5acce1d0760c8e6186f9..e999d954d72d8061468981213a92ea046b94558a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -2979,8 +2979,27 @@ public final class CraftServer implements Server {
+@@ -3048,8 +3048,27 @@ public final class CraftServer implements Server {
          };
      }
  

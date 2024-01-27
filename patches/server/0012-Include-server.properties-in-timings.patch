@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/co/aikar/timings/TimingsExport.java b/src/main/java/co/aikar/timings/TimingsExport.java
-index 1b9d997c31ab281ce9f4719f53b0ad78a430789d..758cb80e64520ff085c4ef5ca8b2ed77d4bc0162 100644
+index 29796a404e210f7864f4b33b3367e02531bca2a0..73e503d0590964ac7f9ea15ac7ee7783f0801b2e 100644
 --- a/src/main/java/co/aikar/timings/TimingsExport.java
 +++ b/src/main/java/co/aikar/timings/TimingsExport.java
 @@ -35,6 +35,7 @@ import org.bukkit.Material;
@@ -18,7 +18,7 @@ index 1b9d997c31ab281ce9f4719f53b0ad78a430789d..758cb80e64520ff085c4ef5ca8b2ed77
  import org.json.simple.JSONObject;
  import org.json.simple.JSONValue;
  import oshi.SystemInfo;
-@@ -240,6 +241,7 @@ public class TimingsExport extends Thread {
+@@ -238,6 +239,7 @@ public class TimingsExport extends Thread {
          // Information on the users Config
  
          parent.put("config", createObject(
@@ -27,7 +27,7 @@ index 1b9d997c31ab281ce9f4719f53b0ad78a430789d..758cb80e64520ff085c4ef5ca8b2ed77
              pair("bukkit", mapAsJSON(Bukkit.spigot().getBukkitConfig(), null)),
              // Gale start - Gale configuration - include in timings
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
-index 1643186bcb2caf5d29fd551afd35830726dbb80a..96c79afbdc824257b4225a85ff9b2fe2d8310f57 100644
+index bab2471616404821671264ccefd729cab8d0bf58..aa46e6e22998c62c89a56fbcabc13fdf58dd7dba 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
 @@ -67,6 +67,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
@@ -53,7 +53,7 @@ index 1643186bcb2caf5d29fd551afd35830726dbb80a..96c79afbdc824257b4225a85ff9b2fe2
 +    public final DedicatedServerProperties.WorldDimensionData worldDimensionData; // Gale - include server.properties in timings - private -> public
      public final WorldOptions worldOptions;
  
-     public final String rconIp; // Paper - Add rcon ip
+     public final String rconIp; // Paper - Configurable rcon ip
 @@ -157,6 +159,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
          this.enforceSecureProfile = this.get("enforce-secure-profile", true);
          this.logIPs = this.get("log-ips", true);

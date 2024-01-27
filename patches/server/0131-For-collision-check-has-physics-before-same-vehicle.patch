@@ -16,7 +16,7 @@ As part of: Akarin (https://github.com/Akarin-project/Akarin)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index d0f7351802cb7ab1130254b102ff059c413c10af..e60b426a2a02a417496ae420023a466c84fdd891 100644
+index 5335b8e41f34654254f28862f3852dfdbc9c938f..32973e7294c6c62f76ed6da69fa5bcddf584fbaf 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -2123,8 +2123,8 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
@@ -26,6 +26,6 @@ index d0f7351802cb7ab1130254b102ff059c413c10af..e60b426a2a02a417496ae420023a466c
 +        if (!entity.noPhysics && !this.noPhysics) { // Gale - Akarin - collision physics check before vehicle check
          if (!this.isPassengerOfSameVehicle(entity)) {
 -            if (!entity.noPhysics && !this.noPhysics) {
-                 if (this.level.paperConfig().collisions.onlyPlayersCollide && !(entity instanceof ServerPlayer || this instanceof ServerPlayer)) return; // Paper
+                 if (this.level.paperConfig().collisions.onlyPlayersCollide && !(entity instanceof ServerPlayer || this instanceof ServerPlayer)) return; // Paper - Collision option for requiring a player participant
                  double d0 = entity.getX() - this.getX();
                  double d1 = entity.getZ() - this.getZ();

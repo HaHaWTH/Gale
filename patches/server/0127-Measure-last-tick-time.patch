@@ -23,10 +23,10 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 8ef27f52b8eda633135f59e68e53b5db271b65f7..e9fc86639a7e7ba6525d63059aed412b8effd2d0 100644
+index 3f7be2c6c95f23e7ea1b03d4083e93c920ccdcf7..11433c92a7c9d5537710b220b93c83b939a00ab5 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1106,6 +1106,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1105,6 +1105,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      public static volatile RuntimeException chunkSystemCrash; // Paper - rewrite chunk system
  
@@ -38,9 +38,9 @@ index 8ef27f52b8eda633135f59e68e53b5db271b65f7..e9fc86639a7e7ba6525d63059aed412b
      protected void runServer() {
          try {
              long serverStartTime = Util.getNanos(); // Paper
-@@ -1185,9 +1190,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1187,9 +1192,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  //MinecraftServer.currentTick = (int) (System.currentTimeMillis() / 50); // CraftBukkit // Paper - don't overwrite current tick time
-                 lastTick = curTime;
+                 lastTick = currentTime;
                  this.nextTickTimeNanos += i;
 +                long tickProperStart = System.nanoTime(); // Gale - YAPFA - last tick time
                  this.tickServer(flag ? () -> {
@@ -50,7 +50,7 @@ index 8ef27f52b8eda633135f59e68e53b5db271b65f7..e9fc86639a7e7ba6525d63059aed412b
                  this.mayHaveDelayedTasks = true;
                  this.delayedTasksMaxNextTickTimeNanos = Math.max(Util.getNanos() + i, this.nextTickTimeNanos);
                  this.waitUntilNextTick();
-@@ -1298,9 +1305,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1301,9 +1308,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      protected void waitUntilNextTick() {
          //this.executeAll(); // Paper - move this into the tick method for timings

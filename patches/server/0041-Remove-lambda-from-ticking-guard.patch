@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 62eac1a915177ffe935f6a19a567932f6c787f75..ec840eb5438eaa9aadfdf62b0c7d4810e83d6402 100644
+index 83c001e809c76a5ec0b314967839713e63d67f0d..3fa891050ef7e62668ecdcf939d702db92514b23 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -899,7 +899,20 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -894,7 +894,20 @@ public class ServerLevel extends Level implements WorldGenLevel {
                                  entity.stopRiding();
                              }
  
@@ -57,22 +57,22 @@ index 62eac1a915177ffe935f6a19a567932f6c787f75..ec840eb5438eaa9aadfdf62b0c7d4810
                      }
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index ff484009c8e0f9ecf0381e33670c13d30f47829d..5ddae106ccd4a81dd0e3f873f7f64c0061814669 100644
+index 89631d1af894647fe4469f88e39c4506805ab96d..1a11939a1ffdeca87e18dc5279b11cf96b395407 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1329,13 +1329,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1324,13 +1324,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          try {
              tickConsumer.accept(entity);
              MinecraftServer.getServer().executeMidTickTasks(); // Paper - execute chunk tasks mid tick
 -        } catch (Throwable throwable) {
 +        } catch (Throwable throwable) { // Gale - Airplane - remove lambda from ticking guard - diff on change ServerLevel#tick
              if (throwable instanceof ThreadDeath) throw throwable; // Paper
-             // Paper start - Prevent tile entity and entity crashes
+             // Paper start - Prevent block entity and entity crashes
              final String msg = String.format("Entity threw exception at %s:%s,%s,%s", entity.level().getWorld().getName(), entity.getX(), entity.getY(), entity.getZ());
              MinecraftServer.LOGGER.error(msg, throwable);
-             getCraftServer().getPluginManager().callEvent(new ServerExceptionEvent(new ServerInternalException(msg, throwable)));
+             getCraftServer().getPluginManager().callEvent(new ServerExceptionEvent(new ServerInternalException(msg, throwable))); // Paper - ServerExceptionEvent
 -            entity.discard();
 +            entity.discard(); // Gale - Airplane - remove lambda from ticking guard - diff on change ServerLevel#tick
-             // Paper end
+             // Paper end - Prevent block entity and entity crashes
          }
      }

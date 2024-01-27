@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 73823d637d9859797d57507932d132b21ba46d70..cea5bef4e50ffaa4015f9224625aa6216c65f3b1 100644
+index cfd4ac06a9af6bf3fac293110482e1df690e075e..751420687c04719373626ce01af18ad7cb4638bf 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 @@ -174,7 +174,7 @@ public class ServerPlayerGameMode {
@@ -16,11 +16,11 @@ index 73823d637d9859797d57507932d132b21ba46d70..cea5bef4e50ffaa4015f9224625aa621
      public void handleBlockBreakAction(BlockPos pos, ServerboundPlayerActionPacket.Action action, Direction direction, int worldHeight, int sequence) {
 -        if (this.player.getEyePosition().distanceToSqr(Vec3.atCenterOf(pos)) > ServerGamePacketListenerImpl.MAX_INTERACTION_DISTANCE) {
 +        if (this.player.getEyePosition().distanceToSqr(Vec3.atCenterOf(pos)) > ServerGamePacketListenerImpl.getMaxInteractionDistanceSquared(this.player.level())) { // Gale - make max interaction distance configurable
-             if (true) return; // Paper - Don't notify if unreasonably far away
+             if (true) return; // Paper - Don't allow digging into unloaded chunks; Don't notify if unreasonably far away
              this.debugLogging(pos, false, sequence, "too far");
          } else if (pos.getY() >= worldHeight) {
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index d9c6d49aed9d84c1f317748e113acb068d1e488d..ea8a136e2ca0aebc668391e15becd48f7d0e586f 100644
+index 15be6d4c333f6e48608becb6ace7f7d201afa81a..e1b6583a3bb9269a14b1e9028a87a6877da5ae78 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -251,7 +251,7 @@ import org.bukkit.inventory.SmithingInventory;
@@ -46,7 +46,7 @@ index d9c6d49aed9d84c1f317748e113acb068d1e488d..ea8a136e2ca0aebc668391e15becd48f
      @Override
      public void tick() {
          if (this.ackBlockChangesUpTo > -1) {
-@@ -1934,7 +1941,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1914,7 +1921,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
              BlockPos blockposition = movingobjectpositionblock.getBlockPos();
              Vec3 vec3d1 = Vec3.atCenterOf(blockposition);
  
@@ -55,7 +55,7 @@ index d9c6d49aed9d84c1f317748e113acb068d1e488d..ea8a136e2ca0aebc668391e15becd48f
                  Vec3 vec3d2 = vec3d.subtract(vec3d1);
                  double d0 = 1.0000001D;
  
-@@ -2722,7 +2729,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2702,7 +2709,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
  
              AABB axisalignedbb = entity.getBoundingBox();
  

@@ -13,10 +13,10 @@ As part of: Paper (https://github.com/PaperMC/Paper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/co/aikar/timings/TimingsExport.java b/src/main/java/co/aikar/timings/TimingsExport.java
-index a2f71a6d1a9e98133dff6cd0f625da9435a8af14..1b9d997c31ab281ce9f4719f53b0ad78a430789d 100644
+index 7620c72a4c243cbeea245203ce03a97cbfa7d922..29796a404e210f7864f4b33b3367e02531bca2a0 100644
 --- a/src/main/java/co/aikar/timings/TimingsExport.java
 +++ b/src/main/java/co/aikar/timings/TimingsExport.java
-@@ -242,7 +242,10 @@ public class TimingsExport extends Thread {
+@@ -240,7 +240,10 @@ public class TimingsExport extends Thread {
          parent.put("config", createObject(
              pair("spigot", mapAsJSON(Bukkit.spigot().getSpigotConfig(), null)),
              pair("bukkit", mapAsJSON(Bukkit.spigot().getBukkitConfig(), null)),
@@ -28,7 +28,7 @@ index a2f71a6d1a9e98133dff6cd0f625da9435a8af14..1b9d997c31ab281ce9f4719f53b0ad78
          ));
  
          new TimingsExport(listeners, parent, history).start();
-@@ -283,7 +286,7 @@ public class TimingsExport extends Thread {
+@@ -281,7 +284,7 @@ public class TimingsExport extends Thread {
          return timingsCost;
      }
  
@@ -188,7 +188,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index bad84f8d6a9b4807af580efc3f082a6379962f9c..7adffbc9e737354a2644a12bc9b067e57bec756a 100644
+index 8ad14057e891213d77c5bbd504e53c37ed045559..a6c1bd3c37720ff692fb72c8648c3d2eb9247346 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -233,9 +233,9 @@ index bad84f8d6a9b4807af580efc3f082a6379962f9c..7adffbc9e737354a2644a12bc9b067e5
      public final io.papermc.paper.configuration.PaperConfigurations paperConfigurations; // Paper - add paper configuration files
 +    public final GaleConfigurations galeConfigurations; // Gale - Gale configuration
      public static long currentTickLong = 0L; // Paper - track current tick as a long
+     public boolean isIteratingOverLevels = false; // Paper - Throw exception on world create while being ticked
  
-     public volatile Thread shutdownThread; // Paper
-@@ -414,6 +413,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -412,6 +411,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          Runtime.getRuntime().addShutdownHook(new org.bukkit.craftbukkit.util.ServerShutdownThread(this));
          // CraftBukkit end
          this.paperConfigurations = services.paperConfigurations(); // Paper - add paper configuration files
@@ -288,7 +288,7 @@ index d89c624554ab08bd1b33a3f62b52aa57aaafb8b4..2f76d1be6b26e516d1ab13df8d05b1f5
      }
  
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 00c47942a3690df565bd0ea76b8abbf2dc50c4e2..bb6246da25e756348d2dc0152d487f99054b5203 100644
+index 6de6dad36203479677a29ad61e21bc369d4e5513..d994993057b042f95eb309eb9ba08f872d954cad 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -1,20 +1,15 @@
@@ -321,11 +321,11 @@ index 00c47942a3690df565bd0ea76b8abbf2dc50c4e2..bb6246da25e756348d2dc0152d487f99
 +        galeConfigurations.initializeGlobalConfiguration(this.registryAccess());
 +        galeConfigurations.initializeWorldDefaultsConfiguration(this.registryAccess());
 +        // Gale end - Gale configuration
-         // Paper start - convert old users earlier after PlayerList creation but before file load/save
+         // Paper start - fix converting txt to json file; convert old users earlier after PlayerList creation but before file load/save
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 9b0b2510edb4984b0714244bbe513e077af7b455..ab0ab5574dc3a19b133262b9c17d62a36df15566 100644
+index 6934e9dac0d69c043b73b7c46d59f2d39b37c67f..3267978df4039d7b5096eee486d56345d619606d 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -134,12 +134,10 @@ import net.minecraft.world.level.chunk.storage.EntityStorage;
@@ -341,7 +341,7 @@ index 9b0b2510edb4984b0714244bbe513e077af7b455..ab0ab5574dc3a19b133262b9c17d62a3
  import net.minecraft.world.level.gameevent.DynamicGameEventListener;
  import net.minecraft.world.level.gameevent.GameEvent;
  import net.minecraft.world.level.gameevent.GameEventDispatcher;
-@@ -697,7 +695,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -692,7 +690,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
@@ -351,7 +351,7 @@ index 9b0b2510edb4984b0714244bbe513e077af7b455..ab0ab5574dc3a19b133262b9c17d62a3
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index dce7be16854faa3e297815e794cae6b0bd42bd4f..6a9ffef1b09b70e460fbd3aa90e34104057c0007 100644
+index 8f437225d2a4e08ca47873cd42277d9f0f9f5529..ebe0bac2593e72b465f61643054f37f35d678672 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -1,10 +1,7 @@
@@ -401,7 +401,7 @@ index dce7be16854faa3e297815e794cae6b0bd42bd4f..6a9ffef1b09b70e460fbd3aa90e34104
  // CraftBukkit end
  
  public abstract class Level implements LevelAccessor, AutoCloseable {
-@@ -177,6 +169,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -176,6 +168,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          return this.paperConfig;
      }
      // Paper end - add paper world config
@@ -414,7 +414,7 @@ index dce7be16854faa3e297815e794cae6b0bd42bd4f..6a9ffef1b09b70e460fbd3aa90e34104
  
      public final com.destroystokyo.paper.antixray.ChunkPacketBlockController chunkPacketBlockController; // Paper - Anti-Xray
      public final co.aikar.timings.WorldTimingsHandler timings; // Paper
-@@ -213,9 +211,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -212,9 +210,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
  
      public abstract ResourceKey<LevelStem> getTypeKey();
  
@@ -427,7 +427,7 @@ index dce7be16854faa3e297815e794cae6b0bd42bd4f..6a9ffef1b09b70e460fbd3aa90e34104
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 2e6206bc868480cb1866e77421374c0b632e8c1d..8f234dfe047fe8f93f160c1b794b88b3357e1d93 100644
+index e99f88383565a5498584a00d583d2a114dd087ed..8116b55cf34a97979d94494055bb67a651c9eeb3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1037,6 +1037,7 @@ public final class CraftServer implements Server {
@@ -438,7 +438,7 @@ index 2e6206bc868480cb1866e77421374c0b632e8c1d..8f234dfe047fe8f93f160c1b794b88b3
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters, config.spawnAnimals); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -3010,6 +3011,14 @@ public final class CraftServer implements Server {
+@@ -2996,6 +2997,14 @@ public final class CraftServer implements Server {
              return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
          }
  

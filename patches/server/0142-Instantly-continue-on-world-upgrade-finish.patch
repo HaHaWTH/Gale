@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/io/papermc/paper/world/ThreadedWorldUpgrader.java b/src/main/java/io/papermc/paper/world/ThreadedWorldUpgrader.java
-index 513833c2ea23df5b079d157bc5cb89d5c9754c0b..c13df3a375f416273c6a26f5f77624c1f34a918c 100644
+index 9017907c0ec67a37a506f09b7e4499cef7885279..8dffb330b474b830d2f816ecf8be2e8d2e4556cd 100644
 --- a/src/main/java/io/papermc/paper/world/ThreadedWorldUpgrader.java
 +++ b/src/main/java/io/papermc/paper/world/ThreadedWorldUpgrader.java
 @@ -25,6 +25,7 @@ import java.util.Optional;
@@ -31,7 +31,7 @@ index 513833c2ea23df5b079d157bc5cb89d5c9754c0b..c13df3a375f416273c6a26f5f77624c1
          for (final File regionFile : regionFiles) {
              final ChunkPos regionPos = RegionFileStorage.getRegionFileCoordinates(regionFile.toPath());
              if (regionPos == null) {
-@@ -96,8 +102,25 @@ public class ThreadedWorldUpgrader {
+@@ -96,7 +102,23 @@ public class ThreadedWorldUpgrader {
                  continue;
              }
  
@@ -53,12 +53,18 @@ index 513833c2ea23df5b079d157bc5cb89d5c9754c0b..c13df3a375f416273c6a26f5f77624c1
 +            };
 +            this.threadPool.execute(taskWithNotification);
 +            // Gale end - instantly continue on world upgrade finish
+             // Paper start - Write SavedData IO async
+             this.threadPool.execute(() -> {
+                 try {
+@@ -107,6 +129,7 @@ public class ThreadedWorldUpgrader {
+             });
+             // Paper end - Write SavedData IO async
          }
 +        finalExpectedChunks[0] = expectedChunks; // Gale - instantly continue on world upgrade finish
          this.threadPool.shutdown();
  
          final DecimalFormat format = new DecimalFormat("#0.00");
-@@ -109,9 +132,16 @@ public class ThreadedWorldUpgrader {
+@@ -118,9 +141,16 @@ public class ThreadedWorldUpgrader {
  
              LOGGER.info("{}% completed ({} / {} chunks)...", format.format((double)current / (double)expectedChunks * 100.0), current, expectedChunks);
  

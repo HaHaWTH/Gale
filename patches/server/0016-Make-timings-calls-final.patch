@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 7adffbc9e737354a2644a12bc9b067e57bec756a..d57a3967f29f795cc6e1ee137d06c32e7833f31c 100644
+index a6c1bd3c37720ff692fb72c8648c3d2eb9247346..216cbb87356fd98ec7015cd31b0fde860ea92672 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1501,7 +1501,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1504,7 +1504,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      }
  
      public void tickServer(BooleanSupplier shouldKeepTicking) {
@@ -19,7 +19,7 @@ index 7adffbc9e737354a2644a12bc9b067e57bec756a..d57a3967f29f795cc6e1ee137d06c32e
          long i = Util.getNanos();
  
          // Paper start - move oversleep into full server tick
-@@ -1573,7 +1573,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1576,7 +1576,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          this.logTickTime(l - i);
          this.profiler.pop();
          org.spigotmc.WatchdogThread.tick(); // Spigot

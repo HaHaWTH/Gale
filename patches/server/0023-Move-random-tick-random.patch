@@ -19,10 +19,10 @@ require it to be initialized earlier. By moving it to the superclass, we
 initialize it earlier, ensuring that it is available sooner.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index a692573423348db7a48e5cc79e1bcc469d8e21aa..3f637a3e666c24ed2d293f86824e91c751a3095e 100644
+index 2de2c2c09a57f46a7c7ff9603f57c104d5a911d9..62c4576b3e7f50054cca6157019b2b53133009dc 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -960,7 +960,6 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -955,7 +955,6 @@ public class ServerLevel extends Level implements WorldGenLevel {
      }
      // Paper start - optimise random block ticking
      private final BlockPos.MutableBlockPos chunkTickMutablePosition = new BlockPos.MutableBlockPos();
@@ -31,12 +31,12 @@ index a692573423348db7a48e5cc79e1bcc469d8e21aa..3f637a3e666c24ed2d293f86824e91c7
  
      public void tickChunk(LevelChunk chunk, int randomTickSpeed) {
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index a759f61d2e56cbb7f526c854b6b26b34736b11cd..39e95e11c3c7c784a007138b65860e4b0c7c43bb 100644
+index 588dccfa6a3e8e546be2b8b52bb07ceacbf0ab7d..25af78bbb07e174f6c57e26743421f2143d73bd7 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -184,6 +184,8 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -183,6 +183,8 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      public final Map<Explosion.CacheKey, Float> explosionDensityCache = new HashMap<>(); // Paper - Optimize explosions
-     public java.util.ArrayDeque<net.minecraft.world.level.block.RedstoneTorchBlock.Toggle> redstoneUpdateInfos; // Paper - Move from Map in BlockRedstoneTorch to here
+     public java.util.ArrayDeque<net.minecraft.world.level.block.RedstoneTorchBlock.Toggle> redstoneUpdateInfos; // Paper - Faster redstone torch rapid clock removal; Move from Map in BlockRedstoneTorch to here
  
 +    public final io.papermc.paper.util.math.ThreadUnsafeRandom randomTickRandom = new io.papermc.paper.util.math.ThreadUnsafeRandom(this.random.nextLong()); // Gale - Pufferfish - move random tick random
 +

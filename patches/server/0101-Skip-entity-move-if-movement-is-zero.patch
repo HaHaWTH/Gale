@@ -13,10 +13,10 @@ As part of: VMP (https://github.com/RelativityMC/VMP-fabric)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index f97790842558577238949efbbb21fc31de6b5141..dd8eb98086c4d303c54d0f8bf45fcabd7039686c 100644
+index 81163774d783bfdefaf0031b589e8496ab0d3a92..54a95ea88f79f58d1214a0e6a3d8fe6492a53f3c 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -317,6 +317,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -316,6 +316,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
      public float yRotO;
      public float xRotO;
      private AABB bb;
@@ -24,7 +24,7 @@ index f97790842558577238949efbbb21fc31de6b5141..dd8eb98086c4d303c54d0f8bf45fcabd
      public boolean onGround;
      public boolean horizontalCollision;
      public boolean verticalCollision;
-@@ -1077,6 +1078,11 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -1076,6 +1077,11 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
      // Paper end - detailed watchdog information
  
      public void move(MoverType movementType, Vec3 movement) {
@@ -33,10 +33,10 @@ index f97790842558577238949efbbb21fc31de6b5141..dd8eb98086c4d303c54d0f8bf45fcabd
 +            return;
 +        }
 +        // Gale end - VMP - skip entity move if movement is zero
+         final Vec3 originalMovement = movement; // Paper - Expose pre-collision velocity
          // Paper start - detailed watchdog information
          io.papermc.paper.util.TickThread.ensureTickThread("Cannot move an entity off-main");
-         synchronized (this.posLock) {
-@@ -4075,6 +4081,11 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -4070,6 +4076,11 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
      }
  
      public final void setBoundingBox(AABB boundingBox) {

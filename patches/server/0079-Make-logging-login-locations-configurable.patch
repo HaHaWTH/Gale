@@ -13,13 +13,13 @@ As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 206f179a4c6ea8eab75200ee72efb21e29d28a53..2306d7aca29b3e399f152eb8470115e6f7bb172a 100644
+index 25ddf54a4c07c7be1f9ecafe411ff83f3522063d..3c0d21f964cd0ed4ead16ebd9d662059137ff8b3 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -490,7 +490,13 @@ public abstract class PlayerList {
+@@ -489,7 +489,13 @@ public abstract class PlayerList {
+             scoreboard.addPlayerToTeam(player.getScoreboardName(), collideRuleTeam);
          }
-         // Paper end
-         // CraftBukkit - Moved from above, added world
+         // Paper end - Configurable player collision
 +        if (GaleGlobalConfiguration.get().logToConsole.playerLoginLocations) { // Gale - JettPack - make logging login location configurable
          PlayerList.LOGGER.info("{}[{}] logged in with entity id {} at ([{}]{}, {}, {})", player.getName().getString(), s1, player.getId(), worldserver1.serverLevelData.getLevelName(), player.getX(), player.getY(), player.getZ());
 +        // Gale start - JettPack - make logging login location configurable
