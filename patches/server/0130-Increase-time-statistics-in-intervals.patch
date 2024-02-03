@@ -45,7 +45,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index 4d2502d77cc78c1382f108efad9a2a47e712cbd9..654133f8c1991f4949131856a50d14afc4f18630 100644
+index 4ba670c22d3826c64ac49b84b8651dc9ee67c6d7..34490ea2673f376b0ac11b52964eab46995cfb36 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
 @@ -112,6 +112,7 @@ import net.minecraft.world.phys.AABB;
@@ -64,7 +64,7 @@ index 4d2502d77cc78c1382f108efad9a2a47e712cbd9..654133f8c1991f4949131856a50d14af
      private long timeEntitySatOnShoulder;
      private final Inventory inventory = new Inventory(this);
      protected PlayerEnderChestContainer enderChestInventory = new PlayerEnderChestContainer(this); // CraftBukkit - add "this" to constructor
-@@ -280,19 +282,23 @@ public abstract class Player extends LivingEntity {
+@@ -282,19 +284,23 @@ public abstract class Player extends LivingEntity {
          this.moveCloak();
          if (!this.level().isClientSide) {
              this.foodData.tick(this);

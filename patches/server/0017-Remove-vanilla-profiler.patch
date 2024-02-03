@@ -167,7 +167,7 @@ index 821dc4aeaf48460000682604fba51b340b9738e7..4f4540ed9b3e603eec0d46fb5b58de24
  
      }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 216cbb87356fd98ec7015cd31b0fde860ea92672..377cf883f6a78d3d2ccbbcae451d1358295b20c8 100644
+index 4919e1f741e4b1680cb9e3736d8096616adb6def..6f3d488fda697299f604e813b8eaa06ed9de828f 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -106,18 +106,9 @@ import net.minecraft.util.RandomSource;
@@ -312,7 +312,7 @@ index 216cbb87356fd98ec7015cd31b0fde860ea92672..377cf883f6a78d3d2ccbbcae451d1358
          // CraftBukkit start
 @@ -1702,19 +1658,12 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              net.minecraft.world.level.block.entity.HopperBlockEntity.skipHopperEvents = worldserver.paperConfig().hopper.disableMoveEvent || org.bukkit.event.inventory.InventoryMoveItemEvent.getHandlerList().getRegisteredListeners().length == 0; // Paper - Perf: Optimize Hoppers
-             worldserver.hasEntityMoveEvent = io.papermc.paper.event.entity.EntityMoveEvent.getHandlerList().getRegisteredListeners().length > 0; // Paper - Add EntityMoveEvent
+             worldserver.updateLagCompensationTick(); // Paper - lag compensation
  
 -            this.profiler.push(() -> {
 -                return worldserver + " " + worldserver.dimension().location();
@@ -1096,7 +1096,7 @@ index 7ab57748b2f2aea1003d9b7e70e76c372aa1e432..47e75ec4a01f8a456ec6ebc13031c1f0
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 2c06f3ebf7e1069727387bfc60db30c958c14b5a..df915549b366d25727ac9c6ff4e9521927ad50c8 100644
+index 9ee1e3da1cb16291ff3e37829e25227a6b97a177..e99b48b0a707a008f2074b954bc4c852cf32e305 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -820,7 +820,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
@@ -1211,10 +1211,10 @@ index 2c06f3ebf7e1069727387bfc60db30c958c14b5a..df915549b366d25727ac9c6ff4e95219
              }
          } else {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 6071451339080bbdd98fb634791a56988984c8bc..0c82be4f9dc6886c19b0f2edca019f7e6ffff6c2 100644
+index 6523795e715e5d472739e9bc6433143115c3de8f..d047eef2748c0e263a708391678b719a7bf4ffce 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -404,7 +404,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -403,7 +403,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          super.baseTick();
@@ -1222,7 +1222,7 @@ index 6071451339080bbdd98fb634791a56988984c8bc..0c82be4f9dc6886c19b0f2edca019f7e
          if (this.fireImmune() || this.level().isClientSide) {
              this.clearFire();
          }
-@@ -506,7 +505,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -505,7 +504,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
          this.yHeadRotO = this.yHeadRot;
          this.yRotO = this.getYRot();
          this.xRotO = this.getXRot();
@@ -1230,7 +1230,7 @@ index 6071451339080bbdd98fb634791a56988984c8bc..0c82be4f9dc6886c19b0f2edca019f7e
      }
  
      public boolean canSpawnSoulSpeedParticle() {
-@@ -3075,10 +3073,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3076,10 +3074,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          this.run += (f3 - this.run) * 0.3F;
@@ -1241,7 +1241,7 @@ index 6071451339080bbdd98fb634791a56988984c8bc..0c82be4f9dc6886c19b0f2edca019f7e
  
          // Paper start - stop large pitch and yaw changes from crashing the server
          this.yRotO += Math.round((this.getYRot() - this.yRotO) / 360.0F) * 360.0F;
-@@ -3090,7 +3085,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3091,7 +3086,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
          this.yHeadRotO += Math.round((this.yHeadRot - this.yHeadRotO) / 360.0F) * 360.0F;
          // Paper end
  
@@ -1249,7 +1249,7 @@ index 6071451339080bbdd98fb634791a56988984c8bc..0c82be4f9dc6886c19b0f2edca019f7e
          this.animStep += f2;
          if (this.isFallFlying()) {
              ++this.fallFlyTicks;
-@@ -3385,19 +3379,14 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3386,19 +3380,14 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          this.setDeltaMovement(d0, d1, d2);
@@ -1269,7 +1269,7 @@ index 6071451339080bbdd98fb634791a56988984c8bc..0c82be4f9dc6886c19b0f2edca019f7e
          if (this.jumping && this.isAffectedByFluids()) {
              double d3;
  
-@@ -3424,8 +3413,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3425,8 +3414,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.noJumpDelay = 0;
          }
  
@@ -1278,7 +1278,7 @@ index 6071451339080bbdd98fb634791a56988984c8bc..0c82be4f9dc6886c19b0f2edca019f7e
          this.xxa *= 0.98F;
          this.zza *= 0.98F;
          this.updateFallFlying();
-@@ -3452,8 +3439,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3453,8 +3440,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.travel(vec3d1);
          }
  
@@ -1287,7 +1287,7 @@ index 6071451339080bbdd98fb634791a56988984c8bc..0c82be4f9dc6886c19b0f2edca019f7e
          if (!this.level().isClientSide && !this.isDeadOrDying() && !this.freezeLocked) { // Paper - Freeze Tick Lock API
              int i = this.getTicksFrozen();
  
-@@ -3470,15 +3455,12 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3471,15 +3456,12 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.hurt(this.damageSources().freeze(), 1.0F);
          }
  
@@ -1737,10 +1737,10 @@ index 28ef910885dbd48965fba6f08cec412697b1b7f0..5097a73ef96724c83e3c0369a5ca6b60
  
          if (this.fire) {
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index ebe0bac2593e72b465f61643054f37f35d678672..588dccfa6a3e8e546be2b8b52bb07ceacbf0ab7d 100644
+index c7abd433e70a6479fc81e5bce94144c9479eb372..680cfc6e2e3acd0d5ce364c774772e3c4d072c31 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -132,7 +132,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -130,7 +130,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      private final ResourceKey<DimensionType> dimensionTypeId;
      private final Holder<DimensionType> dimensionTypeRegistration;
      public final WritableLevelData levelData;
@@ -1748,7 +1748,7 @@ index ebe0bac2593e72b465f61643054f37f35d678672..588dccfa6a3e8e546be2b8b52bb07cea
      public final boolean isClientSide;
      private final WorldBorder worldBorder;
      private final BiomeManager biomeManager;
-@@ -210,7 +209,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -208,7 +207,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
  
      public abstract ResourceKey<LevelStem> getTypeKey();
  
@@ -1757,7 +1757,7 @@ index ebe0bac2593e72b465f61643054f37f35d678672..588dccfa6a3e8e546be2b8b52bb07cea
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig(((net.minecraft.world.level.storage.PrimaryLevelData) worlddatamutable).getLevelName()); // Spigot
          this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper - create paper world config
          this.galeConfig = galeWorldConfigCreator.apply(this.spigotConfig); // Gale - Gale configuration
-@@ -225,7 +224,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -223,7 +222,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          }
  
          // CraftBukkit end
@@ -1765,7 +1765,7 @@ index ebe0bac2593e72b465f61643054f37f35d678672..588dccfa6a3e8e546be2b8b52bb07cea
          this.levelData = worlddatamutable;
          this.dimensionTypeRegistration = holder;
          this.dimensionTypeId = (ResourceKey) holder.unwrapKey().orElseThrow(() -> {
-@@ -1261,9 +1259,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1259,9 +1257,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      }
  
      protected void tickBlockEntities() {
@@ -1775,7 +1775,7 @@ index ebe0bac2593e72b465f61643054f37f35d678672..588dccfa6a3e8e546be2b8b52bb07cea
          this.timings.tileEntityPending.startTiming(); // Spigot
          this.tickingBlockEntities = true;
          if (!this.pendingBlockEntityTickers.isEmpty()) {
-@@ -1304,7 +1299,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1302,7 +1297,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          this.timings.tileEntityTick.stopTiming(); // Spigot
          this.tickingBlockEntities = false;
          co.aikar.timings.TimingHistory.tileEntityTicks += this.blockEntityTickers.size(); // Paper
@@ -1783,7 +1783,7 @@ index ebe0bac2593e72b465f61643054f37f35d678672..588dccfa6a3e8e546be2b8b52bb07cea
          this.spigotConfig.currentPrimedTnt = 0; // Spigot
      }
  
-@@ -1514,7 +1508,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1512,7 +1506,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
  
      @Override
      public List<Entity> getEntities(@Nullable Entity except, AABB box, Predicate<? super Entity> predicate) {
@@ -1791,7 +1791,7 @@ index ebe0bac2593e72b465f61643054f37f35d678672..588dccfa6a3e8e546be2b8b52bb07cea
          List<Entity> list = Lists.newArrayList();
          ((ServerLevel)this).getEntityLookup().getEntities(except, box, list, predicate); // Paper - optimise this call
          return list;
-@@ -1533,7 +1526,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1531,7 +1524,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      }
  
      public <T extends Entity> void getEntities(EntityTypeTest<Entity, T> filter, AABB box, Predicate<? super T> predicate, List<? super T> result, int limit) {
@@ -1799,7 +1799,7 @@ index ebe0bac2593e72b465f61643054f37f35d678672..588dccfa6a3e8e546be2b8b52bb07cea
          // Paper start - optimise this call
          //TODO use limit
          if (filter instanceof net.minecraft.world.entity.EntityType entityTypeTest) {
-@@ -1792,11 +1784,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1790,11 +1782,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      }
  
      public ProfilerFiller getProfiler() {
@@ -1814,7 +1814,7 @@ index ebe0bac2593e72b465f61643054f37f35d678672..588dccfa6a3e8e546be2b8b52bb07cea
  
      @Override
 diff --git a/src/main/java/net/minecraft/world/level/NaturalSpawner.java b/src/main/java/net/minecraft/world/level/NaturalSpawner.java
-index 17e9f3a30e287faf210e08dc7eb177a70f049f43..0483ebfbbfe5a2e517bf6d9679f1afca73b14c05 100644
+index da7489986848316fed029b71d1bc4e1248c9c9a8..71581713596594f8f8c39dac4971111e1a2cad3d 100644
 --- a/src/main/java/net/minecraft/world/level/NaturalSpawner.java
 +++ b/src/main/java/net/minecraft/world/level/NaturalSpawner.java
 @@ -132,7 +132,6 @@ public final class NaturalSpawner {

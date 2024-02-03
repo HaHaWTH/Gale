@@ -57,10 +57,10 @@ index 83c001e809c76a5ec0b314967839713e63d67f0d..3fa891050ef7e62668ecdcf939d702db
                      }
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 89631d1af894647fe4469f88e39c4506805ab96d..1a11939a1ffdeca87e18dc5279b11cf96b395407 100644
+index a57038b0c0cd5d7fd2e96101cf07d7350f17a2f5..6ed2a91b01233850b399e33f507353b52f06fd91 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1324,13 +1324,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1322,13 +1322,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          try {
              tickConsumer.accept(entity);
              MinecraftServer.getServer().executeMidTickTasks(); // Paper - execute chunk tasks mid tick
@@ -70,7 +70,7 @@ index 89631d1af894647fe4469f88e39c4506805ab96d..1a11939a1ffdeca87e18dc5279b11cf9
              // Paper start - Prevent block entity and entity crashes
              final String msg = String.format("Entity threw exception at %s:%s,%s,%s", entity.level().getWorld().getName(), entity.getX(), entity.getY(), entity.getZ());
              MinecraftServer.LOGGER.error(msg, throwable);
-             getCraftServer().getPluginManager().callEvent(new ServerExceptionEvent(new ServerInternalException(msg, throwable))); // Paper - ServerExceptionEvent
+             getCraftServer().getPluginManager().callEvent(new com.destroystokyo.paper.event.server.ServerExceptionEvent(new com.destroystokyo.paper.exception.ServerInternalException(msg, throwable))); // Paper - ServerExceptionEvent
 -            entity.discard();
 +            entity.discard(); // Gale - Airplane - remove lambda from ticking guard - diff on change ServerLevel#tick
              // Paper end - Prevent block entity and entity crashes

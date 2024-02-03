@@ -25,10 +25,10 @@ index e8ebc8588642479f22c6971bb2ea8ba557d9596a..932eb924a9d37130b53949d55c8d9e67
      public boolean isRealPlayer; // Paper
      public final com.destroystokyo.paper.util.misc.PooledLinkedHashSets.PooledObjectLinkedOpenHashSet<ServerPlayer> cachedSingleHashSet; // Paper
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 521153303fca35df7d4589abda772cc27b565ede..cb70e6f6b9db9637977eff1eebdf868713fe73c6 100644
+index 367392bffd0dc1d433ed44f7696bd5840b268157..38ea014943ade6e9cdbfd76fdfdbe4d8311d7fd8 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2260,6 +2260,10 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2259,6 +2259,10 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
          if (this.player.isRemoved() || this.player.getChatVisibility() == ChatVisiblity.HIDDEN) { // CraftBukkit - dead men tell no tales
              this.send(new ClientboundSystemChatPacket(Component.translatable("chat.disabled.options").withStyle(ChatFormatting.RED), false));
              return Optional.empty();
@@ -40,7 +40,7 @@ index 521153303fca35df7d4589abda772cc27b565ede..cb70e6f6b9db9637977eff1eebdf8687
              this.player.resetLastActionTime();
              return optional;
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index e0ee45036b9bf14a6e2013fe291cde0402b85b1f..a9acf052c61b0592da9cf3ade8c4c8f7ba068dad 100644
+index 91feb12732564c90656da487664dbc12e55397fc..c34fa92849a917e6269390b94360de9f047fb316 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -347,6 +347,8 @@ public abstract class PlayerList {

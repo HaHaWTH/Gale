@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/level/NaturalSpawner.java b/src/main/java/net/minecraft/world/level/NaturalSpawner.java
-index d3ea44e41c2e332bf06f7c6e2935adcde5631467..61829217fa49a4671e549a4462c73a3c7cc557ef 100644
+index 71581713596594f8f8c39dac4971111e1a2cad3d..ffa5f8be4aefb451352e1c6db84f36adca3a044d 100644
 --- a/src/main/java/net/minecraft/world/level/NaturalSpawner.java
 +++ b/src/main/java/net/minecraft/world/level/NaturalSpawner.java
-@@ -427,13 +427,14 @@ public final class NaturalSpawner {
+@@ -423,13 +423,14 @@ public final class NaturalSpawner {
          }
      }
  

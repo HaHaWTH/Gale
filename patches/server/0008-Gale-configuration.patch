@@ -188,7 +188,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 8ad14057e891213d77c5bbd504e53c37ed045559..a6c1bd3c37720ff692fb72c8648c3d2eb9247346 100644
+index e909e960005c512c42c7b8643e8f9241695bb81b..261bc188a5788988f4ad31ab1640798d619e1da7 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -351,21 +351,10 @@ index 6934e9dac0d69c043b73b7c46d59f2d39b37c67f..3267978df4039d7b5096eee486d56345
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 8f437225d2a4e08ca47873cd42277d9f0f9f5529..ebe0bac2593e72b465f61643054f37f35d678672 100644
+index 19f23a6c8fb5c02843c27fb8a242ec9d0d1b538b..c7abd433e70a6479fc81e5bce94144c9479eb372 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1,10 +1,7 @@
- package net.minecraft.world.level;
- 
--import co.aikar.timings.Timing;
--import co.aikar.timings.Timings;
- import com.destroystokyo.paper.event.server.ServerExceptionEvent;
- import com.destroystokyo.paper.exception.ServerInternalException;
--import com.google.common.base.MoreObjects;
- import com.google.common.collect.Lists;
- import com.mojang.serialization.Codec;
- import java.io.IOException;
-@@ -17,7 +14,6 @@ import java.util.function.Supplier;
+@@ -12,7 +12,6 @@ import java.util.function.Supplier;
  import javax.annotation.Nullable;
  import net.minecraft.CrashReport;
  import net.minecraft.CrashReportCategory;
@@ -373,7 +362,7 @@ index 8f437225d2a4e08ca47873cd42277d9f0f9f5529..ebe0bac2593e72b465f61643054f37f3
  import net.minecraft.core.BlockPos;
  import net.minecraft.core.Direction;
  import net.minecraft.core.Holder;
-@@ -47,8 +43,6 @@ import net.minecraft.world.TickRateManager;
+@@ -42,8 +41,6 @@ import net.minecraft.world.TickRateManager;
  import net.minecraft.world.damagesource.DamageSource;
  import net.minecraft.world.damagesource.DamageSources;
  import net.minecraft.world.entity.Entity;
@@ -382,7 +371,7 @@ index 8f437225d2a4e08ca47873cd42277d9f0f9f5529..ebe0bac2593e72b465f61643054f37f3
  import net.minecraft.world.entity.item.ItemEntity;
  import net.minecraft.world.entity.player.Player;
  import net.minecraft.world.item.ItemStack;
-@@ -94,17 +88,15 @@ import net.minecraft.network.protocol.game.ClientboundSetBorderSizePacket;
+@@ -89,17 +86,15 @@ import net.minecraft.network.protocol.game.ClientboundSetBorderSizePacket;
  import net.minecraft.network.protocol.game.ClientboundSetBorderWarningDelayPacket;
  import net.minecraft.network.protocol.game.ClientboundSetBorderWarningDistancePacket;
  import org.bukkit.Bukkit;
@@ -401,7 +390,7 @@ index 8f437225d2a4e08ca47873cd42277d9f0f9f5529..ebe0bac2593e72b465f61643054f37f3
  // CraftBukkit end
  
  public abstract class Level implements LevelAccessor, AutoCloseable {
-@@ -176,6 +168,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -171,6 +166,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          return this.paperConfig;
      }
      // Paper end - add paper world config
@@ -414,7 +403,7 @@ index 8f437225d2a4e08ca47873cd42277d9f0f9f5529..ebe0bac2593e72b465f61643054f37f3
  
      public final com.destroystokyo.paper.antixray.ChunkPacketBlockController chunkPacketBlockController; // Paper - Anti-Xray
      public final co.aikar.timings.WorldTimingsHandler timings; // Paper
-@@ -212,9 +210,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -207,9 +208,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
  
      public abstract ResourceKey<LevelStem> getTypeKey();
  
@@ -427,7 +416,7 @@ index 8f437225d2a4e08ca47873cd42277d9f0f9f5529..ebe0bac2593e72b465f61643054f37f3
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index e99f88383565a5498584a00d583d2a114dd087ed..8116b55cf34a97979d94494055bb67a651c9eeb3 100644
+index f01064ddfc1e96fab1d9e42326eb537911102003..6b2632f5e3f01f3c8c350775595d8b77930bf15e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1037,6 +1037,7 @@ public final class CraftServer implements Server {

@@ -13,10 +13,10 @@ As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
 Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index daabae0c34b4d03b71b19843c4b420128f4dbaf6..e2e1b3e148e32441b2b1adc97157253428f4c2ca 100644
+index 49ed6ee2e64cf1a3b6914951a74a3a925c19dc85..69f2be2c71e1f4329bfe6e7dd04959e974e57b22 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -582,11 +582,10 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -581,11 +581,10 @@ public abstract class LivingEntity extends Entity implements Attackable {
      }
  
      protected void tryAddFrost() {
@@ -29,7 +29,7 @@ index daabae0c34b4d03b71b19843c4b420128f4dbaf6..e2e1b3e148e32441b2b1adc971572534
  
                  if (attributemodifiable == null) {
                      return;
-@@ -596,7 +595,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -595,7 +594,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
  
                  attributemodifiable.addTransientModifier(new AttributeModifier(LivingEntity.SPEED_MODIFIER_POWDER_SNOW_UUID, "Powder snow slow", (double) f, AttributeModifier.Operation.ADDITION));
              }

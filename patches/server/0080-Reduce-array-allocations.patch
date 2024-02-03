@@ -325,7 +325,7 @@ index a2920b8a9eff77d9c5d1d7f70ad3abdacba8f0fa..43f402d9032e4570a81a80e412215598
      protected CipherBase(Cipher cipher) {
          this.cipher = cipher;
 diff --git a/src/main/java/net/minecraft/network/Connection.java b/src/main/java/net/minecraft/network/Connection.java
-index b189aeb8646b5385c7cca0c4babfcb071a642220..7dedd112bd220bee86d56afbb401c20baf44b3ec 100644
+index 4716f8bd8a64d4f20f0d5957c1e7fabf63020f43..9e37578ac79a63bb72cc04aae7ba4f6f927a2ce4 100644
 --- a/src/main/java/net/minecraft/network/Connection.java
 +++ b/src/main/java/net/minecraft/network/Connection.java
 @@ -23,7 +23,6 @@ import io.netty.channel.epoll.EpollSocketChannel;
@@ -434,7 +434,7 @@ index 3fa891050ef7e62668ecdcf939d702db92514b23..e18764104c306de17ced824b96e163b2
          return ret;
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 1cace957572e60ac595b81910b58c2fcdc76298e..7ca3cddf3a25d01cc02599873f7661e87fe16f93 100644
+index d79d53ddb5d46e8e44d5de9e904c4b872504baa3..27b6cb3672dbe3faf1b6815d22c21a983f95ef27 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -28,6 +28,8 @@ import java.util.function.UnaryOperator;
@@ -454,7 +454,7 @@ index 1cace957572e60ac595b81910b58c2fcdc76298e..7ca3cddf3a25d01cc02599873f7661e8
  import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.phys.AABB;
  import net.minecraft.world.phys.BlockHitResult;
-@@ -227,8 +228,6 @@ import org.bukkit.event.inventory.InventoryCreativeEvent;
+@@ -226,8 +227,6 @@ import org.bukkit.event.inventory.InventoryCreativeEvent;
  import org.bukkit.event.inventory.InventoryType.SlotType;
  import org.bukkit.event.inventory.SmithItemEvent;
  import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -463,17 +463,8 @@ index 1cace957572e60ac595b81910b58c2fcdc76298e..7ca3cddf3a25d01cc02599873f7661e8
  import org.bukkit.event.player.PlayerChatEvent;
  import org.bukkit.event.player.PlayerCommandPreprocessEvent;
  import org.bukkit.event.player.PlayerInteractAtEntityEvent;
-@@ -3201,7 +3200,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
-         // Paper start - auto recipe limit
-         if (!org.bukkit.Bukkit.isPrimaryThread()) {
-             if (this.recipeSpamPackets.addAndGet(io.papermc.paper.configuration.GlobalConfiguration.get().spamLimiter.recipeSpamIncrement) > io.papermc.paper.configuration.GlobalConfiguration.get().spamLimiter.recipeSpamLimit) {
--                this.server.scheduleOnMain(() -> this.disconnect(net.minecraft.network.chat.Component.translatable("disconnect.spam", new Object[0]), org.bukkit.event.player.PlayerKickEvent.Cause.SPAM)); // Paper - kick event cause
-+                this.server.scheduleOnMain(() -> this.disconnect(net.minecraft.network.chat.Component.translatable("disconnect.spam", ArrayConstants.emptyObjectArray), org.bukkit.event.player.PlayerKickEvent.Cause.SPAM)); // Paper - kick event cause // Gale - JettPack - reduce array allocations
-                 return;
-             }
-         }
 diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-index 854aea894b8efeb4cdd591507a2a414d751d7bbb..83d2b25529efec93ec22c3739bf87cc7bb79ac5f 100644
+index 0818657745d48cd3367263e2d7650361ca7a4c02..a87be49d91e0bd95d5d5aa9f140f3f29f1c8b565 100644
 --- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 @@ -13,9 +13,10 @@ import java.security.PrivateKey;
@@ -520,7 +511,7 @@ index 854aea894b8efeb4cdd591507a2a414d751d7bbb..83d2b25529efec93ec22c3739bf87cc7
          ServerConfigurationPacketListenerImpl serverconfigurationpacketlistenerimpl = new ServerConfigurationPacketListenerImpl(this.server, this.connection, commonlistenercookie, this.player); // CraftBukkit
  
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 3c0d21f964cd0ed4ead16ebd9d662059137ff8b3..0fdbd05af21cb33d54addb59c236263e16a12ebd 100644
+index 259807423a6191ec38802a9e663cbc0371edce26..c17ce75c599874d0db003b787e41b4f2dca8f138 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -25,6 +25,8 @@ import java.util.UUID;
@@ -532,15 +523,6 @@ index 3c0d21f964cd0ed4ead16ebd9d662059137ff8b3..0fdbd05af21cb33d54addb59c236263e
  import net.minecraft.ChatFormatting;
  import net.minecraft.FileUtil;
  import net.minecraft.commands.CommandSourceStack;
-@@ -722,7 +724,7 @@ public abstract class PlayerList {
-         while (iterator.hasNext()) {
-             entityplayer = (ServerPlayer) iterator.next();
-             this.save(entityplayer); // CraftBukkit - Force the player's inventory to be saved
--            entityplayer.connection.disconnect(Component.translatable("multiplayer.disconnect.duplicate_login", new Object[0]), org.bukkit.event.player.PlayerKickEvent.Cause.DUPLICATE_LOGIN); // Paper - kick event cause
-+            entityplayer.connection.disconnect(Component.translatable("multiplayer.disconnect.duplicate_login", ArrayConstants.emptyObjectArray), org.bukkit.event.player.PlayerKickEvent.Cause.DUPLICATE_LOGIN); // Paper - kick event cause // Gale - JettPack - reduce array allocations
-         }
- 
-         // Instead of kicking then returning, we need to store the kick reason
 diff --git a/src/main/java/net/minecraft/server/players/StoredUserList.java b/src/main/java/net/minecraft/server/players/StoredUserList.java
 index 35f973cc2c0989256fa21abaf0327c2f36dbe4c9..219e0059418e6d64f5b859ba253c3cf3e91713cf 100644
 --- a/src/main/java/net/minecraft/server/players/StoredUserList.java
@@ -622,10 +604,10 @@ index 2e324276ea4cd9e528c6a3f9a9ba394b378fe075..8e91714e3167ab0ad16df681bc080772
      private EquipmentSlot(EquipmentSlot.Type type, int entityId, int armorStandId, String name) {
          this.type = type;
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index a3e74ee433814da7670fb3dc472a67a8fff7ff6d..e0a6b34323fb6eaf552d794cfd72bdb95e4f0095 100644
+index ef1cbbc1dc879d2fe981d6f45ef63fcdbd015257..49ed6ee2e64cf1a3b6914951a74a3a925c19dc85 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -3139,7 +3139,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3140,7 +3140,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
      @Nullable
      private Map<EquipmentSlot, ItemStack> collectEquipmentChanges() {
          Map<EquipmentSlot, ItemStack> map = null;
@@ -740,10 +722,10 @@ index 6c2e8049c2197ddc912c1a0fc99c87beae81e25b..a13822a22ab524a0fb9fd998c4ada06b
      private static Enchantment register(String name, Enchantment enchantment) {
          return Registry.register(BuiltInRegistries.ENCHANTMENT, name, enchantment);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 1a11939a1ffdeca87e18dc5279b11cf96b395407..7e0cc7e9cbcfcdfa9c0ed2aab4c0e4d6813d1040 100644
+index 6ed2a91b01233850b399e33f507353b52f06fd91..c5ee421f127ccd089c085f5fe7d314a8376d9882 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -12,6 +12,8 @@ import java.util.function.Consumer;
+@@ -10,6 +10,8 @@ import java.util.function.Consumer;
  import java.util.function.Predicate;
  import java.util.function.Supplier;
  import javax.annotation.Nullable;
@@ -752,7 +734,7 @@ index 1a11939a1ffdeca87e18dc5279b11cf96b395407..7e0cc7e9cbcfcdfa9c0ed2aab4c0e4d6
  import net.minecraft.CrashReport;
  import net.minecraft.CrashReportCategory;
  import net.minecraft.core.BlockPos;
-@@ -1866,7 +1868,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1864,7 +1866,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      public org.bukkit.entity.Entity[] getChunkEntities(int chunkX, int chunkZ) {
          io.papermc.paper.world.ChunkEntitySlices slices = ((ServerLevel)this).getEntityLookup().getChunk(chunkX, chunkZ);
          if (slices == null) {
@@ -762,7 +744,7 @@ index 1a11939a1ffdeca87e18dc5279b11cf96b395407..7e0cc7e9cbcfcdfa9c0ed2aab4c0e4d6
          return slices.getChunkEntities();
      }
 diff --git a/src/main/java/net/minecraft/world/level/block/ComposterBlock.java b/src/main/java/net/minecraft/world/level/block/ComposterBlock.java
-index d78fe4081bc2938326066e0afddb4a6c833a4bf7..f991a3f0ba55aeb99138038618f80bd33a5f10c2 100644
+index f9084e2605d7403721fe6b714bfad051f932aaef..689ba0cc4d3571efc2664e45fde00af724007934 100644
 --- a/src/main/java/net/minecraft/world/level/block/ComposterBlock.java
 +++ b/src/main/java/net/minecraft/world/level/block/ComposterBlock.java
 @@ -4,6 +4,8 @@ import com.mojang.serialization.MapCodec;
