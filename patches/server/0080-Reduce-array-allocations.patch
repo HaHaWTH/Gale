@@ -434,7 +434,7 @@ index 3fa891050ef7e62668ecdcf939d702db92514b23..e18764104c306de17ced824b96e163b2
          return ret;
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index d79d53ddb5d46e8e44d5de9e904c4b872504baa3..27b6cb3672dbe3faf1b6815d22c21a983f95ef27 100644
+index b00df400bdd20615997317aae873dcc94d8061af..331c71b8f8d1974f6cabb4f6602a62204d75790c 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -28,6 +28,8 @@ import java.util.function.UnaryOperator;
@@ -617,10 +617,10 @@ index ef1cbbc1dc879d2fe981d6f45ef63fcdbd015257..49ed6ee2e64cf1a3b6914951a74a3a92
  
          for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 684749248be7d3a258f84398fd6d0073eeb11a17..40edbefa9efaa897d203d4cf13ea796d6f35b965 100644
+index 82383d25da1ffcd027d4f761c5b21079b66242ae..b2440bd7cfd060928ad0378c0ac7e2dc3b1114b4 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
-@@ -1056,7 +1056,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
+@@ -1062,7 +1062,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
      @Override
      protected void dropCustomDeathLoot(DamageSource source, int lootingMultiplier, boolean allowDrops) {
          super.dropCustomDeathLoot(source, lootingMultiplier, allowDrops);
@@ -629,7 +629,7 @@ index 684749248be7d3a258f84398fd6d0073eeb11a17..40edbefa9efaa897d203d4cf13ea796d
          int j = aenumitemslot.length;
  
          for (int k = 0; k < j; ++k) {
-@@ -1118,7 +1118,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
+@@ -1125,7 +1125,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
              }
  
              boolean flag = true;
@@ -638,7 +638,7 @@ index 684749248be7d3a258f84398fd6d0073eeb11a17..40edbefa9efaa897d203d4cf13ea796d
              int j = aenumitemslot.length;
  
              for (int k = 0; k < j; ++k) {
-@@ -1205,7 +1205,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
+@@ -1212,7 +1212,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
          float f = localDifficulty.getSpecialMultiplier();
  
          this.enchantSpawnedWeapon(random, f);
@@ -647,7 +647,7 @@ index 684749248be7d3a258f84398fd6d0073eeb11a17..40edbefa9efaa897d203d4cf13ea796d
          int i = aenumitemslot.length;
  
          for (int j = 0; j < i; ++j) {
-@@ -1424,7 +1424,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
+@@ -1431,7 +1431,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
                  t0.setInvulnerable(this.isInvulnerable());
                  if (flag) {
                      t0.setCanPickUpLoot(this.canPickUpLoot());

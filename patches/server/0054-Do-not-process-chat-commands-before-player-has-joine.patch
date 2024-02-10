@@ -13,7 +13,7 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index e8ebc8588642479f22c6971bb2ea8ba557d9596a..932eb924a9d37130b53949d55c8d9e678900efd2 100644
+index deb9a8931bbc6d8687d629fac9787361fc96aae6..06b9fdd33fe888d298dfd24a67702a610233f10d 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -275,6 +275,7 @@ public class ServerPlayer extends Player {
@@ -25,10 +25,10 @@ index e8ebc8588642479f22c6971bb2ea8ba557d9596a..932eb924a9d37130b53949d55c8d9e67
      public boolean isRealPlayer; // Paper
      public final com.destroystokyo.paper.util.misc.PooledLinkedHashSets.PooledObjectLinkedOpenHashSet<ServerPlayer> cachedSingleHashSet; // Paper
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 367392bffd0dc1d433ed44f7696bd5840b268157..38ea014943ade6e9cdbfd76fdfdbe4d8311d7fd8 100644
+index 6e531e52f9698bd6eb2311fc1ab63e394868d5a8..f54f84c2206645fb86f8292dce0928b045bbe800 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2259,6 +2259,10 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2278,6 +2278,10 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
          if (this.player.isRemoved() || this.player.getChatVisibility() == ChatVisiblity.HIDDEN) { // CraftBukkit - dead men tell no tales
              this.send(new ClientboundSystemChatPacket(Component.translatable("chat.disabled.options").withStyle(ChatFormatting.RED), false));
              return Optional.empty();

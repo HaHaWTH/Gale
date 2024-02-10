@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 38ea014943ade6e9cdbfd76fdfdbe4d8311d7fd8..d79d53ddb5d46e8e44d5de9e904c4b872504baa3 100644
+index f54f84c2206645fb86f8292dce0928b045bbe800..b00df400bdd20615997317aae873dcc94d8061af 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -187,6 +187,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
@@ -18,7 +18,7 @@ index 38ea014943ade6e9cdbfd76fdfdbe4d8311d7fd8..d79d53ddb5d46e8e44d5de9e904c4b87
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -2428,7 +2429,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2447,7 +2448,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
          // CraftBukkit start
          String s = message.signedContent();
          if (s.isEmpty()) {
