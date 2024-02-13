@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index ce9e799da779fe658b8a35eca4131fb46e92fc54..24d1163ed81bc28a802c64c95622b2efd3bc16fe 100644
+index 87290dd96c568386d28d0453a5bdad8d9b1edcbe..4c5c7d45a78e232b0ec7e8c140b70cfc4f1b2e4f 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -4605,6 +4605,16 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -4608,6 +4608,16 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
          return this.feetBlockState;
      }
  
@@ -28,10 +28,10 @@ index ce9e799da779fe658b8a35eca4131fb46e92fc54..24d1163ed81bc28a802c64c95622b2ef
          return this.chunkPosition;
      }
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 69f2be2c71e1f4329bfe6e7dd04959e974e57b22..4fdd02d00843b561ee4738fed8e2cd61d98ffc4c 100644
+index 03943255e02ef9173f6857fa3639dfa53c2b9d16..288f326b1b10d737184a0dd9bf45b6240cd96181 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -2017,19 +2017,43 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -2030,19 +2030,43 @@ public abstract class LivingEntity extends Entity implements Attackable {
  
      public boolean onClimbableCached() {
          if (!this.blockPosition().equals(this.lastClimbingPosition)) {

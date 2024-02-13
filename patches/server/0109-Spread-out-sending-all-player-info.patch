@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 0fdbd05af21cb33d54addb59c236263e16a12ebd..18f8e64b17d482066f74a4790494552036b12454 100644
+index c17ce75c599874d0db003b787e41b4f2dca8f138..a15ce3fa047a3130288ef7006163ff8afd8a1db0 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -13,6 +13,8 @@ import java.net.SocketAddress;
@@ -157,7 +157,7 @@ index 0fdbd05af21cb33d54addb59c236263e16a12ebd..18f8e64b17d482066f74a47904945520
          }
  
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index c37e0321392c3e65f02a0ac26843b8af06b4826a..4d2502d77cc78c1382f108efad9a2a47e712cbd9 100644
+index 9286d41a9e61c03e56195669a8da17c30c7157e7..45dccd72ffb674ef58d8bcf379001be008ef9b99 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
 @@ -39,6 +39,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
@@ -168,7 +168,7 @@ index c37e0321392c3e65f02a0ac26843b8af06b4826a..4d2502d77cc78c1382f108efad9a2a47
  import net.minecraft.sounds.SoundEvent;
  import net.minecraft.sounds.SoundEvents;
  import net.minecraft.sounds.SoundSource;
-@@ -192,12 +193,15 @@ public abstract class Player extends LivingEntity {
+@@ -193,12 +194,15 @@ public abstract class Player extends LivingEntity {
      }
      // CraftBukkit end
  

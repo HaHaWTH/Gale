@@ -288,7 +288,7 @@ index d89c624554ab08bd1b33a3f62b52aa57aaafb8b4..2f76d1be6b26e516d1ab13df8d05b1f5
      }
  
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 6de6dad36203479677a29ad61e21bc369d4e5513..d994993057b042f95eb309eb9ba08f872d954cad 100644
+index 68d268b6fff126e8645b6deec3fb549ea2286b77..1243b375d2cbdf224fe174e75d42739248858561 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -1,20 +1,15 @@
@@ -416,10 +416,10 @@ index 19f23a6c8fb5c02843c27fb8a242ec9d0d1b538b..c7abd433e70a6479fc81e5bce94144c9
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index f8f7fcbd02005979436246d93584b1d003461868..0b7fb92aa1f61e04a6b6d75c12118dddf6941b75 100644
+index 0c1419478dc5bd74a89a23fcefa9ac6222986c3a..8b3f630fddb1cd7f87664711532bde8bb78d9c90 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1042,6 +1042,7 @@ public final class CraftServer implements Server {
+@@ -1054,6 +1054,7 @@ public final class CraftServer implements Server {
  
          org.spigotmc.SpigotConfig.init((File) this.console.options.valueOf("spigot-settings")); // Spigot
          this.console.paperConfigurations.reloadConfigs(this.console);
@@ -427,7 +427,7 @@ index f8f7fcbd02005979436246d93584b1d003461868..0b7fb92aa1f61e04a6b6d75c12118ddd
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters, config.spawnAnimals); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -3001,6 +3002,14 @@ public final class CraftServer implements Server {
+@@ -3013,6 +3014,14 @@ public final class CraftServer implements Server {
              return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
          }
  

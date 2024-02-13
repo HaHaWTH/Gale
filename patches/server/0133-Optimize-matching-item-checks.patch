@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index 2e451090791e1dd374bd54ae74eef617306e5f3e..3c4919412fd995a6f00abe912e138b726392b88a 100644
+index 93ddff72b43b8cfd83a4b07d636795640b63ae07..a39201ea35edb1be068ff7269dcee614d0477050 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
-@@ -783,15 +783,15 @@ public final class ItemStack {
+@@ -784,15 +784,15 @@ public final class ItemStack {
      }
  
      public static boolean matches(ItemStack left, ItemStack right) {

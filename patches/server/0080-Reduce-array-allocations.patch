@@ -434,7 +434,7 @@ index 3fa891050ef7e62668ecdcf939d702db92514b23..e18764104c306de17ced824b96e163b2
          return ret;
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index b00df400bdd20615997317aae873dcc94d8061af..331c71b8f8d1974f6cabb4f6602a62204d75790c 100644
+index 5bb93e13a8c7e5baf98e17c65e65e245c5d94d82..9f5c600680c3540250cfb7c0372cd1d0fa66d34d 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -28,6 +28,8 @@ import java.util.function.UnaryOperator;
@@ -604,10 +604,10 @@ index 2e324276ea4cd9e528c6a3f9a9ba394b378fe075..8e91714e3167ab0ad16df681bc080772
      private EquipmentSlot(EquipmentSlot.Type type, int entityId, int armorStandId, String name) {
          this.type = type;
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index ef1cbbc1dc879d2fe981d6f45ef63fcdbd015257..49ed6ee2e64cf1a3b6914951a74a3a925c19dc85 100644
+index 6179e9d59d94e1412b750ebcf77f5e8c6eacf805..c8d83e1af99a0aa6c23d3c80ebcf449c21a1c016 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -3140,7 +3140,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3153,7 +3153,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
      @Nullable
      private Map<EquipmentSlot, ItemStack> collectEquipmentChanges() {
          Map<EquipmentSlot, ItemStack> map = null;
@@ -617,7 +617,7 @@ index ef1cbbc1dc879d2fe981d6f45ef63fcdbd015257..49ed6ee2e64cf1a3b6914951a74a3a92
  
          for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 82383d25da1ffcd027d4f761c5b21079b66242ae..b2440bd7cfd060928ad0378c0ac7e2dc3b1114b4 100644
+index 2dfdeec25ef0d9a004601fd9b5050c881156de26..18ef2f62b2a6cb0d9a3ce7135f8ea8228665b830 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
 @@ -1062,7 +1062,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
@@ -670,10 +670,10 @@ index 7de9d012e7416eaa0189b513a0972c846e93c4b6..9274015f58c71f991903bd28434a4832
  
          for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index ed27a963223bfe18310ad5adabf461b5e307ef9c..5ab93a8790f48e72f17a86bd84c16ab2cb8e956c 100644
+index 1ad126d992d95062a3db08374db7a927f23a0cac..93ddff72b43b8cfd83a4b07d636795640b63ae07 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
-@@ -1052,7 +1052,7 @@ public final class ItemStack {
+@@ -1053,7 +1053,7 @@ public final class ItemStack {
          int k;
  
          if (ItemStack.shouldShowInTooltip(i, ItemStack.TooltipPart.MODIFIERS)) {

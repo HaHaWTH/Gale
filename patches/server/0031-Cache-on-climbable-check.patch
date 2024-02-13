@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index d047eef2748c0e263a708391678b719a7bf4ffce..a70eb0e8d03ea4eadb82f44dbef30f656f0a2e9d 100644
+index 68b23175b5ea1c10cad0c865b8445c0d461f41e4..c51016042d89fb34e211ea0ba985804158cf32c6 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -141,7 +141,6 @@ import org.bukkit.event.entity.EntityTeleportEvent;
+@@ -142,7 +142,6 @@ import org.bukkit.event.entity.EntityTeleportEvent;
  import org.bukkit.event.player.PlayerItemConsumeEvent;
  // CraftBukkit end
  
@@ -42,7 +42,7 @@ index d047eef2748c0e263a708391678b719a7bf4ffce..a70eb0e8d03ea4eadb82f44dbef30f65
  
  public abstract class LivingEntity extends Entity implements Attackable {
  
-@@ -2001,6 +2000,20 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -2014,6 +2013,20 @@ public abstract class LivingEntity extends Entity implements Attackable {
          return this.lastClimbablePos;
      }
  

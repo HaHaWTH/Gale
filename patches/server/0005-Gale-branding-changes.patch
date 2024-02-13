@@ -427,7 +427,7 @@ index c5d5648f4ca603ef2b1df723b58f9caf4dd3c722..e45e6b44b2a8f2cdae6e0048a812b921
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 90ae7e8c81f6a9ede8aeaeec3bf784023522cefc..8ad14057e891213d77c5bbd504e53c37ed045559 100644
+index d06185566b447c432d4dc2e3ba04d121bcdbc71b..e909e960005c512c42c7b8643e8f9241695bb81b 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -952,7 +952,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -455,10 +455,10 @@ index 90ae7e8c81f6a9ede8aeaeec3bf784023522cefc..8ad14057e891213d77c5bbd504e53c37
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 34cd96dba5f11e64d7c90f4246b513b0ea943aa6..e99f88383565a5498584a00d583d2a114dd087ed 100644
+index 9f7ed337463cc9bb370a5541d9de5cd8f9c1a78a..0c1419478dc5bd74a89a23fcefa9ac6222986c3a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -264,7 +264,7 @@ import javax.annotation.Nullable; // Paper
+@@ -266,7 +266,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {
@@ -481,10 +481,10 @@ index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e58721
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index ca5312febcdd467889ad725c0263367bc5fe69f6..b1bd810d4a83086966da16f4b0327f67c794246a 100644
+index 1324f05de8106032ce290e928cf106fb4f450517..050d6820efd55f73bf8aba915f6fb461bc884378 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -482,7 +482,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -497,7 +497,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {

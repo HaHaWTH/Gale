@@ -13,7 +13,7 @@ As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
 Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/level/GameRules.java b/src/main/java/net/minecraft/world/level/GameRules.java
-index afe91d02363bf7385d34447dda8960980ec48443..817556fdee3551c44a5a83f174496d7fd9c6387e 100644
+index 4a340bd1f1859e43bb58e68aee4018fdb4ca7a5a..cf99427d3efbcb79dcc05807b65dc3dd6c32df99 100644
 --- a/src/main/java/net/minecraft/world/level/GameRules.java
 +++ b/src/main/java/net/minecraft/world/level/GameRules.java
 @@ -19,6 +19,8 @@ import java.util.function.BiConsumer;
@@ -25,7 +25,7 @@ index afe91d02363bf7385d34447dda8960980ec48443..817556fdee3551c44a5a83f174496d7f
  import net.minecraft.commands.CommandSourceStack;
  import net.minecraft.commands.Commands;
  import net.minecraft.nbt.CompoundTag;
-@@ -141,7 +143,7 @@ public class GameRules {
+@@ -142,7 +144,7 @@ public class GameRules {
      }
  
      private GameRules(Map<GameRules.Key<?>, GameRules.Value<?>> rules) {

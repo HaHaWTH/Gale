@@ -27,7 +27,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/com/destroystokyo/paper/loottable/PaperLootableInventoryData.java b/src/main/java/com/destroystokyo/paper/loottable/PaperLootableInventoryData.java
-index 5408cbc21fc7577a6100b5a1ca0463e899d2df8b..406119370596e1463c7b197988d7700a2f48c711 100644
+index 6e72c43b9d3834eb91c02ce68e7d114ad907812d..f6f8e51cbdcfcbde9dc67d006867ae9daec09a4a 100644
 --- a/src/main/java/com/destroystokyo/paper/loottable/PaperLootableInventoryData.java
 +++ b/src/main/java/com/destroystokyo/paper/loottable/PaperLootableInventoryData.java
 @@ -2,7 +2,7 @@ package com.destroystokyo.paper.loottable;
@@ -49,7 +49,7 @@ index 5408cbc21fc7577a6100b5a1ca0463e899d2df8b..406119370596e1463c7b197988d7700a
      private long lastFill = -1;
      private long nextRefill = -1;
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
-index 9248769e6d357f6eec68945fd7700e79b2942c41..5b91ccafbdc7582e50272953f3ab2b8c0f0bf9dd 100644
+index 6cf83502a954cce9c562ec036bfeddb477d38b73..21070516fc936109f537494e38e240982bebf66a 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
 @@ -108,7 +108,7 @@ public class RegionFile implements AutoCloseable {
@@ -62,10 +62,10 @@ index 9248769e6d357f6eec68945fd7700e79b2942c41..5b91ccafbdc7582e50272953f3ab2b8c
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index 38d842bc0fb7d9c39a3673983a643248e9563fe2..8b1b8d0b653fd361358ace0d6ddcc509659cedb9 100644
+index bfb178c69026e9759e9afaebb9da141b62d1f144..c9d276124bd14aafcd1a29991081b7668fe636b6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-@@ -237,7 +237,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
+@@ -243,7 +243,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
      }
      // Paper end
  
@@ -75,7 +75,7 @@ index 38d842bc0fb7d9c39a3673983a643248e9563fe2..8b1b8d0b653fd361358ace0d6ddcc509
      public CraftWorld(ServerLevel world, ChunkGenerator gen, BiomeProvider biomeProvider, Environment env) {
          this.world = world;
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java
-index c13cdbaf7abdf120a3969f8e887b4c3b78989c9c..2c054f16d2503f0443d3986314f68fa0b2dcebd4 100644
+index 1309fabd357eb9b8f90f882ec7ff3de9e60f187d..2eb85078a7da717602071e5463635b0b498416bb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java
 @@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
@@ -543,7 +543,7 @@ index 0000000000000000000000000000000000000000..60dc2c1deb0749168d03c5d94136e613
 +    }
 +}
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index efa0ba731095501fa56823806f08511efcb2b18b..7f9efe9429f9dcceb52d72f231a7a4bbae0f9738 100644
+index 54c68978e19a5fb871f7b31f74c6c77376693cd9..1cff8378c4939af4bbe300e5d6428539e75218ae 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
 @@ -38,6 +38,7 @@ import co.aikar.timings.MinecraftTimings;
