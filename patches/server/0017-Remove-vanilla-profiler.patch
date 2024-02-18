@@ -1211,7 +1211,7 @@ index 906eded9a2ab61737a30cfe89292a71237ce4eb7..b4ba0ff5a32fea0afcd987a530c43013
              }
          } else {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 902c0e7f2a167845f46adef4578bc71ca8cabfe8..68b23175b5ea1c10cad0c865b8445c0d461f41e4 100644
+index aceee33eebd4d5f89e62a42910ec51843f33843b..a0da290019b10f424771309c0ccc84689c753c90 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -404,7 +404,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -1717,10 +1717,10 @@ index 1aae466e3e334d7f4bbb3ea9365a255afcc3dd3a..1edc23e457432b571d00bce5a4c32c6d
              this.assignProfessionWhenSpawned = false;
          }
 diff --git a/src/main/java/net/minecraft/world/level/Explosion.java b/src/main/java/net/minecraft/world/level/Explosion.java
-index f0fbde839a527481314f54a1aefa0fc317ba2221..289396ef9e7d4d9038e957e53a46db4ac7f0b435 100644
+index b678da2cbb93cea7971bc3c4d324cfca18b0bc97..bb8d73d4022b1e13bb3e2bcf74b511f64fe476d2 100644
 --- a/src/main/java/net/minecraft/world/level/Explosion.java
 +++ b/src/main/java/net/minecraft/world/level/Explosion.java
-@@ -665,7 +665,6 @@ public class Explosion {
+@@ -675,7 +675,6 @@ public class Explosion {
          }
  
          if (flag1) {
@@ -1728,7 +1728,7 @@ index f0fbde839a527481314f54a1aefa0fc317ba2221..289396ef9e7d4d9038e957e53a46db4a
              List<Pair<ItemStack, BlockPos>> list = new ArrayList();
  
              Util.shuffle(this.toBlow, this.level.random);
-@@ -741,7 +740,6 @@ public class Explosion {
+@@ -751,7 +750,6 @@ public class Explosion {
                  Block.popResource(this.level, (BlockPos) pair.getSecond(), (ItemStack) pair.getFirst());
              }
  

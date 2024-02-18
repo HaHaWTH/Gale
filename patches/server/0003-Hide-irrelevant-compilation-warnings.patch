@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 7d00abc41857d008c863f4350d97a0e018241690..3c30e911885dcbe5456614f2073ddbf2dc17040c 100644
+index 79ead96666c1cb1e3639641e1636c2bb7096706a..e5b40a8da24f39391110291fe6c9bdfb82e933c8 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -63,6 +63,16 @@ dependencies {
+@@ -64,6 +64,16 @@ dependencies {
  }
  
  val craftbukkitPackageVersion = "1_20_R3" // Paper

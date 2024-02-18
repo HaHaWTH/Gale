@@ -129,7 +129,7 @@ index e7583996cc6d750cbd72f749de39ecded56d7f7c..d791c2f2facfc46d8664225c8b28f95f
  
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 331c71b8f8d1974f6cabb4f6602a62204d75790c..d42473b063130e6a2c0a480373712e10a2425660 100644
+index 4d3caaf289689a640fa471f170d75964617230f1..9037a4a01128bf26b45aebd9dd2d91d23bd8e26d 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -8,6 +8,8 @@ import com.mojang.brigadier.StringReader;
@@ -141,7 +141,7 @@ index 331c71b8f8d1974f6cabb4f6602a62204d75790c..d42473b063130e6a2c0a480373712e10
  import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
  import it.unimi.dsi.fastutil.objects.ObjectIterator;
  import java.net.SocketAddress;
-@@ -3400,6 +3402,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -3396,6 +3398,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
      }
  
      @Override
