@@ -25,7 +25,7 @@ index deb9a8931bbc6d8687d629fac9787361fc96aae6..06b9fdd33fe888d298dfd24a67702a61
      public boolean isRealPlayer; // Paper
      public final com.destroystokyo.paper.util.misc.PooledLinkedHashSets.PooledObjectLinkedOpenHashSet<ServerPlayer> cachedSingleHashSet; // Paper
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index f6b847f9cf1a97f186ba9a9d1d540ef56c41ebc4..6082637bfd19f7ea6eb1b76c615f56a6454643e6 100644
+index e2c9a1007dce1fd05382622dd186ff5dca1b9512..481e0139a973a7b24a5ff6158e795a265550f087 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2274,6 +2274,10 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
@@ -40,10 +40,10 @@ index f6b847f9cf1a97f186ba9a9d1d540ef56c41ebc4..6082637bfd19f7ea6eb1b76c615f56a6
              this.player.resetLastActionTime();
              return optional;
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 91feb12732564c90656da487664dbc12e55397fc..c34fa92849a917e6269390b94360de9f047fb316 100644
+index 1e5f709115007ff19901c0a6c3cf884d9e4d3a6c..152ecf384ac91c39700c6e16b0cd342b8b827bf9 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -347,6 +347,8 @@ public abstract class PlayerList {
+@@ -348,6 +348,8 @@ public abstract class PlayerList {
              return;
          }
  

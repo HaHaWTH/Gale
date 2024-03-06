@@ -17,7 +17,7 @@ Licensed under: MIT (https://opensource.org/licenses/MIT)
 Only do an item "suck in" action once per second
 
 diff --git a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
-index 491a521f0e5e272fbad7870fa3adefdea22e179f..3ff5c1b932bb28203aa5b48393ff41724c93618a 100644
+index c7f06c3cfb737bd17a706798bf9cf0e1af5f0cc0..3b803ac2041b9f6bb6f016e58d95c0bf58fd9a8d 100644
 --- a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
 @@ -14,11 +14,13 @@ import net.minecraft.world.entity.Entity;
@@ -34,10 +34,10 @@ index 491a521f0e5e272fbad7870fa3adefdea22e179f..3ff5c1b932bb28203aa5b48393ff4172
  import net.minecraft.world.phys.Vec3;
  import net.minecraft.core.BlockPos;
  import net.minecraft.nbt.CompoundTag;
-@@ -227,11 +229,31 @@ public class ItemEntity extends Entity implements TraceableEntity {
+@@ -228,11 +230,31 @@ public class ItemEntity extends Entity implements TraceableEntity {
                  }
                  // CraftBukkit end
-                 this.discard();
+                 this.discard(EntityRemoveEvent.Cause.DESPAWN); // CraftBukkit - add Bukkit remove cause
 +                return; // Gale - EMC - reduce hopper item checks
              }
 +            this.markNearbyHopperCartsAsImmune(); // Gale - EMC - reduce hopper item checks
@@ -66,10 +66,10 @@ index 491a521f0e5e272fbad7870fa3adefdea22e179f..3ff5c1b932bb28203aa5b48393ff4172
      // Spigot start - copied from above
      @Override
      public void inactiveTick() {
-@@ -251,7 +273,13 @@ public class ItemEntity extends Entity implements TraceableEntity {
+@@ -252,7 +274,13 @@ public class ItemEntity extends Entity implements TraceableEntity {
              }
              // CraftBukkit end
-             this.discard();
+             this.discard(EntityRemoveEvent.Cause.DESPAWN); // CraftBukkit - add Bukkit remove cause
 +            return; // Gale - EMC - reduce hopper item checks
 +        }
 +        // Gale start - EMC - reduce hopper item checks
@@ -119,7 +119,7 @@ index a05acf709735b40ca86f978508c63a86065fd405..3752b4ba7fb0d680d4b4a61bf44d54d5
  
      double getLevelY();
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-index 5a199935865979adf2f81ff6459299c4c7b9003b..5a5347ee033db890872193f22a7b63c1af0e79b7 100644
+index fc3fd4ac0f833b606757e9334b41311fe6eb8d92..e336f33946c6362629c8a20e20763cfc79a67d37 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 @@ -11,6 +11,7 @@ import net.minecraft.core.Direction;
@@ -138,7 +138,7 @@ index 5a199935865979adf2f81ff6459299c4c7b9003b..5a5347ee033db890872193f22a7b63c1
  import net.minecraft.world.inventory.AbstractContainerMenu;
  import net.minecraft.world.inventory.HopperMenu;
  import net.minecraft.world.item.ItemStack;
-@@ -575,7 +577,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
+@@ -576,7 +578,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
                  return false;
              }
              // Paper end - Perf: Optimize Hoppers
@@ -147,7 +147,7 @@ index 5a199935865979adf2f81ff6459299c4c7b9003b..5a5347ee033db890872193f22a7b63c1
              Iterator iterator = HopperBlockEntity.getItemsAtAndAbove(world, hopper).iterator();
  
              ItemEntity entityitem;
-@@ -590,6 +592,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
+@@ -591,6 +593,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
  
              return true;
          }
@@ -155,7 +155,7 @@ index 5a199935865979adf2f81ff6459299c4c7b9003b..5a5347ee033db890872193f22a7b63c1
      }
  
      @io.papermc.paper.annotation.DoNotUse // Paper - method unused as logic is inlined above
-@@ -900,6 +903,31 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
+@@ -901,6 +904,31 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
          return first.getCount() < first.getMaxStackSize() && first.is(second.getItem()) && first.getDamageValue() == second.getDamageValue() && ((first.isEmpty() && second.isEmpty()) || java.util.Objects.equals(first.getTag(), second.getTag())); // Paper - Perf: Optimize Hoppers; used to return true for full itemstacks?!
      }
  

@@ -221,10 +221,10 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index d74cae963bf52a7a65a11540b527d49c017ebb3c..dee43c516c6c09c4d3e2ef7595d8e5f1e4866e55 100644
+index a5f1f49ed6b92e68e52b8e08b32bd0b4893a6a3c..b0dc9ee8808e0eb84969d0f59f83f3d2ab49d083 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -86,7 +86,7 @@ tasks.jar {
+@@ -87,7 +87,7 @@ tasks.jar {
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
@@ -233,7 +233,7 @@ index d74cae963bf52a7a65a11540b527d49c017ebb3c..dee43c516c6c09c4d3e2ef7595d8e5f1
              "Implementation-Vendor" to date, // Paper
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
-@@ -231,3 +231,22 @@ tasks.registerRunTask("runDev") {
+@@ -232,3 +232,22 @@ tasks.registerRunTask("runDev") {
      classpath(runtimeClasspathForRunDev)
      jvmArgs("-DPaper.isRunDev=true")
  }
@@ -455,7 +455,7 @@ index d06185566b447c432d4dc2e3ba04d121bcdbc71b..e909e960005c512c42c7b8643e8f9241
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 9f7ed337463cc9bb370a5541d9de5cd8f9c1a78a..0c1419478dc5bd74a89a23fcefa9ac6222986c3a 100644
+index c490a29bcf7410bc54959ee71375605964379ed5..af7206ac02397971acc1505f76c666327cdae8b3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -266,7 +266,7 @@ import javax.annotation.Nullable; // Paper

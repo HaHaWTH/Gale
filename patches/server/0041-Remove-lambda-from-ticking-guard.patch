@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 83c001e809c76a5ec0b314967839713e63d67f0d..3fa891050ef7e62668ecdcf939d702db92514b23 100644
+index 55b59745b7d3cc245c4768b5d2e6bf277a34d1b4..86a2f955dc981dd95091b70d6600ff94ce4dc714 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -894,7 +894,20 @@ public class ServerLevel extends Level implements WorldGenLevel {
@@ -57,10 +57,10 @@ index 83c001e809c76a5ec0b314967839713e63d67f0d..3fa891050ef7e62668ecdcf939d702db
                      }
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index a57038b0c0cd5d7fd2e96101cf07d7350f17a2f5..6ed2a91b01233850b399e33f507353b52f06fd91 100644
+index 84021917524447938cb7f0877647565698f7d4e1..9440dd58325df07521ef52373089e6989105ba4b 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1322,13 +1322,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1331,13 +1331,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          try {
              tickConsumer.accept(entity);
              MinecraftServer.getServer().executeMidTickTasks(); // Paper - execute chunk tasks mid tick
@@ -71,8 +71,8 @@ index a57038b0c0cd5d7fd2e96101cf07d7350f17a2f5..6ed2a91b01233850b399e33f507353b5
              final String msg = String.format("Entity threw exception at %s:%s,%s,%s", entity.level().getWorld().getName(), entity.getX(), entity.getY(), entity.getZ());
              MinecraftServer.LOGGER.error(msg, throwable);
              getCraftServer().getPluginManager().callEvent(new com.destroystokyo.paper.event.server.ServerExceptionEvent(new com.destroystokyo.paper.exception.ServerInternalException(msg, throwable))); // Paper - ServerExceptionEvent
--            entity.discard();
-+            entity.discard(); // Gale - Airplane - remove lambda from ticking guard - diff on change ServerLevel#tick
+-            entity.discard(org.bukkit.event.entity.EntityRemoveEvent.Cause.DISCARD);
++            entity.discard(org.bukkit.event.entity.EntityRemoveEvent.Cause.DISCARD); // Gale - Airplane - remove lambda from ticking guard - diff on change ServerLevel#tick
              // Paper end - Prevent block entity and entity crashes
          }
      }
