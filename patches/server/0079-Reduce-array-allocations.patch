@@ -133,7 +133,7 @@ index c78cbec447032de9fe69748591bef6be300160ed..d8b22d51d28692182cd75affd6cb5529
                  this.storage = Arrays.copyOf(this.storage, this.storage.length * 2);
 diff --git a/src/main/java/me/titaniumtown/ArrayConstants.java b/src/main/java/me/titaniumtown/ArrayConstants.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..bccd0127387d27f7eb7e6ce68f31a1686a008419
+index 0000000000000000000000000000000000000000..c99e9e361ab4377c0df76b943b96bf87e138d91c
 --- /dev/null
 +++ b/src/main/java/me/titaniumtown/ArrayConstants.java
 @@ -0,0 +1,21 @@
@@ -141,7 +141,7 @@ index 0000000000000000000000000000000000000000..bccd0127387d27f7eb7e6ce68f31a168
 +
 +package me.titaniumtown;
 +
-+//import net.minecraft.server.level.ServerLevel;
++import net.minecraft.server.level.ServerLevel;
 +
 +public final class ArrayConstants {
 +
@@ -155,7 +155,7 @@ index 0000000000000000000000000000000000000000..bccd0127387d27f7eb7e6ce68f31a168
 +    public static final long[] emptyLongArray = new long[0];
 +    public static final org.bukkit.entity.Entity[] emptyBukkitEntityArray = new org.bukkit.entity.Entity[0];
 +    public static final net.minecraft.world.entity.Entity[] emptyEntityArray = new net.minecraft.world.entity.Entity[0];
-+    //public static final ServerLevel[] emptyServerLevelArray = new ServerLevel[0];
++    public static final ServerLevel[] emptyServerLevelArray = new ServerLevel[0];
 +
 +}
 diff --git a/src/main/java/net/minecraft/nbt/ByteArrayTag.java b/src/main/java/net/minecraft/nbt/ByteArrayTag.java

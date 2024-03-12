@@ -109,10 +109,10 @@ index bb8d73d4022b1e13bb3e2bcf74b511f64fe476d2..aa784c1794b80b57fd9c1d738a744e0a
          this.hitPlayers = Maps.newHashMap();
          this.level = world;
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/TheEndGatewayBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/TheEndGatewayBlockEntity.java
-index bcf1cce649c388596ad60244ffa947b48669c640..0d3242be8fe0201e9179a78bd122a2669c42fbc5 100644
+index 083130de6f6d5b6daa1564d5d51115f7c58987a7..610f1d50b91ffe4b84026681cf65b237bb1d4931 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/TheEndGatewayBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/TheEndGatewayBlockEntity.java
-@@ -361,7 +361,7 @@ public class TheEndGatewayBlockEntity extends TheEndPortalBlockEntity {
+@@ -355,7 +355,7 @@ public class TheEndGatewayBlockEntity extends TheEndPortalBlockEntity {
      }
  
      private static void spawnGatewayPortal(ServerLevel world, BlockPos pos, EndGatewayConfiguration config) {

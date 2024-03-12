@@ -1096,7 +1096,7 @@ index 7ab57748b2f2aea1003d9b7e70e76c372aa1e432..47e75ec4a01f8a456ec6ebc13031c1f0
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 51097f1d04d981db2823e8647b546658b8fd27c1..7b1a9b21b7f72964f9157bf02e8dbcd57785cbfb 100644
+index be2220457e941803b14d78c550d0db777c79a886..df9f72dda34ff4ab87a4324938720dd8d9f82295 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -833,7 +833,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
@@ -1533,16 +1533,17 @@ index b21e180641d17438997a80e5bcb0ec7998d24a2e..207d41b91bc02d94c5b40799619f7314
              Optional<Integer> optional = this.getBrain().getMemory(MemoryModuleType.PLAY_DEAD_TICKS);
  
 diff --git a/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java b/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java
-index 1f09d47b0ffb07b49b4d8bd79a371dd61f1c2a92..c3f5d82fb3d738ef7c80eae69ba06bd785042380 100644
+index 84ae19bf9bddd2b6ee4737577d8836d59be028c2..52e5f367bf20427a532f59bc20610f05f88982bd 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java
-@@ -147,13 +147,9 @@ public class Camel extends AbstractHorse implements PlayerRideableJumping, Saddl
+@@ -149,14 +149,10 @@ public class Camel extends AbstractHorse implements PlayerRideableJumping, Saddl
  
      @Override
      protected void customServerAiStep() {
 -        this.level().getProfiler().push("camelBrain");
-         Brain<Camel> brain = (Brain<Camel>) this.getBrain(); // Paper - decompile fix
-         brain.tick((ServerLevel)this.level(), this);
+         Brain<Camel> behaviorcontroller = (Brain<Camel>) this.getBrain(); // CraftBukkit - decompile error
+ 
+         behaviorcontroller.tick((ServerLevel) this.level(), this);
 -        this.level().getProfiler().pop();
 -        this.level().getProfiler().push("camelActivityUpdate");
          CamelAi.updateActivity(this);
