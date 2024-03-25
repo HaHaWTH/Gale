@@ -390,7 +390,7 @@ index 9b1243d96e0694c62fc9e82e9be540bce0d2b3ad..0d7a80824bf0ce921070dea02220ca65
  
      @Override
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-index 757edf74751dc7183454656fda9cecc4eb601e4c..fc3fd4ac0f833b606757e9334b41311fe6eb8d92 100644
+index cdb739df2a285032d25d84f4464f202a7a3fa578..a2e314549f4b4182a817ecd477235f56fb95c5f5 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 @@ -48,7 +48,10 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
@@ -401,7 +401,7 @@ index 757edf74751dc7183454656fda9cecc4eb601e4c..fc3fd4ac0f833b606757e9334b41311f
      private NonNullList<ItemStack> items;
 +    private gg.airplane.structs.ItemListWithBitset optimizedItems;
 +    // Gale end - Airplane - improve container checking with a bitset
-     private int cooldownTime;
+     public int cooldownTime;
      private long tickedGameTime;
  
 @@ -84,14 +87,37 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen

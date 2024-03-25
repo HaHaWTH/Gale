@@ -86,7 +86,7 @@ index f46c16dd6ff9cd09ea579eecf99ce78c7eb39d49..430b8a2bb1639eeb7338e0f7b1030248
  
      private void spawnDustParticles(Level world, BlockHitResult hitResult, BlockState state, Vec3 userRotation, HumanoidArm arm) {
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index d6d2a8b922fe06fc00090acb2ea06cb8d70eb88e..fe008b7e8033fcf5793d4ab8f6929a3c2dfe2a94 100644
+index 5d499e77800466210473e36b2355873807b9f86a..c5b23bafb7909130a8a294e3b5bf94daa313ee11 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -9,6 +9,7 @@ import io.papermc.paper.configuration.PaperConfigurations;

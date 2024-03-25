@@ -49,12 +49,12 @@ index 098fde8200a11f91f934ddab6b1486dac4014dfe..083130de6f6d5b6daa1564d5d51115f7
  
              blockEntity.teleportCooldown = 100;
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 9abfdc9e1725b37987b661cd89b32cc43595396f..01cc8c68e73392db88bd79e7fabd54a4262164b1 100644
+index 7f9c5012defeac5ae558e46d8fca6889fb1d0872..56bf02a1f9741fc1c05ede0c0c79fea97d46271b 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -100,6 +100,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
          public class Fixes extends ConfigurationPart {
-             public boolean tripwireDuping = true; // Gale - Leaf - make tripwire duping fix configurable
+ 
              public boolean keepMooshroomRotationAfterShearing = true; // Gale - Purpur - fix cow rotation when shearing mooshroom
 +            public boolean checkCanChangeDimensionsBeforeUseEndGateway = false; // Gale - Purpur - end gateway should check if entity can use portal
  

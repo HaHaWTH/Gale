@@ -355,7 +355,7 @@ index 4716f8bd8a64d4f20f0d5957c1e7fabf63020f43..9e37578ac79a63bb72cc04aae7ba4f6f
  
          if (enumprotocoldirection != this.receiving) {
 diff --git a/src/main/java/net/minecraft/network/chat/contents/TranslatableContents.java b/src/main/java/net/minecraft/network/chat/contents/TranslatableContents.java
-index 084ffde43447f6ff5e45e9fe3fc6a86bde65fd5a..4eafe7ee45f9dc071a8d0a7a4fa9b0800334d995 100644
+index 981d34dd4cfbc0932b147688751b98552c8beea8..53d80d46a857297987145fd956c8136b46185446 100644
 --- a/src/main/java/net/minecraft/network/chat/contents/TranslatableContents.java
 +++ b/src/main/java/net/minecraft/network/chat/contents/TranslatableContents.java
 @@ -15,6 +15,8 @@ import java.util.function.Consumer;
