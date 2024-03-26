@@ -1,16 +1,21 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Martijn Muijsers <martijnmuijsers@live.nl>
-Date: Tue, 29 Nov 2022 16:16:35 +0100
-Subject: [PATCH] Fix MC-238526
+Date: Tue, 29 Nov 2022 21:37:22 +0100
+Subject: [PATCH] Make arrow movement resetting despawn counter configurable
 
 License: MIT (https://opensource.org/licenses/MIT)
 Gale - https://galemc.org
 
 This patch is based on the following patch:
-"MC-238526 - Fix spawner not spawning water animals correctly"
-By: BillyGalbreath <Blake.Galbreath@Gmail.com>
+"Arrows should not reset despawn counter"
+By: William Blake Galbreath <blake.galbreath@gmail.com>
 As part of: Purpur (https://github.com/PurpurMC/Purpur)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
+
+* Purpur description *
+
+This prevents keeping arrows alive indefinitely (such as when the block
+the arrow is stuck in gets removed, like a piston head going up/down)
 
 * Purpur copyright *
 
@@ -36,36 +41,28 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-diff --git a/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java b/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java
-index 9b897cf53f4bb5d366e6ac88dbed93c59d8fe541..53e3a40246da0a4d30ad8a7286d1a43dc7db3b0b 100644
---- a/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java
-+++ b/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java
-@@ -77,6 +77,6 @@ public abstract class WaterAnimal extends PathfinderMob {
-         i = world.getMinecraftWorld().paperConfig().entities.spawning.wateranimalSpawnHeight.maximum.or(i);
-         j = world.getMinecraftWorld().paperConfig().entities.spawning.wateranimalSpawnHeight.minimum.or(j);
-         // Paper end - Make water animal spawn height configurable
--        return pos.getY() >= j && pos.getY() <= i && world.getFluidState(pos.below()).is(FluidTags.WATER) && world.getBlockState(pos.above()).is(Blocks.WATER);
-+        return ((reason == MobSpawnType.SPAWNER && world.getMinecraftWorld().galeConfig().gameplayMechanics.fixes.mc238526) || (pos.getY() >= j && pos.getY() <= i)) && world.getFluidState(pos.below()).is(FluidTags.WATER) && world.getBlockState(pos.above()).is(Blocks.WATER); // Gale - Purpur - fix MC-238526
+diff --git a/src/main/java/net/minecraft/world/entity/projectile/AbstractArrow.java b/src/main/java/net/minecraft/world/entity/projectile/AbstractArrow.java
+index e8faca6e443239968f0111519f9e5cd018ed3297..488a98e20b4f405d1ce4a224d2d2b5151dec369b 100644
+--- a/src/main/java/net/minecraft/world/entity/projectile/AbstractArrow.java
++++ b/src/main/java/net/minecraft/world/entity/projectile/AbstractArrow.java
+@@ -320,7 +320,7 @@ public abstract class AbstractArrow extends Projectile {
+         Vec3 vec3d = this.getDeltaMovement();
+ 
+         this.setDeltaMovement(vec3d.multiply((double) (this.random.nextFloat() * 0.2F), (double) (this.random.nextFloat() * 0.2F), (double) (this.random.nextFloat() * 0.2F)));
+-        this.life = 0;
++        if (this.level().galeConfig().gameplayMechanics.arrowMovementResetsDespawnCounter) this.life = 0; // Gale - Purpur - make arrow movement resetting despawn counter configurable
      }
- }
+ 
+     @Override
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index f8a561d91686d6df89a7374ca223972e435978c9..14f4a9fe5e8c185d1d8e6201bff24aabee43a634 100644
+index cd4ddb2d4d66d4ffd7310ef29444d995ec58e427..e55535f7de93c2b0ac7d84d2dbf16101cb0e61de 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-@@ -96,6 +96,16 @@ public class GaleWorldConfiguration extends ConfigurationPart {
-     public GameplayMechanics gameplayMechanics;
-     public class GameplayMechanics extends ConfigurationPart {
+@@ -125,6 +125,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
  
-+        public Fixes fixes;
-+        public class Fixes extends ConfigurationPart {
-+
-+            // Gale start - Purpur - fix MC-238526
-+            @Setting("mc-238526")
-+            public boolean mc238526 = false;
-+            // Gale end - Purpur - fix MC-238526
-+
-+        }
-+
+         }
+ 
++        public boolean arrowMovementResetsDespawnCounter = true; // Gale - Purpur - make arrow movement resetting despawn counter configurable
          public double entityWakeUpDurationRatioStandardDeviation = 0.2; // Gale - variable entity wake-up duration
          public boolean tryRespawnEnderDragonAfterEndCrystalPlace = true; // Gale - Pufferfish - make ender dragon respawn attempt after placing end crystals configurable
  

@@ -1901,7 +1901,7 @@ index 6ec3fc801453fd54c25b642e6fa71c19b463311d..b02a2ca45152693e9974e802866feaa6
                          if (throwable instanceof ThreadDeath) throw throwable; // Paper
                          // Paper start - Prevent block entity and entity crashes
 diff --git a/src/main/java/net/minecraft/world/level/pathfinder/PathFinder.java b/src/main/java/net/minecraft/world/level/pathfinder/PathFinder.java
-index 8aa4ac3a6affbe888d6084a27b668c58dfda6c79..b70deca077e49da069906d33bb29daab21f0943d 100644
+index 8aa4ac3a6affbe888d6084a27b668c58dfda6c79..61d5fe8e5344a6cb94d427859488c34821c8a3f6 100644
 --- a/src/main/java/net/minecraft/world/level/pathfinder/PathFinder.java
 +++ b/src/main/java/net/minecraft/world/level/pathfinder/PathFinder.java
 @@ -12,7 +12,6 @@ import java.util.function.Function;
@@ -1932,6 +1932,14 @@ index 8aa4ac3a6affbe888d6084a27b668c58dfda6c79..b70deca077e49da069906d33bb29daab
          // Set<Target> set = positions.keySet();
          startNode.g = 0.0F;
          startNode.h = this.getBestH(startNode, positions); // Paper - optimize collection
+@@ -123,7 +120,6 @@ public class PathFinder {
+             if (best == null || comparator.compare(path, best) < 0)
+                 best = path;
+         }
+-        profiler.pop();
+         return best;
+         // Paper end - Perf: remove streams and optimize collection
+     }
 diff --git a/src/main/java/net/minecraft/world/level/storage/loot/LootDataManager.java b/src/main/java/net/minecraft/world/level/storage/loot/LootDataManager.java
 index 3ddf6ab00de2456ebf504985b88994f970e3b5c4..3b2eb7738380c9385c0227e6f04e3c1691093b1f 100644
 --- a/src/main/java/net/minecraft/world/level/storage/loot/LootDataManager.java

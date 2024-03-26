@@ -86,7 +86,7 @@ index f46c16dd6ff9cd09ea579eecf99ce78c7eb39d49..430b8a2bb1639eeb7338e0f7b1030248
  
      private void spawnDustParticles(Level world, BlockHitResult hitResult, BlockState state, Vec3 userRotation, HumanoidArm arm) {
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 5d499e77800466210473e36b2355873807b9f86a..c5b23bafb7909130a8a294e3b5bf94daa313ee11 100644
+index 7d4e0bf1b128a04118079e0e8e420f3dd3978600..eb651b6f618cfe4b79a5279396eac6bc99014d02 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -9,6 +9,7 @@ import io.papermc.paper.configuration.PaperConfigurations;
@@ -97,7 +97,7 @@ index 5d499e77800466210473e36b2355873807b9f86a..c5b23bafb7909130a8a294e3b5bf94da
  import org.spongepowered.configurate.objectmapping.meta.Setting;
  
  @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal", "NotNullFieldNotInitialized", "InnerClassMayBeStatic"})
-@@ -130,6 +131,16 @@ public class GaleWorldConfiguration extends ConfigurationPart {
+@@ -131,6 +132,16 @@ public class GaleWorldConfiguration extends ConfigurationPart {
          public boolean hideFlamesOnEntitiesWithFireResistance = false; // Gale - Slice - hide flames on entities with fire resistance
          public boolean tryRespawnEnderDragonAfterEndCrystalPlace = true; // Gale - Pufferfish - make ender dragon respawn attempt after placing end crystals configurable
  
