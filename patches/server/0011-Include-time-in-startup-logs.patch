@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index ce341f42b3a5e17fb6d1f7de8057e73137ae2a6e..4ef9e98891a85e4b81f7d3f011bee5ad0eaee4f9 100644
+index 8d626fadcd4743b6472a2954d2b1b2ec89669814..8d3959614ce42c996d93ffe00e7900d60c9b8184 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -2,6 +2,7 @@ package org.bukkit.craftbukkit;
@@ -23,7 +23,7 @@ index ce341f42b3a5e17fb6d1f7de8057e73137ae2a6e..4ef9e98891a85e4b81f7d3f011bee5ad
      // Paper end - Reset loggers after shutdown
  
 +    // Gale start - include time in startup logs
-+    private static final DateFormat startupDateFormat = new SimpleDateFormat("hh:mm:ss");
++    private static final DateFormat startupDateFormat = new SimpleDateFormat("HH:mm:ss");
 +
 +    private static void printlnStartupToSystemOut(String type, String line) {
 +        System.out.println("[" + startupDateFormat.format(new Date()) + " " + type + "]: " + line);
