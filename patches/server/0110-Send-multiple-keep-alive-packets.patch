@@ -129,7 +129,7 @@ index e7583996cc6d750cbd72f749de39ecded56d7f7c..d791c2f2facfc46d8664225c8b28f95f
  
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index e66becca5d422eaf2242c8fcfb87a1ac0a5ae063..3b2075b36093e5b9f507b2e9b0f04f62a6cabf03 100644
+index c9f3ac6f18eddb3f45024c562e7d1bfb9730e9d2..ec0cf74e977d3ba4cbd43572af8f7fd4a496462f 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -8,6 +8,8 @@ import com.mojang.brigadier.StringReader;

@@ -31,10 +31,10 @@ index 4f34ca69a0f417028bad01f4a29644a1e08bb9ca..b4d78f2609a58e4aba0340ebfce229bb
  
          this.firstTick = false;
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index df8843a80bb0008be1a3a3151360cc92e5676579..7d4e0bf1b128a04118079e0e8e420f3dd3978600 100644
+index 19115238d0fd845a788446d88d9ec9a52762c367..5d499e77800466210473e36b2355873807b9f86a 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-@@ -128,6 +128,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
+@@ -127,6 +127,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
  
          public boolean arrowMovementResetsDespawnCounter = true; // Gale - Purpur - make arrow movement resetting despawn counter configurable
          public double entityWakeUpDurationRatioStandardDeviation = 0.2; // Gale - variable entity wake-up duration

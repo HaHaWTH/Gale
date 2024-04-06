@@ -377,7 +377,7 @@ index 981d34dd4cfbc0932b147688751b98552c8beea8..53d80d46a857297987145fd956c8136b
      private static final Codec<Object> ARG_CODEC = Codec.either(PRIMITIVE_ARG_CODEC, ComponentSerialization.CODEC).xmap((either) -> {
          return either.map((object) -> {
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index 61840cfd64caba6595dfc99c91c76a195638d4ee..96cb26fae947006ae7bceb3187ed2c28c4214f16 100644
+index bc391d27399d8c22e78735ca39aa8ab45efb6413..465a7787f15c934b2cef1a58e4b18f1ae9b4cae7 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -87,7 +87,7 @@ public class Main {
@@ -434,7 +434,7 @@ index 86a2f955dc981dd95091b70d6600ff94ce4dc714..8f5b90dc2af62336116fae24ed3248bf
          return ret;
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 572bfe0be19d549e11d9b551794d615c5e194217..e66becca5d422eaf2242c8fcfb87a1ac0a5ae063 100644
+index f5d6bf230ec6ec24ae22669b32ce6e85388475c3..c9f3ac6f18eddb3f45024c562e7d1bfb9730e9d2 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -28,6 +28,8 @@ import java.util.function.UnaryOperator;

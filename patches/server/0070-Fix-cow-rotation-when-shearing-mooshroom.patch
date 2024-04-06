@@ -64,12 +64,12 @@ index 161c128d27f50f145f88142191f1a5c93649ea65..6659abb4ab8a13a48c154d2e3f273eb1
                      entitycow.setPersistenceRequired();
                  }
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 1f99a324527d5329a21e795d3b6d95b535f415ef..410aa2ffd6bd9792e81a3e2933fe923291e1dd99 100644
+index 14f4a9fe5e8c185d1d8e6201bff24aabee43a634..223983565d08c0a803afb27433aee31a4267c364 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-@@ -100,6 +100,8 @@ public class GaleWorldConfiguration extends ConfigurationPart {
+@@ -99,6 +99,8 @@ public class GaleWorldConfiguration extends ConfigurationPart {
+         public Fixes fixes;
          public class Fixes extends ConfigurationPart {
-             public boolean tripwireDuping = true; // Gale - Leaf - make tripwire duping fix configurable
  
 +            public boolean keepMooshroomRotationAfterShearing = true; // Gale - Purpur - fix cow rotation when shearing mooshroom
 +

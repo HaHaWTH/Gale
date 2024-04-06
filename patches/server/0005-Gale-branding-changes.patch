@@ -221,7 +221,7 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index a5f1f49ed6b92e68e52b8e08b32bd0b4893a6a3c..b0dc9ee8808e0eb84969d0f59f83f3d2ab49d083 100644
+index 32839f9f0dc6009cf3346724a2ddbf74f56ac94c..8b5e71d2847db5e737f5380f41cc4696a038c397 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -87,7 +87,7 @@ tasks.jar {
@@ -233,9 +233,9 @@ index a5f1f49ed6b92e68e52b8e08b32bd0b4893a6a3c..b0dc9ee8808e0eb84969d0f59f83f3d2
              "Implementation-Vendor" to date, // Paper
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
-@@ -232,3 +232,22 @@ tasks.registerRunTask("runDev") {
-     classpath(runtimeClasspathForRunDev)
-     jvmArgs("-DPaper.isRunDev=true")
+@@ -221,3 +221,22 @@ tasks.registerRunTask("runDev") {
+     classpath(sourceSets.main.map { it.runtimeClasspath })
+     jvmArgs("-DPaper.pushPaperAssetsRoot=true")
  }
 +
 +// Gale start - package license into jar

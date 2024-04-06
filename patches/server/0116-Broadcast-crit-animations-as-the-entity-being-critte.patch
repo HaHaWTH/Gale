@@ -38,12 +38,12 @@ index 06b9fdd33fe888d298dfd24a67702a610233f10d..8d7cda352d1be1bd7638561d4727df9c
  
      @Override
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index da903a8872d15d597b739fcb1bb044882f84c138..f4ba8b70038390a026c61b9f2dc9f427103e6edb 100644
+index 9c7342ed33eb0051a8f8b7b18a02cdbccd003eb9..b736cef3509b1f6c7c6135c0f9e5d29f35c82053 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-@@ -108,6 +108,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
+@@ -107,6 +107,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
+         public Fixes fixes;
          public class Fixes extends ConfigurationPart {
-             public boolean tripwireDuping = true; // Gale - Leaf - make tripwire duping fix configurable
  
 +            public boolean broadcastCritAnimationsAsTheEntityBeingCritted = false; // Gale - MultiPaper - broadcast crit animations as the entity being critted
              public boolean keepMooshroomRotationAfterShearing = true; // Gale - Purpur - fix cow rotation when shearing mooshroom

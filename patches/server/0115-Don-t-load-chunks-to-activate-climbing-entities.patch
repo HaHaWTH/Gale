@@ -79,7 +79,7 @@ index 6560fda6525dceddc91b95c8dd82b10debd6b62f..9b33b8b6aa769aceeb8080814b0682cb
              if (iblockdata.is(BlockTags.CLIMBABLE)) {
                  this.lastClimbablePos = Optional.of(blockposition);
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 210423422c81c55d82a190584259af562b7e15ad..da903a8872d15d597b739fcb1bb044882f84c138 100644
+index bc8af8c6b5f0d4717317e072b3be7348b2eeee76..9c7342ed33eb0051a8f8b7b18a02cdbccd003eb9 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -96,6 +96,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
