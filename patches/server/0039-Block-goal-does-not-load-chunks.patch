@@ -31,12 +31,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/ai/goal/MoveToBlockGoal.java b/src/main/java/net/minecraft/world/entity/ai/goal/MoveToBlockGoal.java
-index 07519c817cc6de04a98198c43a0c2b02ba3141eb..13a8d345a8876810dc1efafc55c98243fbbbf873 100644
+index aee0147649d458b87d92496eda0c1723ebe570d2..7e9243f76f77df2f2c5744d2dd17187c215d6e08 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/goal/MoveToBlockGoal.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/goal/MoveToBlockGoal.java
-@@ -120,6 +120,7 @@ public abstract class MoveToBlockGoal extends Goal {
-                 for(int m = 0; m <= l; m = m > 0 ? -m : 1 - m) {
-                     for(int n = m < l && m > -l ? l : 0; n <= l; n = n > 0 ? -n : 1 - n) {
+@@ -121,6 +121,7 @@ public abstract class MoveToBlockGoal extends Goal {
+                 for (int m = 0; m <= l; m = m > 0 ? -m : 1 - m) {
+                     for (int n = m < l && m > -l ? l : 0; n <= l; n = n > 0 ? -n : 1 - n) {
                          mutableBlockPos.setWithOffset(blockPos, m, k - 1, n);
 +                        if (!this.mob.level().hasChunkAt(mutableBlockPos)) continue; // Gale - Airplane - block goal does not load chunks - if this block isn't loaded, continue
                          if (this.mob.isWithinRestriction(mutableBlockPos) && this.isValidTarget(this.mob.level(), mutableBlockPos)) {

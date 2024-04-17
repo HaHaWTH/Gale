@@ -13,13 +13,13 @@ As part of: Mirai (https://github.com/etil2jz/Mirai)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/advancements/Advancement.java b/src/main/java/net/minecraft/advancements/Advancement.java
-index a053d30f171c0c022888f098313b50f73c434180..afe6dc0e814ecbe57f92b541947d2edadcd5b370 100644
+index 366ce8120b0cc7136d2756070d710ec65ae7f44d..98c5da21177665d9d3b0e6a4136ae6a21d0154af 100644
 --- a/src/main/java/net/minecraft/advancements/Advancement.java
 +++ b/src/main/java/net/minecraft/advancements/Advancement.java
-@@ -40,7 +40,7 @@ public record Advancement(Optional<ResourceLocation> parent, Optional<DisplayInf
-     }), Advancement::validate);
- 
-     public Advancement(Optional<ResourceLocation> parent, Optional<DisplayInfo> display, AdvancementRewards rewards, Map<String, Criterion<?>> criteria, AdvancementRequirements requirements, boolean sendsTelemetryEvent) {
+@@ -62,7 +62,7 @@ public record Advancement(
+         AdvancementRequirements requirements,
+         boolean sendsTelemetryEvent
+     ) {
 -        this(parent, display, rewards, Map.copyOf(criteria), requirements, sendsTelemetryEvent, display.map(Advancement::decorateName));
 +        this(parent, display, rewards, criteria, requirements, sendsTelemetryEvent, display.map(Advancement::decorateName)); // Gale - Mirai - skip cloning advancement criteria
      }

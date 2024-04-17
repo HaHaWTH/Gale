@@ -158,17 +158,16 @@ index 0000000000000000000000000000000000000000..f3835d6934f4d82980eb068c0b8c238f
 +    }
 +}
 diff --git a/src/main/java/net/minecraft/world/level/biome/Biome.java b/src/main/java/net/minecraft/world/level/biome/Biome.java
-index 65012a12e1430956ef55ced56773e6354ac26444..e79404cfb0a04912a61583539aba51dc778bc729 100644
+index 64076a452a315090d299a7a58a43fd3b5c1b4e0a..455a037174d66fd2fa1a136207ff7495486fd918 100644
 --- a/src/main/java/net/minecraft/world/level/biome/Biome.java
 +++ b/src/main/java/net/minecraft/world/level/biome/Biome.java
-@@ -66,14 +66,20 @@ public final class Biome {
+@@ -63,13 +63,18 @@ public final class Biome {
      private final BiomeGenerationSettings generationSettings;
      private final MobSpawnSettings mobSettings;
      private final BiomeSpecialEffects specialEffects;
--    private final ThreadLocal<Long2FloatLinkedOpenHashMap> temperatureCache = ThreadLocal.withInitial(() -> {
+-    private final ThreadLocal<Long2FloatLinkedOpenHashMap> temperatureCache = ThreadLocal.withInitial(() -> Util.make(() -> {
 +    // Gale start - Airplane - use aging cache for biome temperatures - use our cache
-+    private final ThreadLocal<gg.airplane.structs.Long2FloatAgingCache> temperatureCache = ThreadLocal.withInitial(() -> {
-         return Util.make(() -> {
++    private final ThreadLocal<gg.airplane.structs.Long2FloatAgingCache> temperatureCache = ThreadLocal.withInitial(() -> Util.make(() -> {
 +            /*
              Long2FloatLinkedOpenHashMap long2FloatLinkedOpenHashMap = new Long2FloatLinkedOpenHashMap(1024, 0.25F) {
                  protected void rehash(int i) {
@@ -176,14 +175,13 @@ index 65012a12e1430956ef55ced56773e6354ac26444..e79404cfb0a04912a61583539aba51dc
              };
              long2FloatLinkedOpenHashMap.defaultReturnValue(Float.NaN);
              return long2FloatLinkedOpenHashMap;
-+
-+             */
++            */
 +            return new gg.airplane.structs.Long2FloatAgingCache(TEMPERATURE_CACHE_SIZE);
 +            // Gale end - Airplane - use aging cache for biome temperatures - use our cache
-         });
-     });
+         }));
  
-@@ -118,17 +124,15 @@ public final class Biome {
+     Biome(Biome.ClimateSettings weather, BiomeSpecialEffects effects, BiomeGenerationSettings generationSettings, MobSpawnSettings spawnSettings) {
+@@ -112,17 +117,15 @@ public final class Biome {
      @Deprecated
      public float getTemperature(BlockPos blockPos) {
          long l = blockPos.asLong();

@@ -65,7 +65,7 @@ index ec0cf74e977d3ba4cbd43572af8f7fd4a496462f..9025505e7c8ac81d97a553e0ebbeb572
                      private void performInteraction(InteractionHand enumhand, ServerGamePacketListenerImpl.EntityInteraction playerconnection_a, PlayerInteractEntityEvent event) { // CraftBukkit
                          ItemStack itemstack = ServerGamePacketListenerImpl.this.player.getItemInHand(enumhand);
 diff --git a/src/main/java/net/minecraft/world/item/BrushItem.java b/src/main/java/net/minecraft/world/item/BrushItem.java
-index f46c16dd6ff9cd09ea579eecf99ce78c7eb39d49..430b8a2bb1639eeb7338e0f7b1030248d66ef31e 100644
+index 9caf067fcfbf74bbf260bf9149122f7ff8f317e4..a0bd0093bd232070c5826eb7271e490d9138db58 100644
 --- a/src/main/java/net/minecraft/world/item/BrushItem.java
 +++ b/src/main/java/net/minecraft/world/item/BrushItem.java
 @@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
@@ -76,15 +76,15 @@ index f46c16dd6ff9cd09ea579eecf99ce78c7eb39d49..430b8a2bb1639eeb7338e0f7b1030248
  import net.minecraft.sounds.SoundEvent;
  import net.minecraft.sounds.SoundEvents;
  import net.minecraft.sounds.SoundSource;
-@@ -110,7 +111,7 @@ public class BrushItem extends Item {
+@@ -97,7 +98,7 @@ public class BrushItem extends Item {
+ 
      private HitResult calculateHitResult(Player user) {
-         return ProjectileUtil.getHitResultOnViewVector(user, (entity) -> {
-             return !entity.isSpectator() && entity.isPickable();
--        }, (double)Player.getPickRange(user.isCreative()));
-+        }, Math.sqrt(ServerGamePacketListenerImpl.getMaxInteractionDistanceSquared(user.level())) - 1.0D); // Gale - make max interaction distance configurable
+         return ProjectileUtil.getHitResultOnViewVector(
+-            user, entity -> !entity.isSpectator() && entity.isPickable(), (double)Player.getPickRange(user.isCreative())
++            user, entity -> !entity.isSpectator() && entity.isPickable(), Math.sqrt(ServerGamePacketListenerImpl.getMaxInteractionDistanceSquared(user.level())) - 1.0D // Gale - make max interaction distance configurable
+         );
      }
  
-     private void spawnDustParticles(Level world, BlockHitResult hitResult, BlockState state, Vec3 userRotation, HumanoidArm arm) {
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 index 5d499e77800466210473e36b2355873807b9f86a..c5b23bafb7909130a8a294e3b5bf94daa313ee11 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java

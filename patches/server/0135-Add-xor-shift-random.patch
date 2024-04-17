@@ -62,10 +62,10 @@ index 6cf83502a954cce9c562ec036bfeddb477d38b73..21070516fc936109f537494e38e24098
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index bfb178c69026e9759e9afaebb9da141b62d1f144..c9d276124bd14aafcd1a29991081b7668fe636b6 100644
+index 01797d9791f19dfda4b168218eadeaae97f11eab..4a11314df1a6d068c5abf12677b9bfd11ea7c66c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-@@ -243,7 +243,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
+@@ -244,7 +244,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
      }
      // Paper end
  
@@ -543,7 +543,7 @@ index 0000000000000000000000000000000000000000..60dc2c1deb0749168d03c5d94136e613
 +    }
 +}
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index 54c68978e19a5fb871f7b31f74c6c77376693cd9..1cff8378c4939af4bbe300e5d6428539e75218ae 100644
+index 0a32b68ae0172fa637a37fcf82557ba799e3aee6..5e24b70b102cbf4dce2dec748dab1949a77b0d4d 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
 @@ -38,6 +38,7 @@ import co.aikar.timings.MinecraftTimings;

@@ -37,10 +37,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java b/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java
-index 9b897cf53f4bb5d366e6ac88dbed93c59d8fe541..53e3a40246da0a4d30ad8a7286d1a43dc7db3b0b 100644
+index 75884a9e69a28404752c1a2cf854335bb78cac01..2bef8de96eeba9a1cd674f3195fe0055eb56fa33 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java
-@@ -77,6 +77,6 @@ public abstract class WaterAnimal extends PathfinderMob {
+@@ -78,6 +78,6 @@ public abstract class WaterAnimal extends PathfinderMob {
          i = world.getMinecraftWorld().paperConfig().entities.spawning.wateranimalSpawnHeight.maximum.or(i);
          j = world.getMinecraftWorld().paperConfig().entities.spawning.wateranimalSpawnHeight.minimum.or(j);
          // Paper end - Make water animal spawn height configurable

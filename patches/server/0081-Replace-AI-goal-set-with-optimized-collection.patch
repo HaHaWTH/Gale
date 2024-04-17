@@ -13,10 +13,10 @@ As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
 Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/ai/goal/GoalSelector.java b/src/main/java/net/minecraft/world/entity/ai/goal/GoalSelector.java
-index fda42ae6579819aa140766829d852633415e8d76..5e7b978a3019bc31ef94c1c666a3abdf380ced5c 100644
+index 91d1088dbf1c0cfb3694d37b4e491e601507421c..fc16161d352221be549760dcdd8c62dfba6a6798 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/goal/GoalSelector.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/goal/GoalSelector.java
-@@ -11,6 +11,8 @@ import java.util.Set;
+@@ -12,6 +12,8 @@ import java.util.Map.Entry;
  import java.util.function.Predicate;
  import java.util.function.Supplier;
  import java.util.stream.Stream;
@@ -25,7 +25,7 @@ index fda42ae6579819aa140766829d852633415e8d76..5e7b978a3019bc31ef94c1c666a3abdf
  import org.slf4j.Logger;
  
  public class GoalSelector {
-@@ -27,7 +29,7 @@ public class GoalSelector {
+@@ -28,7 +30,7 @@ public class GoalSelector {
          }
      };
      private final Map<Goal.Flag, WrappedGoal> lockedFlags = new EnumMap<>(Goal.Flag.class);

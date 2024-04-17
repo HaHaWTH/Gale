@@ -21,7 +21,7 @@ Given that we do a lot of varint writing as well, this should provide a small pe
 This includes a test to ensure that the behavior is as expected and fixes the initialization loop so that the correct results will be given. Much thanks to @octylFractal for acting as my duck while trying to figure this out.
 
 diff --git a/src/main/java/net/minecraft/network/VarLong.java b/src/main/java/net/minecraft/network/VarLong.java
-index 3ea9f42b7ad50c0dc4466849e3432ebddcfe2f7b..4c1fbf3e2e6cfaf5f5db199b232d007ec6a9d226 100644
+index c4fd722f4203e3f4de7b41de9d6ef47b5cfaed10..b73a50fa8465ea4d392a65146eb2775a50917290 100644
 --- a/src/main/java/net/minecraft/network/VarLong.java
 +++ b/src/main/java/net/minecraft/network/VarLong.java
 @@ -8,7 +8,22 @@ public class VarLong {
@@ -44,7 +44,7 @@ index 3ea9f42b7ad50c0dc4466849e3432ebddcfe2f7b..4c1fbf3e2e6cfaf5f5db199b232d007e
 +
 +    static int getByteSizeOriginal(long l) { // public -> package-private
 +        // Gale end - Velocity - pre-compute VarInt and VarLong sizes
-         for(int i = 1; i < 10; ++i) {
+         for (int i = 1; i < 10; i++) {
              if ((l & -1L << i * 7) == 0L) {
                  return i;
 diff --git a/src/test/java/net/minecraft/network/VarIntLongTest.java b/src/test/java/net/minecraft/network/VarIntLongTest.java

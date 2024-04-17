@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/util/Mth.java b/src/main/java/net/minecraft/util/Mth.java
-index d9e0224dc108a99c194d4947d18f2d855a341534..79419f6e1ba900c1686fa9b43866fc43649123a1 100644
+index 66192e92f18062f6bec377a43d6cfc5b277705a1..c29f12b2da4d0f65673eecc0151e74ff7e9bc26b 100644
 --- a/src/main/java/net/minecraft/util/Mth.java
 +++ b/src/main/java/net/minecraft/util/Mth.java
-@@ -148,14 +148,26 @@ public class Mth {
+@@ -149,14 +149,26 @@ public class Mth {
          return Math.floorMod(dividend, divisor);
      }
  
@@ -40,15 +40,15 @@ index d9e0224dc108a99c194d4947d18f2d855a341534..79419f6e1ba900c1686fa9b43866fc43
          return a % b == 0;
      }
 diff --git a/src/main/java/net/minecraft/world/level/levelgen/blending/Blender.java b/src/main/java/net/minecraft/world/level/levelgen/blending/Blender.java
-index a6434f2c2d1ddb33e7c51d0a099fd127d8a785e6..a7972d196c354ff175728f2b8e99590181c65451 100644
+index ef73772bd3f9484efbcd521a86a34c6ec3fd0d14..45f6f74bcae3e3f27809d2ff3973b98edb169f0f 100644
 --- a/src/main/java/net/minecraft/world/level/levelgen/blending/Blender.java
 +++ b/src/main/java/net/minecraft/world/level/levelgen/blending/Blender.java
-@@ -141,7 +141,7 @@ public class Blender {
+@@ -148,7 +148,7 @@ public class Blender {
      private static double heightToOffset(double height) {
-         double d = 1.0D;
-         double e = height + 0.5D;
--        double f = Mth.positiveModulo(e, 8.0D);
-+        double f = Mth.positiveModuloForPositiveIntegerDivisor(e, 8.0D); // Gale - faster floating-point positive modulo
-         return 1.0D * (32.0D * (e - 128.0D) - 3.0D * (e - 120.0D) * f + 3.0D * f * f) / (128.0D * (32.0D - 3.0D * f));
+         double d = 1.0;
+         double e = height + 0.5;
+-        double f = Mth.positiveModulo(e, 8.0);
++        double f = Mth.positiveModuloForPositiveIntegerDivisor(e, 8.0); // Gale - faster floating-point positive modulo
+         return 1.0 * (32.0 * (e - 128.0) - 3.0 * (e - 120.0) * f + 3.0 * f * f) / (128.0 * (32.0 - 3.0 * f));
      }
  

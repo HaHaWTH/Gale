@@ -13,10 +13,10 @@ As part of: VMP (https://github.com/RelativityMC/VMP-fabric)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/world/level/LocalMobCapCalculator.java b/src/main/java/net/minecraft/world/level/LocalMobCapCalculator.java
-index 84c766e09898cfc07d6e07e80f4b9aa318050a62..8357b1e16b2fb1b84c7d14da577e95d91450b53e 100644
+index 09199c574169057ae6e52ee7df277c03fa6ba5c2..3f0c84cf120e71259adc726579b2a23b3c56abbe 100644
 --- a/src/main/java/net/minecraft/world/level/LocalMobCapCalculator.java
 +++ b/src/main/java/net/minecraft/world/level/LocalMobCapCalculator.java
-@@ -47,16 +47,14 @@ public class LocalMobCapCalculator {
+@@ -42,14 +42,14 @@ public class LocalMobCapCalculator {
      }
  
      static class MobCounts {
@@ -24,9 +24,7 @@ index 84c766e09898cfc07d6e07e80f4b9aa318050a62..8357b1e16b2fb1b84c7d14da577e95d9
 +        public final int[] counts = new int[MobCategory.values().length]; // Gale - VMP - store mob counts in an array
  
          public void add(MobCategory spawnGroup) {
--            this.counts.computeInt(spawnGroup, (group, density) -> {
--                return density == null ? 1 : density + 1;
--            });
+-            this.counts.computeInt(spawnGroup, (group, density) -> density == null ? 1 : density + 1);
 +            this.counts[spawnGroup.ordinal()]++; // Gale - VMP - store mob counts in an array
          }
  

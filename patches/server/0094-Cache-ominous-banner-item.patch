@@ -13,18 +13,18 @@ As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
 Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/advancements/critereon/EntityEquipmentPredicate.java b/src/main/java/net/minecraft/advancements/critereon/EntityEquipmentPredicate.java
-index f4e5ada556a7fc7adac9b8d3e75ace483f753782..14b0fb4a1d7bc752fc041dbc850ad457a24c939a 100644
+index 96f5ccfa0369ca5dd7a327126dbe9b3cfe86ec1b..e4f1c486639d3488b40fe22ac6c4764ca5f043bd 100644
 --- a/src/main/java/net/minecraft/advancements/critereon/EntityEquipmentPredicate.java
 +++ b/src/main/java/net/minecraft/advancements/critereon/EntityEquipmentPredicate.java
-@@ -15,7 +15,7 @@ public record EntityEquipmentPredicate(Optional<ItemPredicate> head, Optional<It
-     public static final Codec<EntityEquipmentPredicate> CODEC = RecordCodecBuilder.create((instance) -> {
-         return instance.group(ExtraCodecs.strictOptionalField(ItemPredicate.CODEC, "head").forGetter(EntityEquipmentPredicate::head), ExtraCodecs.strictOptionalField(ItemPredicate.CODEC, "chest").forGetter(EntityEquipmentPredicate::chest), ExtraCodecs.strictOptionalField(ItemPredicate.CODEC, "legs").forGetter(EntityEquipmentPredicate::legs), ExtraCodecs.strictOptionalField(ItemPredicate.CODEC, "feet").forGetter(EntityEquipmentPredicate::feet), ExtraCodecs.strictOptionalField(ItemPredicate.CODEC, "mainhand").forGetter(EntityEquipmentPredicate::mainhand), ExtraCodecs.strictOptionalField(ItemPredicate.CODEC, "offhand").forGetter(EntityEquipmentPredicate::offhand)).apply(instance, EntityEquipmentPredicate::new);
-     });
--    public static final EntityEquipmentPredicate CAPTAIN = EntityEquipmentPredicate.Builder.equipment().head(ItemPredicate.Builder.item().of(Items.WHITE_BANNER).hasNbt(Raid.getLeaderBannerInstance().getTag())).build();
-+    public static final EntityEquipmentPredicate CAPTAIN = EntityEquipmentPredicate.Builder.equipment().head(ItemPredicate.Builder.item().of(Items.WHITE_BANNER).hasNbt(Raid.LEADER_BANNER.getTag())).build(); // Gale - Lithium - cache ominous banner item
+@@ -31,7 +31,7 @@ public record EntityEquipmentPredicate(
+                 .apply(instance, EntityEquipmentPredicate::new)
+     );
+     public static final EntityEquipmentPredicate CAPTAIN = EntityEquipmentPredicate.Builder.equipment()
+-        .head(ItemPredicate.Builder.item().of(Items.WHITE_BANNER).hasNbt(Raid.getLeaderBannerInstance().getTag()))
++        .head(ItemPredicate.Builder.item().of(Items.WHITE_BANNER).hasNbt(Raid.LEADER_BANNER.getTag())) // Gale - Lithium - cache ominous banner item
+         .build();
  
      public boolean matches(@Nullable Entity entity) {
-         if (entity instanceof LivingEntity livingEntity) {
 diff --git a/src/main/java/net/minecraft/world/entity/raid/Raid.java b/src/main/java/net/minecraft/world/entity/raid/Raid.java
 index 5a0a6de4c6f0d554b9efbb8b3dcf4e0c5bee7baf..ea0df00966cf9900a8a0153099bbb04e5b47116d 100644
 --- a/src/main/java/net/minecraft/world/entity/raid/Raid.java

@@ -17,7 +17,7 @@ Licensed under: MIT (https://opensource.org/licenses/MIT)
 Only do an item "suck in" action once per second
 
 diff --git a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
-index c7f06c3cfb737bd17a706798bf9cf0e1af5f0cc0..3b803ac2041b9f6bb6f016e58d95c0bf58fd9a8d 100644
+index 29ce703a79f7893ac990ad80e0f1c1cf63546e6c..293bc6e40fec09a8ec5cac901d52cc3f7e9b9ea3 100644
 --- a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
 @@ -14,11 +14,13 @@ import net.minecraft.world.entity.Entity;
@@ -81,7 +81,7 @@ index c7f06c3cfb737bd17a706798bf9cf0e1af5f0cc0..3b803ac2041b9f6bb6f016e58d95c0bf
      // Spigot end
  
 diff --git a/src/main/java/net/minecraft/world/entity/vehicle/MinecartHopper.java b/src/main/java/net/minecraft/world/entity/vehicle/MinecartHopper.java
-index fc35cfc9d045f3e5b6a50af1d0ba83b6e322091f..41e23b4e0df3f3561925dad87624f4e445831a52 100644
+index 761142374f793a1cd4228936b21a68d7a0458894..06a697757aaa10ded293ee26117153b66702e77b 100644
 --- a/src/main/java/net/minecraft/world/entity/vehicle/MinecartHopper.java
 +++ b/src/main/java/net/minecraft/world/entity/vehicle/MinecartHopper.java
 @@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
@@ -92,7 +92,7 @@ index fc35cfc9d045f3e5b6a50af1d0ba83b6e322091f..41e23b4e0df3f3561925dad87624f4e4
  
      public MinecartHopper(EntityType<? extends MinecartHopper> type, Level world) {
          super(type, world);
-@@ -132,4 +133,12 @@ public class MinecartHopper extends AbstractMinecartContainer implements Hopper
+@@ -131,4 +132,12 @@ public class MinecartHopper extends AbstractMinecartContainer implements Hopper
      }
      // Paper end
  
@@ -106,7 +106,7 @@ index fc35cfc9d045f3e5b6a50af1d0ba83b6e322091f..41e23b4e0df3f3561925dad87624f4e4
 +
  }
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/Hopper.java b/src/main/java/net/minecraft/world/level/block/entity/Hopper.java
-index a05acf709735b40ca86f978508c63a86065fd405..3752b4ba7fb0d680d4b4a61bf44d54d5ab11815c 100644
+index 25cae6cb4127083cb47966ed7bb58a9a61e4310f..3cd850744b4b35c2abe2fde7ddc6ce227cbf45c0 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/Hopper.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/Hopper.java
 @@ -14,6 +14,8 @@ public interface Hopper extends Container {
@@ -119,7 +119,7 @@ index a05acf709735b40ca86f978508c63a86065fd405..3752b4ba7fb0d680d4b4a61bf44d54d5
  
      double getLevelY();
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-index fc3fd4ac0f833b606757e9334b41311fe6eb8d92..e336f33946c6362629c8a20e20763cfc79a67d37 100644
+index a2e314549f4b4182a817ecd477235f56fb95c5f5..7ecf0ff4dc106999d1f3a419482f9bf1510335e6 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 @@ -11,6 +11,7 @@ import net.minecraft.core.Direction;

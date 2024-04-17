@@ -40,10 +40,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/phys/shapes/EntityCollisionContext.java b/src/main/java/net/minecraft/world/phys/shapes/EntityCollisionContext.java
-index ebe65474a4a05ff1637d7f37ebcfe690af59def5..1bf730336e23eef97d22de7613c63bb9ea0c427c 100644
+index 88a4a72bb390947dc17e5da09a99b2d1b3ac4621..9343195e5e7444a1926db656707df961a5b8ea55 100644
 --- a/src/main/java/net/minecraft/world/phys/shapes/EntityCollisionContext.java
 +++ b/src/main/java/net/minecraft/world/phys/shapes/EntityCollisionContext.java
-@@ -19,47 +19,72 @@ public class EntityCollisionContext implements CollisionContext {
+@@ -17,23 +17,33 @@ public class EntityCollisionContext implements CollisionContext {
              return defaultValue;
          }
      };
@@ -70,17 +70,20 @@ index ebe65474a4a05ff1637d7f37ebcfe690af59def5..1bf730336e23eef97d22de7613c63bb9
          this.entity = entity;
      }
  
-     /** @deprecated */
      @Deprecated
      protected EntityCollisionContext(Entity entity) {
 +        // Gale start - Airplane - make EntityCollisionContext a live representation - remove unneeded things
 +        /*
-         this(entity.isDescending(), entity.getY(), entity instanceof LivingEntity ? ((LivingEntity)entity).getMainHandItem() : ItemStack.EMPTY, entity instanceof LivingEntity ? ((LivingEntity)entity)::canStandOnFluid : (fluidState) -> {
-             return false;
-         }, entity);
-+         */
-+        // Gale end - Airplane - make EntityCollisionContext a live representation - remove unneeded things
+         this(
+             entity.isDescending(),
+             entity.getY(),
+@@ -41,26 +51,41 @@ public class EntityCollisionContext implements CollisionContext {
+             entity instanceof LivingEntity ? ((LivingEntity)entity)::canStandOnFluid : fluidState -> false,
+             entity
+         );
++        */
 +        this.entity = entity;
++        // Gale end - Airplane - make EntityCollisionContext a live representation - remove unneeded things
      }
  
      @Override
@@ -115,8 +118,8 @@ index ebe65474a4a05ff1637d7f37ebcfe690af59def5..1bf730336e23eef97d22de7613c63bb9
  
      @Override
      public boolean isAbove(VoxelShape shape, BlockPos pos, boolean defaultValue) {
--        return this.entityBottom > (double)pos.getY() + shape.max(Direction.Axis.Y) - (double)1.0E-5F;
-+        return (this.entity == null ? -Double.MAX_VALUE : entity.getY()) > (double)pos.getY() + shape.max(Direction.Axis.Y) - (double)1.0E-5F; // Gale - Airplane - make EntityCollisionContext a live representation
+-        return this.entityBottom > (double)pos.getY() + shape.max(Direction.Axis.Y) - 1.0E-5F;
++        return (this.entity == null ? -Double.MAX_VALUE : entity.getY()) > (double) pos.getY() + shape.max(Direction.Axis.Y) - (double) 1.0E-5F; // Gale - Airplane - make EntityCollisionContext a live representation
      }
  
      @Nullable

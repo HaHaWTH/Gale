@@ -221,7 +221,7 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 32839f9f0dc6009cf3346724a2ddbf74f56ac94c..8b5e71d2847db5e737f5380f41cc4696a038c397 100644
+index af2ced430f317ea5bcef154af014c0a18b2ffc72..b9d7ca20d2284a227c95b9c9e03549f28dc60a28 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -87,7 +87,7 @@ tasks.jar {
@@ -427,7 +427,7 @@ index c5d5648f4ca603ef2b1df723b58f9caf4dd3c722..e45e6b44b2a8f2cdae6e0048a812b921
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 93b661e9cb7743aeff7da3972942cb73049a5e4c..9f5192212c492cefee9abd96aec6866e27ceb48e 100644
+index 27db614d46dffc2d10f18d79cc5a084f3421d86b..4318f6b4f83709ae2f1d4d8346e79b3e433abf19 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -952,7 +952,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -481,10 +481,10 @@ index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e58721
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 1324f05de8106032ce290e928cf106fb4f450517..050d6820efd55f73bf8aba915f6fb461bc884378 100644
+index 3c7a771c48cc2732cc038ca11bb93ec5f8c2d667..53b73cac093797de47a9e61a5fdab44aced54ebb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -497,7 +497,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -502,7 +502,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {

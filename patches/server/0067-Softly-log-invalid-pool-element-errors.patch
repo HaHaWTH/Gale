@@ -13,7 +13,7 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java b/src/main/java/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java
-index d2b4654a9095a678bbc9e004af969cf54da0fcab..d797bac97ec1adec7a25a26c8e052e70e8db1c28 100644
+index 92fd8e437b57c9df06c0287006604b85a1b7c048..3bd9d7105d2e0a6cdcbf81d8a5f4a51975257b67 100644
 --- a/src/main/java/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java
 +++ b/src/main/java/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java
 @@ -23,10 +23,11 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
@@ -29,15 +29,15 @@ index d2b4654a9095a678bbc9e004af969cf54da0fcab..d797bac97ec1adec7a25a26c8e052e70
      protected final StructurePoolElement element;
      protected BlockPos position;
      private final int groundLevelDelta;
-@@ -49,7 +50,7 @@ public class PoolElementStructurePiece extends StructurePiece {
-         this.position = new BlockPos(nbt.getInt("PosX"), nbt.getInt("PosY"), nbt.getInt("PosZ"));
-         this.groundLevelDelta = nbt.getInt("ground_level_delta");
+@@ -58,7 +59,7 @@ public class PoolElementStructurePiece extends StructurePiece {
          DynamicOps<Tag> dynamicOps = RegistryOps.create(NbtOps.INSTANCE, context.registryAccess());
--        this.element = StructurePoolElement.CODEC.parse(dynamicOps, nbt.getCompound("pool_element")).resultOrPartial(LOGGER::error).orElseThrow(() -> {
-+        this.element = StructurePoolElement.CODEC.parse(dynamicOps, nbt.getCompound("pool_element")).resultOrPartial(GaleGlobalConfiguration.get().logToConsole.invalidPoolElementErrorStringConsumer).orElseThrow(() -> { // Gale - EMC - softly log invalid pool element errors
-             return new IllegalStateException("Invalid pool element found");
-         });
+         this.element = StructurePoolElement.CODEC
+             .parse(dynamicOps, nbt.getCompound("pool_element"))
+-            .resultOrPartial(LOGGER::error)
++            .resultOrPartial(GaleGlobalConfiguration.get().logToConsole.invalidPoolElementErrorStringConsumer) // Gale - EMC - softly log invalid pool element errors
+             .orElseThrow(() -> new IllegalStateException("Invalid pool element found"));
          this.rotation = Rotation.valueOf(nbt.getString("rotation"));
+         this.boundingBox = this.element.getBoundingBox(this.structureTemplateManager, this.position, this.rotation);
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 index d95141f43ebbad984db96416623957bd47f3ac1b..ea7f6a826763af8aa10d79e82b9ba99198e31e06 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java

@@ -181,7 +181,7 @@ index 06648f9751fd8a322d0809ffebf6a544596ee1a4..b4c2fbdd56ba278560fc1c0d7e086dce
  
      @Override
 diff --git a/src/main/java/net/minecraft/nbt/CompoundTag.java b/src/main/java/net/minecraft/nbt/CompoundTag.java
-index eea9866aecb7189455319d83561fcef35a777d7a..81976797e7c384ddd629d28c76837d9d83fd5b13 100644
+index 23916b011ed0645ab284fb080c9555921290d875..367d7ada0f45a4de675cdc8cb087a30cca9dd530 100644
 --- a/src/main/java/net/minecraft/nbt/CompoundTag.java
 +++ b/src/main/java/net/minecraft/nbt/CompoundTag.java
 @@ -1,6 +1,5 @@
@@ -191,16 +191,16 @@ index eea9866aecb7189455319d83561fcef35a777d7a..81976797e7c384ddd629d28c76837d9d
  import com.mojang.serialization.Codec;
  import com.mojang.serialization.DataResult;
  import com.mojang.serialization.Dynamic;
-@@ -14,6 +13,8 @@ import java.util.Objects;
- import java.util.Set;
+@@ -15,6 +14,8 @@ import java.util.Set;
  import java.util.UUID;
+ import java.util.Map.Entry;
  import javax.annotation.Nullable;
 +
 +import me.titaniumtown.ArrayConstants;
  import net.minecraft.CrashReport;
  import net.minecraft.CrashReportCategory;
  import net.minecraft.ReportedException;
-@@ -420,7 +421,7 @@ public class CompoundTag implements Tag {
+@@ -409,7 +410,7 @@ public class CompoundTag implements Tag {
              throw new ReportedException(this.createReport(key, ByteArrayTag.TYPE, var3));
          }
  
@@ -209,7 +209,7 @@ index eea9866aecb7189455319d83561fcef35a777d7a..81976797e7c384ddd629d28c76837d9d
      }
  
      public int[] getIntArray(String key) {
-@@ -432,7 +433,7 @@ public class CompoundTag implements Tag {
+@@ -421,7 +422,7 @@ public class CompoundTag implements Tag {
              throw new ReportedException(this.createReport(key, IntArrayTag.TYPE, var3));
          }
  
@@ -218,7 +218,7 @@ index eea9866aecb7189455319d83561fcef35a777d7a..81976797e7c384ddd629d28c76837d9d
      }
  
      public long[] getLongArray(String key) {
-@@ -444,7 +445,7 @@ public class CompoundTag implements Tag {
+@@ -433,7 +434,7 @@ public class CompoundTag implements Tag {
              throw new ReportedException(this.createReport(key, LongArrayTag.TYPE, var3));
          }
  
@@ -281,7 +281,7 @@ index 24ad8d22b5180cd7d7f793e3074e438f9192448f..33ea5ee8d79708e11613ce162f97f300
  
      public double getDouble(int index) {
 diff --git a/src/main/java/net/minecraft/nbt/LongArrayTag.java b/src/main/java/net/minecraft/nbt/LongArrayTag.java
-index 3604e22f593275140d706c296355ee06ca8ec888..d28507d1e0b076f109c3c85b92ec0682062686c2 100644
+index 2e5c34ebb94a1536cf09d71bdf052a49ecb9159d..6df94b70f9d69ce61ef7947f39a97a54e4d7181c 100644
 --- a/src/main/java/net/minecraft/nbt/LongArrayTag.java
 +++ b/src/main/java/net/minecraft/nbt/LongArrayTag.java
 @@ -6,6 +6,8 @@ import java.io.DataOutput;
@@ -293,7 +293,7 @@ index 3604e22f593275140d706c296355ee06ca8ec888..d28507d1e0b076f109c3c85b92ec0682
  import org.apache.commons.lang3.ArrayUtils;
  
  public class LongArrayTag extends CollectionTag<LongTag> {
-@@ -190,7 +192,7 @@ public class LongArrayTag extends CollectionTag<LongTag> {
+@@ -185,7 +187,7 @@ public class LongArrayTag extends CollectionTag<LongTag> {
  
      @Override
      public void clear() {
@@ -325,7 +325,7 @@ index a2920b8a9eff77d9c5d1d7f70ad3abdacba8f0fa..43f402d9032e4570a81a80e412215598
      protected CipherBase(Cipher cipher) {
          this.cipher = cipher;
 diff --git a/src/main/java/net/minecraft/network/Connection.java b/src/main/java/net/minecraft/network/Connection.java
-index 4716f8bd8a64d4f20f0d5957c1e7fabf63020f43..9e37578ac79a63bb72cc04aae7ba4f6f927a2ce4 100644
+index a536ebcf29d8ef0ed32863bd8d5e70f7a0636e8d..63b303a68edd7d39f85c8cb56760b2bf46dcb67a 100644
 --- a/src/main/java/net/minecraft/network/Connection.java
 +++ b/src/main/java/net/minecraft/network/Connection.java
 @@ -23,7 +23,6 @@ import io.netty.channel.epoll.EpollSocketChannel;
@@ -345,7 +345,7 @@ index 4716f8bd8a64d4f20f0d5957c1e7fabf63020f43..9e37578ac79a63bb72cc04aae7ba4f6f
  import net.minecraft.Util;
  import net.minecraft.network.chat.Component;
  import net.minecraft.network.chat.MutableComponent;
-@@ -321,7 +322,7 @@ public class Connection extends SimpleChannelInboundHandler<Packet<?>> {
+@@ -322,7 +323,7 @@ public class Connection extends SimpleChannelInboundHandler<Packet<?>> {
      }
  
      public void setListener(PacketListener packetListener) {
@@ -355,10 +355,10 @@ index 4716f8bd8a64d4f20f0d5957c1e7fabf63020f43..9e37578ac79a63bb72cc04aae7ba4f6f
  
          if (enumprotocoldirection != this.receiving) {
 diff --git a/src/main/java/net/minecraft/network/chat/contents/TranslatableContents.java b/src/main/java/net/minecraft/network/chat/contents/TranslatableContents.java
-index 981d34dd4cfbc0932b147688751b98552c8beea8..53d80d46a857297987145fd956c8136b46185446 100644
+index 18e53db59082bae94922edc4baa812aa6f089576..54da741b4fa22c6a01aacc6598de0a9d44fc545b 100644
 --- a/src/main/java/net/minecraft/network/chat/contents/TranslatableContents.java
 +++ b/src/main/java/net/minecraft/network/chat/contents/TranslatableContents.java
-@@ -15,6 +15,8 @@ import java.util.function.Consumer;
+@@ -16,6 +16,8 @@ import java.util.function.Consumer;
  import java.util.regex.Matcher;
  import java.util.regex.Pattern;
  import javax.annotation.Nullable;
@@ -367,15 +367,15 @@ index 981d34dd4cfbc0932b147688751b98552c8beea8..53d80d46a857297987145fd956c8136b
  import net.minecraft.commands.CommandSourceStack;
  import net.minecraft.locale.Language;
  import net.minecraft.network.chat.Component;
-@@ -28,7 +30,7 @@ import net.minecraft.util.ExtraCodecs;
+@@ -29,7 +31,7 @@ import net.minecraft.util.ExtraCodecs;
  import net.minecraft.world.entity.Entity;
  
  public class TranslatableContents implements ComponentContents {
 -    public static final Object[] NO_ARGS = new Object[0];
 +    public static final Object[] NO_ARGS = ArrayConstants.emptyObjectArray; // Gale - JettPack - reduce array allocations
      private static final Codec<Object> PRIMITIVE_ARG_CODEC = ExtraCodecs.validate(ExtraCodecs.JAVA, TranslatableContents::filterAllowedArguments);
-     private static final Codec<Object> ARG_CODEC = Codec.either(PRIMITIVE_ARG_CODEC, ComponentSerialization.CODEC).xmap((either) -> {
-         return either.map((object) -> {
+     private static final Codec<Object> ARG_CODEC = Codec.either(PRIMITIVE_ARG_CODEC, ComponentSerialization.CODEC)
+         .xmap(
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
 index bc391d27399d8c22e78735ca39aa8ab45efb6413..465a7787f15c934b2cef1a58e4b18f1ae9b4cae7 100644
 --- a/src/main/java/net/minecraft/server/Main.java
@@ -403,7 +403,7 @@ index 733ff850468c8a6474a15a455e89bf1195dd7e65..04249a147f2c0a41499d1149a1f97496
  
              for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 86a2f955dc981dd95091b70d6600ff94ce4dc714..8f5b90dc2af62336116fae24ed3248bfcf975883 100644
+index d5e9c65d8664f509bec419fddc7b85042473268e..9805ee5989d813f45b5b0829d73ebce3909b5f07 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -38,6 +38,8 @@ import java.util.stream.Collectors;
@@ -573,7 +573,7 @@ index 0ee04fe6ff6a4d09754f326526ae04fe7226bab2..a4f7fee3ea112c8f7b0b94949f9eb899
      }
  }
 diff --git a/src/main/java/net/minecraft/util/ZeroBitStorage.java b/src/main/java/net/minecraft/util/ZeroBitStorage.java
-index f8de91393564b3691c17339ac9196cc0fc1cf748..d06b49a47c2dcb4b235e5353f347640ee34f1da3 100644
+index 01f5b946fabbe34f31110e75973dab9f39897346..f1b8e746fea603ebadcef7aff1b83677fea32137 100644
 --- a/src/main/java/net/minecraft/util/ZeroBitStorage.java
 +++ b/src/main/java/net/minecraft/util/ZeroBitStorage.java
 @@ -2,10 +2,11 @@ package net.minecraft.util;
@@ -591,7 +591,7 @@ index f8de91393564b3691c17339ac9196cc0fc1cf748..d06b49a47c2dcb4b235e5353f347640e
  
      public ZeroBitStorage(int size) {
 diff --git a/src/main/java/net/minecraft/world/entity/EquipmentSlot.java b/src/main/java/net/minecraft/world/entity/EquipmentSlot.java
-index 2e324276ea4cd9e528c6a3f9a9ba394b378fe075..8e91714e3167ab0ad16df681bc0807721a19ad71 100644
+index 8b4dd6ff53d2d61c71f04c37389ac645766305c4..49a643015c4bd67baf250b27db7cb6ffb57921de 100644
 --- a/src/main/java/net/minecraft/world/entity/EquipmentSlot.java
 +++ b/src/main/java/net/minecraft/world/entity/EquipmentSlot.java
 @@ -15,6 +15,7 @@ public enum EquipmentSlot implements StringRepresentable {
@@ -603,7 +603,7 @@ index 2e324276ea4cd9e528c6a3f9a9ba394b378fe075..8e91714e3167ab0ad16df681bc080772
      private EquipmentSlot(EquipmentSlot.Type type, int entityId, int armorStandId, String name) {
          this.type = type;
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 1798862ef457dddfa907ec5d903bd5461a044858..da8cbae05465cd36b87598507f2cd16ca1d82a38 100644
+index 9c85df84d820ff664b446cfbcb6cf322dde7289b..4489bd7c6b29ea6db432e62bb113fdc930c8a480 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -3161,7 +3161,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -682,7 +682,7 @@ index 1ad126d992d95062a3db08374db7a927f23a0cac..93ddff72b43b8cfd83a4b07d63679564
              k = aenumitemslot.length;
  
 diff --git a/src/main/java/net/minecraft/world/item/crafting/ShapedRecipePattern.java b/src/main/java/net/minecraft/world/item/crafting/ShapedRecipePattern.java
-index 27dc0e4ce21ccf641ea16fd6d2dc1c28fcf62df8..81c9ba1d3455d1eb6619cb04d4e52a7226b2518f 100644
+index d8fe760bb74c8ea0d6fb8321d2c8a49d838c5362..4fd03bc94ebcbc42fbb55564515ea1f57fe6d214 100644
 --- a/src/main/java/net/minecraft/world/item/crafting/ShapedRecipePattern.java
 +++ b/src/main/java/net/minecraft/world/item/crafting/ShapedRecipePattern.java
 @@ -11,6 +11,8 @@ import java.util.List;
@@ -694,7 +694,7 @@ index 27dc0e4ce21ccf641ea16fd6d2dc1c28fcf62df8..81c9ba1d3455d1eb6619cb04d4e52a72
  import net.minecraft.Util;
  import net.minecraft.core.NonNullList;
  import net.minecraft.network.FriendlyByteBuf;
-@@ -89,7 +91,7 @@ public record ShapedRecipePattern(int width, int height, NonNullList<Ingredient>
+@@ -85,7 +87,7 @@ public record ShapedRecipePattern(int width, int height, NonNullList<Ingredient>
          }
  
          if (pattern.size() == l) {
@@ -704,24 +704,25 @@ index 27dc0e4ce21ccf641ea16fd6d2dc1c28fcf62df8..81c9ba1d3455d1eb6619cb04d4e52a72
              String[] strings = new String[pattern.size() - l - k];
  
 diff --git a/src/main/java/net/minecraft/world/item/enchantment/Enchantments.java b/src/main/java/net/minecraft/world/item/enchantment/Enchantments.java
-index 6c2e8049c2197ddc912c1a0fc99c87beae81e25b..a13822a22ab524a0fb9fd998c4ada06b6e10e182 100644
+index 8343e175a7221f7b0e83c39cd5350683a0649f8d..e023a1c77ab1e2ca757d82f027246259d122b81f 100644
 --- a/src/main/java/net/minecraft/world/item/enchantment/Enchantments.java
 +++ b/src/main/java/net/minecraft/world/item/enchantment/Enchantments.java
-@@ -43,8 +43,10 @@ public class Enchantments {
+@@ -63,10 +63,11 @@ public class Enchantments {
      public static final Enchantment MULTISHOT = register("multishot", new MultiShotEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND));
      public static final Enchantment QUICK_CHARGE = register("quick_charge", new QuickChargeEnchantment(Enchantment.Rarity.UNCOMMON, EquipmentSlot.MAINHAND));
      public static final Enchantment PIERCING = register("piercing", new ArrowPiercingEnchantment(Enchantment.Rarity.COMMON, EquipmentSlot.MAINHAND));
 -    public static final Enchantment MENDING = register("mending", new MendingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.values()));
--    public static final Enchantment VANISHING_CURSE = register("vanishing_curse", new VanishingCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.values()));
-+    // Gale start - JettPack - reduce array allocations
 +    public static final Enchantment MENDING = register("mending", new MendingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.VALUES));
-+    public static final Enchantment VANISHING_CURSE = register("vanishing_curse", new VanishingCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.VALUES));
+     public static final Enchantment VANISHING_CURSE = register(
+-        "vanishing_curse", new VanishingCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.values())
++        "vanishing_curse", new VanishingCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.VALUES)
+     );
 +    // Gale end - JettPack - reduce array allocations
  
      private static Enchantment register(String name, Enchantment enchantment) {
          return Registry.register(BuiltInRegistries.ENCHANTMENT, name, enchantment);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 9440dd58325df07521ef52373089e6989105ba4b..33cbba9f92cfbb6508dd8e2c5e35c63a49cdd85c 100644
+index e4d633411c53d867636a23451d5ff9ffd962d5b4..f239b14fd9c884dc7905a9e0456c2198bf1205e6 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -10,6 +10,8 @@ import java.util.function.Consumer;
@@ -834,7 +835,7 @@ index 63e187c65cb855031f286aad0d25ac4694f7a331..083849817786e08d23b05f8cc6c2469c
  
          for (int i = 0; i < astring.length; ++i) {
 diff --git a/src/main/java/net/minecraft/world/scores/Team.java b/src/main/java/net/minecraft/world/scores/Team.java
-index 16d2aa4556bc9f32a2def7f9ca282aa3fa23fb87..ad9a78f56aeb93895d1caefd6f59326dbf33d18f 100644
+index f00791b89fdb1bb0fb358eff2af2e687bda15e85..9dbd771cb0a37928c403d8758b78684f73888775 100644
 --- a/src/main/java/net/minecraft/world/scores/Team.java
 +++ b/src/main/java/net/minecraft/world/scores/Team.java
 @@ -5,6 +5,8 @@ import java.util.Collection;
@@ -846,7 +847,7 @@ index 16d2aa4556bc9f32a2def7f9ca282aa3fa23fb87..ad9a78f56aeb93895d1caefd6f59326d
  import net.minecraft.ChatFormatting;
  import net.minecraft.network.chat.Component;
  import net.minecraft.network.chat.MutableComponent;
-@@ -80,7 +82,7 @@ public abstract class Team {
+@@ -70,7 +72,7 @@ public abstract class Team {
          public final int id;
  
          public static String[] getAllNames() {

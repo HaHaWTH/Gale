@@ -188,7 +188,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 9f5192212c492cefee9abd96aec6866e27ceb48e..295b76c60d9395d0beb234aff5691388bd3fe437 100644
+index 4318f6b4f83709ae2f1d4d8346e79b3e433abf19..25bde42e2bc3201b8ddc2a70ccd1bfd8072e2f0e 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -244,26 +244,27 @@ index 9f5192212c492cefee9abd96aec6866e27ceb48e..295b76c60d9395d0beb234aff5691388
  
      private void readScoreboard(DimensionDataStorage persistentStateManager) {
 diff --git a/src/main/java/net/minecraft/server/Services.java b/src/main/java/net/minecraft/server/Services.java
-index d89c624554ab08bd1b33a3f62b52aa57aaafb8b4..2f76d1be6b26e516d1ab13df8d05b1f54f1ff558 100644
+index 33e3815a0c979609d4c7ab83ad91e87ac07a556d..67d4a82f371a4772128cc2218fd0a18ce7500b4f 100644
 --- a/src/main/java/net/minecraft/server/Services.java
 +++ b/src/main/java/net/minecraft/server/Services.java
-@@ -9,12 +9,13 @@ import java.io.File;
- import javax.annotation.Nullable;
+@@ -10,13 +10,14 @@ import javax.annotation.Nullable;
  import net.minecraft.server.players.GameProfileCache;
  import net.minecraft.util.SignatureValidator;
+ 
 +import org.galemc.gale.configuration.GaleConfigurations;
  
- // Paper start - add paper configuration files
--public record Services(MinecraftSessionService sessionService, ServicesKeySet servicesKeySet, GameProfileRepository profileRepository, GameProfileCache profileCache, @javax.annotation.Nullable io.papermc.paper.configuration.PaperConfigurations paperConfigurations) {
-+public record Services(MinecraftSessionService sessionService, ServicesKeySet servicesKeySet, GameProfileRepository profileRepository, GameProfileCache profileCache, @javax.annotation.Nullable io.papermc.paper.configuration.PaperConfigurations paperConfigurations, @javax.annotation.Nullable GaleConfigurations galeConfigurations) { // Gale - Gale configuration
- 
+ public record Services(
+-    MinecraftSessionService sessionService, ServicesKeySet servicesKeySet, GameProfileRepository profileRepository, GameProfileCache profileCache, @javax.annotation.Nullable io.papermc.paper.configuration.PaperConfigurations paperConfigurations // Paper - add paper configuration files
++    MinecraftSessionService sessionService, ServicesKeySet servicesKeySet, GameProfileRepository profileRepository, GameProfileCache profileCache, @javax.annotation.Nullable io.papermc.paper.configuration.PaperConfigurations paperConfigurations, @javax.annotation.Nullable GaleConfigurations galeConfigurations // Paper - add paper configuration files // Gale - Gale configuration
+ ) {
+     // Paper start - add paper configuration files
      public Services(MinecraftSessionService sessionService, ServicesKeySet servicesKeySet, GameProfileRepository profileRepository, GameProfileCache profileCache) {
 -        this(sessionService, servicesKeySet, profileRepository, profileCache, null);
 +        this(sessionService, servicesKeySet, profileRepository, profileCache, null, null); // Gale - Gale configuration
      }
  
      @Override
-@@ -22,6 +23,11 @@ public record Services(MinecraftSessionService sessionService, ServicesKeySet se
+@@ -24,6 +25,11 @@ public record Services(
          return java.util.Objects.requireNonNull(this.paperConfigurations);
      }
      // Paper end - add paper configuration files
@@ -275,7 +276,7 @@ index d89c624554ab08bd1b33a3f62b52aa57aaafb8b4..2f76d1be6b26e516d1ab13df8d05b1f5
      public static final String USERID_CACHE_FILE = "usercache.json"; // Paper - private -> public
  
      public static Services create(YggdrasilAuthenticationService authenticationService, File rootDirectory, File userCacheFile, joptsimple.OptionSet optionSet) throws Exception { // Paper - add optionset to load paper config files; add userCacheFile parameter
-@@ -32,7 +38,10 @@ public record Services(MinecraftSessionService sessionService, ServicesKeySet se
+@@ -34,7 +40,10 @@ public record Services(
          final java.nio.file.Path legacyConfigPath = ((File) optionSet.valueOf("paper-settings")).toPath();
          final java.nio.file.Path configDirPath = ((File) optionSet.valueOf("paper-settings-directory")).toPath();
          io.papermc.paper.configuration.PaperConfigurations paperConfigurations = io.papermc.paper.configuration.PaperConfigurations.setup(legacyConfigPath, configDirPath, rootDirectory.toPath(), (File) optionSet.valueOf("spigot-settings"));
@@ -325,7 +326,7 @@ index 68d268b6fff126e8645b6deec3fb549ea2286b77..1243b375d2cbdf224fe174e75d427392
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index bf5e47e8c3706590fdc0731bd9a5858b56d06136..675d2a1a19296e7390ffc92edb6d071925e51647 100644
+index 502bdc726b7890b00ee36871d905dea44e8719e3..fc4d69058e6f543afc7da493edb8ac43376413c4 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -134,12 +134,10 @@ import net.minecraft.world.level.chunk.storage.EntityStorage;
@@ -351,7 +352,7 @@ index bf5e47e8c3706590fdc0731bd9a5858b56d06136..675d2a1a19296e7390ffc92edb6d0719
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index bc89f9e90af3d69872a58c47a4c2545ba91b6ba5..2161664f96bf130d6ca690be47dc7f3ff3a84cd0 100644
+index ca89d1593bf1b46c79a882db528cbca1359dc9d4..82db09234899606b217acb22b0eba2f8ee063812 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -12,7 +12,6 @@ import java.util.function.Supplier;

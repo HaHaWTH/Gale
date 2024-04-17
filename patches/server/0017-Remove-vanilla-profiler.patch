@@ -85,7 +85,7 @@ index b7f338e982d0dcab99137ab6dc200b82ac6b7cba..7600991949de84b6667c0a80bfec4a13
                  try {
                      Commands.CURRENT_EXECUTION_CONTEXT.set(executioncontext1);
 diff --git a/src/main/java/net/minecraft/commands/execution/ExecutionContext.java b/src/main/java/net/minecraft/commands/execution/ExecutionContext.java
-index 38854a047c6da7e2551f206478d17628e765168d..cc827443a812735336e18ff3c7b7f15a448e02d0 100644
+index f626a2f28f2aebb3237cebb6afef3c4fa1a6cb37..2200d34ce40c61c0eee81b8f8903458c548e65ec 100644
 --- a/src/main/java/net/minecraft/commands/execution/ExecutionContext.java
 +++ b/src/main/java/net/minecraft/commands/execution/ExecutionContext.java
 @@ -20,7 +20,6 @@ public class ExecutionContext<T> implements AutoCloseable {
@@ -108,7 +108,7 @@ index 38854a047c6da7e2551f206478d17628e765168d..cc827443a812735336e18ff3c7b7f15a
          this.commandQuota = maxCommandChainLength;
      }
  
-@@ -128,7 +126,7 @@ public class ExecutionContext<T> implements AutoCloseable {
+@@ -130,7 +128,7 @@ public class ExecutionContext<T> implements AutoCloseable {
      }
  
      public ProfilerFiller profiler() {
@@ -118,22 +118,20 @@ index 38854a047c6da7e2551f206478d17628e765168d..cc827443a812735336e18ff3c7b7f15a
  
      public int forkLimit() {
 diff --git a/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java b/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
-index 446b7e585afccb034816a5371a3b7376cbef7177..f8e7b0336ca2545312d877db5a0f05386b025aed 100644
+index bcba8224b9a210bced04ff370a73b3067109fa71..260b3ea95a77e01ada2b0e40fbae511c8d5a26a9 100644
 --- a/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
 +++ b/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
-@@ -43,11 +43,7 @@ public class BuildContexts<T extends ExecutionCommandSource<T>> {
+@@ -42,9 +42,6 @@ public class BuildContexts<T extends ExecutionCommandSource<T>> {
          ChainModifiers chainModifiers = flags;
          List<T> list = sources;
          if (contextChain.getStage() != Stage.EXECUTE) {
--            context.profiler().push(() -> {
--                return "prepare " + this.commandInput;
--            });
- 
+-            context.profiler().push(() -> "prepare " + this.commandInput);
+-
 -            try {
-                 for(int i = context.forkLimit(); contextChain.getStage() != Stage.EXECUTE; contextChain = contextChain.nextStage()) {
+                 for (int i = context.forkLimit(); contextChain.getStage() != Stage.EXECUTE; contextChain = contextChain.nextStage()) {
                      CommandContext<T> commandContext = contextChain.getTopContext();
                      if (commandContext.isForked()) {
-@@ -87,9 +83,6 @@ public class BuildContexts<T extends ExecutionCommandSource<T>> {
+@@ -85,9 +82,6 @@ public class BuildContexts<T extends ExecutionCommandSource<T>> {
                          list = list2;
                      }
                  }
@@ -144,30 +142,29 @@ index 446b7e585afccb034816a5371a3b7376cbef7177..f8e7b0336ca2545312d877db5a0f0538
  
          if (list.isEmpty()) {
 diff --git a/src/main/java/net/minecraft/commands/execution/tasks/ExecuteCommand.java b/src/main/java/net/minecraft/commands/execution/tasks/ExecuteCommand.java
-index 821dc4aeaf48460000682604fba51b340b9738e7..4f4540ed9b3e603eec0d46fb5b58de24f27e734b 100644
+index e9775b4506909bee65a74964f0d5391a0513de1d..1c4dd8acdcd571aceffe4b78599ca2c7362aea5d 100644
 --- a/src/main/java/net/minecraft/commands/execution/tasks/ExecuteCommand.java
 +++ b/src/main/java/net/minecraft/commands/execution/tasks/ExecuteCommand.java
-@@ -23,9 +23,6 @@ public class ExecuteCommand<T extends ExecutionCommandSource<T>> implements Unbo
+@@ -23,8 +23,6 @@ public class ExecuteCommand<T extends ExecutionCommandSource<T>> implements Unbo
  
      @Override
      public void execute(T executionCommandSource, ExecutionContext<T> executionContext, Frame frame) {
--        executionContext.profiler().push(() -> {
--            return "execute " + this.commandInput;
--        });
- 
+-        executionContext.profiler().push(() -> "execute " + this.commandInput);
+-
          try {
              executionContext.incrementCost();
-@@ -36,8 +33,6 @@ public class ExecuteCommand<T extends ExecutionCommandSource<T>> implements Unbo
+             int i = ContextChain.runExecutable(
+@@ -36,8 +34,6 @@ public class ExecuteCommand<T extends ExecutionCommandSource<T>> implements Unbo
              }
          } catch (CommandSyntaxException var9) {
              executionCommandSource.handleError(var9, this.modifiers.isForked(), executionContext.tracer());
 -        } finally {
 -            executionContext.profiler().pop();
          }
- 
      }
+ }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 2315d736b604ff35aa5bd839f3ea7bbc3f47e31c..68197cddec15d43f9de373d096be2507e3e36227 100644
+index 4062e400c4ad6f46e80405ec45864925a9e40ea9..d86c888095ca360bccca515dc4941f46c6944e0e 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -106,18 +106,9 @@ import net.minecraft.util.RandomSource;
@@ -398,7 +395,7 @@ index 2315d736b604ff35aa5bd839f3ea7bbc3f47e31c..68197cddec15d43f9de373d096be2507
      }
  
      public abstract boolean isSingleplayerOwner(GameProfile profile);
-@@ -2696,53 +2634,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2698,53 +2636,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      }
      // CraftBukkit end
  
@@ -452,7 +449,7 @@ index 2315d736b604ff35aa5bd839f3ea7bbc3f47e31c..68197cddec15d43f9de373d096be2507
      public Path getWorldPath(LevelResource worldSavePath) {
          return this.storageSource.getLevelPath(worldSavePath);
      }
-@@ -2788,25 +2679,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2790,25 +2681,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          return this.isSaving;
      }
  
@@ -478,7 +475,7 @@ index 2315d736b604ff35aa5bd839f3ea7bbc3f47e31c..68197cddec15d43f9de373d096be2507
      public int getMaxChainedNeighborUpdates() {
          return 1000000;
      }
-@@ -2847,56 +2719,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2849,56 +2721,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          }
      }
  
@@ -536,18 +533,18 @@ index 2315d736b604ff35aa5bd839f3ea7bbc3f47e31c..68197cddec15d43f9de373d096be2507
  
      }
 diff --git a/src/main/java/net/minecraft/server/ReloadableServerResources.java b/src/main/java/net/minecraft/server/ReloadableServerResources.java
-index 3192ad97889f1a199b4b7b3dc43ff9bbafe748b3..28c77578f3d157c7fe47732850565b8e6ae69d03 100644
+index 2fe0672bb23c11b21aebf2600b8f4fc39f7dce42..643164a4360f9ad9ee3be2b32f410bfb7a6ce4df 100644
 --- a/src/main/java/net/minecraft/server/ReloadableServerResources.java
 +++ b/src/main/java/net/minecraft/server/ReloadableServerResources.java
-@@ -69,7 +69,7 @@ public class ReloadableServerResources {
- 
-     public static CompletableFuture<ReloadableServerResources> loadResources(ResourceManager manager, RegistryAccess.Frozen dynamicRegistryManager, FeatureFlagSet enabledFeatures, Commands.CommandSelection environment, int functionPermissionLevel, Executor prepareExecutor, Executor applyExecutor) {
-         ReloadableServerResources reloadableServerResources = new ReloadableServerResources(dynamicRegistryManager, enabledFeatures, environment, functionPermissionLevel);
--        return SimpleReloadInstance.create(manager, reloadableServerResources.listeners(), prepareExecutor, applyExecutor, DATA_RELOAD_INITIAL_TASK, LOGGER.isDebugEnabled()).done().whenComplete((void_, throwable) -> {
-+        return SimpleReloadInstance.create(manager, reloadableServerResources.listeners(), prepareExecutor, applyExecutor, DATA_RELOAD_INITIAL_TASK, false).done().whenComplete((void_, throwable) -> { // Gale - Purpur - remove vanilla profiler
-             reloadableServerResources.commandBuildContext.missingTagAccessPolicy(CommandBuildContext.MissingTagAccessPolicy.FAIL);
-         }).thenApply((void_) -> {
-             return reloadableServerResources;
+@@ -82,7 +82,7 @@ public class ReloadableServerResources {
+             dynamicRegistryManager, enabledFeatures, environment, functionPermissionLevel
+         );
+         return SimpleReloadInstance.create(
+-                manager, reloadableServerResources.listeners(), prepareExecutor, applyExecutor, DATA_RELOAD_INITIAL_TASK, LOGGER.isDebugEnabled()
++                manager, reloadableServerResources.listeners(), prepareExecutor, applyExecutor, DATA_RELOAD_INITIAL_TASK, false // Gale - Purpur - remove vanilla profiler
+             )
+             .done()
+             .whenComplete(
 diff --git a/src/main/java/net/minecraft/server/ServerFunctionManager.java b/src/main/java/net/minecraft/server/ServerFunctionManager.java
 index df0c15f6b5b2224d53e4f8fad42b9a1e5f33dc25..caa6dcfec13728863dcf21f9f778665b2bcd3d50 100644
 --- a/src/main/java/net/minecraft/server/ServerFunctionManager.java
@@ -756,7 +753,7 @@ index 366c0c9b45a819f7f94ebe3e49b8ab7f9edf9ce7..20ec10b843f90d2077f49d293d65fa6e
          }
  
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 675d2a1a19296e7390ffc92edb6d071925e51647..8ffd3b1193233040013e435f26f3a3768c7ad8fd 100644
+index fc4d69058e6f543afc7da493edb8ac43376413c4..7484d6d7ad43b5c0a94e24ec3d61675065ca6edd 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -78,7 +78,6 @@ import net.minecraft.util.Mth;
@@ -967,7 +964,7 @@ index 675d2a1a19296e7390ffc92edb6d071925e51647..8ffd3b1193233040013e435f26f3a376
  
                  while (iterator.hasNext()) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 58591bf2f63b9c5e97d9ce4188dff3366968a178..deb9a8931bbc6d8687d629fac9787361fc96aae6 100644
+index b3781efbd3edcf102fe1bda5d6149915dc1127c6..91545e7fdb3a8da1a708dac9126178cfcc1cef3a 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -1213,7 +1213,6 @@ public class ServerPlayer extends Player {
@@ -1016,30 +1013,36 @@ index 0306771b8f90dcdd77f151c19c6c2d75c41f8feb..e7583996cc6d750cbd72f749de39ecde
  
      public void suspendFlushing() {
 diff --git a/src/main/java/net/minecraft/server/packs/resources/PreparableReloadListener.java b/src/main/java/net/minecraft/server/packs/resources/PreparableReloadListener.java
-index 828196decc89e7e03f88c4a3208ee1ab2bb69242..ff1ac081ba9de69bd684a26a6455ac2b6cd2cae9 100644
+index 60d33ac7ab7b610e9d5104ac9c7029ba4fc26cdf..55dc48bd8e32cd392a4d44e5c8b278c226782de0 100644
 --- a/src/main/java/net/minecraft/server/packs/resources/PreparableReloadListener.java
 +++ b/src/main/java/net/minecraft/server/packs/resources/PreparableReloadListener.java
-@@ -5,7 +5,13 @@ import java.util.concurrent.Executor;
+@@ -5,14 +5,18 @@ import java.util.concurrent.Executor;
  import net.minecraft.util.profiling.ProfilerFiller;
  
  public interface PreparableReloadListener {
--    CompletableFuture<Void> reload(PreparableReloadListener.PreparationBarrier synchronizer, ResourceManager manager, ProfilerFiller prepareProfiler, ProfilerFiller applyProfiler, Executor prepareExecutor, Executor applyExecutor);
 +    // Gale start - Purpur - remove vanilla profiler
 +    default CompletableFuture<Void> reload(PreparableReloadListener.PreparationBarrier synchronizer, ResourceManager manager, ProfilerFiller prepareProfiler, ProfilerFiller applyProfiler, Executor prepareExecutor, Executor applyExecutor) {
 +        return this.reload(synchronizer, manager, prepareExecutor, applyExecutor);
 +    }
-+    
-+    CompletableFuture<Void> reload(PreparableReloadListener.PreparationBarrier synchronizer, ResourceManager manager, Executor prepareExecutor, Executor applyExecutor);
++
+     CompletableFuture<Void> reload(
+         PreparableReloadListener.PreparationBarrier synchronizer,
+         ResourceManager manager,
+-        ProfilerFiller prepareProfiler,
+-        ProfilerFiller applyProfiler,
+         Executor prepareExecutor,
+         Executor applyExecutor
+     );
 +    // Gale end - Purpur - remove vanilla profiler
  
      default String getName() {
          return this.getClass().getSimpleName();
 diff --git a/src/main/java/net/minecraft/server/packs/resources/ReloadableResourceManager.java b/src/main/java/net/minecraft/server/packs/resources/ReloadableResourceManager.java
-index c83c6fe5f7e2dc00a36cdd76c23317f232a2336b..47091691ca667e8ee58fa96ee9a2a827bcee5ce3 100644
+index f0257e295d9e856391b8e881370610c06fab9fba..7b327b59374474f68b189cefbf97d4a4b4478472 100644
 --- a/src/main/java/net/minecraft/server/packs/resources/ReloadableResourceManager.java
 +++ b/src/main/java/net/minecraft/server/packs/resources/ReloadableResourceManager.java
-@@ -43,7 +43,7 @@ public class ReloadableResourceManager implements ResourceManager, AutoCloseable
-         }));
+@@ -41,7 +41,7 @@ public class ReloadableResourceManager implements ResourceManager, AutoCloseable
+         LOGGER.info("Reloading ResourceManager: {}", LogUtils.defer(() -> packs.stream().map(PackResources::packId).collect(Collectors.joining(", "))));
          this.resources.close();
          this.resources = new MultiPackResourceManager(this.type, packs);
 -        return SimpleReloadInstance.create(this.resources, this.listeners, prepareExecutor, applyExecutor, initialStage, LOGGER.isDebugEnabled());
@@ -1048,33 +1051,44 @@ index c83c6fe5f7e2dc00a36cdd76c23317f232a2336b..47091691ca667e8ee58fa96ee9a2a827
  
      @Override
 diff --git a/src/main/java/net/minecraft/server/packs/resources/ResourceManagerReloadListener.java b/src/main/java/net/minecraft/server/packs/resources/ResourceManagerReloadListener.java
-index 9ddbfcf80d9a381dace78a62880f85a4d767e0eb..61a7c5e253e790b1e966c704af2f9645322a026e 100644
+index f14113eef226e906c0d21641e74a27471254909d..649e8a76e8964786ddb91bd69dd10ddb641ac547 100644
 --- a/src/main/java/net/minecraft/server/packs/resources/ResourceManagerReloadListener.java
 +++ b/src/main/java/net/minecraft/server/packs/resources/ResourceManagerReloadListener.java
-@@ -3,17 +3,12 @@ package net.minecraft.server.packs.resources;
+@@ -3,26 +3,19 @@ package net.minecraft.server.packs.resources;
  import java.util.concurrent.CompletableFuture;
  import java.util.concurrent.Executor;
  import net.minecraft.util.Unit;
 -import net.minecraft.util.profiling.ProfilerFiller;
  
  public interface ResourceManagerReloadListener extends PreparableReloadListener {
++    // Gale start - Purpur - remove vanilla profiler
      @Override
--    default CompletableFuture<Void> reload(PreparableReloadListener.PreparationBarrier synchronizer, ResourceManager manager, ProfilerFiller prepareProfiler, ProfilerFiller applyProfiler, Executor prepareExecutor, Executor applyExecutor) {
-+    default CompletableFuture<Void> reload(PreparableReloadListener.PreparationBarrier synchronizer, ResourceManager manager, Executor prepareExecutor, Executor applyExecutor) { // Gale - Purpur - remove vanilla profiler
-         return synchronizer.wait(Unit.INSTANCE).thenRunAsync(() -> {
+     default CompletableFuture<Void> reload(
+         PreparableReloadListener.PreparationBarrier synchronizer,
+         ResourceManager manager,
+-        ProfilerFiller prepareProfiler,
+-        ProfilerFiller applyProfiler,
+         Executor prepareExecutor,
+         Executor applyExecutor
+     ) {
+-        return synchronizer.wait(Unit.INSTANCE).thenRunAsync(() -> {
 -            applyProfiler.startTick();
 -            applyProfiler.push("listener");
-             this.onResourceManagerReload(manager);
+-            this.onResourceManagerReload(manager);
 -            applyProfiler.pop();
 -            applyProfiler.endTick();
-         }, applyExecutor);
+-        }, applyExecutor);
++        return synchronizer.wait(Unit.INSTANCE).thenRunAsync(() -> this.onResourceManagerReload(manager), applyExecutor);
      }
++    // Gale end - Purpur - remove vanilla profiler
  
+     void onResourceManagerReload(ResourceManager manager);
+ }
 diff --git a/src/main/java/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java b/src/main/java/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java
-index 7ab57748b2f2aea1003d9b7e70e76c372aa1e432..47e75ec4a01f8a456ec6ebc13031c1f0c5537d6a 100644
+index 298e3eddd600f0b2e48ce2d4080cf68adff59a3a..61a7c2e1d073e5b4b7947618b57bef5a62565087 100644
 --- a/src/main/java/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java
 +++ b/src/main/java/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java
-@@ -2,15 +2,17 @@ package net.minecraft.server.packs.resources;
+@@ -2,6 +2,8 @@ package net.minecraft.server.packs.resources;
  
  import java.util.concurrent.CompletableFuture;
  import java.util.concurrent.Executor;
@@ -1083,20 +1097,25 @@ index 7ab57748b2f2aea1003d9b7e70e76c372aa1e432..47e75ec4a01f8a456ec6ebc13031c1f0
  import net.minecraft.util.profiling.ProfilerFiller;
  
  public abstract class SimplePreparableReloadListener<T> implements PreparableReloadListener {
-     @Override
--    public final CompletableFuture<Void> reload(PreparableReloadListener.PreparationBarrier synchronizer, ResourceManager manager, ProfilerFiller prepareProfiler, ProfilerFiller applyProfiler, Executor prepareExecutor, Executor applyExecutor) {
-+    public final CompletableFuture<Void> reload(PreparableReloadListener.PreparationBarrier synchronizer, ResourceManager manager, Executor prepareExecutor, Executor applyExecutor) { // Gale - Purpur - remove vanilla profiler
-         return CompletableFuture.supplyAsync(() -> {
--            return this.prepare(manager, prepareProfiler);
-+            return this.prepare(manager, InactiveProfiler.INSTANCE); // Gale - Purpur - remove vanilla profiler
-         }, prepareExecutor).thenCompose(synchronizer::wait).thenAcceptAsync((prepared) -> {
--            this.apply(prepared, manager, applyProfiler);
-+            this.apply(prepared, manager, InactiveProfiler.INSTANCE); // Gale - Purpur - remove vanilla profiler
-         }, applyExecutor);
+@@ -9,14 +11,12 @@ public abstract class SimplePreparableReloadListener<T> implements PreparableRel
+     public final CompletableFuture<Void> reload(
+         PreparableReloadListener.PreparationBarrier synchronizer,
+         ResourceManager manager,
+-        ProfilerFiller prepareProfiler,
+-        ProfilerFiller applyProfiler,
+         Executor prepareExecutor,
+         Executor applyExecutor
+     ) {
+-        return CompletableFuture.<T>supplyAsync(() -> this.prepare(manager, prepareProfiler), prepareExecutor)
++        return CompletableFuture.<T>supplyAsync(() -> this.prepare(manager, InactiveProfiler.INSTANCE), prepareExecutor) // Gale - Purpur - remove vanilla profiler
+             .thenCompose(synchronizer::wait)
+-            .thenAcceptAsync(prepared -> this.apply((T)prepared, manager, applyProfiler), applyExecutor);
++            .thenAcceptAsync(prepared -> this.apply((T)prepared, manager, InactiveProfiler.INSTANCE), applyExecutor); // Gale - Purpur - remove vanilla profiler
      }
  
+     protected abstract T prepare(ResourceManager manager, ProfilerFiller profiler);
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index b2eff51f1ad1e702525ef298807ea7d2083f6218..f222d987a47cc3913c5a48505d272d72c4b4432c 100644
+index 637478fd8a284e6833cf8f5fa17ccf9d73d1dd3f..d7da3bb9e6c7900a211ddd35471799d9a3d63f17 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -833,7 +833,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
@@ -1125,7 +1144,7 @@ index b2eff51f1ad1e702525ef298807ea7d2083f6218..f222d987a47cc3913c5a48505d272d72
                  this.stuckSpeedMultiplier = Vec3.ZERO;
 @@ -1122,7 +1119,6 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
              // Paper start - ignore movement changes while inactive.
-             if (isTemporarilyActive && !(this instanceof ItemEntity || this instanceof net.minecraft.world.entity.vehicle.AbstractMinecart) && movement == getDeltaMovement() && movementType == MoverType.SELF) {
+             if (isTemporarilyActive && !(this instanceof ItemEntity) && movement == getDeltaMovement() && movementType == MoverType.SELF) {
                  setDeltaMovement(Vec3.ZERO);
 -                this.level.getProfiler().pop();
                  return;
@@ -1211,7 +1230,7 @@ index b2eff51f1ad1e702525ef298807ea7d2083f6218..f222d987a47cc3913c5a48505d272d72
              }
          } else {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 23570a0b1227a840b9c1e6ae326827ea655bb5f7..8e375654bf60e1b4f82718e23968c3ab1f799c34 100644
+index e9bb7feb591032904516d1b9374f486d8a7d066c..c49b788af3f66edaef4aa153e6cb323283e552f8 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -405,7 +405,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -1395,10 +1414,10 @@ index 2439f8d48daca7329049436414f06a36b4b79029..dee9ee5e5917f48b8e1c078710c6d67d
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/ai/goal/GoalSelector.java b/src/main/java/net/minecraft/world/entity/ai/goal/GoalSelector.java
-index 676f5485a4ca9252e911213dcda8d51776b637b6..fda42ae6579819aa140766829d852633415e8d76 100644
+index 38af5c7280366fd6ec077f3d914ea5f3ee77451a..91d1088dbf1c0cfb3694d37b4e491e601507421c 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/goal/GoalSelector.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/goal/GoalSelector.java
-@@ -11,7 +11,6 @@ import java.util.Set;
+@@ -12,7 +12,6 @@ import java.util.Map.Entry;
  import java.util.function.Predicate;
  import java.util.function.Supplier;
  import java.util.stream.Stream;
@@ -1406,7 +1425,7 @@ index 676f5485a4ca9252e911213dcda8d51776b637b6..fda42ae6579819aa140766829d852633
  import org.slf4j.Logger;
  
  public class GoalSelector {
-@@ -29,7 +28,6 @@ public class GoalSelector {
+@@ -30,7 +29,6 @@ public class GoalSelector {
      };
      private final Map<Goal.Flag, WrappedGoal> lockedFlags = new EnumMap<>(Goal.Flag.class);
      private final Set<WrappedGoal> availableGoals = Sets.newLinkedHashSet();
@@ -1414,7 +1433,7 @@ index 676f5485a4ca9252e911213dcda8d51776b637b6..fda42ae6579819aa140766829d852633
      private final EnumSet<Goal.Flag> disabledFlags = EnumSet.noneOf(Goal.Flag.class); // Paper unused, but dummy to prevent plugins from crashing as hard. Theyll need to support paper in a special case if this is super important, but really doesn't seem like it would be.
      private final com.destroystokyo.paper.util.set.OptimizedSmallEnumSet<net.minecraft.world.entity.ai.goal.Goal.Flag> goalTypes = new com.destroystokyo.paper.util.set.OptimizedSmallEnumSet<>(Goal.Flag.class); // Paper - remove streams from pathfindergoalselector
      private int tickCount;
-@@ -37,9 +35,7 @@ public class GoalSelector {
+@@ -38,9 +36,7 @@ public class GoalSelector {
      private int curRate;
      private static final Goal.Flag[] GOAL_FLAG_VALUES = Goal.Flag.values(); // Paper - remove streams from pathfindergoalselector
  
@@ -1425,27 +1444,27 @@ index 676f5485a4ca9252e911213dcda8d51776b637b6..fda42ae6579819aa140766829d852633
  
      public void addGoal(int priority, Goal goal) {
          this.availableGoals.add(new WrappedGoal(priority, goal));
-@@ -102,9 +98,6 @@ public class GoalSelector {
+@@ -101,9 +97,6 @@ public class GoalSelector {
      }
  
      public void tick() {
 -        ProfilerFiller profilerFiller = this.profiler.get();
 -        profilerFiller.push("goalCleanup");
 -
-         for(WrappedGoal wrappedGoal : this.availableGoals) {
-             if (wrappedGoal.isRunning() && (goalContainsAnyFlags(wrappedGoal, this.goalTypes) || !wrappedGoal.canContinueToUse())) {
+         for (WrappedGoal wrappedGoal : this.availableGoals) {
+             if (wrappedGoal.isRunning() && (goalContainsAnyFlags(wrappedGoal, this.goalTypes) || !wrappedGoal.canContinueToUse())) { // Paper - Perf: optimize goal types by removing streams
                  wrappedGoal.stop();
-@@ -120,9 +113,6 @@ public class GoalSelector {
+@@ -119,9 +112,6 @@ public class GoalSelector {
              }
          }
  
 -        profilerFiller.pop();
 -        profilerFiller.push("goalUpdate");
 -
-         for(WrappedGoal wrappedGoal2 : this.availableGoals) {
+         for (WrappedGoal wrappedGoal2 : this.availableGoals) {
              // Paper start
              if (!wrappedGoal2.isRunning() && !goalContainsAnyFlags(wrappedGoal2, this.goalTypes) && goalCanBeReplacedForAllFlags(wrappedGoal2, this.lockedFlags) && wrappedGoal2.canUse()) {
-@@ -141,21 +131,15 @@ public class GoalSelector {
+@@ -140,21 +130,15 @@ public class GoalSelector {
              }
          }
  
@@ -1457,7 +1476,7 @@ index 676f5485a4ca9252e911213dcda8d51776b637b6..fda42ae6579819aa140766829d852633
 -        ProfilerFiller profilerFiller = this.profiler.get();
 -        profilerFiller.push("goalTick");
 -
-         for(WrappedGoal wrappedGoal : this.availableGoals) {
+         for (WrappedGoal wrappedGoal : this.availableGoals) {
              if (wrappedGoal.isRunning() && (tickAll || wrappedGoal.requiresUpdateEveryTick())) {
                  wrappedGoal.tick();
              }
@@ -1468,10 +1487,10 @@ index 676f5485a4ca9252e911213dcda8d51776b637b6..fda42ae6579819aa140766829d852633
  
      public Set<WrappedGoal> getAvailableGoals() {
 diff --git a/src/main/java/net/minecraft/world/entity/ai/navigation/PathNavigation.java b/src/main/java/net/minecraft/world/entity/ai/navigation/PathNavigation.java
-index a04fb58c29b462e20ed0b702cef478e3985b7cd2..33983ed67ad6b0d25d2ae00e03415bda940584eb 100644
+index e3a7eaf31ab19cc9f23a0c87649b74bb42976cb4..cf57d0f4636ec3f93992626f06fe9c10c7cac19a 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/navigation/PathNavigation.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/navigation/PathNavigation.java
-@@ -173,12 +173,10 @@ public abstract class PathNavigation {
+@@ -172,12 +172,10 @@ public abstract class PathNavigation {
                  }
              }
              // Paper end - EntityPathfindEvent
@@ -1552,10 +1571,10 @@ index 84ae19bf9bddd2b6ee4737577d8836d59be028c2..52e5f367bf20427a532f59bc20610f05
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/animal/frog/Frog.java b/src/main/java/net/minecraft/world/entity/animal/frog/Frog.java
-index 295769d039f2a1e4f48912a60f9dbe267d8992c1..81e69ea2858228942177e54c92b50b2b908bc010 100644
+index a03fb7aa9f4528f4885db88eaf480202d5f54750..dfb1f7db2db231049cebf0283ab879618eddaba6 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/frog/Frog.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/frog/Frog.java
-@@ -161,12 +161,8 @@ public class Frog extends Animal implements VariantHolder<FrogVariant> {
+@@ -185,12 +185,8 @@ public class Frog extends Animal implements VariantHolder<FrogVariant> {
  
      @Override
      protected void customServerAiStep() {
@@ -1619,10 +1638,10 @@ index 0a5b953bd8c0c7f181da4090b950e9e6524b6d61..817f269d28305ae2d08b3f680d06af74
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/monster/Zoglin.java b/src/main/java/net/minecraft/world/entity/monster/Zoglin.java
-index 05b4c054327bb86cf3b08e45916aac31aa9e000b..3e79562f51efbac51785fa0998d6a1a6e3036939 100644
+index 728f3dff42678ed48c8921ea0e960f48724a9183..6c1a402e45d7b224c41696bb8bc0e09da076ae4d 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/Zoglin.java
 +++ b/src/main/java/net/minecraft/world/entity/monster/Zoglin.java
-@@ -200,9 +200,7 @@ public class Zoglin extends Monster implements Enemy, HoglinBase {
+@@ -241,9 +241,7 @@ public class Zoglin extends Monster implements Enemy, HoglinBase {
  
      @Override
      protected void customServerAiStep() {
@@ -1633,10 +1652,10 @@ index 05b4c054327bb86cf3b08e45916aac31aa9e000b..3e79562f51efbac51785fa0998d6a1a6
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java b/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java
-index 1268ce642a79495450845734085f281589415fef..9672afb372e3b376d46864fed5bc8af12aaae48a 100644
+index b5ef8d9e55656100085a4d9858c3530bb08d3c16..2099c26aad87765e505ffc74566fc44167095fcb 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java
 +++ b/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java
-@@ -200,10 +200,7 @@ public class Breeze extends Monster {
+@@ -202,10 +202,7 @@ public class Breeze extends Monster {
  
      @Override
      protected void customServerAiStep() {
@@ -1648,10 +1667,10 @@ index 1268ce642a79495450845734085f281589415fef..9672afb372e3b376d46864fed5bc8af1
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java b/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java
-index 01a2016ac82807d28ffe407b7dbb74bdbcde503e..c97a3c7060b846aa92a730760e3428ba98919879 100644
+index 050ffa4a23feba29fdf4c6a175cdff4e5009027d..6b0f5aa9e49c7ff8784ae7a016c4403acf98ca1e 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java
 +++ b/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java
-@@ -130,9 +130,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {
+@@ -157,9 +157,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {
  
      @Override
      protected void customServerAiStep() {
@@ -1660,7 +1679,7 @@ index 01a2016ac82807d28ffe407b7dbb74bdbcde503e..c97a3c7060b846aa92a730760e3428ba
 -        this.level().getProfiler().pop();
          HoglinAi.updateActivity(this);
          if (this.isConverting()) {
-             ++this.timeInOverworld;
+             this.timeInOverworld++;
 diff --git a/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java b/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java
 index a9813da7f2b248f98f22e0ad2e7842915025ec12..104f3ed9230f6397bfe306b7fbfb9893b7c8e94d 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java
@@ -1676,10 +1695,10 @@ index a9813da7f2b248f98f22e0ad2e7842915025ec12..104f3ed9230f6397bfe306b7fbfb9893
          super.customServerAiStep();
      }
 diff --git a/src/main/java/net/minecraft/world/entity/monster/piglin/PiglinBrute.java b/src/main/java/net/minecraft/world/entity/monster/piglin/PiglinBrute.java
-index 5d1a30e09870a5a535c71a2e44b8e6933de0c1e8..5aab051998b67b7ba95cbf568de60e325b905eab 100644
+index 1afd5245267866c498d4b0d90ca55cda2ede8ca9..76916f1f23c274f615aeccb4dc48649483cdcdb5 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/piglin/PiglinBrute.java
 +++ b/src/main/java/net/minecraft/world/entity/monster/piglin/PiglinBrute.java
-@@ -85,9 +85,7 @@ public class PiglinBrute extends AbstractPiglin {
+@@ -113,9 +113,7 @@ public class PiglinBrute extends AbstractPiglin {
  
      @Override
      protected void customServerAiStep() {
@@ -1738,7 +1757,7 @@ index 90a82bd7977ebe520bdcc2ab99e11452d5cf4a21..dae299512dd458ec3765f2940505e6b4
  
          if (this.fire) {
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 2161664f96bf130d6ca690be47dc7f3ff3a84cd0..21a350cab63e8bb3062ec38686fdc1b630f01857 100644
+index 82db09234899606b217acb22b0eba2f8ee063812..5c18961b46867e51930527c0e720be08c9ac0fcb 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -130,7 +130,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
@@ -1835,7 +1854,7 @@ index da7489986848316fed029b71d1bc4e1248c9c9a8..71581713596594f8f8c39dac4971111e
  
      // Paper start - Add mobcaps commands
 diff --git a/src/main/java/net/minecraft/world/level/PathNavigationRegion.java b/src/main/java/net/minecraft/world/level/PathNavigationRegion.java
-index 0f1025495237aebe30132ace0832aa5718d6f9bb..9c2321ebb1237b4ecd3e7f7053e5039b800d89ff 100644
+index c5454b92ca2565461c799d7340160f9fb72c1b0f..a1a4b99167919bedb8a45c3b81889f58f2abfbcc 100644
 --- a/src/main/java/net/minecraft/world/level/PathNavigationRegion.java
 +++ b/src/main/java/net/minecraft/world/level/PathNavigationRegion.java
 @@ -8,7 +8,6 @@ import net.minecraft.core.BlockPos;
@@ -1846,7 +1865,7 @@ index 0f1025495237aebe30132ace0832aa5718d6f9bb..9c2321ebb1237b4ecd3e7f7053e5039b
  import net.minecraft.server.level.ServerLevel;
  import net.minecraft.world.entity.Entity;
  import net.minecraft.world.level.biome.Biome;
-@@ -154,8 +153,4 @@ public class PathNavigationRegion implements BlockGetter, CollisionGetter {
+@@ -151,8 +150,4 @@ public class PathNavigationRegion implements BlockGetter, CollisionGetter {
      public int getHeight() {
          return this.level.getHeight();
      }
@@ -1856,7 +1875,7 @@ index 0f1025495237aebe30132ace0832aa5718d6f9bb..9c2321ebb1237b4ecd3e7f7053e5039b
 -    }
  }
 diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
-index 6ec3fc801453fd54c25b642e6fa71c19b463311d..b02a2ca45152693e9974e802866feaa6bd2f2508 100644
+index 465458e8a7dbaf9afb32709a71c7b2620d1e1fd2..18ecd049d916c385c2c3e57213a100332a0c30ce 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 @@ -25,7 +25,6 @@ import net.minecraft.network.FriendlyByteBuf;
@@ -1891,9 +1910,9 @@ index 6ec3fc801453fd54c25b642e6fa71c19b463311d..b02a2ca45152693e9974e802866feaa6
                          this.blockEntity.tickTimer.startTiming(); // Spigot
                          BlockState iblockdata = LevelChunk.this.getBlockState(blockposition);
  
-@@ -1173,8 +1164,6 @@ public class LevelChunk extends ChunkAccess {
-                             this.loggedInvalidBlockState = true;
-                             LevelChunk.LOGGER.warn("Block entity {} @ {} state {} invalid for ticking:", new Object[]{LogUtils.defer(this::getType), LogUtils.defer(this::getPos), iblockdata});
+@@ -1178,8 +1169,6 @@ public class LevelChunk extends ChunkAccess {
+                             }
+                             // Paper end - Remove the Block Entity if it's invalid
                          }
 -
 -                        gameprofilerfiller.pop();
@@ -1901,7 +1920,7 @@ index 6ec3fc801453fd54c25b642e6fa71c19b463311d..b02a2ca45152693e9974e802866feaa6
                          if (throwable instanceof ThreadDeath) throw throwable; // Paper
                          // Paper start - Prevent block entity and entity crashes
 diff --git a/src/main/java/net/minecraft/world/level/pathfinder/PathFinder.java b/src/main/java/net/minecraft/world/level/pathfinder/PathFinder.java
-index 8aa4ac3a6affbe888d6084a27b668c58dfda6c79..61d5fe8e5344a6cb94d427859488c34821c8a3f6 100644
+index d1e1f12451058f7f276f8277536a4c0a4d736601..ad8b94cd37eb00c50af5b9c51c35b098a9ad67a3 100644
 --- a/src/main/java/net/minecraft/world/level/pathfinder/PathFinder.java
 +++ b/src/main/java/net/minecraft/world/level/pathfinder/PathFinder.java
 @@ -12,7 +12,6 @@ import java.util.function.Function;
@@ -1932,7 +1951,7 @@ index 8aa4ac3a6affbe888d6084a27b668c58dfda6c79..61d5fe8e5344a6cb94d427859488c348
          // Set<Target> set = positions.keySet();
          startNode.g = 0.0F;
          startNode.h = this.getBestH(startNode, positions); // Paper - optimize collection
-@@ -123,7 +120,6 @@ public class PathFinder {
+@@ -122,7 +119,6 @@ public class PathFinder {
              if (best == null || comparator.compare(path, best) < 0)
                  best = path;
          }
@@ -1962,10 +1981,10 @@ index 3ddf6ab00de2456ebf504985b88994f970e3b5c4..3b2eb7738380c9385c0227e6f04e3c16
          CompletableFuture<?>[] acompletablefuture = (CompletableFuture[]) LootDataType.values().map((lootdatatype) -> {
              return LootDataManager.scheduleElementParse(lootdatatype, manager, prepareExecutor, map);
 diff --git a/src/main/java/net/minecraft/world/ticks/LevelTicks.java b/src/main/java/net/minecraft/world/ticks/LevelTicks.java
-index 1d7c663fa0e550bd0cfb9a4b83ccd7e2968666f0..cf685940e09251bef1a3d06f1e2468ce4ff46cc5 100644
+index 7a69564572357a7acc043e35b9c113beeb738951..6e24b2c1b9ac9f1be02a6cc88085cbbcbfee1a02 100644
 --- a/src/main/java/net/minecraft/world/ticks/LevelTicks.java
 +++ b/src/main/java/net/minecraft/world/ticks/LevelTicks.java
-@@ -23,7 +23,6 @@ import net.minecraft.Util;
+@@ -24,14 +24,12 @@ import net.minecraft.Util;
  import net.minecraft.core.BlockPos;
  import net.minecraft.core.SectionPos;
  import net.minecraft.core.Vec3i;
@@ -1973,16 +1992,15 @@ index 1d7c663fa0e550bd0cfb9a4b83ccd7e2968666f0..cf685940e09251bef1a3d06f1e2468ce
  import net.minecraft.world.level.ChunkPos;
  import net.minecraft.world.level.levelgen.structure.BoundingBox;
  
-@@ -32,7 +31,6 @@ public class LevelTicks<T> implements LevelTickAccess<T> {
-         return ScheduledTick.INTRA_TICK_DRAIN_ORDER.compare(a.peek(), b.peek());
-     };
+ public class LevelTicks<T> implements LevelTickAccess<T> {
+     private static final Comparator<LevelChunkTicks<?>> CONTAINER_DRAIN_ORDER = (a, b) -> ScheduledTick.INTRA_TICK_DRAIN_ORDER.compare(a.peek(), b.peek());
      private final LongPredicate tickCheck;
 -    private final Supplier<ProfilerFiller> profiler;
      private final Long2ObjectMap<LevelChunkTicks<T>> allContainers = new Long2ObjectOpenHashMap<>();
-     private final Long2LongMap nextTickForContainer = Util.make(new Long2LongOpenHashMap(), (map) -> {
-         map.defaultReturnValue(Long.MAX_VALUE);
-@@ -48,9 +46,8 @@ public class LevelTicks<T> implements LevelTickAccess<T> {
- 
+     private final Long2LongMap nextTickForContainer = Util.make(new Long2LongOpenHashMap(), map -> map.defaultReturnValue(Long.MAX_VALUE));
+     private final Queue<LevelChunkTicks<T>> containersToTick = new PriorityQueue<>(CONTAINER_DRAIN_ORDER);
+@@ -44,9 +42,8 @@ public class LevelTicks<T> implements LevelTickAccess<T> {
+         }
      };
  
 -    public LevelTicks(LongPredicate tickingFutureReadyPredicate, Supplier<ProfilerFiller> profilerGetter) {
@@ -1992,7 +2010,7 @@ index 1d7c663fa0e550bd0cfb9a4b83ccd7e2968666f0..cf685940e09251bef1a3d06f1e2468ce
      }
  
      public void addContainer(ChunkPos pos, LevelChunkTicks<T> scheduler) {
-@@ -86,20 +83,13 @@ public class LevelTicks<T> implements LevelTickAccess<T> {
+@@ -81,20 +78,13 @@ public class LevelTicks<T> implements LevelTickAccess<T> {
      }
  
      public void tick(long time, int maxTicks, BiConsumer<BlockPos, T> ticker) {

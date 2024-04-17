@@ -31,15 +31,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/ai/targeting/TargetingConditions.java b/src/main/java/net/minecraft/world/entity/ai/targeting/TargetingConditions.java
-index c8a80c1b2fedff22e8a877d466062375ffb2f0d7..29963fbccdd9adadcf46970473ff1fccc68572f0 100644
+index d2f0c3b26d4beedb49d86e0242d843590d469d02..68bc8699a9389d118411ea7134ea0e0588adf8dc 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/targeting/TargetingConditions.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/targeting/TargetingConditions.java
-@@ -75,9 +75,18 @@ public class TargetingConditions {
+@@ -76,9 +76,18 @@ public class TargetingConditions {
                  }
  
-                 if (this.range > 0.0D) {
--                    double d = this.testInvisible ? targetEntity.getVisibilityPercent(baseEntity) : 1.0D;
--                    double e = Math.max((this.useFollowRange ? this.getFollowRange(baseEntity) : this.range) * d, 2.0D); // Paper - Fix MC-145656
+                 if (this.range > 0.0) {
+-                    double d = this.testInvisible ? targetEntity.getVisibilityPercent(baseEntity) : 1.0;
+-                    double e = Math.max((this.useFollowRange ? this.getFollowRange(baseEntity) : this.range) * d, 2.0); // Paper - Fix MC-145656
 +                    // Gale start - Airplane - check targeting range before getting visibility
 +                    // d = invisibility percent, e = follow range adjusted for invisibility, f = distance
                      double f = baseEntity.distanceToSqr(targetEntity.getX(), targetEntity.getY(), targetEntity.getZ());
@@ -50,7 +50,7 @@ index c8a80c1b2fedff22e8a877d466062375ffb2f0d7..29963fbccdd9adadcf46970473ff1fcc
 +                    }
 +
 +                    double d = this.testInvisible ? targetEntity.getVisibilityPercent(baseEntity) : 1.0D;
-+                    double e = Math.max((followRangeRaw) * d, 2.0D); // Paper
++                    double e = Math.max((followRangeRaw) * d, 2.0D); // Paper - Fix MC-145656
 +                    // Gale end - Airplane - check targeting range before getting visibility
                      if (f > e * e) {
                          return false;

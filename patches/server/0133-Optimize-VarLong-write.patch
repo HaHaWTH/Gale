@@ -21,7 +21,7 @@ Given that we do a lot of varint writing as well, this should provide a small pe
 This includes a test to ensure that the behavior is as expected and fixes the initialization loop so that the correct results will be given. Much thanks to @octylFractal for acting as my duck while trying to figure this out.
 
 diff --git a/src/main/java/net/minecraft/network/VarLong.java b/src/main/java/net/minecraft/network/VarLong.java
-index 4c1fbf3e2e6cfaf5f5db199b232d007ec6a9d226..10546fb8b47b54989f5f98ddf37f202699abfb6d 100644
+index b73a50fa8465ea4d392a65146eb2775a50917290..a584a44680a034be4f9848cbfea4af4c87d8de7d 100644
 --- a/src/main/java/net/minecraft/network/VarLong.java
 +++ b/src/main/java/net/minecraft/network/VarLong.java
 @@ -54,6 +54,127 @@ public class VarLong {
@@ -149,7 +149,7 @@ index 4c1fbf3e2e6cfaf5f5db199b232d007ec6a9d226..10546fb8b47b54989f5f98ddf37f2026
 +
 +    static ByteBuf writeOriginal(ByteBuf buf, long l) { // public -> package-private
 +        // Gale end - Velocity - optimized VarLong#write
-         while((l & -128L) != 0L) {
+         while ((l & -128L) != 0L) {
              buf.writeByte((int)(l & 127L) | 128);
              l >>>= 7;
 diff --git a/src/test/java/net/minecraft/network/VarIntLongTest.java b/src/test/java/net/minecraft/network/VarIntLongTest.java
