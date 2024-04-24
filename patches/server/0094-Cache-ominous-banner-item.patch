@@ -26,10 +26,10 @@ index 96f5ccfa0369ca5dd7a327126dbe9b3cfe86ec1b..e4f1c486639d3488b40fe22ac6c4764c
  
      public boolean matches(@Nullable Entity entity) {
 diff --git a/src/main/java/net/minecraft/world/entity/raid/Raid.java b/src/main/java/net/minecraft/world/entity/raid/Raid.java
-index 5a0a6de4c6f0d554b9efbb8b3dcf4e0c5bee7baf..ea0df00966cf9900a8a0153099bbb04e5b47116d 100644
+index d422f6fee7c0fb5ee2f751ede3b894846e61374c..541f6491b8578ba9681b6937f9df02b1a742a5cd 100644
 --- a/src/main/java/net/minecraft/world/entity/raid/Raid.java
 +++ b/src/main/java/net/minecraft/world/entity/raid/Raid.java
-@@ -706,7 +706,7 @@ public class Raid {
+@@ -716,7 +716,7 @@ public class Raid {
          this.level.getRaids().setDirty();
      }
  
@@ -38,7 +38,7 @@ index 5a0a6de4c6f0d554b9efbb8b3dcf4e0c5bee7baf..ea0df00966cf9900a8a0153099bbb04e
          ItemStack itemstack = new ItemStack(Items.WHITE_BANNER);
          CompoundTag nbttagcompound = new CompoundTag();
          ListTag nbttaglist = (new BannerPattern.Builder()).addPattern(BannerPatterns.RHOMBUS_MIDDLE, DyeColor.CYAN).addPattern(BannerPatterns.STRIPE_BOTTOM, DyeColor.LIGHT_GRAY).addPattern(BannerPatterns.STRIPE_CENTER, DyeColor.GRAY).addPattern(BannerPatterns.BORDER, DyeColor.LIGHT_GRAY).addPattern(BannerPatterns.STRIPE_MIDDLE, DyeColor.BLACK).addPattern(BannerPatterns.HALF_HORIZONTAL, DyeColor.LIGHT_GRAY).addPattern(BannerPatterns.CIRCLE_MIDDLE, DyeColor.LIGHT_GRAY).addPattern(BannerPatterns.BORDER, DyeColor.BLACK).toListTag();
-@@ -718,6 +718,14 @@ public class Raid {
+@@ -728,6 +728,14 @@ public class Raid {
          return itemstack;
      }
  

@@ -74,10 +74,10 @@ index 91497f5e6c07fcf1b05eca6846c51e1a15ed3bc0..32ba46c80b083cb3ef47bc0d4d393809
          this.currentState = FishingHook.FishHookState.FLYING;
          this.noCulling = true;
 diff --git a/src/main/java/net/minecraft/world/entity/raid/Raid.java b/src/main/java/net/minecraft/world/entity/raid/Raid.java
-index ea0df00966cf9900a8a0153099bbb04e5b47116d..1168465f6b9414b08680660413c62967cd1e95ee 100644
+index 541f6491b8578ba9681b6937f9df02b1a742a5cd..e5b2329efdddb697d9a50462f6a1910482e00af4 100644
 --- a/src/main/java/net/minecraft/world/entity/raid/Raid.java
 +++ b/src/main/java/net/minecraft/world/entity/raid/Raid.java
-@@ -110,7 +110,7 @@ public class Raid {
+@@ -115,7 +115,7 @@ public class Raid {
  
      public Raid(int id, ServerLevel world, BlockPos pos) {
          this.raidEvent = new ServerBossEvent(Raid.RAID_NAME_COMPONENT, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_10);
@@ -86,7 +86,7 @@ index ea0df00966cf9900a8a0153099bbb04e5b47116d..1168465f6b9414b08680660413c62967
          this.waveSpawnPos = Optional.empty();
          this.id = id;
          this.level = world;
-@@ -124,7 +124,7 @@ public class Raid {
+@@ -129,7 +129,7 @@ public class Raid {
  
      public Raid(ServerLevel world, CompoundTag nbt) {
          this.raidEvent = new ServerBossEvent(Raid.RAID_NAME_COMPONENT, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_10);

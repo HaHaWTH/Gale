@@ -13,18 +13,18 @@ As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
 Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/raid/Raid.java b/src/main/java/net/minecraft/world/entity/raid/Raid.java
-index eaa2943b667967f93f28d9d794d702fdaeb670ec..5a0a6de4c6f0d554b9efbb8b3dcf4e0c5bee7baf 100644
+index bf2c23fad919820512ce031cf28a000b249b2876..d422f6fee7c0fb5ee2f751ede3b894846e61374c 100644
 --- a/src/main/java/net/minecraft/world/entity/raid/Raid.java
 +++ b/src/main/java/net/minecraft/world/entity/raid/Raid.java
-@@ -106,6 +106,7 @@ public class Raid {
-     private Raid.RaidStatus status;
-     private int celebrationTicks;
-     private Optional<BlockPos> waveSpawnPos;
+@@ -111,6 +111,7 @@ public class Raid {
+     private static final org.bukkit.craftbukkit.persistence.CraftPersistentDataTypeRegistry PDC_TYPE_REGISTRY = new org.bukkit.craftbukkit.persistence.CraftPersistentDataTypeRegistry();
+     public final org.bukkit.craftbukkit.persistence.CraftPersistentDataContainer persistentDataContainer = new org.bukkit.craftbukkit.persistence.CraftPersistentDataContainer(PDC_TYPE_REGISTRY);
+     // Paper end
 +    private boolean isBarDirty; // Gale - Lithium - update boss bar within tick
  
      public Raid(int id, ServerLevel world, BlockPos pos) {
          this.raidEvent = new ServerBossEvent(Raid.RAID_NAME_COMPONENT, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_10);
-@@ -272,6 +273,12 @@ public class Raid {
+@@ -282,6 +283,12 @@ public class Raid {
      }
  
      public void tick() {
@@ -37,7 +37,7 @@ index eaa2943b667967f93f28d9d794d702fdaeb670ec..5a0a6de4c6f0d554b9efbb8b3dcf4e0c
          if (!this.isStopped()) {
              if (this.status == Raid.RaidStatus.ONGOING) {
                  boolean flag = this.active;
-@@ -642,6 +649,12 @@ public class Raid {
+@@ -652,6 +659,12 @@ public class Raid {
      }
  
      public void updateBossbar() {

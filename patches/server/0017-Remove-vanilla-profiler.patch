@@ -164,7 +164,7 @@ index e9775b4506909bee65a74964f0d5391a0513de1d..1c4dd8acdcd571aceffe4b78599ca2c7
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 4062e400c4ad6f46e80405ec45864925a9e40ea9..d86c888095ca360bccca515dc4941f46c6944e0e 100644
+index f551044d6cebaec0f2fe8668900727b0157bb6f3..ba7338ca9b025dcb30697ebf4b9db24c970ecd55 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -106,18 +106,9 @@ import net.minecraft.util.RandomSource;
@@ -475,7 +475,7 @@ index 4062e400c4ad6f46e80405ec45864925a9e40ea9..d86c888095ca360bccca515dc4941f46
      public int getMaxChainedNeighborUpdates() {
          return 1000000;
      }
-@@ -2849,56 +2721,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2845,56 +2717,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          }
      }
  
@@ -1323,7 +1323,7 @@ index e9bb7feb591032904516d1b9374f486d8a7d066c..c49b788af3f66edaef4aa153e6cb3232
          if (((ServerLevel) this.level()).hasEntityMoveEvent && !(this instanceof net.minecraft.world.entity.player.Player)) {
              if (this.xo != this.getX() || this.yo != this.getY() || this.zo != this.getZ() || this.yRotO != this.getYRot() || this.xRotO != this.getXRot()) {
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 2439f8d48daca7329049436414f06a36b4b79029..dee9ee5e5917f48b8e1c078710c6d67de6de78d5 100644
+index d2c92df28475f0a32a0134324eb0a5609a9afb99..c7f328945ac11626bab2724475c2aa41a69fffa0 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
 @@ -147,8 +147,10 @@ public abstract class Mob extends LivingEntity implements Targeting {

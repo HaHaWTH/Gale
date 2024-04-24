@@ -434,7 +434,7 @@ index d5e9c65d8664f509bec419fddc7b85042473268e..9805ee5989d813f45b5b0829d73ebce3
          return ret;
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index f5d6bf230ec6ec24ae22669b32ce6e85388475c3..c9f3ac6f18eddb3f45024c562e7d1bfb9730e9d2 100644
+index 26ff2e2ffb7cbc206a4a52600f173a4dcd084ac2..6d7d6858c021d2d14a83bbe40404c749c449e589 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -28,6 +28,8 @@ import java.util.function.UnaryOperator;
@@ -616,7 +616,7 @@ index 9c85df84d820ff664b446cfbcb6cf322dde7289b..4489bd7c6b29ea6db432e62bb113fdc9
  
          for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index dee9ee5e5917f48b8e1c078710c6d67de6de78d5..32f2132ead256e18531fa1abdd5e764f35573cd6 100644
+index c7f328945ac11626bab2724475c2aa41a69fffa0..9df992ca013db3f54026aa5ebd3eb3d49b7c3969 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
 @@ -1063,7 +1063,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
@@ -646,7 +646,7 @@ index dee9ee5e5917f48b8e1c078710c6d67de6de78d5..32f2132ead256e18531fa1abdd5e764f
          int i = aenumitemslot.length;
  
          for (int j = 0; j < i; ++j) {
-@@ -1432,7 +1432,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
+@@ -1433,7 +1433,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
                  t0.setInvulnerable(this.isInvulnerable());
                  if (flag) {
                      t0.setCanPickUpLoot(this.canPickUpLoot());
