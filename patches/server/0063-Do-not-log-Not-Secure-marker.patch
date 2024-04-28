@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/io/papermc/paper/adventure/ChatProcessor.java b/src/main/java/io/papermc/paper/adventure/ChatProcessor.java
-index 1d78e8beacbc93ef2cd6beb418edca843f8a5429..c5ad3034e8298e345733340d2b6284ef05bb4713 100644
+index e83f9517b31c5171b8dc75ab63a5bfe654221c84..8b95af95976309f31eb2493049a6a7440c505608 100644
 --- a/src/main/java/io/papermc/paper/adventure/ChatProcessor.java
 +++ b/src/main/java/io/papermc/paper/adventure/ChatProcessor.java
 @@ -44,6 +44,8 @@ import org.bukkit.event.player.PlayerChatEvent;
@@ -29,10 +29,10 @@ index 1d78e8beacbc93ef2cd6beb418edca843f8a5429..c5ad3034e8298e345733340d2b6284ef
      }
  
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 152ecf384ac91c39700c6e16b0cd342b8b827bf9..40fba831975d21eb4ba9aacbf25cdaca082de6aa 100644
+index 523f183f2a8b8f97088eab57f9b28e777b93bef0..6931003ca7808fddccd648a3eb2dc41b38ec97bd 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -100,6 +100,7 @@ import net.minecraft.world.phys.Vec3;
+@@ -102,6 +102,7 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.scores.DisplaySlot;
  import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
@@ -40,7 +40,7 @@ index 152ecf384ac91c39700c6e16b0cd342b8b827bf9..40fba831975d21eb4ba9aacbf25cdaca
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -1433,7 +1434,7 @@ public abstract class PlayerList {
+@@ -1432,7 +1433,7 @@ public abstract class PlayerList {
          // Paper end
          boolean flag = this.verifyChatTrusted(message);
  

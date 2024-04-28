@@ -26,13 +26,13 @@ search to attempt respawning the ender dragon whenever a player places
 an end crystal.
 
 diff --git a/src/main/java/net/minecraft/world/item/EndCrystalItem.java b/src/main/java/net/minecraft/world/item/EndCrystalItem.java
-index e1696f6b77df4c8fceaece64701d4db78b0a4c42..a0bc8bb8d88e96457a2be0befe1fd69ef4973e11 100644
+index dd1bdb4bb87a3a59c229ba76b36841d199717624..ded33fd166cbb95917f7e321875acc4222caff46 100644
 --- a/src/main/java/net/minecraft/world/item/EndCrystalItem.java
 +++ b/src/main/java/net/minecraft/world/item/EndCrystalItem.java
-@@ -53,11 +53,13 @@ public class EndCrystalItem extends Item {
+@@ -54,11 +54,13 @@ public class EndCrystalItem extends Item {
                          // CraftBukkit end
                          world.addFreshEntity(entityendercrystal);
-                         world.gameEvent((Entity) context.getPlayer(), GameEvent.ENTITY_PLACE, blockposition1);
+                         world.gameEvent((Entity) context.getPlayer(), (Holder) GameEvent.ENTITY_PLACE, blockposition1);
 +                        if (world.galeConfig().gameplayMechanics.tryRespawnEnderDragonAfterEndCrystalPlace) { // Gale - Pufferfish - make ender dragon respawn attempt after placing end crystals configurable
                          EndDragonFight enderdragonbattle = ((ServerLevel) world).getDragonFight();
  

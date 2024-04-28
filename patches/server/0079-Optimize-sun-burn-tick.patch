@@ -13,10 +13,10 @@ As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 8d43764a305b4a7fcc34abc041dac735fc168e62..8e4314b4c8acc059dfc5878d4982fa9a6ba9fab1 100644
+index 2ff752dfc7dcee936611613da934ccebe45c1cae..cb4f71f93f45ec1e91e7ca883cfce93c2260c990 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -308,7 +308,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -311,7 +311,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
      public double xo;
      public double yo;
      public double zo;
@@ -25,7 +25,7 @@ index 8d43764a305b4a7fcc34abc041dac735fc168e62..8e4314b4c8acc059dfc5878d4982fa9a
      public BlockPos blockPosition; // Gale - Pufferfish - optimize entity coordinate key - private -> public
      private ChunkPos chunkPosition;
      private Vec3 deltaMovement;
-@@ -2018,9 +2018,17 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -2073,9 +2073,17 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
      /** @deprecated */
      @Deprecated
      public float getLightLevelDependentMagicValue() {
@@ -45,11 +45,11 @@ index 8d43764a305b4a7fcc34abc041dac735fc168e62..8e4314b4c8acc059dfc5878d4982fa9a
          this.absMoveTo(x, y, z);
          this.setYRot(yaw % 360.0F);
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 9df992ca013db3f54026aa5ebd3eb3d49b7c3969..33afd520babc33c5b296b39e2bd6c3586230cd84 100644
+index 1b97a429c05ae8f77af3cea4852bac3966dd54e0..e0e7c35fa9c9395eec5b4504e250ee2d58f98e30 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
-@@ -1699,13 +1699,29 @@ public abstract class Mob extends LivingEntity implements Targeting {
- 
+@@ -1817,13 +1817,29 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Targeti
+         return flag;
      }
  
 +    // Gale start - JettPack - optimize sun burn tick - cache eye blockpos

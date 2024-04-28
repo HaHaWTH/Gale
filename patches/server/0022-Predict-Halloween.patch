@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/world/entity/ambient/Bat.java b/src/main/java/net/minecraft/world/entity/ambient/Bat.java
-index 6b614818b14ecfc8fc82b523eeb7e21fdf9bf1ba..685823c4c6f175460fdeb84053ea115c24a67909 100644
+index dc27ddf5131e7398a5390a5187261d4c7fb6ccaa..f223e369dd8d781e32e1f06572b2ae717afd6f32 100644
 --- a/src/main/java/net/minecraft/world/entity/ambient/Bat.java
 +++ b/src/main/java/net/minecraft/world/entity/ambient/Bat.java
 @@ -1,6 +1,6 @@
@@ -18,12 +18,11 @@ index 6b614818b14ecfc8fc82b523eeb7e21fdf9bf1ba..685823c4c6f175460fdeb84053ea115c
  import java.time.temporal.ChronoField;
  import javax.annotation.Nullable;
  import net.minecraft.core.BlockPos;
-@@ -241,12 +241,62 @@ public class Bat extends AmbientCreature {
+@@ -239,12 +239,60 @@ public class Bat extends AmbientCreature {
          }
      }
  
 +    // Gale start - predict Halloween
-+
 +    /**
 +     * The 1-indexed month of the year that Halloween starts (inclusive).
 +     */
@@ -55,7 +54,6 @@ index 6b614818b14ecfc8fc82b523eeb7e21fdf9bf1ba..685823c4c6f175460fdeb84053ea115c
 +     * Will be 0 while not computed yet.
 +     */
 +    private static long nextHalloweenEnd = 0;
-+
 +    // Gale end - predict Halloween
 +
      private static boolean isHalloween() {
@@ -84,4 +82,4 @@ index 6b614818b14ecfc8fc82b523eeb7e21fdf9bf1ba..685823c4c6f175460fdeb84053ea115c
 +        // Gale end - predict Halloween
      }
  
-     @Override
+     private void setupAnimationStates() {

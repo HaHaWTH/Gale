@@ -221,10 +221,10 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index af2ced430f317ea5bcef154af014c0a18b2ffc72..b9d7ca20d2284a227c95b9c9e03549f28dc60a28 100644
+index ee6002acca215015d00ea0bfc2b720ea0087145e..77df57490bf3c107eff5527506256610fd8fe1f3 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -87,7 +87,7 @@ tasks.jar {
+@@ -94,7 +94,7 @@ tasks.jar {
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
@@ -233,9 +233,9 @@ index af2ced430f317ea5bcef154af014c0a18b2ffc72..b9d7ca20d2284a227c95b9c9e03549f2
              "Implementation-Vendor" to date, // Paper
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
-@@ -221,3 +221,22 @@ tasks.registerRunTask("runDev") {
-     classpath(sourceSets.main.map { it.runtimeClasspath })
-     jvmArgs("-DPaper.pushPaperAssetsRoot=true")
+@@ -233,3 +233,22 @@ tasks.registerRunTask("runReobfPaperclip") {
+     classpath(rootProject.tasks.named<io.papermc.paperweight.tasks.CreatePaperclipJar>("createReobfPaperclipJar").flatMap { it.outputZip })
+     mainClass.set(null as String?)
  }
 +
 +// Gale start - package license into jar
@@ -427,10 +427,10 @@ index c5d5648f4ca603ef2b1df723b58f9caf4dd3c722..e45e6b44b2a8f2cdae6e0048a812b921
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 27db614d46dffc2d10f18d79cc5a084f3421d86b..4318f6b4f83709ae2f1d4d8346e79b3e433abf19 100644
+index 8dc2f9df367c849ca333bf1a1fd92ff91617b548..f77a12e0ef3852b6de0f7b507bba4803d2d70d49 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -952,7 +952,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -960,7 +960,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          shutdownThread = Thread.currentThread();
          org.spigotmc.WatchdogThread.doStop(); // Paper
          if (!isSameThread()) {
@@ -445,7 +445,7 @@ index 27db614d46dffc2d10f18d79cc5a084f3421d86b..4318f6b4f83709ae2f1d4d8346e79b3e
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
                  try {
-@@ -1865,7 +1871,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1924,7 +1930,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -455,10 +455,10 @@ index 27db614d46dffc2d10f18d79cc5a084f3421d86b..4318f6b4f83709ae2f1d4d8346e79b3e
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index c490a29bcf7410bc54959ee71375605964379ed5..af7206ac02397971acc1505f76c666327cdae8b3 100644
+index 05e304f9fc8d0291fa779da589bd060ef4165b49..419b99908b0e798c229b2f92e14f45c4356330cb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -266,7 +266,7 @@ import javax.annotation.Nullable; // Paper
+@@ -268,7 +268,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {
@@ -481,10 +481,10 @@ index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e58721
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 3c7a771c48cc2732cc038ca11bb93ec5f8c2d667..53b73cac093797de47a9e61a5fdab44aced54ebb 100644
+index 573b93fc4e392456af2f2cf3900a9d7014f67a22..7f11f35ba6ec90c06d6d224b5a13e2a114cd35b2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -502,7 +502,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -508,7 +508,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
@@ -709,7 +709,7 @@ index 0000000000000000000000000000000000000000..3d674eca7d20202d8f811c5c3e3946a1
 +
 +}
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index 9e638f72f180ff5ef63ec3dd6cf548c53f7bd4a5..7e3efdc59ce2c84403d0c2b77c1c48f3e28a28a2 100644
+index 6db566e3111ec08a99aa429624979cb83a85e272..5e556d7f3e444a7b7d7de70fa4efd50ef2a6dc8b 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
 @@ -155,14 +155,20 @@ public final class WatchdogThread extends io.papermc.paper.util.TickThread // Pa

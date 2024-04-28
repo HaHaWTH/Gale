@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index fbb453420aa6f4688aa6b2bd07b099aa5e8b912e..dc38b98d4ec1eec60725fcb00c09ac7a3ca427a9 100644
+index 1549876d9888571449d54461024c331580ea7bf7..d0fa080acc1877fe66672387c0b1f00e6cebf041 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -4405,16 +4405,18 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -4462,16 +4462,18 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
      }
  
      public boolean updateFluidHeightAndDoFluidPushing(TagKey<Fluid> tag, double speed) {
@@ -60,7 +60,7 @@ index fbb453420aa6f4688aa6b2bd07b099aa5e8b912e..dc38b98d4ec1eec60725fcb00c09ac7a
              double d1 = 0.0D;
              boolean flag = this.isPushedByFluid();
              boolean flag1 = false;
-@@ -4422,14 +4424,61 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -4479,14 +4481,61 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
              int k1 = 0;
              BlockPos.MutableBlockPos blockposition_mutableblockposition = new BlockPos.MutableBlockPos();
  
@@ -128,7 +128,7 @@ index fbb453420aa6f4688aa6b2bd07b099aa5e8b912e..dc38b98d4ec1eec60725fcb00c09ac7a
  
                              if (d2 >= axisalignedbb.minY) {
                                  flag1 = true;
-@@ -4451,9 +4500,12 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -4508,9 +4557,12 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                                  // CraftBukkit end
                              }
                          }
@@ -142,7 +142,7 @@ index fbb453420aa6f4688aa6b2bd07b099aa5e8b912e..dc38b98d4ec1eec60725fcb00c09ac7a
              if (vec3d.length() > 0.0D) {
                  if (k1 > 0) {
 diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
-index 796bbef3544e06b8e7aac7e8ac5f740a2613f4bd..f34b5ecf71602c95208d0f72e56c636b3a2bc34a 100644
+index a2a5aef769ee8bb638a5a9f3da9812fa4a85dda5..121459fdb47904d448f86362f535765c713a4b67 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
 @@ -25,6 +25,7 @@ public class LevelChunkSection {

@@ -22,10 +22,10 @@ you to easily disable books, should you want to preemptively remove this
 functionality before additional exploits are found.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index ab5b259d8f72022c875cae73be25fe2da346c6b3..f6b847f9cf1a97f186ba9a9d1d540ef56c41ebc4 100644
+index 8e67853a7a93fa736c147e8b2df537746dc8e94f..cb3b10cc96c15a4894b3239110ee60f4aa130e05 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -186,6 +186,8 @@ import net.minecraft.world.phys.Vec3;
+@@ -193,6 +193,8 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.phys.shapes.BooleanOp;
  import net.minecraft.world.phys.shapes.Shapes;
  import net.minecraft.world.phys.shapes.VoxelShape;
@@ -34,7 +34,7 @@ index ab5b259d8f72022c875cae73be25fe2da346c6b3..f6b847f9cf1a97f186ba9a9d1d540ef5
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -1135,6 +1137,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1154,6 +1156,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
  
      @Override
      public void handleEditBook(ServerboundEditBookPacket packet) {
@@ -45,7 +45,7 @@ index ab5b259d8f72022c875cae73be25fe2da346c6b3..f6b847f9cf1a97f186ba9a9d1d540ef5
 +        // Gale end - Pufferfish - make book writing configurable
          // Paper start - Book size limits
          if (!this.cserver.isPrimaryThread()) {
-             List<String> pageList = packet.getPages();
+             List<String> pageList = packet.pages();
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.java b/src/main/java/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.java
 index 0a808c5d242b2d9bea82d9d219227fbaf5741bf4..7d66126c1f5957c109a2426d53f5d0072886309b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.java

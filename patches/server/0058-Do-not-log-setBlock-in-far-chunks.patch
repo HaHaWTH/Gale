@@ -37,10 +37,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/level/WorldGenRegion.java b/src/main/java/net/minecraft/server/level/WorldGenRegion.java
-index 5ece375eaf6bcc61864997a389bb5e24625e4505..12898276aae034673484cd60cb598a520a47ce21 100644
+index 1351423a12c19a01f602a202832372a399e6a867..59b7d9c9a2a0203f8135a9dcdce302bbf0b2d0f4 100644
 --- a/src/main/java/net/minecraft/server/level/WorldGenRegion.java
 +++ b/src/main/java/net/minecraft/server/level/WorldGenRegion.java
-@@ -54,6 +54,7 @@ import net.minecraft.world.phys.AABB;
+@@ -58,6 +58,7 @@ import net.minecraft.world.phys.AABB;
  import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.ticks.LevelTickAccess;
  import net.minecraft.world.ticks.WorldGenTickAccess;
@@ -48,14 +48,14 @@ index 5ece375eaf6bcc61864997a389bb5e24625e4505..12898276aae034673484cd60cb598a52
  import org.slf4j.Logger;
  
  public class WorldGenRegion implements WorldGenLevel {
-@@ -318,6 +319,7 @@ public class WorldGenRegion implements WorldGenLevel {
+@@ -326,6 +327,7 @@ public class WorldGenRegion implements WorldGenLevel {
              return true;
          } else {
              // Paper start - Buffer OOB setBlock calls
 +            if (GaleGlobalConfiguration.get().logToConsole.setBlockInFarChunk) // Gale - Purpur - do not log setBlock in far chunks
              if (!hasSetFarWarned) {
-             Util.logAndPauseIfInIde("Detected setBlock in a far chunk [" + i + ", " + j + "], pos: " + pos + ", status: " + this.generatingStatus + (this.currentlyGenerating == null ? "" : ", currently generating: " + (String) this.currentlyGenerating.get()));
-             hasSetFarWarned = true;
+             Util.logAndPauseIfInIde("Detected setBlock in a far chunk [" + i + ", " + j + "], pos: " + String.valueOf(pos) + ", status: " + String.valueOf(this.generatingStatus) + (this.currentlyGenerating == null ? "" : ", currently generating: " + (String) this.currentlyGenerating.get()));
+                 hasSetFarWarned = true;
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 index 9c8c283aa88165d862c649b22fd86e61ec8e84d7..281d01126f623d0541b1676bf79bf1dd3020d250 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java

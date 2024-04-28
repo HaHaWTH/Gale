@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 0948e253b95312998d498be7cd7a123bbe06376b..84021917524447938cb7f0877647565698f7d4e1 100644
+index d934ba31e397fae2498e7c6a9499bc5eb98eb897..0c0396e0d3e23485a069a8b6bbd637826a7b1119 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -218,6 +218,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
@@ -50,8 +50,8 @@ index 0948e253b95312998d498be7cd7a123bbe06376b..84021917524447938cb7f08776475656
      protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config; Async-Anti-Xray: Pass executor // Gale - Gale configuration // Gale - Purpur - remove vanilla profiler
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig(((net.minecraft.world.level.storage.PrimaryLevelData) worlddatamutable).getLevelName()); // Spigot
          this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper - create paper world config
-@@ -240,6 +249,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
-         });
+@@ -237,6 +246,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+         this.dimensionTypeRegistration = holder;
          final DimensionType dimensionmanager = (DimensionType) holder.value();
  
 +        // Gale start - Airplane - inline level height

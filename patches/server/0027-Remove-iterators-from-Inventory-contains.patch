@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/player/Inventory.java b/src/main/java/net/minecraft/world/entity/player/Inventory.java
-index 96d664c28738d6090f7067761c2978dd1aa0fd0e..e89942d80b435acbeb7a1d00491c7fdf18e89a3c 100644
+index ca7fbe4f8c1e1d2fb90095aa35be4dda3029c23e..4ef55f51f98a4b5c164b40728efd82052c5bf762 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Inventory.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Inventory.java
-@@ -687,6 +687,8 @@ public class Inventory implements Container, Nameable {
+@@ -643,6 +643,8 @@ public class Inventory implements Container, Nameable {
      }
  
      public boolean contains(ItemStack stack) {
@@ -43,22 +43,70 @@ index 96d664c28738d6090f7067761c2978dd1aa0fd0e..e89942d80b435acbeb7a1d00491c7fdf
          Iterator iterator = this.compartments.iterator();
  
          while (iterator.hasNext()) {
-@@ -701,7 +703,18 @@ public class Inventory implements Container, Nameable {
-                 }
-             }
-         }
-+         */
+@@ -679,25 +681,34 @@ public class Inventory implements Container, Nameable {
+ 
+         return false;
+     }
++    */
 +        for (int i = 0; i < this.compartments.size(); i++) {
 +            List<ItemStack> list = this.compartments.get(i);
 +            for (int j = 0; j < list.size(); j++) {
 +                ItemStack itemstack1 = list.get(j);
  
+-    public boolean contains(Predicate<ItemStack> predicate) {
+-        Iterator iterator = this.compartments.iterator();
+-
+-        while (iterator.hasNext()) {
+-            List<ItemStack> list = (List) iterator.next();
+-            Iterator iterator1 = list.iterator();
 +                if (!itemstack1.isEmpty() && ItemStack.isSameItem(itemstack1, stack)) {
 +                    return true;
 +                }
 +            }
 +        }
-+        // Gale end - Airplane - remove iterators from Inventory#contains
++        return false;
++    }
+ 
+-            while (iterator1.hasNext()) {
+-                ItemStack itemstack = (ItemStack) iterator1.next();
++    public boolean containsMatchedMap(Predicate<ItemStack> predicate) {
++        for (int i = 0; i < this.compartments.size(); i++) {
++            List<ItemStack> list = this.compartments.get(i);
++            for (int j = 0; j < list.size(); j++) {
++                ItemStack itemstack1 = list.get(j);
+ 
+-                if (predicate.test(itemstack)) {
++                if (!itemstack1.isEmpty() && predicate.test(itemstack1)) {
+                     return true;
+                 }
+             }
+         }
+-
          return false;
      }
++    // Gale end - Airplane - remove iterators from Inventory#contains
  
+     public void replaceWith(Inventory other) {
+         for (int i = 0; i < this.getContainerSize(); ++i) {
+diff --git a/src/main/java/net/minecraft/world/level/saveddata/maps/MapItemSavedData.java b/src/main/java/net/minecraft/world/level/saveddata/maps/MapItemSavedData.java
+index cf8ae635fce7ea66d4e1ab1dc05575f035fa95ef..973f1d2c1db383eed5fccb7ccbad8f9a6b81d824 100644
+--- a/src/main/java/net/minecraft/world/level/saveddata/maps/MapItemSavedData.java
++++ b/src/main/java/net/minecraft/world/level/saveddata/maps/MapItemSavedData.java
+@@ -294,7 +294,7 @@ public class MapItemSavedData extends SavedData {
+ 
+         Predicate<ItemStack> predicate = MapItemSavedData.mapMatcher(stack);
+ 
+-        if (!player.getInventory().contains(predicate)) {
++        if (!player.getInventory().containsMatchedMap(predicate)) {
+             this.removeDecoration(player.getName().getString());
+         }
+ 
+@@ -302,7 +302,7 @@ public class MapItemSavedData extends SavedData {
+             MapItemSavedData.HoldingPlayer worldmap_worldmaphumantracker1 = (MapItemSavedData.HoldingPlayer) this.carriedBy.get(i);
+             String s = worldmap_worldmaphumantracker1.player.getName().getString();
+ 
+-            if (!worldmap_worldmaphumantracker1.player.isRemoved() && (worldmap_worldmaphumantracker1.player.getInventory().contains(predicate) || stack.isFramed())) {
++            if (!worldmap_worldmaphumantracker1.player.isRemoved() && (worldmap_worldmaphumantracker1.player.getInventory().containsMatchedMap(predicate) || stack.isFramed())) {
+                 if (!stack.isFramed() && worldmap_worldmaphumantracker1.player.level().dimension() == this.dimension && this.trackingPosition) {
+                     this.addDecoration(MapDecorationTypes.PLAYER, worldmap_worldmaphumantracker1.player.level(), s, worldmap_worldmaphumantracker1.player.getX(), worldmap_worldmaphumantracker1.player.getZ(), (double) worldmap_worldmaphumantracker1.player.getYRot(), (Component) null);
+                 }

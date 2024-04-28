@@ -18,7 +18,7 @@ Helps 1.8 Farms let hoppers pick it up before Villager
 due to our hopper changes
 
 diff --git a/src/main/java/net/minecraft/world/entity/ai/behavior/BehaviorUtils.java b/src/main/java/net/minecraft/world/entity/ai/behavior/BehaviorUtils.java
-index 92bd58010e8c89e361e28aec59447349edbbc028..2239c7260638bb25df5b45dbc129bcfe1530bc59 100644
+index d98b28e9488a5a7736719cf656736bb026ec8c7e..74fe07a3737728b67987ef794103346c1e428109 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/behavior/BehaviorUtils.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/behavior/BehaviorUtils.java
 @@ -21,6 +21,7 @@ import net.minecraft.world.entity.ai.memory.NearestVisibleLivingEntities;
@@ -29,7 +29,7 @@ index 92bd58010e8c89e361e28aec59447349edbbc028..2239c7260638bb25df5b45dbc129bcfe
  import net.minecraft.world.item.Item;
  import net.minecraft.world.item.ItemStack;
  import net.minecraft.world.item.ProjectileWeaponItem;
-@@ -101,7 +102,16 @@ public class BehaviorUtils {
+@@ -99,7 +100,16 @@ public class BehaviorUtils {
  
          vec3d2 = vec3d2.normalize().multiply(velocityFactor.x, velocityFactor.y, velocityFactor.z);
          entityitem.setDeltaMovement(vec3d2);

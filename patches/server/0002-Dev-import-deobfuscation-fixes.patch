@@ -34,10 +34,10 @@ index b0d26b0eadb2a43924629424a6c13198aace8f69..bcba8224b9a210bced04ff370a73b306
  
                  for (T executionCommandSource2 : list) {
 diff --git a/src/main/java/net/minecraft/util/ExtraCodecs.java b/src/main/java/net/minecraft/util/ExtraCodecs.java
-index 0530b87c422a6b767c1a18434f93f18f16580785..64dd6f81e24d18df3b5efc87a0cb452759d3697a 100644
+index 4f206e32477d84f4ba16e49d5abd3c28da5cab8f..3c8f05a13d4fb10ac1e0ed444f1bfe665a077033 100644
 --- a/src/main/java/net/minecraft/util/ExtraCodecs.java
 +++ b/src/main/java/net/minecraft/util/ExtraCodecs.java
-@@ -225,7 +225,7 @@ public class ExtraCodecs {
+@@ -224,7 +224,7 @@ public class ExtraCodecs {
                  return combineFunction.apply(object, object2);
              }), pair -> ImmutableList.of(leftFunction.apply((I)pair), rightFunction.apply((I)pair)));
          Codec<I> codec3 = RecordCodecBuilder.<Pair>create(
@@ -46,7 +46,7 @@ index 0530b87c422a6b767c1a18434f93f18f16580785..64dd6f81e24d18df3b5efc87a0cb4527
                          .apply(instance, Pair::of)
              )
              .comapFlatMap(
-@@ -248,7 +248,7 @@ public class ExtraCodecs {
+@@ -247,7 +247,7 @@ public class ExtraCodecs {
                  Optional<Pair<A, T>> optional = dataResult.resultOrPartial(mutableObject::setValue);
                  return optional.isPresent()
                      ? dataResult
@@ -77,7 +77,7 @@ index c9101a3bf0cb2c9e49e0e768b379e8dd816012de..ec7f8ef7bcd0a6cf72d032714c3e1057
                  .put(dynamic.createString("x"), dynamic.createInt(i * 16 + m))
                  .put(dynamic.createString("y"), dynamic.createInt(j * 16 + n))
 diff --git a/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java b/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
-index 71e1a68ae46475e7cdf37f32e101b3ca8847abd3..721dc2881c51a4bbcdaeaf3b309b316d26009535 100644
+index 166b7d87ab88e28d465fb4a5d07c180c10464925..a506f3ef40ec34a89abb73a60cedf3b556585bee 100644
 --- a/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
 +++ b/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
 @@ -155,7 +155,7 @@ public class SurfaceRules {

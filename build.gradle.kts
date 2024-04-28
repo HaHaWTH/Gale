@@ -7,8 +7,7 @@ import kotlin.io.path.deleteRecursively
 plugins {
     java
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "8.1.1" apply false
-    id("io.papermc.paperweight.patcher") version "1.5.15"
+    id("io.papermc.paperweight.patcher") version "1.6.2"
 }
 
 allprojects {
@@ -17,7 +16,7 @@ allprojects {
 
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(17))
+            languageVersion.set(JavaLanguageVersion.of(21))
         }
     }
 }
@@ -27,7 +26,7 @@ val paperMavenPublicUrl = "https://repo.papermc.io/repository/maven-public/"
 subprojects {
     tasks.withType<JavaCompile>().configureEach {
         options.encoding = Charsets.UTF_8.name()
-        options.release.set(17)
+        options.release.set(21)
     }
     tasks.withType<Javadoc> {
         options.encoding = Charsets.UTF_8.name()
@@ -46,6 +45,7 @@ subprojects {
     repositories {
         mavenCentral()
         maven(paperMavenPublicUrl)
+        maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") // TODO - Adventure snapshot
     }
 }
 
@@ -59,7 +59,7 @@ repositories {
 }
 
 dependencies {
-    remapper("net.fabricmc:tiny-remapper:0.10.1:fat")
+    remapper("net.fabricmc:tiny-remapper:0.10.2:fat")
     decompiler("org.vineflower:vineflower:1.10.1")
     paperclip("io.papermc:paperclip:3.0.3")
 }
@@ -109,39 +109,38 @@ tasks.register("printGaleVersion") { // Gale - branding changes
 }
 
 // Gale start - branding changes - package license into jar
-for (classifier in arrayOf("mojmap", "reobf")) {
-    // Based on io.papermc.paperweight.taskcontainers.BundlerJarTasks
-    tasks.named("create${classifier.capitalized()}PaperclipJar") {
-        doLast {
+// Based on io.papermc.paperweight.taskcontainers.BundlerJarTasks
+tasks.named("createMojmapPaperclipJar") {
+    doLast {
 
-            // Based on io.papermc.paperweight.taskcontainers.BundlerJarTasks
-            val jarName = listOfNotNull(
-                project.name,
-                "paperclip",
-                project.version,
-                classifier
-            ).joinToString("-") + ".jar"
+        // Based on io.papermc.paperweight.taskcontainers.BundlerJarTasks
+        val jarName = listOfNotNull(
+            project.name,
+            "paperclip",
+            project.version,
+            "mojmap"
+        ).joinToString("-") + ".jar"
 
-            // Based on io.papermc.paperweight.taskcontainers.BundlerJarTasks
-            val zipFile = layout.buildDirectory.file("libs/$jarName").path
+        // Based on io.papermc.paperweight.taskcontainers.BundlerJarTasks
+        val zipFile = layout.buildDirectory.file("libs/$jarName").path
 
-            val rootDir = io.papermc.paperweight.util.findOutputDir(zipFile)
+        val rootDir = io.papermc.paperweight.util.findOutputDir(zipFile)
 
-            try {
-                io.papermc.paperweight.util.unzip(zipFile, rootDir)
+        try {
+            io.papermc.paperweight.util.unzip(zipFile, rootDir)
 
-                val licenseFileName = "LICENSE.txt"
-                project(":gale-server").projectDir.resolve(licenseFileName).copyTo(rootDir.resolve(licenseFileName).toFile())
+            val licenseFileName = "LICENSE.txt"
+            project(":gale-server").projectDir.resolve(licenseFileName)
+                .copyTo(rootDir.resolve(licenseFileName).toFile())
 
-                io.papermc.paperweight.util.ensureDeleted(zipFile)
+            io.papermc.paperweight.util.ensureDeleted(zipFile)
 
-                io.papermc.paperweight.util.zip(rootDir, zipFile)
-            } finally {
-                @OptIn(kotlin.io.path.ExperimentalPathApi::class)
-                rootDir.deleteRecursively()
-            }
-
+            io.papermc.paperweight.util.zip(rootDir, zipFile)
+        } finally {
+            @OptIn(kotlin.io.path.ExperimentalPathApi::class)
+            rootDir.deleteRecursively()
         }
+
     }
 }
 // Gale end - branding changes - package license into jar

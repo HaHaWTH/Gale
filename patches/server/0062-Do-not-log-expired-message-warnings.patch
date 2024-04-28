@@ -7,18 +7,18 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
-index cb5502ef7a9f4c5dcbbb794371daffb92c456b00..20a369086c0c13735d1a39a2faf23408a96f25f4 100644
+index e5625557d2cd70b19b9db5fd418c243b639188e8..67ab06ccd421f991035360bd037616c9fd5ceeb0 100644
 --- a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
 +++ b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
-@@ -47,7 +47,7 @@ public class SignedMessageChain {
-                     throw new SignedMessageChain.DecodeException(Component.translatable("multiplayer.disconnect.unsigned_chat"), true, org.bukkit.event.player.PlayerKickEvent.Cause.UNSIGNED_CHAT); // Paper - kick event causes
-                 } else {
-                     if (playerChatMessage.hasExpiredServer(Instant.now())) {
--                        LOGGER.warn("Received expired chat: '{}'. Is the client/server system time unsynchronized?", body.content());
-+                        if (GaleGlobalConfiguration.get().logToConsole.chat.expiredMessageWarning) LOGGER.warn("Received expired chat: '{}'. Is the client/server system time unsynchronized?", body.content()); // Gale - do not log expired message warnings
-                     }
+@@ -57,7 +57,7 @@ public class SignedMessageChain {
+                             throw new SignedMessageChain.DecodeException(SignedMessageChain.DecodeException.INVALID_SIGNATURE);
+                         } else {
+                             if (playerChatMessage.hasExpiredServer(Instant.now())) {
+-                                SignedMessageChain.LOGGER.warn("Received expired chat: '{}'. Is the client/server system time unsynchronized?", body.content());
++                                if (GaleGlobalConfiguration.get().logToConsole.chat.expiredMessageWarning) SignedMessageChain.LOGGER.warn("Received expired chat: '{}'. Is the client/server system time unsynchronized?", body.content()); // Gale - do not log expired message warnings
+                             }
  
-                     return playerChatMessage;
+                             SignedMessageChain.this.nextLink = signedMessageLink.advance();
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 index 83fcaa347be906cf42ba853754ac6bda2b39d8f9..ca6d3712f4552534585b46e921738ec9416095ab 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java

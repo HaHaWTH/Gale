@@ -20,12 +20,12 @@ launcher can very easily fill a chunk.
 Prevent saving Fireworks so that chunk unloads will wipe a chunks fireworks in this case.
 
 diff --git a/src/main/java/net/minecraft/world/entity/projectile/FireworkRocketEntity.java b/src/main/java/net/minecraft/world/entity/projectile/FireworkRocketEntity.java
-index 5b3b59057b962438c6f4fc8a1507342865b3bc11..1f39b1af8ba1264d58ddf342ed9472bda01b5ad2 100644
+index 3df4005b6ddc075e5922c1e96e4ceb21d8b8ea43..941274636eb635bc2c91bffa55436a5a5a78fcd2 100644
 --- a/src/main/java/net/minecraft/world/entity/projectile/FireworkRocketEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/projectile/FireworkRocketEntity.java
-@@ -355,4 +355,12 @@ public class FireworkRocketEntity extends Projectile implements ItemSupplier {
-     public boolean isAttackable() {
-         return false;
+@@ -348,4 +348,11 @@ public class FireworkRocketEntity extends Projectile implements ItemSupplier {
+     private static ItemStack getDefaultItem() {
+         return new ItemStack(Items.FIREWORK_ROCKET);
      }
 +
 +    // Gale start - EMC - make saving fireworks configurable
@@ -34,7 +34,6 @@ index 5b3b59057b962438c6f4fc8a1507342865b3bc11..1f39b1af8ba1264d58ddf342ed9472bd
 +        return this.level().galeConfig().smallOptimizations.saveFireworks;
 +    }
 +    // Gale end - EMC - make saving fireworks configurable
-+
  }
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 index 7e7e01f6514f6bbb9c89dc3c878fb6da25eb6b1f..00a327bd0e4e0f2def0bb29d5ecff4f0ec4ba1eb 100644

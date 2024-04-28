@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index d7da3bb9e6c7900a211ddd35471799d9a3d63f17..34be1098c1c1bf1e5de7034afe02579d9680fd23 100644
+index c3f260004ca0577f19cb047071969e173a303081..1549876d9888571449d54461024c331580ea7bf7 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -502,6 +502,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+@@ -504,6 +504,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
          return chunkMap.playerEntityTrackerTrackMaps[type.ordinal()].getObjectsInRange(MCUtil.getCoordinateKey(this));
      }
      // Paper end - optimise entity tracking
@@ -43,27 +43,27 @@ index d7da3bb9e6c7900a211ddd35471799d9a3d63f17..34be1098c1c1bf1e5de7034afe02579d
          return this.yRot;
      }
 diff --git a/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java b/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java
-index b99a080ab27e24d8131fda931ca70d6d271bb01c..5d34e5bd3ff2954b009f7a99954c0f1cc0d5755e 100644
+index 9ef8f014af332da129bfcd3370da983ec035ecc6..665fbe3362dcd9de4bd290b71a1b1f2fed218eeb 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java
-@@ -23,9 +23,11 @@ public class AttributeMap {
-     private final Map<Attribute, AttributeInstance> attributes = Maps.newHashMap();
-     private final Set<AttributeInstance> dirtyAttributes = Sets.newHashSet();
+@@ -22,9 +22,11 @@ public class AttributeMap {
+     private final Map<Holder<Attribute>, AttributeInstance> attributes = new Object2ObjectOpenHashMap<>();
+     private final Set<AttributeInstance> dirtyAttributes = new ObjectOpenHashSet<>();
      private final AttributeSupplier supplier;
-+    private final java.util.function.Function<Attribute, AttributeInstance> createInstance; // Gale - Airplane - reduce entity allocations
++    private final java.util.function.Function<Holder<Attribute>, AttributeInstance> createInstance; // Gale - Airplane - reduce entity allocations
  
      public AttributeMap(AttributeSupplier defaultAttributes) {
          this.supplier = defaultAttributes;
-+        this.createInstance = attribute -> this.supplier.createInstance(this::onAttributeModified, attribute); // Gale - Airplane - reduce entity allocations
++        this.createInstance = attributex -> this.supplier.createInstance(this::onAttributeModified, attributex); // Gale - Airplane - reduce entity allocations
      }
  
      private void onAttributeModified(AttributeInstance instance) {
-@@ -44,7 +46,7 @@ public class AttributeMap {
+@@ -43,7 +45,7 @@ public class AttributeMap {
  
      @Nullable
-     public AttributeInstance getInstance(Attribute attribute) {
+     public AttributeInstance getInstance(Holder<Attribute> attribute) {
 -        return this.attributes.computeIfAbsent(attribute, attributex -> this.supplier.createInstance(this::onAttributeModified, attributex));
 +        return this.attributes.computeIfAbsent(attribute, this.createInstance); // Gale - Airplane - reduce entity allocations - cache lambda, as for some reason java allocates it anyways
      }
  
-     @Nullable
+     public boolean hasAttribute(Holder<Attribute> attribute) {

@@ -15,8 +15,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: 17
+          distribution: zulu
+          java-version: 21
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Configure Git user details
@@ -24,7 +24,7 @@ jobs:
       - name: Apply patches
         run: ./gradlew applyPatches
       - name: Create Paperclip jar
-        run: ./gradlew createReobfPaperclipJar
+        run: ./gradlew createMojmapPaperclipJar
       - name: Upload Paperclip jar
         uses: actions/upload-artifact@v4
         with:
