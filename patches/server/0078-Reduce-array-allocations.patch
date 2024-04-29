@@ -479,7 +479,7 @@ index ee05f0131f336c50536fe47eda4693b696634796..f0436b9a2457eac9904e56f45fa1118e
  import org.bukkit.event.player.PlayerCommandPreprocessEvent;
  import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-index 857ea8d6fe72a1ef2094121f49db4a359e9e2080..0588e43e7607b10f66db6d0b615141250031699a 100644
+index 6bd1959d4805ebe5c60a10faaa65daa457d02674..48cf4b376b5db3849c8b11f6b78c00a6ec3874b5 100644
 --- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 @@ -13,9 +13,10 @@ import java.security.PrivateKey;
@@ -494,20 +494,26 @@ index 857ea8d6fe72a1ef2094121f49db4a359e9e2080..0588e43e7607b10f66db6d0b61514125
  import net.minecraft.DefaultUncaughtExceptionHandler;
  import net.minecraft.core.UUIDUtil;
  import net.minecraft.network.Connection;
-@@ -174,8 +175,10 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -174,14 +175,16 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
  
      @Override
      public void handleHello(ServerboundHelloPacket packet) {
 -        Validate.validState(this.state == ServerLoginPacketListenerImpl.State.HELLO, "Unexpected hello packet", new Object[0]);
--        if (io.papermc.paper.configuration.GlobalConfiguration.get().proxies.isProxyOnlineMode() && io.papermc.paper.configuration.GlobalConfiguration.get().unsupportedSettings.performUsernameValidation && !this.iKnowThisMayNotBeTheBestIdeaButPleaseDisableUsernameValidation) Validate.validState(StringUtil.isValidPlayerName(packet.name()), "Invalid characters in username", new Object[0]); // Paper - config username validation
 +        // Gale start - JettPack - reduce array allocations
 +        Validate.validState(this.state == ServerLoginPacketListenerImpl.State.HELLO, "Unexpected hello packet", ArrayConstants.emptyObjectArray);
-+        if (io.papermc.paper.configuration.GlobalConfiguration.get().proxies.isProxyOnlineMode() && io.papermc.paper.configuration.GlobalConfiguration.get().unsupportedSettings.performUsernameValidation && !this.iKnowThisMayNotBeTheBestIdeaButPleaseDisableUsernameValidation) Validate.validState(StringUtil.isValidPlayerName(packet.name()), "Invalid characters in username", ArrayConstants.emptyObjectArray); // Paper - config username validation
+         // Paper start - Validate usernames
+         if (io.papermc.paper.configuration.GlobalConfiguration.get().proxies.isProxyOnlineMode()
+             && io.papermc.paper.configuration.GlobalConfiguration.get().unsupportedSettings.performUsernameValidation
+             && !this.iKnowThisMayNotBeTheBestIdeaButPleaseDisableUsernameValidation) {
+-            Validate.validState(StringUtil.isReasonablePlayerName(packet.name()), "Invalid characters in username", new Object[0]);
++            Validate.validState(StringUtil.isReasonablePlayerName(packet.name()), "Invalid characters in username", ArrayConstants.emptyObjectArray);
+         }
+         // Paper end - Validate usernames
 +        // Gale end - JettPack - reduce array allocations
          this.requestedUsername = packet.name();
          GameProfile gameprofile = this.server.getSingleplayerProfile();
  
-@@ -271,7 +274,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -277,7 +280,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
  
      @Override
      public void handleKey(ServerboundKeyPacket packet) {
@@ -516,7 +522,7 @@ index 857ea8d6fe72a1ef2094121f49db4a359e9e2080..0588e43e7607b10f66db6d0b61514125
  
          final String s;
  
-@@ -451,7 +454,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -457,7 +460,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
  
      @Override
      public void handleLoginAcknowledgement(ServerboundLoginAcknowledgedPacket packet) {
@@ -684,7 +690,7 @@ index f38acc96f71298e40ce9433e7759fd223ca55e48..22ec9c1e74450f56cd1e390d59ca28f1
  
          for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index 36e3415b9312d3a80c9f5e1c36b42b7ea30c31c5..5c922ed680cdf54e7a1439e2181a3ba4151a1d4c 100644
+index a45389d64c04cd4c2a35fbc511595be0535a8665..5eba8eaf2fb6b5507ee4b4a6a2f386bdf26b80dd 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
 @@ -1102,7 +1102,7 @@ public final class ItemStack implements DataComponentHolder {

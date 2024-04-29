@@ -55,10 +55,10 @@ index eaefbb00e9993d54906cc8cf35cf753c0d6c7707..92d20e70d26318fbaed8adffd21c6b77
       * This class was not meant to be constructed explicitly
       *
 diff --git a/src/main/java/org/bukkit/plugin/java/LibraryLoader.java b/src/main/java/org/bukkit/plugin/java/LibraryLoader.java
-index f4d655a158410039305ac68cebe0d79000f73df8..7ad6d1007154357a33bca49fec43cb4a4a15b832 100644
+index 8e1b6be2462aaa692efa1f72986921a6dc357196..72b20fa06b461d89f0eeff7b2fbbbe89bae0027c 100644
 --- a/src/main/java/org/bukkit/plugin/java/LibraryLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/LibraryLoader.java
-@@ -66,6 +66,7 @@ public class LibraryLoader
+@@ -68,6 +68,7 @@ public class LibraryLoader
              @Override
              public void transferStarted(@NotNull TransferEvent event) throws TransferCancelledException
              {
@@ -66,7 +66,7 @@ index f4d655a158410039305ac68cebe0d79000f73df8..7ad6d1007154357a33bca49fec43cb4a
                  logger.log( Level.INFO, "Downloading {0}", event.getResource().getRepositoryUrl() + event.getResource().getResourceName() );
              }
          } );
-@@ -86,6 +87,7 @@ public class LibraryLoader
+@@ -88,6 +89,7 @@ public class LibraryLoader
          {
              return null;
          }
@@ -74,7 +74,7 @@ index f4d655a158410039305ac68cebe0d79000f73df8..7ad6d1007154357a33bca49fec43cb4a
          logger.log( Level.INFO, "[{0}] Loading {1} libraries... please wait", new Object[]
          {
              java.util.Objects.requireNonNullElseGet(desc.getPrefix(), desc::getName), desc.getLibraries().size() // Paper - use configured log prefix
-@@ -124,6 +126,7 @@ public class LibraryLoader
+@@ -135,6 +137,7 @@ public class LibraryLoader
              }
  
              jarFiles.add( url );
