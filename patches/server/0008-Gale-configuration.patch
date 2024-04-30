@@ -419,10 +419,10 @@ index 419b99908b0e798c229b2f92e14f45c4356330cb..1c69e41e0a6c908eb9530cdbac3137b2
              org.spigotmc.RestartCommand.restart();
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleConfigurations.java b/src/main/java/org/galemc/gale/configuration/GaleConfigurations.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..fc13ce21092fabb17d2c2da63947d58e6f3d3b88
+index 0000000000000000000000000000000000000000..de25d0b4001363e63873af8f0f2165e5449786df
 --- /dev/null
 +++ b/src/main/java/org/galemc/gale/configuration/GaleConfigurations.java
-@@ -0,0 +1,303 @@
+@@ -0,0 +1,304 @@
 +// Gale - Gale configuration
 +
 +package org.galemc.gale.configuration;
@@ -466,6 +466,7 @@ index 0000000000000000000000000000000000000000..fc13ce21092fabb17d2c2da63947d58e
 +import net.minecraft.world.entity.EntityType;
 +import net.minecraft.world.item.Item;
 +import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
++import org.jetbrains.annotations.Nullable;
 +import org.slf4j.Logger;
 +import org.spongepowered.configurate.ConfigurateException;
 +import org.spongepowered.configurate.ConfigurationNode;
@@ -628,7 +629,7 @@ index 0000000000000000000000000000000000000000..fc13ce21092fabb17d2c2da63947d58e
 +    }
 +
 +    @Override
-+    protected void applyWorldConfigTransformations(final ContextMap contextMap, final ConfigurationNode node) throws ConfigurateException {
++    protected void applyWorldConfigTransformations(final ContextMap contextMap, final ConfigurationNode node, final @Nullable ConfigurationNode defaultsNode) throws ConfigurateException {
 +        final ConfigurationNode version = node.node(Configuration.VERSION_FIELD);
 +        final String world = contextMap.require(WORLD_NAME);
 +        if (version.virtual()) {
