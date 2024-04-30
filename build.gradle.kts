@@ -1,7 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import io.papermc.paperweight.util.path
-import org.gradle.configurationcache.extensions.capitalized
 import kotlin.io.path.deleteRecursively
 
 plugins {
