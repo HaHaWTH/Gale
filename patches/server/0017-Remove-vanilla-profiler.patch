@@ -1561,6 +1561,23 @@ index 991e3274091c4e25eebc6debd44653e5b566eedb..29802fa506042c80bd1a03cf88f4ab32
          super.customServerAiStep();
      }
  
+diff --git a/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java b/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java
+index b38281f963377cc82b360e8457da7cad033b8c36..6a3b119bdcac4de1b39216b23ba8dceae062d278 100644
+--- a/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java
++++ b/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java
+@@ -130,12 +130,8 @@ public class Armadillo extends Animal {
+ 
+     @Override
+     protected void customServerAiStep() {
+-        this.level().getProfiler().push("armadilloBrain");
+         ((Brain<Armadillo>) this.brain).tick((ServerLevel) this.level(), this); // CraftBukkit - decompile error
+-        this.level().getProfiler().pop();
+-        this.level().getProfiler().push("armadilloActivityUpdate");
+         ArmadilloAi.updateActivity(this);
+-        this.level().getProfiler().pop();
+         if (this.isAlive() && !this.isBaby() && --this.scuteTime <= 0) {
+             this.playSound(SoundEvents.ARMADILLO_SCUTE_DROP, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+             this.forceDrops = true; // CraftBukkit
 diff --git a/src/main/java/net/minecraft/world/entity/animal/axolotl/Axolotl.java b/src/main/java/net/minecraft/world/entity/animal/axolotl/Axolotl.java
 index a8cc6ddbf45370fe632e5c5fb7ceef3d299e62a4..8a14e3c2bd2162e36634f532fa86a7fba0548541 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/axolotl/Axolotl.java
