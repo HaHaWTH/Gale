@@ -172,10 +172,10 @@ index 0000000000000000000000000000000000000000..19b83cf45034be57d11413361b1b0c87
 +}
 diff --git a/src/main/java/org/galemc/gale/virtualthread/VirtualThreadService.java b/src/main/java/org/galemc/gale/virtualthread/VirtualThreadService.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..6138ef6eb9f3b9709aeb0c83821602a5c4c6c96d
+index 0000000000000000000000000000000000000000..e9757e8ade7198accb7cf34390ed70628a0f7e33
 --- /dev/null
 +++ b/src/main/java/org/galemc/gale/virtualthread/VirtualThreadService.java
-@@ -0,0 +1,100 @@
+@@ -0,0 +1,104 @@
 +// Gale - virtual thread support
 +
 +package org.galemc.gale.virtualthread;
@@ -272,6 +272,10 @@ index 0000000000000000000000000000000000000000..6138ef6eb9f3b9709aeb0c83821602a5
 +        if (version.startsWith("1.")) {
 +            return version.charAt(2) - '0';
 +        }
++        if (version.contains("-")) {
++            version = version.substring(0, version.indexOf("-"));
++        }
++
 +        int dotIndex = version.indexOf(".");
 +        return Integer.parseInt(dotIndex == -1 ? version : version.substring(0, dotIndex));
 +    }
