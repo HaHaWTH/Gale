@@ -150,7 +150,7 @@ index 5404d8b54c8c8d48e4b92ca947d431ed60bb7ce8..79894b08d778a73336b3d265759baeb8
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.serverLevel());
          // CraftBukkit start
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
-index b2aa32662335c4d64ac87320fcfb334784d89ec5..4650c69295adcc780f00d8d098cf939931147828 100644
+index b2aa32662335c4d64ac87320fcfb334784d89ec5..01c805c36225724eae73db20e0ad3fde122cfcf5 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 @@ -88,6 +88,11 @@ public class GaleGlobalConfiguration extends ConfigurationPart {
@@ -159,7 +159,7 @@ index b2aa32662335c4d64ac87320fcfb334784d89ec5..4650c69295adcc780f00d8d098cf9399
  
 +        public Keepalive keepalive;
 +        public class Keepalive extends ConfigurationPart {
-+            public boolean sendMultiple = true; // Gale - Purpur - send multiple keep-alive packets
++            public boolean sendMultiple = false; // Gale - Purpur - send multiple keep-alive packets
 +        }
 +
      }
