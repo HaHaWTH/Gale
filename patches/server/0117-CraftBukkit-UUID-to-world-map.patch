@@ -13,7 +13,7 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 526fb1161605a2b7243d9f78216883918c3bf210..b117b7d57f9f0755a1f2e9769271db7d3ba3b2dc 100644
+index 31a7cdc94ab7946e05f00a9c0996feafee6e95af..c8e32a0c91d5943987d1b680a831cf449fdd59c6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -43,6 +43,9 @@ import java.util.logging.Logger;
@@ -31,7 +31,7 @@ index 526fb1161605a2b7243d9f78216883918c3bf210..b117b7d57f9f0755a1f2e9769271db7d
      protected final DedicatedPlayerList playerList;
      private final Map<String, World> worlds = new LinkedHashMap<String, World>();
 +    private final Object2ObjectMap<UUID, World> worldsByUUID = new Object2ObjectOpenHashMap<>(); // Gale - MultiPaper - CraftBukkit UUID to world map
-     private final Map<Class<?>, Registry<?>> registries = new HashMap<>();
+     // private final Map<Class<?>, Registry<?>> registries = new HashMap<>(); // Paper - replace with RegistryAccess
      private YamlConfiguration configuration;
      private YamlConfiguration commandsConfiguration;
 @@ -1469,6 +1473,7 @@ public final class CraftServer implements Server {

@@ -340,7 +340,7 @@ index a2920b8a9eff77d9c5d1d7f70ad3abdacba8f0fa..43f402d9032e4570a81a80e412215598
      protected CipherBase(Cipher cipher) {
          this.cipher = cipher;
 diff --git a/src/main/java/net/minecraft/network/Connection.java b/src/main/java/net/minecraft/network/Connection.java
-index 58d28b6c1cc7da7d786f78308db971f7502ad844..6da6a7befa2dc8988900abee03d24ba894939932 100644
+index 02833deaa2bb7e5abc655bc1bdbe15c4b3ac7119..20dbef631bbb10285cc8060652247d00b2e1472e 100644
 --- a/src/main/java/net/minecraft/network/Connection.java
 +++ b/src/main/java/net/minecraft/network/Connection.java
 @@ -27,7 +27,6 @@ import io.netty.channel.epoll.EpollSocketChannel;
@@ -360,7 +360,7 @@ index 58d28b6c1cc7da7d786f78308db971f7502ad844..6da6a7befa2dc8988900abee03d24ba8
  import net.minecraft.Util;
  import net.minecraft.network.chat.Component;
  import net.minecraft.network.chat.MutableComponent;
-@@ -316,7 +317,7 @@ public class Connection extends SimpleChannelInboundHandler<Packet<?>> {
+@@ -317,7 +318,7 @@ public class Connection extends SimpleChannelInboundHandler<Packet<?>> {
      }
  
      private void validateListener(ProtocolInfo<?> state, PacketListener listener) {
@@ -449,7 +449,7 @@ index 92a53e55e6431a2748e5a489ca0375930087c3cf..44424717623aa45c00dc69b23fc97411
          return ret;
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index ee05f0131f336c50536fe47eda4693b696634796..f0436b9a2457eac9904e56f45fa1118e83d090cc 100644
+index 3cc51e2be04feff9c0e645b0a39bf969de37de0d..5404d8b54c8c8d48e4b92ca947d431ed60bb7ce8 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -29,6 +29,8 @@ import java.util.function.Consumer;
@@ -690,7 +690,7 @@ index f38acc96f71298e40ce9433e7759fd223ca55e48..22ec9c1e74450f56cd1e390d59ca28f1
  
          for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index a45389d64c04cd4c2a35fbc511595be0535a8665..5eba8eaf2fb6b5507ee4b4a6a2f386bdf26b80dd 100644
+index 893efb2c4a07c33d41e934279dd914a9dbd4ef79..11342d0fd62473403de86794a8186b879315c703 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
 @@ -1102,7 +1102,7 @@ public final class ItemStack implements DataComponentHolder {

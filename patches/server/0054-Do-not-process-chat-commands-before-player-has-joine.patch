@@ -25,10 +25,10 @@ index 1f5223c3f152e8d3f21e59f282ccede8c35346c0..a5aefd1224b8cd6957a0a9654075fa06
      public boolean isRealPlayer; // Paper
      public final com.destroystokyo.paper.util.misc.PooledLinkedHashSets.PooledObjectLinkedOpenHashSet<ServerPlayer> cachedSingleHashSet; // Paper
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index cb3b10cc96c15a4894b3239110ee60f4aa130e05..8a860d6a7602ff15be01a9e57181cd66c72fd2b1 100644
+index 94c5da09a691904fbab82c5b5ed5dd94d33b7021..c45e8cb4dd627023c31f8bd87455ed07aa9feb36 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2338,7 +2338,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2340,7 +2340,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
              this.disconnect(Component.translatable("multiplayer.disconnect.illegal_characters"), org.bukkit.event.player.PlayerKickEvent.Cause.ILLEGAL_CHARACTERS); // Paper
          } else if (this.player.isRemoved() || this.player.getChatVisibility() == ChatVisiblity.HIDDEN) { // CraftBukkit - dead men tell no tales
              this.send(new ClientboundSystemChatPacket(Component.translatable("chat.disabled.options").withStyle(ChatFormatting.RED), false));
