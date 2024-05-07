@@ -119,7 +119,7 @@ index 5f042e294db605827000123252b0df646968f897..e1cc15f28fe8da23b74ff4504c5b2da2
  
      double getLevelY();
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-index 5ba7feada898b27aa651f4dab0595b2ad28b68d0..4f5a1d7dfabdf03f708ad5773a15369bcbe62523 100644
+index 55a5fad40f39b467ba933b2e0778998a54dbb8b2..21a1a880d49db917528d919ef7dd5cabbc8e2568 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 @@ -11,6 +11,7 @@ import net.minecraft.core.NonNullList;
@@ -138,7 +138,7 @@ index 5ba7feada898b27aa651f4dab0595b2ad28b68d0..4f5a1d7dfabdf03f708ad5773a15369b
  import net.minecraft.world.inventory.AbstractContainerMenu;
  import net.minecraft.world.inventory.HopperMenu;
  import net.minecraft.world.item.ItemStack;
-@@ -588,7 +590,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
+@@ -589,7 +591,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
          } else {
              boolean flag = hopper.isGridAligned() && iblockdata.isCollisionShapeFullBlock(world, blockposition) && !iblockdata.is(BlockTags.DOES_NOT_BLOCK_HOPPERS);
  
@@ -147,7 +147,7 @@ index 5ba7feada898b27aa651f4dab0595b2ad28b68d0..4f5a1d7dfabdf03f708ad5773a15369b
                  Iterator iterator = HopperBlockEntity.getItemsAtAndAbove(world, hopper).iterator();
  
                  while (iterator.hasNext()) {
-@@ -897,6 +899,31 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
+@@ -898,6 +900,31 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
          return first.getCount() < first.getMaxStackSize() && ItemStack.isSameItemSameComponents(first, second); // Paper - Perf: Optimize Hoppers; used to return true for full itemstacks?!
      }
  

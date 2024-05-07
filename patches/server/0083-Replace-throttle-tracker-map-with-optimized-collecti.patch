@@ -33,7 +33,7 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRA
 IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
-index a57235284cfa2d289b601a53415b205d4193a243..cd9cf7e09d9d271001ef378496fd0955c39bf13e 100644
+index 45a2683c9489bee6d67a1f3d702c17f2e9dc02e4..8e90f35218e66690359dac35828a1485a77f34c1 100644
 --- a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
 @@ -1,5 +1,7 @@
@@ -63,7 +63,7 @@ index a57235284cfa2d289b601a53415b205d4193a243..cd9cf7e09d9d271001ef378496fd0955
      private static int throttleCounter = 0;
      // CraftBukkit end
      private static final Component IGNORE_STATUS_REASON = Component.translatable("disconnect.ignoring_status_request");
-@@ -82,7 +85,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+@@ -86,7 +89,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
              InetAddress address = ((java.net.InetSocketAddress) this.connection.getRemoteAddress()).getAddress();
  
              synchronized (ServerHandshakePacketListenerImpl.throttleTracker) {
@@ -72,7 +72,7 @@ index a57235284cfa2d289b601a53415b205d4193a243..cd9cf7e09d9d271001ef378496fd0955
                      ServerHandshakePacketListenerImpl.throttleTracker.put(address, currentTime);
                              Component chatmessage = io.papermc.paper.adventure.PaperAdventure.asVanilla(io.papermc.paper.configuration.GlobalConfiguration.get().messages.kick.connectionThrottle); // Paper - Configurable connection throttle kick message
                      this.connection.send(new ClientboundLoginDisconnectPacket(chatmessage));
-@@ -96,13 +99,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+@@ -100,13 +103,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
                      ServerHandshakePacketListenerImpl.throttleCounter = 0;
  
                      // Cleanup stale entries
