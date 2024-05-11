@@ -405,10 +405,10 @@ index 5443013060b62e3bfcc51cddca96d1c0bc59fe72..76a1b31a55b1838dc80b796f997edadd
          OptionSpec<Integer> optionspec11 = optionparser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(-1, new Integer[0]);
          OptionSpec<String> optionspec12 = optionparser.accepts("serverId").withRequiredArg();
 diff --git a/src/main/java/net/minecraft/server/level/ServerEntity.java b/src/main/java/net/minecraft/server/level/ServerEntity.java
-index 949d8c167d8f2b8fa2cb16d489c1cacffcaa78e5..a9f97783ff2a62041f6fc16a2e64112b42a4188d 100644
+index 4a5dc0c552bbd48cb79e29016ea455882cf13744..db3c9d0d1428549ca6955120661cae38e40f7f8a 100644
 --- a/src/main/java/net/minecraft/server/level/ServerEntity.java
 +++ b/src/main/java/net/minecraft/server/level/ServerEntity.java
-@@ -342,7 +342,7 @@ public class ServerEntity {
+@@ -350,7 +350,7 @@ public class ServerEntity {
  
          if (this.entity instanceof LivingEntity) {
              List<Pair<EquipmentSlot, ItemStack>> list = Lists.newArrayList();
@@ -418,7 +418,7 @@ index 949d8c167d8f2b8fa2cb16d489c1cacffcaa78e5..a9f97783ff2a62041f6fc16a2e64112b
  
              for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 92a53e55e6431a2748e5a489ca0375930087c3cf..44424717623aa45c00dc69b23fc9741117650de3 100644
+index 4bb9e099b647a6a524395d9e5393ef6f2fdc9153..5ec5ed9ac62fda568fd011dd62b1c5a23f485e40 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -38,6 +38,8 @@ import java.util.stream.Collectors;

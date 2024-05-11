@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index aeb1db18e864e419bb30e75d24715794d52c40d1..83196467cf7152ba756f5f6d179ee17c00a4325f 100644
+index 652ae75254d78fff02d68cbb747eaee4c3f35a1a..c3a1969e7d3e42b2f0fd0dd0a3d6a5f1dc9b1a1e 100644
 --- a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 @@ -4,6 +4,9 @@ import com.mojang.authlib.GameProfile;
@@ -117,8 +117,8 @@ index aeb1db18e864e419bb30e75d24715794d52c40d1..83196467cf7152ba756f5f6d179ee17c
 +            }
 +        } else {
 +            // Gale end - Purpur - send multiple keep-alive packets
-         if (!this.isSingleplayerOwner() && elapsedTime >= KEEPALIVE_LIMIT) { // Paper - check keepalive limit, don't fire if already disconnected
-             if (this.keepAlivePending && !this.processedDisconnect) { // Paper
+         if (!this.isSingleplayerOwner() && elapsedTime >= 15000L) { // Paper - use vanilla's 15000L between keep alive packets
+             if (this.keepAlivePending && !this.processedDisconnect && elapsedTime >= KEEPALIVE_LIMIT) { // Paper - check keepalive limit, don't fire if already disconnected
                  this.disconnect(ServerCommonPacketListenerImpl.TIMEOUT_DISCONNECTION_MESSAGE, org.bukkit.event.player.PlayerKickEvent.Cause.TIMEOUT); // Paper - kick event cause
 @@ -261,6 +294,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
                  this.send(new ClientboundKeepAlivePacket(this.keepAliveChallenge));
