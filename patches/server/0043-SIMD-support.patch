@@ -13,10 +13,10 @@ As part of: Pufferfish (https://github.com/pufferfish-gg/Pufferfish)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 77df57490bf3c107eff5527506256610fd8fe1f3..e9b050f744391444714c8803835d78d0415f96ce 100644
+index 335cc8638d307fcd0dad44c431ec7f9d5376fc09..e2cc87a762c88a6360c265e66ed3bb0592eab2e3 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -79,6 +79,7 @@ tasks.withType<JavaCompile> {
+@@ -73,6 +73,7 @@ tasks.withType<JavaCompile> {
      compilerArgs.add("-Xlint:-module")
      compilerArgs.add("-Xlint:-removal")
      compilerArgs.add("-Xlint:-dep-ann")
@@ -84,7 +84,7 @@ index 2acad4c3fd58178b0f8b22bdb04eeeeb689d5afa..850ccd53c5007e8b18344ba76c9e7f00
  
          }
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 7c60cc310be57ffc5fbd5a0654059cd2846ef945..28412943a1ce919da3c8731a441b5a1b3b893293 100644
+index e83db964c4016ed9252a76ff452eb5807a1d33cd..5bdcc501c8742b0e3e3c382c0ea5221c2b0d4982 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -14,6 +14,8 @@ import java.util.Locale;
@@ -104,9 +104,9 @@ index 7c60cc310be57ffc5fbd5a0654059cd2846ef945..28412943a1ce919da3c8731a441b5a1b
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -236,6 +239,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -235,6 +238,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
          com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // Paper - load version history now
-         io.papermc.paper.brigadier.PaperBrigadierProviderImpl.INSTANCE.getClass(); // Paper - init PaperBrigadierProvider
  
 +        // Gale start - Pufferfish - SIMD support
 +        // Initialize vectorization

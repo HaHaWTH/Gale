@@ -221,18 +221,29 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index ee6002acca215015d00ea0bfc2b720ea0087145e..77df57490bf3c107eff5527506256610fd8fe1f3 100644
+index f43a0aff5d735e21ac63eeb0314f829bd3b83554..335cc8638d307fcd0dad44c431ec7f9d5376fc09 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -94,7 +94,7 @@ tasks.jar {
+@@ -89,14 +89,14 @@ tasks.jar {
+         val gitBranch = git("rev-parse", "--abbrev-ref", "HEAD").getText().trim() // Paper
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
-             "Implementation-Title" to "CraftBukkit",
--            "Implementation-Version" to "git-Paper-$implementationVersion",
-+            "Implementation-Version" to "git-Gale-$implementationVersion", // Gale - branding changes
+-            "Implementation-Title" to "Paper",
++            "Implementation-Title" to "Gale", // Gale - branding changes
+             "Implementation-Version" to implementationVersion,
              "Implementation-Vendor" to date, // Paper
-             "Specification-Title" to "Bukkit",
+-            "Specification-Title" to "Paper",
++            "Specification-Title" to "Gale", // Gale - branding changes
              "Specification-Version" to project.version,
+-            "Specification-Vendor" to "Paper Team",
+-            "Brand-Id" to "papermc:paper",
+-            "Brand-Name" to "Paper",
++            "Specification-Vendor" to "GaleMC Team", // Gale - branding changes
++            "Brand-Id" to "galemc:gale", // Gale - branding changes
++            "Brand-Name" to "Gale", // Gale - branding changes
+             "Build-Number" to (build ?: ""),
+             "Build-Time" to Instant.now().toString(),
+             "Git-Branch" to gitBranch, // Paper
 @@ -233,3 +233,22 @@ tasks.registerRunTask("runReobfPaperclip") {
      classpath(rootProject.tasks.named<io.papermc.paperweight.tasks.CreatePaperclipJar>("createReobfPaperclipJar").flatMap { it.outputZip })
      mainClass.set(null as String?)
@@ -257,46 +268,54 @@ index ee6002acca215015d00ea0bfc2b720ea0087145e..77df57490bf3c107eff5527506256610
 +}
 +// Gale end - package license into jar
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 9d687da5bdf398bb3f6c84cdf1249a7213d09f2e..03f5ec3c4f8eac9cecfef0f257b90090aece5017 100644
+index 532306cacd52579cdf37e4aca25887b1ed3ba6a1..6fca13221ef3e0bbcad2ebbe74d6aadf8ed2c539 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-@@ -1,85 +1,40 @@
+@@ -1,6 +1,5 @@
  package com.destroystokyo.paper;
  
 -import com.destroystokyo.paper.util.VersionFetcher;
  import com.google.common.base.Charsets;
  import com.google.common.io.Resources;
--import com.google.gson.*;
+ import com.google.gson.Gson;
+@@ -8,80 +7,37 @@ import com.google.gson.JsonArray;
+ import com.google.gson.JsonElement;
+ import com.google.gson.JsonObject;
+ import com.google.gson.JsonSyntaxException;
+-import com.mojang.logging.LogUtils;
+ import io.papermc.paper.ServerBuildInfo;
+ import java.io.BufferedReader;
+ import java.io.IOException;
+-import java.io.InputStreamReader;
+-import java.net.HttpURLConnection;
+ import java.net.URI;
+-import java.util.Optional;
+-import java.util.OptionalInt;
+ import java.util.stream.StreamSupport;
 -import net.kyori.adventure.text.Component;
 -import net.kyori.adventure.text.event.ClickEvent;
 -import net.kyori.adventure.text.format.NamedTextColor;
 -import net.kyori.adventure.text.format.TextDecoration;
--import net.kyori.adventure.text.TextComponent;
-+import com.google.gson.Gson;
-+import com.google.gson.JsonArray;
-+import com.google.gson.JsonObject;
-+import com.google.gson.JsonSyntaxException;
+ import org.checkerframework.checker.nullness.qual.NonNull;
+-import org.checkerframework.checker.nullness.qual.Nullable;
+ import org.checkerframework.framework.qual.DefaultQualifier;
+-import org.slf4j.Logger;
+-
+-import static net.kyori.adventure.text.Component.text;
+-import static net.kyori.adventure.text.format.TextColor.color;
 +import org.galemc.gale.version.AbstractPaperVersionFetcher;
  
--import javax.annotation.Nonnull;
- import javax.annotation.Nullable;
--import java.io.*;
--import java.net.HttpURLConnection;
-+import java.io.BufferedReader;
-+import java.io.IOException;
- import java.net.URL;
- import java.util.stream.StreamSupport;
- 
--public class PaperVersionFetcher implements VersionFetcher {
--    private static final java.util.regex.Pattern VER_PATTERN = java.util.regex.Pattern.compile("^([0-9\\.]*)\\-.*R"); // R is an anchor, will always give '-R' at end
--    private static final String GITHUB_BRANCH_NAME = "master";
--    private static final String DOWNLOAD_PAGE = "https://papermc.io/downloads/paper";
--    private static @Nullable String mcVer;
 +// Gale start - branding changes - version fetcher
 +/**
 + * The original version fetcher for Paper. Most of the original content of this class has been moved to
 + * {@link AbstractPaperVersionFetcher}.
 + */
+ @DefaultQualifier(NonNull.class)
+-public class PaperVersionFetcher implements VersionFetcher {
+-    private static final Logger LOGGER = LogUtils.getClassLogger();
+-    private static final int DISTANCE_ERROR = -1;
+-    private static final int DISTANCE_UNKNOWN = -2;
+-    private static final String DOWNLOAD_PAGE = "https://papermc.io/downloads/paper";
 +public class PaperVersionFetcher extends AbstractPaperVersionFetcher {
  
 -    @Override
@@ -306,111 +325,96 @@ index 9d687da5bdf398bb3f6c84cdf1249a7213d09f2e..03f5ec3c4f8eac9cecfef0f257b90090
 +        super("master", "https://papermc.io/downloads/paper", "Paper", "PaperMC", "PaperMC", "Paper");
      }
  
--    @Nonnull
      @Override
--    public Component getVersionMessage(@Nonnull String serverVersion) {
--        String[] parts = serverVersion.substring("git-Paper-".length()).split("[-\\s]");
--        final Component updateMessage = getUpdateStatusMessage("PaperMC/Paper", GITHUB_BRANCH_NAME, parts[0]);
--        final Component history = getHistory();
--
--        return history != null ? TextComponent.ofChildren(updateMessage, Component.newline(), history) : updateMessage;
--    }
--
--    private static @Nullable String getMinecraftVersion() {
--        if (mcVer == null) {
--            java.util.regex.Matcher matcher = VER_PATTERN.matcher(org.bukkit.Bukkit.getBukkitVersion());
--            if (matcher.find()) {
--                String result = matcher.group();
--                mcVer = result.substring(0, result.length() - 2); // strip 'R' anchor and trailing '-'
--            } else {
--                org.bukkit.Bukkit.getLogger().warning("Unable to match version to pattern! Report to PaperMC!");
--                org.bukkit.Bukkit.getLogger().warning("Pattern: " + VER_PATTERN.toString());
--                org.bukkit.Bukkit.getLogger().warning("Version: " + org.bukkit.Bukkit.getBukkitVersion());
--            }
+-    public Component getVersionMessage(final String serverVersion) {
+-        final Component updateMessage;
+-        final ServerBuildInfo build = ServerBuildInfo.buildInfo();
+-        if (build.buildNumber().isEmpty() && build.gitCommit().isEmpty()) {
+-            updateMessage = text("You are running a development version without access to version information", color(0xFF5300));
+-        } else {
+-            updateMessage = getUpdateStatusMessage("PaperMC/Paper", build);
 -        }
+-        final @Nullable Component history = this.getHistory();
 -
--        return mcVer;
+-        return history != null ? Component.textOfChildren(updateMessage, Component.newline(), history) : updateMessage;
 +    protected boolean canFetchDistanceFromSiteApi() {
 +        return true;
      }
  
--    private static Component getUpdateStatusMessage(@Nonnull String repo, @Nonnull String branch, @Nonnull String versionInfo) {
--        int distance;
--        try {
--            int jenkinsBuild = Integer.parseInt(versionInfo);
--            distance = fetchDistanceFromSiteApi(jenkinsBuild, getMinecraftVersion());
--        } catch (NumberFormatException ignored) {
--            versionInfo = versionInfo.replace("\"", "");
--            distance = fetchDistanceFromGitHub(repo, branch, versionInfo);
+-    private static Component getUpdateStatusMessage(final String repo, final ServerBuildInfo build) {
+-        int distance = DISTANCE_ERROR;
+-
+-        final OptionalInt buildNumber = build.buildNumber();
+-        if (buildNumber.isPresent()) {
+-            distance = fetchDistanceFromSiteApi(build, buildNumber.getAsInt());
+-        } else {
+-            final Optional<String> gitBranch = build.gitBranch();
+-            final Optional<String> gitCommit = build.gitCommit();
+-            if (gitBranch.isPresent() && gitCommit.isPresent()) {
+-                distance = fetchDistanceFromGitHub(repo, gitBranch.get(), gitCommit.get());
+-            }
 -        }
 -
--        switch (distance) {
--            case -1:
--                return Component.text("Error obtaining version information", NamedTextColor.YELLOW);
--            case 0:
--                return Component.text("You are running the latest version", NamedTextColor.GREEN);
--            case -2:
--                return Component.text("Unknown version", NamedTextColor.YELLOW);
--            default:
--                return Component.text("You are " + distance + " version(s) behind", NamedTextColor.YELLOW)
--                        .append(Component.newline())
--                        .append(Component.text("Download the new version at: ")
--                                .append(Component.text(DOWNLOAD_PAGE, NamedTextColor.GOLD)
--                                        .hoverEvent(Component.text("Click to open", NamedTextColor.WHITE))
--                                        .clickEvent(ClickEvent.openUrl(DOWNLOAD_PAGE))));
--        }
+-        return switch (distance) {
+-            case DISTANCE_ERROR -> text("Error obtaining version information", NamedTextColor.YELLOW);
+-            case 0 -> text("You are running the latest version", NamedTextColor.GREEN);
+-            case DISTANCE_UNKNOWN -> text("Unknown version", NamedTextColor.YELLOW);
+-            default -> text("You are " + distance + " version(s) behind", NamedTextColor.YELLOW)
+-                .append(Component.newline())
+-                .append(text("Download the new version at: ")
+-                    .append(text(DOWNLOAD_PAGE, NamedTextColor.GOLD)
+-                        .hoverEvent(text("Click to open", NamedTextColor.WHITE))
+-                        .clickEvent(ClickEvent.openUrl(DOWNLOAD_PAGE))));
+-        };
 +    @Override
 +    protected int fetchDistanceFromSiteApi(int jenkinsBuild) {
-+        return fetchDistanceFromSiteApi(jenkinsBuild, this.getMinecraftVersion());
++        return fetchDistanceFromSiteApi(ServerBuildInfo.buildInfo(), jenkinsBuild);
      }
 +    // Gale end - branding changes - version fetcher
  
-     private static int fetchDistanceFromSiteApi(int jenkinsBuild, @Nullable String siteApiVersion) {
-         if (siteApiVersion == null) { return -1; }
-@@ -105,45 +60,4 @@ public class PaperVersionFetcher implements VersionFetcher {
+     private static int fetchDistanceFromSiteApi(final ServerBuildInfo build, final int jenkinsBuild) {
+         try {
+@@ -105,42 +61,4 @@ public class PaperVersionFetcher implements VersionFetcher {
+             return DISTANCE_ERROR;
          }
      }
- 
+-
 -    // Contributed by Techcable <Techcable@outlook.com> in GH-65
--    private static int fetchDistanceFromGitHub(@Nonnull String repo, @Nonnull String branch, @Nonnull String hash) {
+-    private static int fetchDistanceFromGitHub(final String repo, final String branch, final String hash) {
 -        try {
--            HttpURLConnection connection = (HttpURLConnection) new URL("https://api.github.com/repos/" + repo + "/compare/" + branch + "..." + hash).openConnection();
+-            final HttpURLConnection connection = (HttpURLConnection) URI.create("https://api.github.com/repos/%s/compare/%s...%s".formatted(repo, branch, hash)).toURL().openConnection();
 -            connection.connect();
--            if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) return -2; // Unknown commit
--            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charsets.UTF_8))) {
--                JsonObject obj = new Gson().fromJson(reader, JsonObject.class);
--                String status = obj.get("status").getAsString();
--                switch (status) {
--                    case "identical":
--                        return 0;
--                    case "behind":
--                        return obj.get("behind_by").getAsInt();
--                    default:
--                        return -1;
--                }
--            } catch (JsonSyntaxException | NumberFormatException e) {
--                e.printStackTrace();
--                return -1;
+-            if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) return DISTANCE_UNKNOWN; // Unknown commit
+-            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charsets.UTF_8))) {
+-                final JsonObject obj = new Gson().fromJson(reader, JsonObject.class);
+-                final String status = obj.get("status").getAsString();
+-                return switch (status) {
+-                    case "identical" -> 0;
+-                    case "behind" -> obj.get("behind_by").getAsInt();
+-                    default -> DISTANCE_ERROR;
+-                };
+-            } catch (final JsonSyntaxException | NumberFormatException e) {
+-                LOGGER.error("Error parsing json from GitHub's API", e);
+-                return DISTANCE_ERROR;
 -            }
--        } catch (IOException e) {
--            e.printStackTrace();
--            return -1;
+-        } catch (final IOException e) {
+-            LOGGER.error("Error while parsing version", e);
+-            return DISTANCE_ERROR;
 -        }
 -    }
 -
--    @Nullable
--    private Component getHistory() {
--        final VersionHistoryManager.VersionData data = VersionHistoryManager.INSTANCE.getVersionData();
+-    private @Nullable Component getHistory() {
+-        final VersionHistoryManager.@Nullable VersionData data = VersionHistoryManager.INSTANCE.getVersionData();
 -        if (data == null) {
 -            return null;
 -        }
 -
--        final String oldVersion = data.getOldVersion();
+-        final @Nullable String oldVersion = data.getOldVersion();
 -        if (oldVersion == null) {
 -            return null;
 -        }
 -
--        return Component.text("Previous version: " + oldVersion, NamedTextColor.GRAY, TextDecoration.ITALIC);
+-        return text("Previous version: " + oldVersion, NamedTextColor.GRAY, TextDecoration.ITALIC);
 -    }
  }
 diff --git a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
@@ -426,11 +430,27 @@ index c5d5648f4ca603ef2b1df723b58f9caf4dd3c722..e45e6b44b2a8f2cdae6e0048a812b921
                  .variable(LineReader.HISTORY_FILE, java.nio.file.Paths.get(".console_history"))
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
+diff --git a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
+index 790bad0494454ca12ee152e3de6da3da634d9b20..7823cf3cdb11062491deaa0eae5aa5e9f5a3e3ba 100644
+--- a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
++++ b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
+@@ -42,9 +42,9 @@ public record ServerBuildInfoImpl(
+         this(
+             getManifestAttribute(manifest, ATTRIBUTE_BRAND_ID)
+                 .map(Key::key)
+-                .orElse(BRAND_PAPER_ID),
++                .orElse(Key.key("galemc", "gale")), // Gale - branding changes
+             getManifestAttribute(manifest, ATTRIBUTE_BRAND_NAME)
+-                .orElse(BRAND_PAPER_NAME),
++                .orElse("Gale"), // Gale - branding changes
+             SharedConstants.getCurrentVersion().getId(),
+             SharedConstants.getCurrentVersion().getName(),
+             getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 8dc2f9df367c849ca333bf1a1fd92ff91617b548..f77a12e0ef3852b6de0f7b507bba4803d2d70d49 100644
+index dbc86b8d4d2af6e5f7e678f2bb77fd39b85c04c5..0b9b55ccf5c719d6683403e2f22aa4c1a67a5f35 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -960,7 +960,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -959,7 +959,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          shutdownThread = Thread.currentThread();
          org.spigotmc.WatchdogThread.doStop(); // Paper
          if (!isSameThread()) {
@@ -445,28 +465,6 @@ index 8dc2f9df367c849ca333bf1a1fd92ff91617b548..f77a12e0ef3852b6de0f7b507bba4803
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
                  try {
-@@ -1924,7 +1930,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
- 
-     @DontObfuscate
-     public String getServerModName() {
--        return "Paper"; // Paper
-+        return "Gale"; // Paper // Gale - branding changes
-     }
- 
-     public SystemReport fillSystemReport(SystemReport details) {
-diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 05e304f9fc8d0291fa779da589bd060ef4165b49..419b99908b0e798c229b2f92e14f45c4356330cb 100644
---- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-+++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -268,7 +268,7 @@ import javax.annotation.Nullable; // Paper
- import javax.annotation.Nonnull; // Paper
- 
- public final class CraftServer implements Server {
--    private final String serverName = "Paper"; // Paper
-+    private final String serverName = "Gale"; // Paper // Gale - branding changes
-     private final String serverVersion;
-     private final String bukkitVersion = Versioning.getBukkitVersion();
-     private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e587212ed2c305 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
@@ -481,10 +479,10 @@ index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e58721
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index a1c9989df460d7ae3666fffe7968750832a30b85..d67089b621f3ba07f3cf4cd64ee6ccb99ed23445 100644
+index 5a382907285a288f2a223189e690d3dbdf45594c..fbb137b8e9bdf0376d346894b7939936647b3856 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -507,7 +507,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -511,7 +511,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
@@ -508,10 +506,10 @@ index 774556a62eb240da42e84db4502e2ed43495be17..0b5979723bb30f9011ac64c36d894aa4
          if (stream != null) {
 diff --git a/src/main/java/org/galemc/gale/version/AbstractPaperVersionFetcher.java b/src/main/java/org/galemc/gale/version/AbstractPaperVersionFetcher.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..7fee1c2779ab390586b2d3f75f56890846323500
+index 0000000000000000000000000000000000000000..75af21644eaf78abdebd722b671f3c47aa083a25
 --- /dev/null
 +++ b/src/main/java/org/galemc/gale/version/AbstractPaperVersionFetcher.java
-@@ -0,0 +1,179 @@
+@@ -0,0 +1,154 @@
 +// Gale - branding changes - version fetcher
 +
 +package org.galemc.gale.version;
@@ -523,19 +521,25 @@ index 0000000000000000000000000000000000000000..7fee1c2779ab390586b2d3f75f568908
 +import com.google.gson.Gson;
 +import com.google.gson.JsonObject;
 +import com.google.gson.JsonSyntaxException;
++import com.mojang.logging.LogUtils;
++import io.papermc.paper.ServerBuildInfo;
 +import net.kyori.adventure.text.Component;
-+import net.kyori.adventure.text.TextComponent;
 +import net.kyori.adventure.text.event.ClickEvent;
 +import net.kyori.adventure.text.format.NamedTextColor;
 +import net.kyori.adventure.text.format.TextDecoration;
++import org.jetbrains.annotations.NotNull;
++import org.slf4j.Logger;
 +
-+import javax.annotation.Nonnull;
 +import javax.annotation.Nullable;
 +import java.io.BufferedReader;
 +import java.io.IOException;
 +import java.io.InputStreamReader;
 +import java.net.HttpURLConnection;
-+import java.net.URL;
++import java.net.URI;
++import java.util.Optional;
++
++import static net.kyori.adventure.text.Component.text;
++import static net.kyori.adventure.text.format.TextColor.color;
 +
 +/**
 + * An abstract version fetcher, derived from {@link PaperVersionFetcher}.
@@ -545,11 +549,12 @@ index 0000000000000000000000000000000000000000..7fee1c2779ab390586b2d3f75f568908
 + * Changes to {@link PaperVersionFetcher} are indicated by Gale marker comments.
 + */
 +public abstract class AbstractPaperVersionFetcher implements VersionFetcher {
-+    private static final java.util.regex.Pattern VER_PATTERN = java.util.regex.Pattern.compile("^([0-9\\.]*)\\-.*R"); // R is an anchor, will always give '-R' at end
-+    private static @Nullable String mcVer;
++    protected static final Logger LOGGER = LogUtils.getClassLogger();
++    protected static final int DISTANCE_ERROR = -1;
++    protected static final int DISTANCE_UNKNOWN = -2;
++    protected static final ServerBuildInfo BUILD_INFO = ServerBuildInfo.buildInfo();
 +
 +    // Gale start - branding changes - version fetcher
-+
 +    protected final String gitHubBranchName;
 +    protected final String downloadPage;
 +    protected final String projectDisplayName;
@@ -565,7 +570,6 @@ index 0000000000000000000000000000000000000000..7fee1c2779ab390586b2d3f75f568908
 +        this.gitHubOrganizationName = gitHubOrganizationName;
 +        this.gitHubRepoName = gitHubRepoName;
 +    }
-+
 +    // Gale end - branding changes - version fetcher
 +
 +    @Override
@@ -573,36 +577,21 @@ index 0000000000000000000000000000000000000000..7fee1c2779ab390586b2d3f75f568908
 +        return 720000;
 +    }
 +
-+    @Nonnull
 +    @Override
-+    public Component getVersionMessage(@Nonnull String serverVersion) {
-+        // Gale start - branding changes - version fetcher
-+        String[] parts = serverVersion.substring(("git-" + this.projectDisplayName + "-").length()).split("[-\\s]");
-+        final Component updateMessage = getUpdateStatusMessage(this.gitHubOrganizationName + "/" + this.gitHubRepoName, this.gitHubBranchName, parts[0]);
-+        // Gale end - branding changes - version fetcher
-+        final Component history = getHistory();
-+
-+        return history != null ? TextComponent.ofChildren(updateMessage, Component.newline(), history) : updateMessage;
-+    }
-+
-+    protected @Nullable String getMinecraftVersion() { // Gale - branding changes - version fetcher
-+        if (mcVer == null) {
-+            java.util.regex.Matcher matcher = VER_PATTERN.matcher(org.bukkit.Bukkit.getBukkitVersion());
-+            if (matcher.find()) {
-+                String result = matcher.group();
-+                mcVer = result.substring(0, result.length() - 2); // strip 'R' anchor and trailing '-'
-+            } else {
-+                org.bukkit.Bukkit.getLogger().warning("Unable to match version to pattern! Report to " + this.organizationDisplayName + "!"); // Gale - branding changes - version fetcher
-+                org.bukkit.Bukkit.getLogger().warning("Pattern: " + VER_PATTERN.toString());
-+                org.bukkit.Bukkit.getLogger().warning("Version: " + org.bukkit.Bukkit.getBukkitVersion());
-+            }
++    public @NotNull Component getVersionMessage(final @NotNull String serverVersion) {
++        final Component updateMessage;
++        final ServerBuildInfo build = ServerBuildInfo.buildInfo();
++        if (build.buildNumber().isEmpty() && build.gitCommit().isEmpty()) {
++            updateMessage = text("You are running a development version without access to version information", color(0xFF5300));
++        } else {
++            updateMessage = getUpdateStatusMessage(this.gitHubOrganizationName + "/" + this.gitHubRepoName, build); // Gale - branding changes - version fetcher
 +        }
++        final @Nullable Component history = this.getHistory();
 +
-+        return mcVer;
++        return history != null ? Component.textOfChildren(updateMessage, Component.newline(), history) : updateMessage;
 +    }
 +
 +    // Gale start - branding changes - version fetcher
-+
 +    protected boolean canFetchDistanceFromSiteApi() {
 +        return false;
 +    }
@@ -610,85 +599,69 @@ index 0000000000000000000000000000000000000000..7fee1c2779ab390586b2d3f75f568908
 +    protected int fetchDistanceFromSiteApi(int jenkinsBuild) {
 +        return -1;
 +    }
-+
 +    // Gale end - branding changes - version fetcher
 +
-+    private Component getUpdateStatusMessage(@Nonnull String repo, @Nonnull String branch, @Nonnull String versionInfo) {
-+        // Gale start - branding changes - version fetcher
-+        int distance = -1;
-+        boolean readFromSiteApi = false;
-+        if (this.canFetchDistanceFromSiteApi()) {
-+        // Gale end - branding changes - version fetcher
-+        try {
-+            int jenkinsBuild = Integer.parseInt(versionInfo);
-+            // Gale start - branding changes - version fetcher
-+            distance = this.fetchDistanceFromSiteApi(jenkinsBuild);
-+            readFromSiteApi = true;
-+        } catch (NumberFormatException ignored) {}
-+        }
-+        if (!readFromSiteApi) {
-+            // Gale end - branding changes - version fetcher
-+            versionInfo = versionInfo.replace("\"", "");
-+            distance = fetchDistanceFromGitHub(repo, branch, versionInfo);
-+        }
++    private Component getUpdateStatusMessage(final String repo, final ServerBuildInfo build) {
++        int distance = DISTANCE_ERROR;
 +
-+        switch (distance) {
-+            case -1:
-+                return Component.text("Error obtaining version information", NamedTextColor.YELLOW);
-+            case 0:
-+                return Component.text("You are running the latest version", NamedTextColor.GREEN);
-+            case -2:
-+                return Component.text("Unknown version", NamedTextColor.YELLOW);
-+            default:
-+                return Component.text("You are " + distance + " version(s) behind", NamedTextColor.YELLOW)
-+                        .append(Component.newline())
-+                        .append(Component.text("Download the new version at: ")
-+                                .append(Component.text(this.downloadPage, NamedTextColor.GOLD) // Gale - branding changes - version fetcher
-+                                        .hoverEvent(Component.text("Click to open", NamedTextColor.WHITE))
-+                                        .clickEvent(ClickEvent.openUrl(this.downloadPage)))); // Gale - branding changes - version fetcher
++        // Gale start - branding changes - version fetcher
++        final Optional<String> gitBranch = build.gitBranch();
++        final Optional<String> gitCommit = build.gitCommit();
++        if (gitBranch.isPresent() && gitCommit.isPresent()) {
++            distance = fetchDistanceFromGitHub(repo, gitBranch.get(), gitCommit.get());
 +        }
++        // Gale end - branding changes - version fetcher
++
++        return switch (distance) {
++            case DISTANCE_ERROR -> text("Error obtaining version information", NamedTextColor.YELLOW);
++            case 0 -> text("You are running the latest version", NamedTextColor.GREEN);
++            case DISTANCE_UNKNOWN -> text("Unknown version", NamedTextColor.YELLOW);
++            default -> text("You are " + distance + " version(s) behind", NamedTextColor.YELLOW)
++                    .append(Component.newline())
++                    .append(text("Download the new version at: ")
++                            .append(text(this.downloadPage, NamedTextColor.GOLD) // Gale - branding changes - version fetcher
++                                    .hoverEvent(text("Click to open", NamedTextColor.WHITE))
++                                    .clickEvent(ClickEvent.openUrl(this.downloadPage)))); // Gale - branding changes - version fetcher
++        };
 +    }
 +
 +    // Contributed by Techcable <Techcable@outlook.com> in GH-65
-+    private static int fetchDistanceFromGitHub(@Nonnull String repo, @Nonnull String branch, @Nonnull String hash) {
++    private static int fetchDistanceFromGitHub(final String repo, final String branch, final String hash) {
 +        try {
-+            HttpURLConnection connection = (HttpURLConnection) new URL("https://api.github.com/repos/" + repo + "/compare/" + branch + "..." + hash).openConnection();
++            final HttpURLConnection connection = (HttpURLConnection) URI.create("https://api.github.com/repos/%s/compare/%s...%s".formatted(repo, branch, hash)).toURL().openConnection();
 +            connection.connect();
-+            if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) return -2; // Unknown commit
-+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charsets.UTF_8))) {
-+                JsonObject obj = new Gson().fromJson(reader, JsonObject.class);
-+                String status = obj.get("status").getAsString();
-+                switch (status) {
-+                    case "identical":
-+                        return 0;
-+                    case "behind":
-+                        return obj.get("behind_by").getAsInt();
-+                    default:
-+                        return -1;
-+                }
-+            } catch (JsonSyntaxException | NumberFormatException e) {
-+                e.printStackTrace();
-+                return -1;
++            if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
++                return DISTANCE_UNKNOWN; // Unknown commit
++            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charsets.UTF_8))) {
++                final JsonObject obj = new Gson().fromJson(reader, JsonObject.class);
++                final String status = obj.get("status").getAsString();
++                return switch (status) {
++                    case "identical" -> 0;
++                    case "behind" -> obj.get("behind_by").getAsInt();
++                    default -> DISTANCE_ERROR;
++                };
++            } catch (final JsonSyntaxException | NumberFormatException e) {
++                LOGGER.error("Error parsing json from GitHub's API", e);
++                return DISTANCE_ERROR;
 +            }
-+        } catch (IOException e) {
-+            e.printStackTrace();
-+            return -1;
++        } catch (final IOException e) {
++            LOGGER.error("Error while parsing version", e);
++            return DISTANCE_ERROR;
 +        }
 +    }
 +
-+    @Nullable
-+    private Component getHistory() {
++    private @Nullable Component getHistory() {
 +        final VersionHistoryManager.VersionData data = VersionHistoryManager.INSTANCE.getVersionData();
 +        if (data == null) {
 +            return null;
 +        }
 +
-+        final String oldVersion = data.getOldVersion();
++        final @Nullable String oldVersion = data.getOldVersion();
 +        if (oldVersion == null) {
 +            return null;
 +        }
 +
-+        return Component.text("Previous version: " + oldVersion, NamedTextColor.GRAY, TextDecoration.ITALIC);
++        return text("Previous version: " + oldVersion, NamedTextColor.GRAY, TextDecoration.ITALIC);
 +    }
 +}
 diff --git a/src/main/java/org/galemc/gale/version/GaleVersionFetcher.java b/src/main/java/org/galemc/gale/version/GaleVersionFetcher.java

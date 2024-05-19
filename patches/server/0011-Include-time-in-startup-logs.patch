@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index c097f5d5fbd51cbbc01bbd54101905c59b3f3a4c..cd8ca1c9c8253e54c0b34d30b08fb0c2341cc98e 100644
+index e02102280ed1dc300191d19bbca8f00e17701753..6224bb20a2e3919b5fb33e5cfb8babc1929460c2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -2,6 +2,7 @@ package org.bukkit.craftbukkit;
@@ -18,7 +18,7 @@ index c097f5d5fbd51cbbc01bbd54101905c59b3f3a4c..cd8ca1c9c8253e54c0b34d30b08fb0c2
  import java.text.SimpleDateFormat;
  import java.util.Arrays;
  import java.util.Calendar;
-@@ -24,6 +25,26 @@ public class Main {
+@@ -25,6 +26,26 @@ public class Main {
      }
      // Paper end - Reset loggers after shutdown
  
@@ -45,7 +45,7 @@ index c097f5d5fbd51cbbc01bbd54101905c59b3f3a4c..cd8ca1c9c8253e54c0b34d30b08fb0c2
      public static void main(String[] args) {
          // Paper start
          final String warnWhenLegacyFormattingDetected = String.join(".", "net", "kyori", "adventure", "text", "warnWhenLegacyFormattingDetected");
-@@ -317,13 +338,13 @@ public class Main {
+@@ -318,13 +339,13 @@ public class Main {
                      String javaInfo = "Java " + runtimeMX.getSpecVersion() + " (" + runtimeMX.getVmName() + " " + runtimeMX.getVmVersion() + ")";
                      String osInfo = "Host: " + osMX.getName() + " " + osMX.getVersion() + " (" + osMX.getArch() + ")";
  

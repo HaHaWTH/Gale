@@ -13,7 +13,7 @@ As part of: Paper (https://github.com/PaperMC/Paper)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 109ecbde2afa832a26f51901556f0ae6dae4c561..222b863ba26217b69e9c027ba304107fbe1d6c81 100644
+index 729663b324a7473a5da22f0a615ad20380c7374d..22e6faa71d4bca2f6e975d5be2d05e09300400d4 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -50,6 +50,7 @@ import net.minecraft.world.level.GameRules;
@@ -31,7 +31,7 @@ index 109ecbde2afa832a26f51901556f0ae6dae4c561..222b863ba26217b69e9c027ba304107f
 +        GaleCommands.registerCommands(this); // Gale - Gale commands - register commands
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
          com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // Paper - load version history now
-         io.papermc.paper.brigadier.PaperBrigadierProviderImpl.INSTANCE.getClass(); // Paper - init PaperBrigadierProvider
+ 
 diff --git a/src/main/java/org/galemc/gale/command/GaleCommand.java b/src/main/java/org/galemc/gale/command/GaleCommand.java
 new file mode 100644
 index 0000000000000000000000000000000000000000..87d3aed35341dfa9358af064dd54d7de95078269
