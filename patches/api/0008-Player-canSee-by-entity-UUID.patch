@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 6c327a07bf8a6aa11a2d7dad12b2830acc539484..ba3edf4cb1a2fc0529465d6973ec086291bae41c 100644
+index 6c327a07bf8a6aa11a2d7dad12b2830acc539484..2d63d61fcfe87c4f07b1d752facbb1bae6f2b0ca 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
 @@ -2108,6 +2108,16 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
@@ -51,7 +51,7 @@ index 6c327a07bf8a6aa11a2d7dad12b2830acc539484..ba3edf4cb1a2fc0529465d6973ec0862
 +     * @param entityUUID The {@link Entity#getUniqueId()} of the entity to check
 +     * @return True if the entity with the provided UUID is not being hidden from this player
 +     */
-+    boolean canSee(@NotNull UUID entityUUID);
++    boolean canSeePlayer(@NotNull UUID entityUUID);
 +    // Gale end - Purpur - Player#canSee by entity UUID
 +
      /**

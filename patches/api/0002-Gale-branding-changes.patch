@@ -62,3 +62,21 @@ index 327766a53d6c730d06765ee937b9a89b6629008c..8a81cc5a8c4ce0109e8a4965f3c625a0
  }
  
  tasks.withType<Javadoc> {
+diff --git a/src/main/java/io/papermc/paper/ServerBuildInfo.java b/src/main/java/io/papermc/paper/ServerBuildInfo.java
+index 9df9d09aa477d4cd3c496ba0933c816df1ef0964..bdc8d830f54e4567ec0b03041221fdcd016ce76c 100644
+--- a/src/main/java/io/papermc/paper/ServerBuildInfo.java
++++ b/src/main/java/io/papermc/paper/ServerBuildInfo.java
+@@ -18,6 +18,13 @@ public interface ServerBuildInfo {
+      */
+     Key BRAND_PAPER_ID = Key.key("papermc", "paper");
+ 
++    // Gale start - branding changes
++    /**
++     * The brand id for Gale.
++     */
++    Key BRAND_GALE_ID = Key.key("galemc", "gale");
++    // Gale end - branding changes
++
+     /**
+      * Gets the {@code ServerBuildInfo}.
+      *

@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index a4e813aeae443aecf78515d3759b2a65fd14f8ea..e37c9320083334680e7ccdd12e875feb78f29414 100644
+index a4e813aeae443aecf78515d3759b2a65fd14f8ea..4eff57762a83b6e60fd5ad6cd71dcecf786b10d1 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -1068,14 +1068,18 @@ public abstract class PlayerList {
@@ -55,7 +55,7 @@ index a4e813aeae443aecf78515d3759b2a65fd14f8ea..e37c9320083334680e7ccdd12e875feb
 +                var target = targetPlayer.getBukkitEntity();;
 +                final List<ServerPlayer> list = new java.util.ArrayList<>(this.players.size());
 +                for (ServerPlayer player : this.players) {
-+                    if (target.canSee(player.getUUID())) {
++                    if (target.canSeePlayer(player.getUUID())) {
 +                        list.add(player);
                      }
 -                }).collect(Collectors.toList())));
