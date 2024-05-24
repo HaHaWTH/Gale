@@ -392,7 +392,7 @@ index 4aa6232bf0f72fcde32d257100bd15b1c5192aaa..ad73e14f068ae2f3b83769eef1191b9b
      private static final Codec<Object> ARG_CODEC = Codec.either(PRIMITIVE_ARG_CODEC, ComponentSerialization.CODEC)
          .xmap(
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index 5443013060b62e3bfcc51cddca96d1c0bc59fe72..76a1b31a55b1838dc80b796f997edaddbcaa755c 100644
+index 244a19ecd0234fa1d7a6ecfea20751595688605d..f76ca394169d844a263a53c31c30e57de4381e0d 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -89,7 +89,7 @@ public class Main {
@@ -449,7 +449,7 @@ index 4bb9e099b647a6a524395d9e5393ef6f2fdc9153..5ec5ed9ac62fda568fd011dd62b1c5a2
          return ret;
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 3cc51e2be04feff9c0e645b0a39bf969de37de0d..5404d8b54c8c8d48e4b92ca947d431ed60bb7ce8 100644
+index 59b157545b562ea94ffbc42c8174f4c573d79399..50bf9b83614bbfc1ed76c08d6fea113a1a771b25 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -29,6 +29,8 @@ import java.util.function.Consumer;
@@ -624,7 +624,7 @@ index eb3c12e03c0d5c9cec84d97e2c51c50ce59c23a4..9b29ec4e72e4cdf2a42868ca5659fdcf
      private EquipmentSlot(final EquipmentSlot.Type type, final int entityId, final int armorStandId, final String name) {
          this.type = type;
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index b095a5b4c2390bc3e52f8bb559c621ecb42db2c6..70f1aec3e396561b111696b7ddc31ce848702671 100644
+index 91e3e4a126c1565538d190b5da552ba999c28ba8..8a1ff07671d2b1e6f5132d81733a00fd5d2179c1 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -3233,7 +3233,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -745,7 +745,7 @@ index e158ff1a9dbd054985873e854fcf6c433102059c..4dbe4db3e7b005eabdec56e5047ad7bc
      private static Enchantment register(String name, Enchantment enchantment) {
          return Registry.register(BuiltInRegistries.ENCHANTMENT, name, enchantment);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 50f660de3d94c2b30668f8fd09a590a2d1b3ba16..5854c76fadd8fe08d0d0ca5d01ce218b86a508c1 100644
+index 5d8c9c56d30cd74ffe5941832978d72f421d3639..ba2c1672a018dbd0a179e71f7166fb9df87782dd 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -10,6 +10,8 @@ import java.util.function.Consumer;
@@ -757,7 +757,7 @@ index 50f660de3d94c2b30668f8fd09a590a2d1b3ba16..5854c76fadd8fe08d0d0ca5d01ce218b
  import net.minecraft.CrashReport;
  import net.minecraft.CrashReportCategory;
  import net.minecraft.core.BlockPos;
-@@ -1870,7 +1872,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1861,7 +1863,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      public org.bukkit.entity.Entity[] getChunkEntities(int chunkX, int chunkZ) {
          io.papermc.paper.world.ChunkEntitySlices slices = ((ServerLevel)this).getEntityLookup().getChunk(chunkX, chunkZ);
          if (slices == null) {

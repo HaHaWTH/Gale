@@ -59,10 +59,10 @@ index 039a86034928a5eb7aaa2d7ca76a7bddcca346bd..7c32c60100cf2bd109eb8762efa856c1
      }
  
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 26ff5f76b79a722f56afa8c55a2941f99642998b..d3878d2b9bbff9b68089a415e9d8c2b044fdfb2d 100644
+index d5113b3650ec45127246b18e1f64526bff1798e4..55ea6cd231128b7c2781e59a4fe51a021ab35bb8 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1065,6 +1065,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1062,6 +1062,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      private static final long MAX_CATCHUP_BUFFER = TICK_TIME * TPS * 60L;
      private long lastTick = 0;
      private long catchupTime = 0;
@@ -70,7 +70,7 @@ index 26ff5f76b79a722f56afa8c55a2941f99642998b..d3878d2b9bbff9b68089a415e9d8c2b0
      public final RollingAverage tps1 = new RollingAverage(60);
      public final RollingAverage tps5 = new RollingAverage(60 * 5);
      public final RollingAverage tps15 = new RollingAverage(60 * 15);
-@@ -1187,6 +1188,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1184,6 +1185,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  if (++MinecraftServer.currentTick % MinecraftServer.SAMPLE_INTERVAL == 0) {
                      final long diff = currentTime - tickSection;
                      final java.math.BigDecimal currentTps = TPS_BASE.divide(new java.math.BigDecimal(diff), 30, java.math.RoundingMode.HALF_UP);
@@ -79,10 +79,10 @@ index 26ff5f76b79a722f56afa8c55a2941f99642998b..d3878d2b9bbff9b68089a415e9d8c2b0
                      tps5.add(currentTps, diff);
                      tps15.add(currentTps, diff);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 809e652467491da306a9d876274e91e398259dd8..29f85700cd7ff3ccd94e1d81030888a39f28e303 100644
+index 3768a55c5e20ec47e2b1d41dacb1496006a30652..f895dc5840423c85d42e7ff7488866cc055aa290 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -3086,8 +3086,27 @@ public final class CraftServer implements Server {
+@@ -3081,8 +3081,27 @@ public final class CraftServer implements Server {
          };
      }
  
