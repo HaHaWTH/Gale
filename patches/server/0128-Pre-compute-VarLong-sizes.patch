@@ -49,7 +49,7 @@ index c4fd722f4203e3f4de7b41de9d6ef47b5cfaed10..b73a50fa8465ea4d392a65146eb2775a
                  return i;
 diff --git a/src/test/java/net/minecraft/network/VarIntLongTest.java b/src/test/java/net/minecraft/network/VarIntLongTest.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..a1892a904042fcfad9137df592dabd46d4d1c30b
+index 0000000000000000000000000000000000000000..f8a1b72d70a47dbc75cdb4f7a536dbb58354661f
 --- /dev/null
 +++ b/src/test/java/net/minecraft/network/VarIntLongTest.java
 @@ -0,0 +1,159 @@
@@ -192,7 +192,7 @@ index 0000000000000000000000000000000000000000..a1892a904042fcfad9137df592dabd46
 +            int size = VarInt.getByteSize(value);
 +
 +            // then
-+            Assertions.assertEquals(Float.parseFloat("Optimized size (" + size + ") is not equal to original size (" + originalSize + ") for test case value " + value + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(value), 32) + ")"), originalSize, size);
++            Assertions.assertEquals(originalSize, size, "Optimized size (" + size + ") is not equal to original size (" + originalSize + ") for test case value " + value + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(value), 32) + ")");
 +        });
 +    }
 +
@@ -206,7 +206,7 @@ index 0000000000000000000000000000000000000000..a1892a904042fcfad9137df592dabd46
 +            int size = VarLong.getByteSize(value);
 +
 +            // then
-+            Assertions.assertEquals(Float.parseFloat("Optimized size (" + size + ") is not equal to original size (" + originalSize + ") for test case value " + value + " (binary: " + padStringWithLeadingZeros(Long.toBinaryString(value), 64) + ")"), originalSize, size);
++            Assertions.assertEquals(originalSize, size, "Optimized size (" + size + ") is not equal to original size (" + originalSize + ") for test case value " + value + " (binary: " + padStringWithLeadingZeros(Long.toBinaryString(value), 64) + ")");
 +        });
 +    }
 +    // Gale end - Velocity - pre-compute VarInt and VarLong sizes

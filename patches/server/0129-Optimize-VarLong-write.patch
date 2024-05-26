@@ -153,7 +153,7 @@ index b73a50fa8465ea4d392a65146eb2775a50917290..a584a44680a034be4f9848cbfea4af4c
              buf.writeByte((int)(l & 127L) | 128);
              l >>>= 7;
 diff --git a/src/test/java/net/minecraft/network/VarIntLongTest.java b/src/test/java/net/minecraft/network/VarIntLongTest.java
-index a1892a904042fcfad9137df592dabd46d4d1c30b..892877b1a1ebfe42bb7a7af7555606329c39e9b3 100644
+index f8a1b72d70a47dbc75cdb4f7a536dbb58354661f..2cd1564f0c8d6924dd8b472b19a1925179c09bee 100644
 --- a/src/test/java/net/minecraft/network/VarIntLongTest.java
 +++ b/src/test/java/net/minecraft/network/VarIntLongTest.java
 @@ -2,6 +2,7 @@
@@ -182,9 +182,9 @@ index a1892a904042fcfad9137df592dabd46d4d1c30b..892877b1a1ebfe42bb7a7af755560632
 +            buf2.writeVarInt(value);
 +
 +            // then
-+            Assertions.assertEquals(Float.parseFloat("Writer index of optimized buffer (" + buf2.writerIndex() + ") is not equal to writer index of original buffer (" + buf1.writerIndex() + ") for test case value " + value + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(value), 32) + ")"), buf1.writerIndex(), buf2.writerIndex());
++            Assertions.assertEquals(buf1.writerIndex(), buf2.writerIndex(), "Writer index of optimized buffer (" + buf2.writerIndex() + ") is not equal to writer index of original buffer (" + buf1.writerIndex() + ") for test case value " + value + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(value), 32) + ")");
 +            for (int i = 0; i < capacity; i++) {
-+                Assertions.assertEquals(Float.parseFloat("Buffer byte (at index " + i + ") in optimized buffer (" + buf2.getByte(i) + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(Byte.toUnsignedInt(buf2.getByte(i))), 8) + ")) is not equal to the same byte in original buffer (" + buf1.getByte(i) + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(Byte.toUnsignedInt(buf1.getByte(i))), 8) + ")) for test case value " + value + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(value), 32) + ")"), buf1.getByte(i), buf2.getByte(i));
++                Assertions.assertEquals(buf1.getByte(i), buf2.getByte(i), "Buffer byte (at index " + i + ") in optimized buffer (" + buf2.getByte(i) + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(Byte.toUnsignedInt(buf2.getByte(i))), 8) + ")) is not equal to the same byte in original buffer (" + buf1.getByte(i) + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(Byte.toUnsignedInt(buf1.getByte(i))), 8) + ")) for test case value " + value + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(value), 32) + ")");
 +            }
 +        });
 +    }
@@ -202,9 +202,9 @@ index a1892a904042fcfad9137df592dabd46d4d1c30b..892877b1a1ebfe42bb7a7af755560632
 +            buf2.writeVarLong(value);
 +
 +            // then
-+            Assertions.assertEquals(Float.parseFloat("Writer index of optimized buffer (" + buf2.writerIndex() + ") is not equal to writer index of original buffer (" + buf1.writerIndex() + ") for test case value " + value + " (binary: " + padStringWithLeadingZeros(Long.toBinaryString(value), 64) + ")"), buf1.writerIndex(), buf2.writerIndex());
++            Assertions.assertEquals(buf1.writerIndex(), buf2.writerIndex(), "Writer index of optimized buffer (" + buf2.writerIndex() + ") is not equal to writer index of original buffer (" + buf1.writerIndex() + ") for test case value " + value + " (binary: " + padStringWithLeadingZeros(Long.toBinaryString(value), 64) + ")");
 +            for (int i = 0; i < capacity; i++) {
-+                Assertions.assertEquals(Float.parseFloat("Buffer byte (at index " + i + ") in optimized buffer (" + buf2.getByte(i) + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(Byte.toUnsignedInt(buf2.getByte(i))), 8) + ")) is not equal to the same byte in original buffer (" + buf1.getByte(i) + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(Byte.toUnsignedInt(buf1.getByte(i))), 8) + ")) for test case value " + value + " (binary: " + padStringWithLeadingZeros(Long.toBinaryString(value), 64) + ")"), buf1.getByte(i), buf2.getByte(i));
++                Assertions.assertEquals(buf1.getByte(i), buf2.getByte(i), "Buffer byte (at index " + i + ") in optimized buffer (" + buf2.getByte(i) + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(Byte.toUnsignedInt(buf2.getByte(i))), 8) + ")) is not equal to the same byte in original buffer (" + buf1.getByte(i) + " (binary: " + padStringWithLeadingZeros(Integer.toBinaryString(Byte.toUnsignedInt(buf1.getByte(i))), 8) + ")) for test case value " + value + " (binary: " + padStringWithLeadingZeros(Long.toBinaryString(value), 64) + ")");
 +            }
 +        });
 +    }
