@@ -21,35 +21,31 @@ Given that we do a lot of varint writing as well, this should provide a small pe
 This includes a test to ensure that the behavior is as expected and fixes the initialization loop so that the correct results will be given. Much thanks to @octylFractal for acting as my duck while trying to figure this out.
 
 diff --git a/src/main/java/net/minecraft/network/VarLong.java b/src/main/java/net/minecraft/network/VarLong.java
-index c4fd722f4203e3f4de7b41de9d6ef47b5cfaed10..b73a50fa8465ea4d392a65146eb2775a50917290 100644
+index c4fd722f4203e3f4de7b41de9d6ef47b5cfaed10..11339185fc70b1a34130c92d28c397d4b05569cb 100644
 --- a/src/main/java/net/minecraft/network/VarLong.java
 +++ b/src/main/java/net/minecraft/network/VarLong.java
-@@ -8,7 +8,22 @@ public class VarLong {
-     private static final int CONTINUATION_BIT_MASK = 128;
+@@ -9,6 +9,18 @@ public class VarLong {
      private static final int DATA_BITS_PER_BYTE = 7;
  
-+    // Gale start - Velocity - pre-compute VarInt and VarLong sizes
-+    private static final int[] EXACT_BYTE_LENGTHS = new int[65];
-+    static {
-+        for (int i = 0; i < 64; ++i) {
-+            EXACT_BYTE_LENGTHS[i] = (64 - i + 6) / 7;
-+        }
-+        EXACT_BYTE_LENGTHS[64] = 1; // Special case for the number 0
-+    }
-+    // Gale end - Velocity - pre-compute VarInt and VarLong sizes
      public static int getByteSize(long l) {
 +        // Gale start - Velocity - pre-compute VarInt and VarLong sizes
-+        return EXACT_BYTE_LENGTHS[Long.numberOfLeadingZeros(l)];
++        return VARLONG_EXACT_BYTE_LENGTHS[Long.numberOfLeadingZeros(l)];
 +    }
-+
-+    static int getByteSizeOriginal(long l) { // public -> package-private
++    private static final int[] VARLONG_EXACT_BYTE_LENGTHS = new int[65];
++    static {
++        for (int i = 0; i < 64; ++i) {
++            VARLONG_EXACT_BYTE_LENGTHS[i] = (int) Math.ceil((63d - (i - 1)) / 7d);
++        }
++        VARLONG_EXACT_BYTE_LENGTHS[64] = 1; // Special case for the number 0
++    }
++    static int getByteSizeOld(long l) { // public -> package-private
 +        // Gale end - Velocity - pre-compute VarInt and VarLong sizes
          for (int i = 1; i < 10; i++) {
              if ((l & -1L << i * 7) == 0L) {
                  return i;
 diff --git a/src/test/java/net/minecraft/network/VarIntLongTest.java b/src/test/java/net/minecraft/network/VarIntLongTest.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..f8a1b72d70a47dbc75cdb4f7a536dbb58354661f
+index 0000000000000000000000000000000000000000..bbea09ffc2180c3c62e15d7dff51f8c220425bfe
 --- /dev/null
 +++ b/src/test/java/net/minecraft/network/VarIntLongTest.java
 @@ -0,0 +1,159 @@
@@ -197,10 +193,10 @@ index 0000000000000000000000000000000000000000..f8a1b72d70a47dbc75cdb4f7a536dbb5
 +    }
 +
 +    @Test
-+    public void testGetVarLongSizeComparedToOriginal() {
++    public void testGetVarLongSizeComparedToOld() {
 +        longCases.forEach(value -> {
 +            // given
-+            int originalSize = VarLong.getByteSizeOriginal(value);
++            int originalSize = VarLong.getByteSizeOld(value);
 +
 +            // when
 +            int size = VarLong.getByteSize(value);

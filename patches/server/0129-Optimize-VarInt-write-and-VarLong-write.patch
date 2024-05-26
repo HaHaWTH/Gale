@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Tue, 22 Aug 2023 21:38:37 +0200
-Subject: [PATCH] Optimize VarLong#write
+Subject: [PATCH] Optimize VarInt#write and VarLong#write
 
 License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
@@ -20,11 +20,71 @@ Given that we do a lot of varint writing as well, this should provide a small pe
 
 This includes a test to ensure that the behavior is as expected and fixes the initialization loop so that the correct results will be given. Much thanks to @octylFractal for acting as my duck while trying to figure this out.
 
+diff --git a/src/main/java/net/minecraft/network/VarInt.java b/src/main/java/net/minecraft/network/VarInt.java
+index 74ed47659d3e615c2dae7da98d5a8cf1559625bf..82a8354b5ce503508716af3966b9809a6b4d956c 100644
+--- a/src/main/java/net/minecraft/network/VarInt.java
++++ b/src/main/java/net/minecraft/network/VarInt.java
+@@ -51,6 +51,41 @@ public class VarInt {
+     }
+ 
+     public static ByteBuf write(ByteBuf buf, int i) {
++        // Gale start - Velocity - optimized VarInt#write
++        if ((i & 0xFFFFFF80) == 0) {
++            buf.writeByte(i);
++        } else if ((i & 0xFFFFC000) == 0) {
++            int w = (i & 0x7F) << 8
++                | (i >>> 7)
++                | 0x00008000;
++            buf.writeShort(w);
++        } else if ((i & 0xFFE00000) == 0) {
++            int w = (i & 0x7F) << 16
++                | (i & 0x3F80) << 1
++                | (i >>> 14)
++                | 0x00808000;
++            buf.writeMedium(w);
++        } else if ((i & 0xF0000000) == 0) {
++            int w = (i & 0x7F) << 24
++                | ((i & 0x3F80) << 9)
++                | (i & 0x1FC000) >> 6
++                | (i >>> 21)
++                | 0x80808000;
++            buf.writeInt(w);
++        } else {
++            int w = (i & 0x7F) << 24
++                | (i & 0x3F80) << 9
++                | (i & 0x1FC000) >> 6
++                | ((i >>> 21) & 0x7F)
++                | 0x80808080;
++            buf.writeInt(w);
++            buf.writeByte(i >>> 28);
++        }
++        return buf;
++    }
++
++    static ByteBuf writeOld(ByteBuf buf, int i) { // public -> package-private
++        // Gale end - Velocity - optimized VarInt#write
+      // Paper start - Optimize VarInts
+         // Peel the one and two byte count cases explicitly as they are the most common VarInt sizes
+         // that the proxy will write, to improve inlining.
+@@ -60,11 +95,11 @@ public class VarInt {
+             int w = (i & 0x7F | 0x80) << 8 | (i >>> 7);
+             buf.writeShort(w);
+         } else {
+-            writeOld(buf, i);
++            writeOld2(buf, i); // rename
+         }
+         return buf;
+     }
+-    public static ByteBuf writeOld(ByteBuf buf, int i) {
++    public static ByteBuf writeOld2(ByteBuf buf, int i) { // rename
+     // Paper end - Optimize VarInts
+         while ((i & -128) != 0) {
+             buf.writeByte(i & 127 | 128);
 diff --git a/src/main/java/net/minecraft/network/VarLong.java b/src/main/java/net/minecraft/network/VarLong.java
-index b73a50fa8465ea4d392a65146eb2775a50917290..a584a44680a034be4f9848cbfea4af4c87d8de7d 100644
+index 11339185fc70b1a34130c92d28c397d4b05569cb..c127dd051572177e4fc379bb7e2d40571d0abeed 100644
 --- a/src/main/java/net/minecraft/network/VarLong.java
 +++ b/src/main/java/net/minecraft/network/VarLong.java
-@@ -54,6 +54,127 @@ public class VarLong {
+@@ -51,6 +51,127 @@ public class VarLong {
      }
  
      public static ByteBuf write(ByteBuf buf, long l) {
@@ -147,13 +207,13 @@ index b73a50fa8465ea4d392a65146eb2775a50917290..a584a44680a034be4f9848cbfea4af4c
 +        return buf;
 +    }
 +
-+    static ByteBuf writeOriginal(ByteBuf buf, long l) { // public -> package-private
++    static ByteBuf writeOld(ByteBuf buf, long l) { // public -> package-private
 +        // Gale end - Velocity - optimized VarLong#write
          while ((l & -128L) != 0L) {
              buf.writeByte((int)(l & 127L) | 128);
              l >>>= 7;
 diff --git a/src/test/java/net/minecraft/network/VarIntLongTest.java b/src/test/java/net/minecraft/network/VarIntLongTest.java
-index f8a1b72d70a47dbc75cdb4f7a536dbb58354661f..2cd1564f0c8d6924dd8b472b19a1925179c09bee 100644
+index bbea09ffc2180c3c62e15d7dff51f8c220425bfe..0c11670d8d7307307a7cd12be5d0dca40155829d 100644
 --- a/src/test/java/net/minecraft/network/VarIntLongTest.java
 +++ b/src/test/java/net/minecraft/network/VarIntLongTest.java
 @@ -2,6 +2,7 @@
@@ -190,13 +250,13 @@ index f8a1b72d70a47dbc75cdb4f7a536dbb58354661f..2cd1564f0c8d6924dd8b472b19a19251
 +    }
 +
 +    @Test
-+    public void testWriteVarLongComparedToOriginal() {
++    public void testWriteVarLongComparedToOld() {
 +        longCases.forEach(value -> {
 +            // given
 +            int capacity = 10;
 +            FriendlyByteBuf buf1 = new FriendlyByteBuf(Unpooled.buffer(capacity));
 +            FriendlyByteBuf buf2 = new FriendlyByteBuf(Unpooled.buffer(capacity));
-+            VarLong.writeOriginal(buf1, value);
++            VarLong.writeOld(buf1, value);
 +
 +            // when
 +            buf2.writeVarLong(value);
