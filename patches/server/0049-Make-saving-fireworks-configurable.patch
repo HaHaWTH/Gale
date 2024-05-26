@@ -20,11 +20,11 @@ launcher can very easily fill a chunk.
 Prevent saving Fireworks so that chunk unloads will wipe a chunks fireworks in this case.
 
 diff --git a/src/main/java/net/minecraft/world/entity/projectile/FireworkRocketEntity.java b/src/main/java/net/minecraft/world/entity/projectile/FireworkRocketEntity.java
-index 3df4005b6ddc075e5922c1e96e4ceb21d8b8ea43..941274636eb635bc2c91bffa55436a5a5a78fcd2 100644
+index 6671796d292fbc922a94271136f5a7a4bbdedaca..fe06ee24836f4f10e77a36c34c314464203e19d1 100644
 --- a/src/main/java/net/minecraft/world/entity/projectile/FireworkRocketEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/projectile/FireworkRocketEntity.java
 @@ -348,4 +348,11 @@ public class FireworkRocketEntity extends Projectile implements ItemSupplier {
-     private static ItemStack getDefaultItem() {
+     public static ItemStack getDefaultItem() {
          return new ItemStack(Items.FIREWORK_ROCKET);
      }
 +
