@@ -12,15 +12,15 @@ By: Aikar <aikar@aikar.co>
 As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
-diff --git a/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java
-index 17da915ffa638500a83b67db0940a7b9a9b333a1..e47c9481f39426e1767e73275edbf9a1d298caea 100644
---- a/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java
-+++ b/src/main/java/net/minecraft/world/level/block/entity/RandomizableContainerBlockEntity.java
-@@ -74,6 +74,7 @@ public abstract class RandomizableContainerBlockEntity extends BaseContainerBloc
+diff --git a/src/main/java/net/minecraft/world/RandomizableContainer.java b/src/main/java/net/minecraft/world/RandomizableContainer.java
+index feb35fba0c56445ee910dbe1af9b36f21b4ec480..caf46a9b978c0cada8530142e6ccf8bb0f371c1c 100644
+--- a/src/main/java/net/minecraft/world/RandomizableContainer.java
++++ b/src/main/java/net/minecraft/world/RandomizableContainer.java
+@@ -81,6 +81,7 @@ public interface RandomizableContainer extends Container {
+     }
  
-     @Override
-     public void unpackLootTable(@org.jetbrains.annotations.Nullable final Player player) {
+     default void unpackLootTable(@Nullable Player player) {
 +        if (player == null) return; // Gale - EMC - don't trigger lootable refresh for non-player interaction
-         // Copied from super with changes, always check the original method
-         net.minecraft.world.level.Level level = this.getLevel();
+         Level level = this.getLevel();
          BlockPos blockPos = this.getBlockPos();
+         ResourceKey<LootTable> resourceKey = this.getLootTable();

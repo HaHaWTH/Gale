@@ -985,10 +985,10 @@ index 40db66b168b8927b3d3dd8ec2bf77c22212142ce..db21e92d1e81e34a80342581107e20a3
  
                  while (iterator.hasNext()) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index a645ad66af061966c5e47cae677026b35a55c486..1d4e65d9ca42980b272432fcb0b9627d6b299978 100644
+index 6a4637eef14cbd84bbe26ef16f004b8f93367a3d..85a61984d241fe702e2cda22e5ea5dde239084f3 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-@@ -1290,7 +1290,6 @@ public class ServerPlayer extends Player {
+@@ -1291,7 +1291,6 @@ public class ServerPlayer extends Player {
              PortalInfo shapedetectorshape = this.findDimensionEntryPoint(worldserver);
  
              if (shapedetectorshape != null) {
@@ -996,7 +996,7 @@ index a645ad66af061966c5e47cae677026b35a55c486..1d4e65d9ca42980b272432fcb0b9627d
                  worldserver = shapedetectorshape.world; // CraftBukkit
                  if (worldserver == null) { } else // CraftBukkit - empty to fall through to null to event
                  if (resourcekey == LevelStem.OVERWORLD && worldserver.getTypeKey() == LevelStem.NETHER) { // CraftBukkit
-@@ -1313,8 +1312,6 @@ public class ServerPlayer extends Player {
+@@ -1314,8 +1313,6 @@ public class ServerPlayer extends Player {
              worldserver = ((CraftWorld) exit.getWorld()).getHandle();
              // CraftBukkit end
  
@@ -1005,7 +1005,7 @@ index a645ad66af061966c5e47cae677026b35a55c486..1d4e65d9ca42980b272432fcb0b9627d
              if (true) { // CraftBukkit
                  this.isChangingDimension = true; // CraftBukkit - Set teleport invulnerability only if player changing worlds
  
-@@ -1331,7 +1328,6 @@ public class ServerPlayer extends Player {
+@@ -1332,7 +1329,6 @@ public class ServerPlayer extends Player {
                  this.connection.teleport(exit); // CraftBukkit - use internal teleport without event
                  this.connection.resetPosition();
                  worldserver.addDuringPortalTeleport(this);
@@ -1136,10 +1136,10 @@ index 298e3eddd600f0b2e48ce2d4080cf68adff59a3a..61a7c2e1d073e5b4b7947618b57bef5a
  
      protected abstract T prepare(ResourceManager manager, ProfilerFiller profiler);
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05730d3b09 100644
+index 4ee843dfd826772c9157ca421d8fe1f36f814b51..7ff046e6e1e8f532ab7347beaeac898c57157cc2 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -877,7 +877,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -876,7 +876,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
      // CraftBukkit end
  
      public void baseTick() {
@@ -1147,7 +1147,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
          if (firstTick && this instanceof net.minecraft.world.entity.NeutralMob neutralMob) neutralMob.tickInitialPersistentAnger(level); // Paper - Prevent entity loading causing async lookups
          this.inBlockState = null;
          if (this.isPassenger() && this.getVehicle().isRemoved()) {
-@@ -938,7 +937,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -937,7 +936,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
          }
  
          this.firstTick = false;
@@ -1155,7 +1155,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
      }
  
      public void setSharedFlagOnFire(boolean onFire) {
-@@ -1155,7 +1153,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1154,7 +1152,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                  }
              }
  
@@ -1163,7 +1163,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
              if (this.stuckSpeedMultiplier.lengthSqr() > 1.0E-7D) {
                  movement = movement.multiply(this.stuckSpeedMultiplier);
                  this.stuckSpeedMultiplier = Vec3.ZERO;
-@@ -1164,7 +1161,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1163,7 +1160,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
              // Paper start - ignore movement changes while inactive.
              if (isTemporarilyActive && !(this instanceof ItemEntity) && movement == getDeltaMovement() && movementType == MoverType.SELF) {
                  setDeltaMovement(Vec3.ZERO);
@@ -1171,7 +1171,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
                  return;
              }
              // Paper end
-@@ -1185,8 +1181,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1184,8 +1180,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                  this.setPos(this.getX() + vec3d1.x, this.getY() + vec3d1.y, this.getZ() + vec3d1.z);
              }
  
@@ -1180,7 +1180,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
              boolean flag = !Mth.equal(movement.x, vec3d1.x);
              boolean flag1 = !Mth.equal(movement.z, vec3d1.z);
  
-@@ -1204,9 +1198,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1203,9 +1197,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
              BlockState iblockdata = this.level().getBlockState(blockposition);
  
              this.checkFallDamage(vec3d1.y, this.onGround(), iblockdata, blockposition);
@@ -1191,7 +1191,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
                  if (this.horizontalCollision) {
                      Vec3 vec3d2 = this.getDeltaMovement();
  
-@@ -1342,8 +1334,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1341,8 +1333,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                  if (this.isOnFire() && (this.isInPowderSnow || this.isInWaterRainOrBubble())) {
                      this.setRemainingFireTicks(-this.getFireImmuneTicks());
                  }
@@ -1200,7 +1200,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
              }
          }
          // Paper start - detailed watchdog information
-@@ -3226,7 +3216,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3225,7 +3215,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                  ServerLevel worldserver1 = minecraftserver.getLevel(resourcekey);
  
                  if (true && !this.isPassenger() && this.portalTime++ >= i) { // CraftBukkit
@@ -1208,7 +1208,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
                      this.portalTime = i;
                      // Paper start - Add EntityPortalReadyEvent
                      io.papermc.paper.event.entity.EntityPortalReadyEvent event = new io.papermc.paper.event.entity.EntityPortalReadyEvent(this.getBukkitEntity(), worldserver1 == null ? null : worldserver1.getWorld(), org.bukkit.PortalType.NETHER);
-@@ -3244,7 +3233,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3243,7 +3232,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                      }
                      } // Paper - Add EntityPortalReadyEvent
                      // CraftBukkit end
@@ -1216,7 +1216,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
                  }
  
                  this.isInsidePortal = false;
-@@ -3704,14 +3692,12 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3703,14 +3691,12 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
          }
          // Paper end - Fix item duplication and teleport issues
          if (this.level() instanceof ServerLevel && !this.isRemoved()) {
@@ -1231,7 +1231,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
              PortalInfo shapedetectorshape = (location == null) ? this.findDimensionEntryPoint(worldserver) : new PortalInfo(new Vec3(location.x(), location.y(), location.z()), Vec3.ZERO, this.yRot, this.xRot, worldserver, null); // CraftBukkit
  
              if (shapedetectorshape == null) {
-@@ -3750,7 +3736,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3749,7 +3735,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                  this.unRide();
                  // CraftBukkit end
  
@@ -1239,7 +1239,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
                  // Paper start - Fix item duplication and teleport issues
                  if (this instanceof Mob) {
                      ((Mob) this).dropLeash(true, true); // Paper drop lead
-@@ -3777,10 +3762,8 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3776,10 +3761,8 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                  }
  
                  this.removeAfterChangingDimensions();
@@ -1251,7 +1251,7 @@ index 25ea45a528612d1a2a2d77293b3802f473a52f38..f76a56c20b028c88687f509340b99b05
              }
          } else {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index ef0f118aecf0893e45cb9423a677d7e42496324b..f8a313a970e01929b07b3e2bbec8ff7735dbc0e3 100644
+index 0ddf2e1a6d2ea836f8a140a435721e0ce96bd8d2..7175edc9539c7485a87a7f038a4b567302ab9589 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -418,7 +418,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -1344,7 +1344,7 @@ index ef0f118aecf0893e45cb9423a677d7e42496324b..f8a313a970e01929b07b3e2bbec8ff77
          if (((ServerLevel) this.level()).hasEntityMoveEvent && !(this instanceof net.minecraft.world.entity.player.Player)) {
              if (this.xo != this.getX() || this.yo != this.getY() || this.zo != this.getZ() || this.yRotO != this.getYRot() || this.xRotO != this.getXRot()) {
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index e89f9c3e887601d8461eb967ae0bf582b672f631..a52538ddbadfaa40021462e15224e8a1ed6312a2 100644
+index 9f42563699508fcb3d8a96cfdfc25a7bffd99759..8c8d944fd27bb70bb34db6f9ea4c069bebb8ba05 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
 @@ -37,7 +37,6 @@ import net.minecraft.sounds.SoundEvent;
@@ -1649,7 +1649,7 @@ index 290d41136f5ec7671bc4990dfe50da0a770c124d..53dbe9d296a89d23b19f2551b20b4647
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/animal/goat/Goat.java b/src/main/java/net/minecraft/world/entity/animal/goat/Goat.java
-index 02e49c7ae5e120302b6479cf3e3934b9217eebf0..55d2144af223a2813b784e6e249fe94f610ef079 100644
+index 376bcbc189008464f4d518c1e07643431ba96306..a6b6dd1715f7cb278b66381cbb0dd9d7069ce6ed 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/goat/Goat.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/goat/Goat.java
 @@ -192,12 +192,8 @@ public class Goat extends Animal {
@@ -1802,7 +1802,7 @@ index 082b804f4793f72e76361f5427f0358273454b3d..0772060d96c4fc9dfaf84081be6ccae9
  
          if (this.fire) {
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 75391e04fcd559f09e2a29c71f788761f71f2ad6..7f6f50a33e017b671cdc3a21e618bb71365b2136 100644
+index 01453ffd7e47933dd65fddba9be8e71f3a51cc46..118d1a5aedce3f478f47b9e36cf419c15f3bd7ca 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -131,7 +131,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
@@ -1813,7 +1813,7 @@ index 75391e04fcd559f09e2a29c71f788761f71f2ad6..7f6f50a33e017b671cdc3a21e618bb71
      public final boolean isClientSide;
      private final WorldBorder worldBorder;
      private final BiomeManager biomeManager;
-@@ -208,7 +207,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -209,7 +208,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
  
      public abstract ResourceKey<LevelStem> getTypeKey();
  
@@ -1822,7 +1822,7 @@ index 75391e04fcd559f09e2a29c71f788761f71f2ad6..7f6f50a33e017b671cdc3a21e618bb71
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig(((net.minecraft.world.level.storage.PrimaryLevelData) worlddatamutable).getLevelName()); // Spigot
          this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper - create paper world config
          this.galeConfig = galeWorldConfigCreator.apply(this.spigotConfig); // Gale - Gale configuration
-@@ -223,7 +222,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -224,7 +223,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          }
  
          // CraftBukkit end
@@ -1830,7 +1830,7 @@ index 75391e04fcd559f09e2a29c71f788761f71f2ad6..7f6f50a33e017b671cdc3a21e618bb71
          this.levelData = worlddatamutable;
          this.dimensionTypeRegistration = holder;
          final DimensionType dimensionmanager = (DimensionType) holder.value();
-@@ -1253,9 +1251,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1254,9 +1252,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      }
  
      protected void tickBlockEntities() {
@@ -1840,7 +1840,7 @@ index 75391e04fcd559f09e2a29c71f788761f71f2ad6..7f6f50a33e017b671cdc3a21e618bb71
          this.timings.tileEntityPending.startTiming(); // Spigot
          this.tickingBlockEntities = true;
          if (!this.pendingBlockEntityTickers.isEmpty()) {
-@@ -1296,7 +1291,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1297,7 +1292,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          this.timings.tileEntityTick.stopTiming(); // Spigot
          this.tickingBlockEntities = false;
          co.aikar.timings.TimingHistory.tileEntityTicks += this.blockEntityTickers.size(); // Paper
@@ -1848,7 +1848,7 @@ index 75391e04fcd559f09e2a29c71f788761f71f2ad6..7f6f50a33e017b671cdc3a21e618bb71
          this.spigotConfig.currentPrimedTnt = 0; // Spigot
      }
  
-@@ -1511,7 +1505,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1512,7 +1506,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
  
      @Override
      public List<Entity> getEntities(@Nullable Entity except, AABB box, Predicate<? super Entity> predicate) {
@@ -1856,7 +1856,7 @@ index 75391e04fcd559f09e2a29c71f788761f71f2ad6..7f6f50a33e017b671cdc3a21e618bb71
          List<Entity> list = Lists.newArrayList();
          ((ServerLevel)this).getEntityLookup().getEntities(except, box, list, predicate); // Paper - optimise this call
          return list;
-@@ -1530,7 +1523,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1531,7 +1524,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      }
  
      public <T extends Entity> void getEntities(EntityTypeTest<Entity, T> filter, AABB box, Predicate<? super T> predicate, List<? super T> result, int limit) {
@@ -1864,7 +1864,7 @@ index 75391e04fcd559f09e2a29c71f788761f71f2ad6..7f6f50a33e017b671cdc3a21e618bb71
          // Paper start - optimise this call
          //TODO use limit
          if (filter instanceof net.minecraft.world.entity.EntityType entityTypeTest) {
-@@ -1785,11 +1777,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1786,11 +1778,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      }
  
      public ProfilerFiller getProfiler() {
@@ -1920,7 +1920,7 @@ index c5454b92ca2565461c799d7340160f9fb72c1b0f..a1a4b99167919bedb8a45c3b81889f58
 -    }
  }
 diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
-index 2a8609e33716949ff1877b6d10f64a9d7a7c81e9..b38cdfdd3681b4f0fe537d4100b14bd017331118 100644
+index 14ee7b5b9b804bebd4e2a846b238547a28a36035..1bee0c58ca6acf734e060b4ef6b0b5b42b868613 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 @@ -26,7 +26,6 @@ import net.minecraft.network.FriendlyByteBuf;

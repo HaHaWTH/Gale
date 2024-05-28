@@ -13,10 +13,10 @@ As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 2ff752dfc7dcee936611613da934ccebe45c1cae..cb4f71f93f45ec1e91e7ca883cfce93c2260c990 100644
+index ec36674769993816b22886d90a2f73e3e548917c..b97253a6b43d4db39c22ae16b7e75bd95fb9d958 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -311,7 +311,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -310,7 +310,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
      public double xo;
      public double yo;
      public double zo;
@@ -25,7 +25,7 @@ index 2ff752dfc7dcee936611613da934ccebe45c1cae..cb4f71f93f45ec1e91e7ca883cfce93c
      public BlockPos blockPosition; // Gale - Pufferfish - optimize entity coordinate key - private -> public
      private ChunkPos chunkPosition;
      private Vec3 deltaMovement;
-@@ -2073,9 +2073,17 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -2072,9 +2072,17 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
      /** @deprecated */
      @Deprecated
      public float getLightLevelDependentMagicValue() {
@@ -45,7 +45,7 @@ index 2ff752dfc7dcee936611613da934ccebe45c1cae..cb4f71f93f45ec1e91e7ca883cfce93c
          this.absMoveTo(x, y, z);
          this.setYRot(yaw % 360.0F);
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 1b97a429c05ae8f77af3cea4852bac3966dd54e0..e0e7c35fa9c9395eec5b4504e250ee2d58f98e30 100644
+index f0196c364934894e6fba98de8d8dcbf09d3644b8..2d91941eb780de588202113700f68cca853eb62b 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
 @@ -1817,13 +1817,29 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Targeti

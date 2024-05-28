@@ -27,20 +27,11 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/com/destroystokyo/paper/loottable/PaperLootableInventoryData.java b/src/main/java/com/destroystokyo/paper/loottable/PaperLootableInventoryData.java
-index 6e72c43b9d3834eb91c02ce68e7d114ad907812d..f6f8e51cbdcfcbde9dc67d006867ae9daec09a4a 100644
+index fea92d280c6817cee1f18379d5ed51a3a22ee344..fd5d7feb9670a14cc6f7daa8ce6ba6a2073ac96b 100644
 --- a/src/main/java/com/destroystokyo/paper/loottable/PaperLootableInventoryData.java
 +++ b/src/main/java/com/destroystokyo/paper/loottable/PaperLootableInventoryData.java
-@@ -2,7 +2,7 @@ package com.destroystokyo.paper.loottable;
- 
- import io.papermc.paper.configuration.WorldConfiguration;
- import io.papermc.paper.configuration.type.DurationOrDisabled;
--import java.time.temporal.ChronoUnit;
-+
- import java.util.concurrent.TimeUnit;
- import org.bukkit.entity.Player;
- import org.bukkit.loot.LootTable;
-@@ -16,7 +16,7 @@ import java.util.UUID;
- 
+@@ -21,7 +21,7 @@ import org.checkerframework.framework.qual.DefaultQualifier;
+ @DefaultQualifier(NonNull.class)
  public class PaperLootableInventoryData {
  
 -    private static final Random RANDOM = new Random();
@@ -75,7 +66,7 @@ index f2b20ed5063a293f0b464548f590d652170cd1d8..2abe6131cc04ed397446c2aa08f77f9d
      public CraftWorld(ServerLevel world, ChunkGenerator gen, BiomeProvider biomeProvider, Environment env) {
          this.world = world;
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java
-index 1309fabd357eb9b8f90f882ec7ff3de9e60f187d..2eb85078a7da717602071e5463635b0b498416bb 100644
+index 95e35c223f2ad9b6de6749544abd68de71e4f1ab..4370c27e5b7ab52092e261581558d793516af21d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java
 @@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
@@ -88,7 +79,7 @@ index 1309fabd357eb9b8f90f882ec7ff3de9e60f187d..2eb85078a7da717602071e5463635b0b
  
      public CraftFirework(CraftServer server, FireworkRocketEntity entity) {
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
-index c3df5278231e13c43e9ea0804d95bf0542f2560a..abb8ff945b13c2cf4926a2f047d0e8dd074cea8f 100644
+index 67125bbf3e3b37968b02908d441b21474579ce77..8fc6330817d2b3188f479c6c6a381e4d4f9872d5 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 @@ -10,6 +10,7 @@ import org.spongepowered.configurate.objectmapping.meta.PostProcess;

@@ -26,10 +26,10 @@ index b47a8a082170bcb630c4354be7c77a4cac71d105..b49e3f2cdc1fa5ff3723fae452404664
              double d1 = (double) (center.y - maxRange);
              double d2 = (double) (center.x + maxRange);
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index f42de5d493530d6b7fcfc27ba5a3b75533c0a29e..f4829e31111bb640901e8143ed3afa4de3e28b7d 100644
+index 47357cb475fcb834992f13a5e70cf0f3f1c76993..9be1ba758cc3cac54501c39c05ea057dedeae610 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-@@ -479,7 +479,7 @@ public class ServerPlayer extends Player {
+@@ -480,7 +480,7 @@ public class ServerPlayer extends Player {
              long l = k * k;
              int i1 = l > 2147483647L ? Integer.MAX_VALUE : (int) l;
              int j1 = this.getCoprime(i1);
@@ -38,7 +38,7 @@ index f42de5d493530d6b7fcfc27ba5a3b75533c0a29e..f4829e31111bb640901e8143ed3afa4d
  
              for (int l1 = 0; l1 < i1; ++l1) {
                  int i2 = (k1 + j1 * l1) % i1;
-@@ -516,7 +516,7 @@ public class ServerPlayer extends Player {
+@@ -517,7 +517,7 @@ public class ServerPlayer extends Player {
              long l = k * k;
              int i1 = l > 2147483647L ? Integer.MAX_VALUE : (int) l;
              int j1 = this.getCoprime(i1);
@@ -61,7 +61,7 @@ index 0e0867d7add9a024bbe9471f8ff92bbb25996a3d..94ffa65fa99c4c713936f7004d9f46ac
          }
  
 diff --git a/src/main/java/net/minecraft/world/entity/projectile/FishingHook.java b/src/main/java/net/minecraft/world/entity/projectile/FishingHook.java
-index 35299affb699d745804a3b60cb78b9323f3e068e..4f68a92c6d2f46c6e8769d9dbbd24bcf92ca0b8e 100644
+index 882de08963c72614a3d26cd917916e42b7136042..68fa6351f12c4e9de4029b89c15263e54b0f5f53 100644
 --- a/src/main/java/net/minecraft/world/entity/projectile/FishingHook.java
 +++ b/src/main/java/net/minecraft/world/entity/projectile/FishingHook.java
 @@ -87,7 +87,7 @@ public class FishingHook extends Projectile {
@@ -96,7 +96,7 @@ index 774da40408225b0961b4dea50c4358a03d58b2ff..928d7895b2ba415ae8cd6b49a981f38e
          this.level = world;
          this.id = nbt.getInt("Id");
 diff --git a/src/main/java/net/minecraft/world/level/Explosion.java b/src/main/java/net/minecraft/world/level/Explosion.java
-index e927f278e0b5545a25cb9a17bcb4b7b3d79fb8f8..cef8eff688f7ec1793e8bca9ce05d9ad36003bc8 100644
+index 0772060d96c4fc9dfaf84081be6ccae9fdee7aa5..eb152f9ab41fc7b7219f9be26b574d61506c55d5 100644
 --- a/src/main/java/net/minecraft/world/level/Explosion.java
 +++ b/src/main/java/net/minecraft/world/level/Explosion.java
 @@ -93,7 +93,7 @@ public class Explosion {

@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index c3f260004ca0577f19cb047071969e173a303081..1549876d9888571449d54461024c331580ea7bf7 100644
+index 7ff046e6e1e8f532ab7347beaeac898c57157cc2..2e784ad7c5e38ce74f3bcf0f20718422e3335c98 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -504,6 +504,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -503,6 +503,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
          return chunkMap.playerEntityTrackerTrackMaps[type.ordinal()].getObjectsInRange(MCUtil.getCoordinateKey(this));
      }
      // Paper end - optimise entity tracking

@@ -26,10 +26,10 @@ search to attempt respawning the ender dragon whenever a player places
 an end crystal.
 
 diff --git a/src/main/java/net/minecraft/world/item/EndCrystalItem.java b/src/main/java/net/minecraft/world/item/EndCrystalItem.java
-index dd1bdb4bb87a3a59c229ba76b36841d199717624..ded33fd166cbb95917f7e321875acc4222caff46 100644
+index 5f51e64cb0611a4ba6bdcdcacbcba1063a7f3a5c..50312825fade96ccc8c1231ca1eaf6c36d892746 100644
 --- a/src/main/java/net/minecraft/world/item/EndCrystalItem.java
 +++ b/src/main/java/net/minecraft/world/item/EndCrystalItem.java
-@@ -54,11 +54,13 @@ public class EndCrystalItem extends Item {
+@@ -55,11 +55,13 @@ public class EndCrystalItem extends Item {
                          // CraftBukkit end
                          world.addFreshEntity(entityendercrystal);
                          world.gameEvent((Entity) context.getPlayer(), (Holder) GameEvent.ENTITY_PLACE, blockposition1);

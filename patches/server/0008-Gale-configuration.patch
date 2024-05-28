@@ -337,7 +337,7 @@ index ca56a0b596976448da6bb2a0e82b3d5cd4133e12..40db66b168b8927b3d3dd8ec2bf77c22
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 0a8eeebb2d702ebcefd9f26cc0f41d1eab497902..75391e04fcd559f09e2a29c71f788761f71f2ad6 100644
+index 14281a4e72f49dc4eb2ca3da8479c1f81a3a175d..01453ffd7e47933dd65fddba9be8e71f3a51cc46 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -12,7 +12,6 @@ import java.util.function.Supplier;
@@ -365,7 +365,7 @@ index 0a8eeebb2d702ebcefd9f26cc0f41d1eab497902..75391e04fcd559f09e2a29c71f788761
  // CraftBukkit end
  
  public abstract class Level implements LevelAccessor, AutoCloseable {
-@@ -168,6 +166,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -169,6 +167,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          return this.paperConfig;
      }
      // Paper end - add paper world config
@@ -378,7 +378,7 @@ index 0a8eeebb2d702ebcefd9f26cc0f41d1eab497902..75391e04fcd559f09e2a29c71f788761
  
      public final com.destroystokyo.paper.antixray.ChunkPacketBlockController chunkPacketBlockController; // Paper - Anti-Xray
      public final co.aikar.timings.WorldTimingsHandler timings; // Paper
-@@ -204,9 +208,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -205,9 +209,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
  
      public abstract ResourceKey<LevelStem> getTypeKey();
  
@@ -391,7 +391,7 @@ index 0a8eeebb2d702ebcefd9f26cc0f41d1eab497902..75391e04fcd559f09e2a29c71f788761
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index af015237214cebc4d1c4bb9e9c5f939d433e365c..31c461503fd4fbdac5b144537913c1fa8e1a70b7 100644
+index 94a31c8f903eb61eb6d203e8e6fe8fb0beca28b1..c022f41153c84fb087b5a6eb7ae1df472f4186e6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1033,6 +1033,7 @@ public final class CraftServer implements Server {
@@ -402,7 +402,7 @@ index af015237214cebc4d1c4bb9e9c5f939d433e365c..31c461503fd4fbdac5b144537913c1fa
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters, config.spawnAnimals); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -3029,6 +3030,14 @@ public final class CraftServer implements Server {
+@@ -3030,6 +3031,14 @@ public final class CraftServer implements Server {
              return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
          }
  

@@ -405,7 +405,7 @@ index 244a19ecd0234fa1d7a6ecfea20751595688605d..f76ca394169d844a263a53c31c30e57d
          OptionSpec<Integer> optionspec11 = optionparser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(-1, new Integer[0]);
          OptionSpec<String> optionspec12 = optionparser.accepts("serverId").withRequiredArg();
 diff --git a/src/main/java/net/minecraft/server/level/ServerEntity.java b/src/main/java/net/minecraft/server/level/ServerEntity.java
-index 4a5dc0c552bbd48cb79e29016ea455882cf13744..db3c9d0d1428549ca6955120661cae38e40f7f8a 100644
+index 695ace938f5eb6b44649014511bbe64f2ff6961a..73f7d1af9ec545535d980afaa0ed11bb7e82f2b4 100644
 --- a/src/main/java/net/minecraft/server/level/ServerEntity.java
 +++ b/src/main/java/net/minecraft/server/level/ServerEntity.java
 @@ -350,7 +350,7 @@ public class ServerEntity {
@@ -449,7 +449,7 @@ index 4bb9e099b647a6a524395d9e5393ef6f2fdc9153..5ec5ed9ac62fda568fd011dd62b1c5a2
          return ret;
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 59b157545b562ea94ffbc42c8174f4c573d79399..50bf9b83614bbfc1ed76c08d6fea113a1a771b25 100644
+index ae6b88b5ab67568930ef76ff0c8bbb55ac36cf38..89969a664d0008fe5bbcde11e10b842786865d47 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -29,6 +29,8 @@ import java.util.function.Consumer;
@@ -624,7 +624,7 @@ index eb3c12e03c0d5c9cec84d97e2c51c50ce59c23a4..9b29ec4e72e4cdf2a42868ca5659fdcf
      private EquipmentSlot(final EquipmentSlot.Type type, final int entityId, final int armorStandId, final String name) {
          this.type = type;
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 91e3e4a126c1565538d190b5da552ba999c28ba8..8a1ff07671d2b1e6f5132d81733a00fd5d2179c1 100644
+index 0beed50e9d517165a9e4a4b0b28148a2881d028a..02c1364213af03f5b97a0286f9100d40c39b445d 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -3233,7 +3233,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -637,7 +637,7 @@ index 91e3e4a126c1565538d190b5da552ba999c28ba8..8a1ff07671d2b1e6f5132d81733a00fd
  
          for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index a52538ddbadfaa40021462e15224e8a1ed6312a2..1b97a429c05ae8f77af3cea4852bac3966dd54e0 100644
+index 8c8d944fd27bb70bb34db6f9ea4c069bebb8ba05..f0196c364934894e6fba98de8d8dcbf09d3644b8 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
 @@ -1173,7 +1173,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Targeti
@@ -690,10 +690,10 @@ index f38acc96f71298e40ce9433e7759fd223ca55e48..22ec9c1e74450f56cd1e390d59ca28f1
  
          for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index 893efb2c4a07c33d41e934279dd914a9dbd4ef79..11342d0fd62473403de86794a8186b879315c703 100644
+index 58c38bc4361ddf24716f326b0c6fc626d434756e..b6f7e5b5f853bb961283654200f648c769a71347 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
-@@ -1102,7 +1102,7 @@ public final class ItemStack implements DataComponentHolder {
+@@ -1104,7 +1104,7 @@ public final class ItemStack implements DataComponentHolder {
          ItemAttributeModifiers itemattributemodifiers = (ItemAttributeModifiers) this.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
  
          if (itemattributemodifiers.showInTooltip()) {
@@ -745,7 +745,7 @@ index e158ff1a9dbd054985873e854fcf6c433102059c..4dbe4db3e7b005eabdec56e5047ad7bc
      private static Enchantment register(String name, Enchantment enchantment) {
          return Registry.register(BuiltInRegistries.ENCHANTMENT, name, enchantment);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 5d8c9c56d30cd74ffe5941832978d72f421d3639..ba2c1672a018dbd0a179e71f7166fb9df87782dd 100644
+index 88ccc42e3768db0a11962a880ca14fe9847c0cdb..c97b031c6beca995599642b26dcb888f4977ed5f 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -10,6 +10,8 @@ import java.util.function.Consumer;
@@ -757,7 +757,7 @@ index 5d8c9c56d30cd74ffe5941832978d72f421d3639..ba2c1672a018dbd0a179e71f7166fb9d
  import net.minecraft.CrashReport;
  import net.minecraft.CrashReportCategory;
  import net.minecraft.core.BlockPos;
-@@ -1861,7 +1863,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1862,7 +1864,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      public org.bukkit.entity.Entity[] getChunkEntities(int chunkX, int chunkZ) {
          io.papermc.paper.world.ChunkEntitySlices slices = ((ServerLevel)this).getEntityLookup().getChunk(chunkX, chunkZ);
          if (slices == null) {
@@ -880,7 +880,7 @@ index ae86c45c1d49c7646c721991910592091e7333f8..3bf62117fb052a4d10fd4ccd4e1b63ca
      static {
          set(EquipmentSlot.HAND, net.minecraft.world.entity.EquipmentSlot.MAINHAND);
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftEntityEquipment.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftEntityEquipment.java
-index 6827979a5b270ced53b46ecb9eff548727dadb81..8cecb6eddee0c3cafaecc3cc4d7cf99f3ce1ccea 100644
+index fdcc414f4fa246082ad0732133c870d915ae3084..33ed515d6e79c4135f3e7bbc25fd0e3d83d08540 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftEntityEquipment.java
 +++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftEntityEquipment.java
 @@ -165,7 +165,7 @@ public class CraftEntityEquipment implements EntityEquipment {
