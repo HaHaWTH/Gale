@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 86af3494f3d86c7b9fb90ce5a877ec23f5a79e7f..458713683d5f78d057a42b1353bf3629e21e9e73 100644
+index 0126906e2afc8dd525f27a0c5e82116075c9d352..ad590059cee0ec44f9799c3a6bc8cc0d00b5e172 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -55,7 +55,6 @@ import net.minecraft.server.commands.CloneCommands;
@@ -56,7 +56,7 @@ index 86af3494f3d86c7b9fb90ce5a877ec23f5a79e7f..458713683d5f78d057a42b1353bf3629
          DefaultGameModeCommands.register(this.dispatcher);
          DifficultyCommand.register(this.dispatcher);
          EffectCommands.register(this.dispatcher, commandRegistryAccess);
-@@ -339,9 +337,6 @@ public class Commands {
+@@ -345,9 +343,6 @@ public class Commands {
          // Paper end
          CommandSourceStack commandlistenerwrapper = (CommandSourceStack) parseresults.getContext().getSource();
  
@@ -66,7 +66,7 @@ index 86af3494f3d86c7b9fb90ce5a877ec23f5a79e7f..458713683d5f78d057a42b1353bf3629
          ContextChain contextchain = this.finishParsing(parseresults, s, commandlistenerwrapper, label); // CraftBukkit // Paper - Add UnknownCommandEvent
  
          try {
-@@ -370,8 +365,6 @@ public class Commands {
+@@ -376,8 +371,6 @@ public class Commands {
                  commandlistenerwrapper.sendFailure(Component.literal(Util.describeError(exception)));
                  Commands.LOGGER.error("'/{}' threw an exception", s, exception);
              }
@@ -75,7 +75,7 @@ index 86af3494f3d86c7b9fb90ce5a877ec23f5a79e7f..458713683d5f78d057a42b1353bf3629
          }
  
      }
-@@ -434,7 +427,7 @@ public class Commands {
+@@ -440,7 +433,7 @@ public class Commands {
              int j = minecraftserver.getGameRules().getInt(GameRules.RULE_MAX_COMMAND_FORK_COUNT);
  
              try {
@@ -1136,7 +1136,7 @@ index 298e3eddd600f0b2e48ce2d4080cf68adff59a3a..61a7c2e1d073e5b4b7947618b57bef5a
  
      protected abstract T prepare(ResourceManager manager, ProfilerFiller profiler);
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 4ee843dfd826772c9157ca421d8fe1f36f814b51..7ff046e6e1e8f532ab7347beaeac898c57157cc2 100644
+index 7ef9f67d27cc240191dd5d07e8dcf5fbdebe1049..f60573a8c694f2efb5e8f2a4e6ae4dd87d896482 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -876,7 +876,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -1251,7 +1251,7 @@ index 4ee843dfd826772c9157ca421d8fe1f36f814b51..7ff046e6e1e8f532ab7347beaeac898c
              }
          } else {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 0ddf2e1a6d2ea836f8a140a435721e0ce96bd8d2..7175edc9539c7485a87a7f038a4b567302ab9589 100644
+index ce01fe82dc1eaaf06ca317ddbc62b7d1b87a48b2..a2cc5b29ad5f9ac2d77f1596774224c2e9cc444c 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -418,7 +418,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -1270,7 +1270,7 @@ index 0ddf2e1a6d2ea836f8a140a435721e0ce96bd8d2..7175edc9539c7485a87a7f038a4b5673
      }
  
      public boolean canSpawnSoulSpeedParticle() {
-@@ -3163,10 +3161,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3153,10 +3151,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          this.run += (f3 - this.run) * 0.3F;
@@ -1281,7 +1281,7 @@ index 0ddf2e1a6d2ea836f8a140a435721e0ce96bd8d2..7175edc9539c7485a87a7f038a4b5673
  
          // Paper start - stop large pitch and yaw changes from crashing the server
          this.yRotO += Math.round((this.getYRot() - this.yRotO) / 360.0F) * 360.0F;
-@@ -3178,7 +3173,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3168,7 +3163,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
          this.yHeadRotO += Math.round((this.yHeadRot - this.yHeadRotO) / 360.0F) * 360.0F;
          // Paper end
  
@@ -1289,7 +1289,7 @@ index 0ddf2e1a6d2ea836f8a140a435721e0ce96bd8d2..7175edc9539c7485a87a7f038a4b5673
          this.animStep += f2;
          if (this.isFallFlying()) {
              ++this.fallFlyTicks;
-@@ -3401,19 +3395,14 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3391,19 +3385,14 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          this.setDeltaMovement(d0, d1, d2);
@@ -1309,7 +1309,7 @@ index 0ddf2e1a6d2ea836f8a140a435721e0ce96bd8d2..7175edc9539c7485a87a7f038a4b5673
          if (this.jumping && this.isAffectedByFluids()) {
              double d3;
  
-@@ -3440,8 +3429,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3430,8 +3419,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.noJumpDelay = 0;
          }
  
@@ -1318,7 +1318,7 @@ index 0ddf2e1a6d2ea836f8a140a435721e0ce96bd8d2..7175edc9539c7485a87a7f038a4b5673
          this.xxa *= 0.98F;
          this.zza *= 0.98F;
          this.updateFallFlying();
-@@ -3466,8 +3453,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3456,8 +3443,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.travel(vec3d1);
          }
  
@@ -1327,7 +1327,7 @@ index 0ddf2e1a6d2ea836f8a140a435721e0ce96bd8d2..7175edc9539c7485a87a7f038a4b5673
          if (!this.level().isClientSide && !this.isDeadOrDying() && !this.freezeLocked) { // Paper - Freeze Tick Lock API
              int i = this.getTicksFrozen();
  
-@@ -3484,15 +3469,12 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3474,15 +3459,12 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.hurt(this.damageSources().freeze(), 1.0F);
          }
  
@@ -1344,7 +1344,7 @@ index 0ddf2e1a6d2ea836f8a140a435721e0ce96bd8d2..7175edc9539c7485a87a7f038a4b5673
          if (((ServerLevel) this.level()).hasEntityMoveEvent && !(this instanceof net.minecraft.world.entity.player.Player)) {
              if (this.xo != this.getX() || this.yo != this.getY() || this.zo != this.getZ() || this.yRotO != this.getYRot() || this.xRotO != this.getXRot()) {
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 9f42563699508fcb3d8a96cfdfc25a7bffd99759..8c8d944fd27bb70bb34db6f9ea4c069bebb8ba05 100644
+index 8b612b772ca87c852d0b108c2afd6785c261c9b9..a5fb569f89b0227adc753dc34ae83077db979cb9 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
 @@ -37,7 +37,6 @@ import net.minecraft.sounds.SoundEvent;
@@ -1782,10 +1782,10 @@ index a7930f9875aa4aca997caaead46ecdc21e5e11d7..64ec94ba2b2ce3884f56c95464384fbc
              this.assignProfessionWhenSpawned = false;
          }
 diff --git a/src/main/java/net/minecraft/world/level/Explosion.java b/src/main/java/net/minecraft/world/level/Explosion.java
-index 082b804f4793f72e76361f5427f0358273454b3d..0772060d96c4fc9dfaf84081be6ccae9fdee7aa5 100644
+index 638447e8cb74b26f4f8e3862c2fb4a3048979ebc..61dbd071bbe311743ed8244a85ee044471be007d 100644
 --- a/src/main/java/net/minecraft/world/level/Explosion.java
 +++ b/src/main/java/net/minecraft/world/level/Explosion.java
-@@ -681,7 +681,6 @@ public class Explosion {
+@@ -668,7 +668,6 @@ public class Explosion {
          }
  
          if (flag1) {
@@ -1793,7 +1793,7 @@ index 082b804f4793f72e76361f5427f0358273454b3d..0772060d96c4fc9dfaf84081be6ccae9
              List<Pair<ItemStack, BlockPos>> list = new ArrayList();
  
              Util.shuffle(this.toBlow, this.level.random);
-@@ -759,7 +758,6 @@ public class Explosion {
+@@ -746,7 +745,6 @@ public class Explosion {
                  Block.popResource(this.level, (BlockPos) pair.getSecond(), (ItemStack) pair.getFirst());
              }
  

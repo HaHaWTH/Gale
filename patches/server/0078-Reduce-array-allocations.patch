@@ -340,7 +340,7 @@ index a2920b8a9eff77d9c5d1d7f70ad3abdacba8f0fa..43f402d9032e4570a81a80e412215598
      protected CipherBase(Cipher cipher) {
          this.cipher = cipher;
 diff --git a/src/main/java/net/minecraft/network/Connection.java b/src/main/java/net/minecraft/network/Connection.java
-index 02833deaa2bb7e5abc655bc1bdbe15c4b3ac7119..20dbef631bbb10285cc8060652247d00b2e1472e 100644
+index f40420a6841f03983b0837e177ea2ae7c3a37ca1..f306daa7b9ebb62992ce1db2f062485bc08cfa1e 100644
 --- a/src/main/java/net/minecraft/network/Connection.java
 +++ b/src/main/java/net/minecraft/network/Connection.java
 @@ -27,7 +27,6 @@ import io.netty.channel.epoll.EpollSocketChannel;
@@ -360,7 +360,7 @@ index 02833deaa2bb7e5abc655bc1bdbe15c4b3ac7119..20dbef631bbb10285cc8060652247d00
  import net.minecraft.Util;
  import net.minecraft.network.chat.Component;
  import net.minecraft.network.chat.MutableComponent;
-@@ -317,7 +318,7 @@ public class Connection extends SimpleChannelInboundHandler<Packet<?>> {
+@@ -318,7 +319,7 @@ public class Connection extends SimpleChannelInboundHandler<Packet<?>> {
      }
  
      private void validateListener(ProtocolInfo<?> state, PacketListener listener) {
@@ -449,7 +449,7 @@ index 4bb9e099b647a6a524395d9e5393ef6f2fdc9153..5ec5ed9ac62fda568fd011dd62b1c5a2
          return ret;
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index ae6b88b5ab67568930ef76ff0c8bbb55ac36cf38..89969a664d0008fe5bbcde11e10b842786865d47 100644
+index 30d5d09a1a56e83464d2920383f36cd27ed2c157..71fd17e8e1aea7ac54d910e330c5eb0edaf8b07a 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -29,6 +29,8 @@ import java.util.function.Consumer;
@@ -624,10 +624,10 @@ index eb3c12e03c0d5c9cec84d97e2c51c50ce59c23a4..9b29ec4e72e4cdf2a42868ca5659fdcf
      private EquipmentSlot(final EquipmentSlot.Type type, final int entityId, final int armorStandId, final String name) {
          this.type = type;
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 0beed50e9d517165a9e4a4b0b28148a2881d028a..02c1364213af03f5b97a0286f9100d40c39b445d 100644
+index 5961ca7c2665ee662c7cb00490b6e08a73e55263..0e3e414553837ac4a5a5e614134218d80af03004 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -3233,7 +3233,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3223,7 +3223,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
      @Nullable
      private Map<EquipmentSlot, ItemStack> collectEquipmentChanges() {
          Map<EquipmentSlot, ItemStack> map = null;
@@ -637,7 +637,7 @@ index 0beed50e9d517165a9e4a4b0b28148a2881d028a..02c1364213af03f5b97a0286f9100d40
  
          for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 8c8d944fd27bb70bb34db6f9ea4c069bebb8ba05..f0196c364934894e6fba98de8d8dcbf09d3644b8 100644
+index a5fb569f89b0227adc753dc34ae83077db979cb9..38f91da4f57ce7e92f99b3d987766aa0a38f5bca 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
 @@ -1173,7 +1173,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Targeti
