@@ -464,7 +464,7 @@ index 790bad0494454ca12ee152e3de6da3da634d9b20..2596e0ee4df5b96f181e28a742ef3459
  
      @Override
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 0ed42fa899721f83b598db05be1b5f321af3614a..4f54cd1f3ddd32834df0b12bd9c3028b6bc50f0a 100644
+index 3751c2a077bd13bac330b93c6efc2a640a17f4f2..edabecf0cdd5dca3cc40084f87f4af750ffe3507 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -956,7 +956,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -496,10 +496,10 @@ index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e58721
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 4788a591f40f506d81b10fd9f6ab68f308a68e23..53908cec6f3f5c834ace105c9143cb39dc47c827 100644
+index f99353a60e3f236735ef6e2e6f13381b50ae9b7b..2918b61675e16a0dd023d3ca10f232c4675bf4b0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -503,7 +503,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -504,7 +504,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {

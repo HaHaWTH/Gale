@@ -28,10 +28,10 @@ index 02d03e0931d9e1b1f21cd8b6602a213d627dc122..1e9a42cfe203a6947201977165664194
          return this.chunkPosition;
      }
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 1f317bc15c4d37fc6c0c5a2ca99fd80d15aaf7f5..d214903e273709553d2e0276fdfa69556562fec4 100644
+index f2dafed01b2a54adb5f40f24a3c3366ec362eeff..302c7e14456413dddf5a4ab7efedcd8a737a475b 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -2054,19 +2054,43 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -2048,19 +2048,43 @@ public abstract class LivingEntity extends Entity implements Attackable {
  
      public boolean onClimbableCached() {
          if (!this.blockPosition().equals(this.lastClimbingPosition)) {

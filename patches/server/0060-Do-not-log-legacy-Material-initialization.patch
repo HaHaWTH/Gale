@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java b/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java
-index fde9aadd6c688b9797a6755f9d214918047598a0..0f47ee4193aa834e23b1c5bfc992881cd5872e8a 100644
+index 62f4835309df2b2deeb799609f9b1b325bf58af3..2885788f0ae37474dfab5f51908e290a5f972206 100644
 --- a/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java
 +++ b/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java
 @@ -31,6 +31,7 @@ import org.bukkit.Material;
@@ -48,7 +48,7 @@ index fde9aadd6c688b9797a6755f9d214918047598a0..0f47ee4193aa834e23b1c5bfc992881c
  
  /**
   * This class may seem unnecessarily slow and complicated/repetitive however it
-@@ -256,7 +257,7 @@ public final class CraftLegacy {
+@@ -265,7 +266,7 @@ public final class CraftLegacy {
      }
  
      static {

@@ -164,7 +164,7 @@ index e9775b4506909bee65a74964f0d5391a0513de1d..1c4dd8acdcd571aceffe4b78599ca2c7
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 96830b6ec04d96f5108efbccdcbe45047e1230d7..d5113b3650ec45127246b18e1f64526bff1798e4 100644
+index b877abf070100486bdd3f5e329a6ac68b1ed27e7..83e8cca6181129a48a83bd1630b8ffa8aa96d7cc 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -100,18 +100,9 @@ import net.minecraft.util.datafix.DataFixers;
@@ -599,7 +599,7 @@ index c6d7ee0d498bd92d4321acd30ade10abea611e42..e59756a563c3c289107962910bfde723
  
      }
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 22e6faa71d4bca2f6e975d5be2d05e09300400d4..e83db964c4016ed9252a76ff452eb5807a1d33cd 100644
+index 9fc45ffbe0ebbc97c9656710a0befcef36338834..e84f29c055df62a385da93c729d1af372aa86874 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -881,12 +881,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -649,7 +649,7 @@ index 7fb9ba3dadb1eca4a1000ea8cf4d13fed2b7db1e..278c90341e1a3c47a584c6520ef8c108
  
      public boolean hasWork() {
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index b99f50604bafecbc68835974c9ed0caa91911a40..858ae75ac17612b5856361a7a9a462b1b900efb0 100644
+index fcecfda569d2a8d6b8a7e228831f822fb7327748..56943c009bad6970d1e9ce7eefb34f52f9bb4ab9 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 @@ -21,7 +21,6 @@ import net.minecraft.core.SectionPos;
@@ -693,7 +693,7 @@ index b99f50604bafecbc68835974c9ed0caa91911a40..858ae75ac17612b5856361a7a9a462b1
      public void tick(BooleanSupplier shouldKeepTicking, boolean tickChunks) {
 -        this.level.getProfiler().push("purge");
          this.level.timings.doChunkMap.startTiming(); // Spigot
-         if (this.level.tickRateManager().runsNormally() || !tickChunks) {
+         if (this.level.tickRateManager().runsNormally() || !tickChunks || this.level.spigotConfig.unloadFrozenChunks) { // Spigot
              this.distanceManager.purgeStaleTickets();
 @@ -479,7 +470,6 @@ public class ServerChunkCache extends ChunkSource {
  
@@ -1106,19 +1106,18 @@ index f14113eef226e906c0d21641e74a27471254909d..649e8a76e8964786ddb91bd69dd10ddb
      void onResourceManagerReload(ResourceManager manager);
  }
 diff --git a/src/main/java/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java b/src/main/java/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java
-index 298e3eddd600f0b2e48ce2d4080cf68adff59a3a..61a7c2e1d073e5b4b7947618b57bef5a62565087 100644
+index 298e3eddd600f0b2e48ce2d4080cf68adff59a3a..6b3c57fc1231cd37e17a58137bb78411e4018c83 100644
 --- a/src/main/java/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java
 +++ b/src/main/java/net/minecraft/server/packs/resources/SimplePreparableReloadListener.java
-@@ -2,6 +2,8 @@ package net.minecraft.server.packs.resources;
+@@ -2,6 +2,7 @@ package net.minecraft.server.packs.resources;
  
  import java.util.concurrent.CompletableFuture;
  import java.util.concurrent.Executor;
-+
 +import net.minecraft.util.profiling.InactiveProfiler;
  import net.minecraft.util.profiling.ProfilerFiller;
  
  public abstract class SimplePreparableReloadListener<T> implements PreparableReloadListener {
-@@ -9,14 +11,12 @@ public abstract class SimplePreparableReloadListener<T> implements PreparableRel
+@@ -9,14 +10,12 @@ public abstract class SimplePreparableReloadListener<T> implements PreparableRel
      public final CompletableFuture<Void> reload(
          PreparableReloadListener.PreparationBarrier synchronizer,
          ResourceManager manager,
@@ -1251,7 +1250,7 @@ index 7ef9f67d27cc240191dd5d07e8dcf5fbdebe1049..f60573a8c694f2efb5e8f2a4e6ae4dd8
              }
          } else {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index ce01fe82dc1eaaf06ca317ddbc62b7d1b87a48b2..a2cc5b29ad5f9ac2d77f1596774224c2e9cc444c 100644
+index 21e61bb75ac7ce468bc757633ce678b21bcb9deb..d67a149de34619ac9945ba7fdbd4c7c8f33c8817 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -418,7 +418,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -1270,7 +1269,7 @@ index ce01fe82dc1eaaf06ca317ddbc62b7d1b87a48b2..a2cc5b29ad5f9ac2d77f1596774224c2
      }
  
      public boolean canSpawnSoulSpeedParticle() {
-@@ -3153,10 +3151,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3147,10 +3145,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          this.run += (f3 - this.run) * 0.3F;
@@ -1281,7 +1280,7 @@ index ce01fe82dc1eaaf06ca317ddbc62b7d1b87a48b2..a2cc5b29ad5f9ac2d77f1596774224c2
  
          // Paper start - stop large pitch and yaw changes from crashing the server
          this.yRotO += Math.round((this.getYRot() - this.yRotO) / 360.0F) * 360.0F;
-@@ -3168,7 +3163,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3162,7 +3157,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
          this.yHeadRotO += Math.round((this.yHeadRot - this.yHeadRotO) / 360.0F) * 360.0F;
          // Paper end
  
@@ -1289,7 +1288,7 @@ index ce01fe82dc1eaaf06ca317ddbc62b7d1b87a48b2..a2cc5b29ad5f9ac2d77f1596774224c2
          this.animStep += f2;
          if (this.isFallFlying()) {
              ++this.fallFlyTicks;
-@@ -3391,19 +3385,14 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3385,19 +3379,14 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          this.setDeltaMovement(d0, d1, d2);
@@ -1309,7 +1308,7 @@ index ce01fe82dc1eaaf06ca317ddbc62b7d1b87a48b2..a2cc5b29ad5f9ac2d77f1596774224c2
          if (this.jumping && this.isAffectedByFluids()) {
              double d3;
  
-@@ -3430,8 +3419,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3424,8 +3413,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.noJumpDelay = 0;
          }
  
@@ -1318,7 +1317,7 @@ index ce01fe82dc1eaaf06ca317ddbc62b7d1b87a48b2..a2cc5b29ad5f9ac2d77f1596774224c2
          this.xxa *= 0.98F;
          this.zza *= 0.98F;
          this.updateFallFlying();
-@@ -3456,8 +3443,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3450,8 +3437,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.travel(vec3d1);
          }
  
@@ -1327,7 +1326,7 @@ index ce01fe82dc1eaaf06ca317ddbc62b7d1b87a48b2..a2cc5b29ad5f9ac2d77f1596774224c2
          if (!this.level().isClientSide && !this.isDeadOrDying() && !this.freezeLocked) { // Paper - Freeze Tick Lock API
              int i = this.getTicksFrozen();
  
-@@ -3474,15 +3459,12 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3468,15 +3453,12 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.hurt(this.damageSources().freeze(), 1.0F);
          }
  
