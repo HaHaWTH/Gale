@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index 652ae75254d78fff02d68cbb747eaee4c3f35a1a..c3a1969e7d3e42b2f0fd0dd0a3d6a5f1dc9b1a1e 100644
+index 652ae75254d78fff02d68cbb747eaee4c3f35a1a..2a7de95242c80e2df86ef11538a315664617d3f0 100644
 --- a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 @@ -4,6 +4,9 @@ import com.mojang.authlib.GameProfile;
@@ -80,10 +80,10 @@ index 652ae75254d78fff02d68cbb747eaee4c3f35a1a..c3a1969e7d3e42b2f0fd0dd0a3d6a5f1
          //PacketUtils.ensureRunningOnSameThread(packet, this, this.player.serverLevel()); // CraftBukkit // Paper - handle ServerboundKeepAlivePacket async
 +        // Gale start - Purpur - send multiple keep-alive packets
 +        if (GaleGlobalConfiguration.get().misc.keepalive.sendMultiple) {
-+            long id = packet.getId();
-+            if (!this.keepAlives.isEmpty() && this.keepAlives.contains(id)) {
-+                int ping = (int) (Util.getMillis() - id);
++            if (this.keepAlivePending && !keepAlives.isEmpty() && keepAlives.contains(packet.getId())) {
++                int ping = (int) (Util.getMillis() - packet.getId());
 +                this.latency = (this.latency * 3 + ping) / 4;
++                this.keepAlivePending = false;
 +                this.keepAlives.clear(); // We got a valid response, let's roll with it and forget the rest
 +            }
 +        } else {
@@ -99,20 +99,21 @@ index 652ae75254d78fff02d68cbb747eaee4c3f35a1a..c3a1969e7d3e42b2f0fd0dd0a3d6a5f1
  
      }
  
-@@ -251,6 +270,20 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -251,6 +270,21 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
          long currentTime = Util.getMillis();
          long elapsedTime = currentTime - this.keepAliveTime;
  
 +        // Gale start - Purpur - send multiple keep-alive packets
 +        if (GaleGlobalConfiguration.get().misc.keepalive.sendMultiple) {
 +            if (elapsedTime >= 1000L) { // 1 second
-+                if (!this.processedDisconnect && this.keepAlives.size() >= KEEPALIVE_LIMIT_IN_SECONDS) {
-+                    LOGGER.warn("{} was kicked due to keepalive timeout!", this.player.getName());
-+                    disconnect(Component.translatable("disconnect.timeout"), org.bukkit.event.player.PlayerKickEvent.Cause.TIMEOUT);
-+                } else {
++                if (this.keepAlivePending && !this.processedDisconnect && this.keepAlives.size() >= KEEPALIVE_LIMIT_IN_SECONDS) {
++                    LOGGER.warn("{} was kicked due to keepalive timeout!", this.player.getScoreboardName());
++                    this.disconnect(ServerCommonPacketListenerImpl.TIMEOUT_DISCONNECTION_MESSAGE, org.bukkit.event.player.PlayerKickEvent.Cause.TIMEOUT);
++                } else if (this.checkIfClosed(currentTime)) {
++                    this.keepAlivePending = true;
 +                    this.keepAliveTime = currentTime; // hijack this field for 1 second intervals
 +                    this.keepAlives.add(currentTime); // currentTime is ID
-+                    send(new ClientboundKeepAlivePacket(currentTime));
++                    this.send(new ClientboundKeepAlivePacket(currentTime));
 +                }
 +            }
 +        } else {
@@ -120,7 +121,7 @@ index 652ae75254d78fff02d68cbb747eaee4c3f35a1a..c3a1969e7d3e42b2f0fd0dd0a3d6a5f1
          if (!this.isSingleplayerOwner() && elapsedTime >= 15000L) { // Paper - use vanilla's 15000L between keep alive packets
              if (this.keepAlivePending && !this.processedDisconnect && elapsedTime >= KEEPALIVE_LIMIT) { // Paper - check keepalive limit, don't fire if already disconnected
                  this.disconnect(ServerCommonPacketListenerImpl.TIMEOUT_DISCONNECTION_MESSAGE, org.bukkit.event.player.PlayerKickEvent.Cause.TIMEOUT); // Paper - kick event cause
-@@ -261,6 +294,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -261,6 +295,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
                  this.send(new ClientboundKeepAlivePacket(this.keepAliveChallenge));
              }
          }
@@ -150,7 +151,7 @@ index 71fd17e8e1aea7ac54d910e330c5eb0edaf8b07a..31cd9c04b06fa691305c078e3c428a9e
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.serverLevel());
          // CraftBukkit start
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
-index b2aa32662335c4d64ac87320fcfb334784d89ec5..01c805c36225724eae73db20e0ad3fde122cfcf5 100644
+index b2aa32662335c4d64ac87320fcfb334784d89ec5..4650c69295adcc780f00d8d098cf939931147828 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 @@ -88,6 +88,11 @@ public class GaleGlobalConfiguration extends ConfigurationPart {
@@ -159,7 +160,7 @@ index b2aa32662335c4d64ac87320fcfb334784d89ec5..01c805c36225724eae73db20e0ad3fde
  
 +        public Keepalive keepalive;
 +        public class Keepalive extends ConfigurationPart {
-+            public boolean sendMultiple = false; // Gale - Purpur - send multiple keep-alive packets
++            public boolean sendMultiple = true; // Gale - Purpur - send multiple keep-alive packets
 +        }
 +
      }

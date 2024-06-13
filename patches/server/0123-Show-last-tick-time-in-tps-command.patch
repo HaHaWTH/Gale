@@ -23,11 +23,11 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
-index 3d12b757fc50bb787516aee6325ee6c53e0867c9..13cf00e436a2ad33935ffff8a6d3a1d6db05700e 100644
+index 506d34b207da63893204b3da7490d24826f5b662..c2f77cb0d42baf41f85a3fa7bfcf0b323117fd48 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 @@ -95,6 +95,14 @@ public class GaleGlobalConfiguration extends ConfigurationPart {
-             public boolean sendMultiple = false; // Gale - Purpur - send multiple keep-alive packets
+             public boolean sendMultiple = true; // Gale - Purpur - send multiple keep-alive packets
          }
  
 +        // Gale start - YAPFA - last tick time - in TPS command
