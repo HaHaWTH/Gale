@@ -38,7 +38,7 @@ index 79b49aec7c5c80948b8f1c77ca6e48049dae174e..a70317f5b5cf0fc5ab80782e6f22e76d
  
      @Override
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 627d56be7682cad2c713911a3a3603079d109573..dee63c199cd11a95b5bf7b1e70803c83f0e45511 100644
+index 269393f8b56ed5b5e37879c23fe1e28b5a82ebe0..687549714e928ea74be154c84d04ffd453dc324d 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -106,6 +106,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
@@ -47,5 +47,5 @@ index 627d56be7682cad2c713911a3a3603079d109573..dee63c199cd11a95b5bf7b1e70803c83
  
 +            public boolean broadcastCritAnimationsAsTheEntityBeingCritted = false; // Gale - MultiPaper - broadcast crit animations as the entity being critted
              public boolean keepMooshroomRotationAfterShearing = true; // Gale - Purpur - fix cow rotation when shearing mooshroom
-             public boolean checkCanChangeDimensionsBeforeUseEndGateway = false; // Gale - Purpur - end gateway should check if entity can use portal
  
+             // Gale start - Purpur - fix MC-238526

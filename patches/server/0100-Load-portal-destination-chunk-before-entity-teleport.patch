@@ -33,10 +33,10 @@ index 4dd79b1595406dfd93b2dd6e2ef56f7bf4db65c6..e22174b5c5927fca637167e4a752c415
              entity.restoreFrom(this);
              entity.moveTo(destX, destY, destZ, yaw, f2);
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 5d499e77800466210473e36b2355873807b9f86a..50202c41535f823240e9e8fd5348e3d474814c1b 100644
+index 38488750f556ebae7ed41a24b88f5752f3b54ec7..4c9bb806aa6509894de7f09b633c0c3d74b17233 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-@@ -125,6 +125,11 @@ public class GaleWorldConfiguration extends ConfigurationPart {
+@@ -124,6 +124,11 @@ public class GaleWorldConfiguration extends ConfigurationPart {
  
          }
  

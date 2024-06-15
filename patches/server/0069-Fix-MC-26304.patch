@@ -12,19 +12,6 @@ By: etil2jz <81570777+etil2jz@users.noreply.github.com>
 As part of: Mirai (https://github.com/etil2jz/Mirai)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
-diff --git a/src/main/java/net/minecraft/resources/ResourceLocation.java b/src/main/java/net/minecraft/resources/ResourceLocation.java
-index 1967c43ee3a12e63365cc40ee6565307e2fd73cf..8e478ce995cb4b3b33da68396ebaea5240800cb2 100644
---- a/src/main/java/net/minecraft/resources/ResourceLocation.java
-+++ b/src/main/java/net/minecraft/resources/ResourceLocation.java
-@@ -36,7 +36,7 @@ public final class ResourceLocation implements Comparable<ResourceLocation> {
-     private final String namespace;
-     private final String path;
- 
--    private ResourceLocation(String namespace, String path) {
-+    private ResourceLocation(String namespace, String path) { // Gale start - Mirai - fix MC-26304 - private -> public
-         assert isValidNamespace(namespace);
- 
-         assert isValidPath(path);
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/BrewingStandBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/BrewingStandBlockEntity.java
 index a2fafef89d5354e2cb02f5672810909950a57777..c785362f145dd9605bc01bd3b8b8118f71404d8f 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/BrewingStandBlockEntity.java

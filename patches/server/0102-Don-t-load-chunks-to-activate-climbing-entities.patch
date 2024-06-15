@@ -28,7 +28,7 @@ index e22174b5c5927fca637167e4a752c415a613821a..9c781d585d3ec7e42c036f8ee4e1a38a
          return this.chunkPosition;
      }
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index b7c02647d7d143e2462057792bafed96648973d7..909ec5647acf1d499eb99fd7339d8416cc370e25 100644
+index 7bdf29e3f71aa995a3125176ef4e62c7a6d4d8fe..93f9905bbb47d89c746957f4e3e75e13322e2a5e 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -2042,19 +2042,43 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -79,7 +79,7 @@ index b7c02647d7d143e2462057792bafed96648973d7..909ec5647acf1d499eb99fd7339d8416
              if (iblockdata.is(BlockTags.CLIMBABLE)) {
                  this.lastClimbablePos = Optional.of(blockposition);
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index fb7159842ae81899514267fcaba077638d999348..627d56be7682cad2c713911a3a3603079d109573 100644
+index 7f13c5c2a9185104cd958b75c45f4ba02cda0c95..269393f8b56ed5b5e37879c23fe1e28b5a82ebe0 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -95,6 +95,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {

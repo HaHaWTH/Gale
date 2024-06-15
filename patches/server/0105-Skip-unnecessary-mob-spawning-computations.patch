@@ -13,12 +13,12 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index a65c844d9dc715f75849e5cb665250dfa036af08..0ca299ab0859a9bb0060539d692d3e77f228dc5d 100644
+index 4d12a8972007377b6541143e9a29b78b825cff68..510b29649346375b2dfea606ac722ea2c063a91a 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-@@ -485,11 +485,16 @@ public class ServerChunkCache extends ChunkSource {
+@@ -484,11 +484,16 @@ public class ServerChunkCache extends ChunkSource {
+             }
  
-             this.level.resetIceAndSnowTick(); // Gale - Airplane - optimize random calls in chunk ticking - reset ice & snow tick random
              if (this.level.tickRateManager().runsNormally()) {
 +                // Gale start - MultiPaper - skip unnecessary mob spawning computations
 +                NaturalSpawner.SpawnState spawnercreature_d; // moved down
@@ -34,7 +34,7 @@ index a65c844d9dc715f75849e5cb665250dfa036af08..0ca299ab0859a9bb0060539d692d3e77
                  if ((this.spawnFriendlies || this.spawnEnemies) && this.level.paperConfig().entities.spawning.perPlayerMobSpawns) { // don't count mobs when animals and monsters are disabled
                      // re-set mob counts
                      for (ServerPlayer player : this.level.players) {
-@@ -513,7 +518,11 @@ public class ServerChunkCache extends ChunkSource {
+@@ -512,7 +517,11 @@ public class ServerChunkCache extends ChunkSource {
                  this.level.timings.countNaturalMobs.stopTiming(); // Paper - timings
  
                  this.lastSpawnState = spawnercreature_d;
@@ -47,7 +47,7 @@ index a65c844d9dc715f75849e5cb665250dfa036af08..0ca299ab0859a9bb0060539d692d3e77
  
                  Util.shuffle(list, this.level.random);
                  // Paper start - PlayerNaturallySpawnCreaturesEvent
-@@ -536,7 +545,7 @@ public class ServerChunkCache extends ChunkSource {
+@@ -535,7 +544,7 @@ public class ServerChunkCache extends ChunkSource {
  
                      if (this.level.isNaturalSpawningAllowed(chunkcoordintpair) && this.chunkMap.anyPlayerCloseEnoughForSpawning(chunkcoordintpair)) {
                          chunk1.incrementInhabitedTime(j);
@@ -56,7 +56,7 @@ index a65c844d9dc715f75849e5cb665250dfa036af08..0ca299ab0859a9bb0060539d692d3e77
                              NaturalSpawner.spawnForChunk(this.level, chunk1, spawnercreature_d, this.spawnFriendlies, this.spawnEnemies, flag1);
                          }
  
-@@ -562,6 +571,20 @@ public class ServerChunkCache extends ChunkSource {
+@@ -561,6 +570,20 @@ public class ServerChunkCache extends ChunkSource {
          }
      }
  

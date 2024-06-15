@@ -147,7 +147,7 @@ index 38ac2759894660be1ee7ba59b0bd1270158e9232..eccb524111cec32ed55722817529e6ab
          DyeColor enumcolor1 = ((Sheep) secondParent).getColor();
          CraftingInput craftinginput = Sheep.makeCraftInput(enumcolor, enumcolor1);
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 0f205f02ce0553fb1f8db8aa903861102a570708..19115238d0fd845a788446d88d9ec9a52762c367 100644
+index d7743dc516032a7c8942bce116244e7893e79e0b..89d451b322e9308dfcf7b6579ab558fa7bbc404f 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -34,6 +34,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
