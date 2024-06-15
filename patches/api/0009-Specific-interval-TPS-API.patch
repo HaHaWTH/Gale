@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 71f1c361ebccbe83193c37ec3a90faa4085001c3..0c44d54bc9a63fa351f84dec3b7f62b69c086f0d 100644
+index b9b751ea0d11381e846d5f35f39f285c075c171a..3157818826a08fc64e6aafa269cb53a0797f3a4d 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -2377,6 +2377,37 @@ public final class Bukkit {
+@@ -2371,6 +2371,37 @@ public final class Bukkit {
          return server.getTPS();
      }
  
@@ -49,10 +49,10 @@ index 71f1c361ebccbe83193c37ec3a90faa4085001c3..0c44d54bc9a63fa351f84dec3b7f62b6
       * Get a sample of the servers last tick times (in nanos)
       *
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index b50f6fb3b45678374348778388d18f15b2d8d3e7..3d93593c2e2114a0415529bbc0e8c2733ca79e1d 100644
+index 17aaca2d039eb9c0816a9bdde0876a4debcaeb9d..d8e78424809ee1e1107e37a32552d57c24fa48b0 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -2034,6 +2034,31 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
+@@ -2028,6 +2028,31 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
      @NotNull
      public double[] getTPS();
  

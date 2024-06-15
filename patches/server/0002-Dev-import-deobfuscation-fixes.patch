@@ -34,7 +34,7 @@ index b0d26b0eadb2a43924629424a6c13198aace8f69..bcba8224b9a210bced04ff370a73b306
  
                  for (T executionCommandSource2 : list) {
 diff --git a/src/main/java/net/minecraft/util/ExtraCodecs.java b/src/main/java/net/minecraft/util/ExtraCodecs.java
-index 4f206e32477d84f4ba16e49d5abd3c28da5cab8f..3c8f05a13d4fb10ac1e0ed444f1bfe665a077033 100644
+index 68dda6a3257ca18c1e6c7659d62455da46d187e2..24a478c0e874692964fb1c670277aca94f273749 100644
 --- a/src/main/java/net/minecraft/util/ExtraCodecs.java
 +++ b/src/main/java/net/minecraft/util/ExtraCodecs.java
 @@ -224,7 +224,7 @@ public class ExtraCodecs {
@@ -56,7 +56,7 @@ index 4f206e32477d84f4ba16e49d5abd3c28da5cab8f..3c8f05a13d4fb10ac1e0ed444f1bfe66
  
              public <T> DataResult<T> coApply(DynamicOps<T> dynamicOps, A object, DataResult<T> dataResult) {
 diff --git a/src/main/java/net/minecraft/util/datafix/fixes/ChunkProtoTickListFix.java b/src/main/java/net/minecraft/util/datafix/fixes/ChunkProtoTickListFix.java
-index c9101a3bf0cb2c9e49e0e768b379e8dd816012de..ec7f8ef7bcd0a6cf72d032714c3e1057704260e9 100644
+index 2942534d265416a3693848d76538c04735bc14fa..1665e457bbfea822f5822c31f6c93f3a0d6fa7a3 100644
 --- a/src/main/java/net/minecraft/util/datafix/fixes/ChunkProtoTickListFix.java
 +++ b/src/main/java/net/minecraft/util/datafix/fixes/ChunkProtoTickListFix.java
 @@ -18,6 +18,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
@@ -67,17 +67,17 @@ index c9101a3bf0cb2c9e49e0e768b379e8dd816012de..ec7f8ef7bcd0a6cf72d032714c3e1057
  import java.util.Optional;
  import java.util.function.Function;
  import java.util.function.Supplier;
-@@ -183,7 +184,7 @@ public class ChunkProtoTickListFix extends DataFix {
-         int o = l >>> 8 & 15;
-         String string = function.apply(supplier != null ? supplier.get().get(m, n, o) : null);
-         return dynamic.createMap(
+@@ -186,7 +187,7 @@ public class ChunkProtoTickListFix extends DataFix {
+         int k = packedLocalPos >>> 8 & 15;
+         String string = blockIdGetter.apply(sectionSupplier != null ? sectionSupplier.get().get(i, j, k) : null);
+         return levelDynamic.createMap(
 -            ImmutableMap.builder()
 +            (Map) ImmutableMap.builder() // Gale - dev import deobfuscation fixes
-                 .put(dynamic.createString("i"), dynamic.createString(string))
-                 .put(dynamic.createString("x"), dynamic.createInt(i * 16 + m))
-                 .put(dynamic.createString("y"), dynamic.createInt(j * 16 + n))
+                 .put(levelDynamic.createString("i"), levelDynamic.createString(string))
+                 .put(levelDynamic.createString("x"), levelDynamic.createInt(sectionX * 16 + i))
+                 .put(levelDynamic.createString("y"), levelDynamic.createInt(sectionY * 16 + j))
 diff --git a/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java b/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
-index 166b7d87ab88e28d465fb4a5d07c180c10464925..a506f3ef40ec34a89abb73a60cedf3b556585bee 100644
+index 9167bad12e1be3f4163f85987862b044a630b2eb..9df053ddff459d4aab478106c6e66a5fc3cda8f6 100644
 --- a/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
 +++ b/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
 @@ -155,7 +155,7 @@ public class SurfaceRules {

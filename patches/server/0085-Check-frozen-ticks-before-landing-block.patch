@@ -1,0 +1,39 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martijn Muijsers <martijnmuijsers@live.nl>
+Date: Wed, 30 Nov 2022 20:17:41 +0100
+Subject: [PATCH] Check frozen ticks before landing block
+
+License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
+Gale - https://galemc.org
+
+This patch is based on the following mixin:
+"me/jellysquid/mods/lithium/mixin/entity/fast_powder_snow_check/LivingEntityMixin.java"
+By: 2No2Name <2No2Name@web.de>
+As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
+Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
+
+diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
+index 6c0772f4bb5060d5c9649918257838594a582e65..b7c02647d7d143e2462057792bafed96648973d7 100644
+--- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
++++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
+@@ -565,11 +565,10 @@ public abstract class LivingEntity extends Entity implements Attackable {
+     }
+ 
+     protected void tryAddFrost() {
+-        if (!this.getBlockStateOnLegacy().isAir()) {
+             int i = this.getTicksFrozen();
+ 
+             if (i > 0) {
+-                AttributeInstance attributemodifiable = this.getAttribute(Attributes.MOVEMENT_SPEED);
++                AttributeInstance attributemodifiable = this.getBlockStateOnLegacy().isAir() ? null : this.getAttribute(Attributes.MOVEMENT_SPEED); // Gale - Lithium - check frozen ticks before landing block
+ 
+                 if (attributemodifiable == null) {
+                     return;
+@@ -579,7 +578,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+ 
+                 attributemodifiable.addTransientModifier(new AttributeModifier(LivingEntity.SPEED_MODIFIER_POWDER_SNOW_ID, (double) f, AttributeModifier.Operation.ADD_VALUE));
+             }
+-        }
+ 
+     }
+ 

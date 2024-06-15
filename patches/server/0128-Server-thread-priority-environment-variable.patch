@@ -1,0 +1,33 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martijn Muijsers <martijnmuijsers@live.nl>
+Date: Thu, 22 Dec 2022 15:47:39 +0100
+Subject: [PATCH] Server thread priority environment variable
+
+License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+Gale - https://galemc.org
+
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index 0a2100378080d6ec76522428b354b4fa47cdff7a..4b3a689042ed0244c85d84beb21feb00ab13265a 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -191,6 +191,8 @@ import co.aikar.timings.MinecraftTimings; // Paper
+ 
+ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTask> implements ServerInfo, ChunkIOErrorReporter, CommandSource, AutoCloseable, ca.spottedleaf.moonrise.patches.chunk_system.server.ChunkSystemMinecraftServer { // Paper - rewrite chunk system
+ 
++    public static final int SERVER_THREAD_PRIORITY = Integer.getInteger("gale.thread.priority.server", -1); // Gale - server thread priority environment variable
++
+     private static MinecraftServer SERVER; // Paper
+     public static final Logger LOGGER = LogUtils.getLogger();
+     public static final net.kyori.adventure.text.logger.slf4j.ComponentLogger COMPONENT_LOGGER = net.kyori.adventure.text.logger.slf4j.ComponentLogger.logger(LOGGER.getName()); // Paper
+@@ -321,6 +323,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+         S s0 = serverFactory.apply(thread); // CraftBukkit - decompile error
+ 
+         atomicreference.set(s0);
++        // Gale start - server thread priority environment variable
++        if (SERVER_THREAD_PRIORITY > 0) {
++            thread.setPriority(SERVER_THREAD_PRIORITY);
++        }
++        // Gale end - server thread priority environment variable
+         thread.start();
+         return s0;
+     }

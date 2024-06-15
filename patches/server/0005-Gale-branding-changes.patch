@@ -221,7 +221,7 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index f43a0aff5d735e21ac63eeb0314f829bd3b83554..335cc8638d307fcd0dad44c431ec7f9d5376fc09 100644
+index fc4e25d39c309e3be83e9a380eb6f5f0b58f5191..8f97350aac2f19a0d19e35630261dacc7b46ce52 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -89,14 +89,14 @@ tasks.jar {
@@ -463,25 +463,19 @@ index 790bad0494454ca12ee152e3de6da3da634d9b20..2596e0ee4df5b96f181e28a742ef3459
      }
  
      @Override
-diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 3751c2a077bd13bac330b93c6efc2a640a17f4f2..edabecf0cdd5dca3cc40084f87f4af750ffe3507 100644
---- a/src/main/java/net/minecraft/server/MinecraftServer.java
-+++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -956,7 +956,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
-         shutdownThread = Thread.currentThread();
-         org.spigotmc.WatchdogThread.doStop(); // Paper
-         if (!isSameThread()) {
--            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER)");
-+            // Gale start - branding changes
-+            /*
-+            We do not want people to report thread issues to Paper,
-+            but we do want people to report thread issues to Gale.
-+             */
-+            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER - If you think this is a Gale bug, please report it at https://github.com/GaleMC/Gale/issues )");
-+            // Gale end - branding changes
-             while (this.getRunningThread().isAlive()) {
-                 this.getRunningThread().stop();
-                 try {
+diff --git a/src/main/java/net/minecraft/world/damagesource/DamageSource.java b/src/main/java/net/minecraft/world/damagesource/DamageSource.java
+index bb1a60180e58c1333e7bb33e8acf1b0225eda8a8..4d037e899e0b5548be406ad55acd2062603b7da1 100644
+--- a/src/main/java/net/minecraft/world/damagesource/DamageSource.java
++++ b/src/main/java/net/minecraft/world/damagesource/DamageSource.java
+@@ -67,7 +67,7 @@ public class DamageSource {
+ 
+     public DamageSource customEventDamager(Entity entity) {
+         if (this.directEntity != null) {
+-            throw new IllegalStateException("Cannot set custom event damager when direct entity is already set (report a bug to Paper)");
++            throw new IllegalStateException("Cannot set custom event damager when direct entity is already set (report a bug to Paper, if you think this is a Gale bug, please report it at https://github.com/GaleMC/Gale/issues)"); // Gale - branding changes
+         }
+         DamageSource damageSource = this.cloneInstance();
+         damageSource.customEventDamager = entity;
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e587212ed2c305 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
@@ -496,7 +490,7 @@ index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e58721
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index f99353a60e3f236735ef6e2e6f13381b50ae9b7b..2918b61675e16a0dd023d3ca10f232c4675bf4b0 100644
+index 5a04134973dd1db7f778a57ec5f185feec370990..84b7717bff0d8644a924955cfe5a82285109dff5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 @@ -504,7 +504,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
@@ -699,10 +693,10 @@ index 0000000000000000000000000000000000000000..3d674eca7d20202d8f811c5c3e3946a1
 +
 +}
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index 6db566e3111ec08a99aa429624979cb83a85e272..5e556d7f3e444a7b7d7de70fa4efd50ef2a6dc8b 100644
+index c68256c0c8e131497108f677c6b254c589ce67e2..8da63e1ff46ef2ec87080612510e43c10e5b372a 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
-@@ -155,14 +155,20 @@ public final class WatchdogThread extends io.papermc.paper.util.TickThread // Pa
+@@ -80,14 +80,20 @@ public class WatchdogThread extends Thread
                  if (isLongTimeout) {
                  // Paper end
                  log.log( Level.SEVERE, "------------------------------" );
@@ -726,7 +720,7 @@ index 6db566e3111ec08a99aa429624979cb83a85e272..5e556d7f3e444a7b7d7de70fa4efd50e
                  //
                  if ( net.minecraft.world.level.Level.lastPhysicsProblem != null )
                  {
-@@ -184,12 +190,18 @@ public final class WatchdogThread extends io.papermc.paper.util.TickThread // Pa
+@@ -109,12 +115,18 @@ public class WatchdogThread extends Thread
                  // Paper end
                  } else
                  {
@@ -735,7 +729,7 @@ index 6db566e3111ec08a99aa429624979cb83a85e272..5e556d7f3e444a7b7d7de70fa4efd50e
 +                    /*
 +                    We do not want people to report thread issues to Paper,
 +                    but we do want people to report thread issues to Gale.
-+                     */
++                    */
 +                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PAPER - If you think this is a Gale bug, please report it at https://github.com/GaleMC/Gale/issues - THIS IS NOT A PAPER BUG OR CRASH - " + Bukkit.getServer().getVersion() + " ---");
 +                    // Gale end - branding changes
                      log.log(Level.SEVERE, "The server has not responded for " + (currentTime - lastTick) / 1000 + " seconds! Creating thread dump");
@@ -744,10 +738,10 @@ index 6db566e3111ec08a99aa429624979cb83a85e272..5e556d7f3e444a7b7d7de70fa4efd50e
                  log.log( Level.SEVERE, "------------------------------" );
 -                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to Paper!):" ); // Paper
 +                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to Gale!):" ); // Paper // Gale - branding changes
-                 io.papermc.paper.chunk.system.scheduling.ChunkTaskScheduler.dumpAllChunkLoadInfo(isLongTimeout); // Paper - rewrite chunk system
-                 this.dumpTickingInfo(); // Paper - log detailed tick information
+                 ca.spottedleaf.moonrise.patches.chunk_system.scheduling.ChunkTaskScheduler.dumpAllChunkLoadInfo(isLongTimeout); // Paper - rewrite chunk system
                  WatchdogThread.dumpThread( ManagementFactory.getThreadMXBean().getThreadInfo( MinecraftServer.getServer().serverThread.getId(), Integer.MAX_VALUE ), log );
-@@ -205,7 +217,13 @@ public final class WatchdogThread extends io.papermc.paper.util.TickThread // Pa
+                 log.log( Level.SEVERE, "------------------------------" );
+@@ -129,7 +141,13 @@ public class WatchdogThread extends Thread
                      WatchdogThread.dumpThread( thread, log );
                  }
                  } else {

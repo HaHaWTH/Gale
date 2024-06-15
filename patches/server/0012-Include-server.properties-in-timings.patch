@@ -27,10 +27,10 @@ index 29796a404e210f7864f4b33b3367e02531bca2a0..73e503d0590964ac7f9ea15ac7ee7783
              pair("bukkit", mapAsJSON(Bukkit.spigot().getBukkitConfig(), null)),
              // Gale start - Gale configuration - include in timings
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
-index 9d10cdacb3aed2c00dc60aeb6f2cbeb48905e21f..4323ffee716380bd67eb04a4a7bb62bc4ba2f7df 100644
+index d6431376184e5650b370cbab204e28bc31f4dac6..bfe9be2e329c2ea2c8c44458e88d22bc75520ed4 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
-@@ -66,6 +66,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
+@@ -67,6 +67,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
      public final Difficulty difficulty;
      public final GameType gamemode;
      public final String levelName;
@@ -38,7 +38,7 @@ index 9d10cdacb3aed2c00dc60aeb6f2cbeb48905e21f..4323ffee716380bd67eb04a4a7bb62bc
      public final int serverPort;
      @Nullable
      public final Boolean announcePlayerAchievements;
-@@ -99,13 +100,14 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
+@@ -100,13 +101,14 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
      public final boolean hideOnlinePlayers;
      public final int entityBroadcastRangePercentage;
      public final String textFilteringConfig;
@@ -54,7 +54,7 @@ index 9d10cdacb3aed2c00dc60aeb6f2cbeb48905e21f..4323ffee716380bd67eb04a4a7bb62bc
      public final WorldOptions worldOptions;
      public boolean acceptsTransfers;
  
-@@ -160,6 +162,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
+@@ -161,6 +163,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
          this.logIPs = this.get("log-ips", true);
          this.acceptsTransfers = this.get("accepts-transfers", false);
          String s = this.get("level-seed", "");
@@ -62,7 +62,7 @@ index 9d10cdacb3aed2c00dc60aeb6f2cbeb48905e21f..4323ffee716380bd67eb04a4a7bb62bc
          boolean flag = this.get("generate-structures", true);
          long i = WorldOptions.parseSeed(s).orElse(WorldOptions.randomSeed());
  
-@@ -169,7 +172,10 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
+@@ -170,7 +173,10 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
          }, new JsonObject()), (String) this.get("level-type", (s1) -> {
              return s1.toLowerCase(Locale.ROOT);
          }, WorldPresets.NORMAL.location().toString()));

@@ -61,3 +61,7 @@ Additional thanks and friendly greetings go out to the following forks and other
 Paperweight files are licensed under MIT.
 Patches are licensed under GPL-3.0, unless indicated differently in their header.
 Binaries are licensed under GPL-3.0.
+
+## TODO
+check Simpler ShapelessRecipe comparison for vanilla patch
+check fix MC-26304 (needs tryParse? or just parse)

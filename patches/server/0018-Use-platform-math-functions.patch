@@ -99,10 +99,10 @@ public class Main {
 ```
 
 diff --git a/src/main/java/io/papermc/paper/util/MCUtil.java b/src/main/java/io/papermc/paper/util/MCUtil.java
-index e5c2e53388ff61e4aeae22a74b525d9a26ea0200..15dddb035c7ae3aca9b5cd5a5f56e0407641d9dd 100644
+index 4f5badb9429b34ed999183321c98b60978715638..015a6463875b5ae46da0491b358adc568ac9a174 100644
 --- a/src/main/java/io/papermc/paper/util/MCUtil.java
 +++ b/src/main/java/io/papermc/paper/util/MCUtil.java
-@@ -168,13 +168,11 @@ public final class MCUtil {
+@@ -152,13 +152,11 @@ public final class MCUtil {
      }
  
      public static int fastFloor(double x) {
@@ -118,7 +118,7 @@ index e5c2e53388ff61e4aeae22a74b525d9a26ea0200..15dddb035c7ae3aca9b5cd5a5f56e040
      }
  
      public static float normalizeYaw(float f) {
-@@ -235,11 +233,11 @@ public final class MCUtil {
+@@ -219,11 +217,11 @@ public final class MCUtil {
      }
  
      public static int getChunkCoordinate(final double coordinate) {
@@ -133,7 +133,7 @@ index e5c2e53388ff61e4aeae22a74b525d9a26ea0200..15dddb035c7ae3aca9b5cd5a5f56e040
  
      public static long getBlockKey(final int x, final int y, final int z) {
 diff --git a/src/main/java/net/minecraft/util/Mth.java b/src/main/java/net/minecraft/util/Mth.java
-index 990ea96de8e940390b67e9462fcfd6025f2f5770..e102c109d01e0f992808a6096b5f6a323b52d970 100644
+index f298cdfcf1539e467f57f9f7789de3cf2ca54665..4150562f61fbb5962bf6c7d2727da43feed89036 100644
 --- a/src/main/java/net/minecraft/util/Mth.java
 +++ b/src/main/java/net/minecraft/util/Mth.java
 @@ -58,13 +58,11 @@ public class Mth {

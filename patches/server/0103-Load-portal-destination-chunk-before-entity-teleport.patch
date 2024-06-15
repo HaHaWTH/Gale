@@ -1,0 +1,50 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martijn Muijsers <martijnmuijsers@live.nl>
+Date: Sun, 25 Dec 2022 16:55:45 +0100
+Subject: [PATCH] Load portal destination chunk before entity teleport
+
+License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+Gale - https://galemc.org
+
+This patch is based on the following patch:
+"Load chunks when entities go through an end portal"
+By: PureGero <puregero@gmail.com>
+As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
+Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+
+diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
+index 4dd79b1595406dfd93b2dd6e2ef56f7bf4db65c6..e22174b5c5927fca637167e4a752c415a613821a 100644
+--- a/src/main/java/net/minecraft/world/entity/Entity.java
++++ b/src/main/java/net/minecraft/world/entity/Entity.java
+@@ -3829,7 +3829,15 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+ 
+             if (entity == null) {
+                 return false;
++            // Gale start - MultiPaper - load portal destination chunk before entity teleport
++            } else {
++                if (entity.level.galeConfig().gameplayMechanics.technical.loadPortalDestinationChunkBeforeEntityTeleport) {
++                    BlockPos pos = BlockPos.containing(position);
++                    world.getChunkSource().addRegionTicket(TicketType.PORTAL, new ChunkPos(pos), 1, pos);
++                    world.getChunkAt(pos);
++                }
+             }
++            // Gale end - MultiPaper - load portal destination chunk before entity teleport
+ 
+             entity.restoreFrom(this);
+             entity.moveTo(destX, destY, destZ, yaw, f2);
+diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
+index 5d499e77800466210473e36b2355873807b9f86a..50202c41535f823240e9e8fd5348e3d474814c1b 100644
+--- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
++++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
+@@ -125,6 +125,11 @@ public class GaleWorldConfiguration extends ConfigurationPart {
+ 
+         }
+ 
++        public Technical technical;
++        public class Technical extends ConfigurationPart {
++            public boolean loadPortalDestinationChunkBeforeEntityTeleport = false; // Gale - MultiPaper - load portal destination chunk before entity teleport
++        }
++
+         public boolean arrowMovementResetsDespawnCounter = true; // Gale - Purpur - make arrow movement resetting despawn counter configurable
+         public double entityWakeUpDurationRatioStandardDeviation = 0.2; // Gale - variable entity wake-up duration
+         public boolean hideFlamesOnEntitiesWithFireResistance = false; // Gale - Slice - hide flames on entities with fire resistance
