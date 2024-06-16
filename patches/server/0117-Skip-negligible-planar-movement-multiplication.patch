@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 6650f27d1678ed6cb188f537931eaf3e3d40c7dd..448352d75cad0f016684079f2e14c667e1cecf32 100644
+index 9190b26c81c1060b7c3a71b1e584b8f9b8e79852..28782b46cef81a0ee049be902ca60ddb9fd5d852 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -1188,9 +1188,19 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1219,9 +1219,19 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                  }
  
                  this.tryCheckInsideBlocks();
