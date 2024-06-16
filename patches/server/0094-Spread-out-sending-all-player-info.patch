@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index fa4ca096dfd3afe8868b76a8576f0f2882f139ca..44990dfc60126bf6bb88679dfbebb09d3ca1473a 100644
+index 7ebe9f2842b76c2a12d8316916d22ff17a45b3ac..6afadb847906050566f0eeb8ba5ad5c539d0c9b7 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -13,6 +13,8 @@ import java.net.SocketAddress;
