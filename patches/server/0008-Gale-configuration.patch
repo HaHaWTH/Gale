@@ -289,10 +289,10 @@ index 0761d5bc5f2813bb4a9f664ac7a05b9744d0a778..87ec971241047314e7d505fb6b35be4a
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index fb0db51493e343c781876b9db773fa3fc9a8d666..1972203ee1bdd9966b74926bae6ef23d4a1cedef 100644
+index b81ac6db8ba1ee0722e9e85f8de8ef91169a3198..ba1cecad79de47c29f42cb786647668bae189f22 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -503,7 +503,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -502,7 +502,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error

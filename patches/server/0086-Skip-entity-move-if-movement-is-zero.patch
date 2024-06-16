@@ -13,7 +13,7 @@ As part of: VMP (https://github.com/RelativityMC/VMP-fabric)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index ba0e7bc1dd98ea632ab80091acb900b862186dad..329856d3656da0fd01ab1500a423cae554d2544a 100644
+index 215a193baf6a54b307c94c9ffa912430db6a2cf5..95e06a768d264701e5522d389a8c8fa20c68fa63 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -323,6 +323,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -36,7 +36,7 @@ index ba0e7bc1dd98ea632ab80091acb900b862186dad..329856d3656da0fd01ab1500a423cae5
          final Vec3 originalMovement = movement; // Paper - Expose pre-collision velocity
          if (this.noPhysics) {
              this.setPos(this.getX() + movement.x, this.getY() + movement.y, this.getZ() + movement.z);
-@@ -3985,6 +3991,11 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3974,6 +3980,11 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
      }
  
      public final void setBoundingBox(AABB boundingBox) {
