@@ -23,10 +23,10 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 5415cc96c9acba64b1f26b76726226fb2756c908..0a2100378080d6ec76522428b354b4fa47cdff7a 100644
+index f8909886e6c1e4c64fd674b8a19b0cc6242160cb..5b2f18705b1b1da5c431b9061d5e5da5deab1589 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1100,6 +1100,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1133,6 +1133,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      // Paper end
      // Spigot End
  
@@ -37,8 +37,8 @@ index 5415cc96c9acba64b1f26b76726226fb2756c908..0a2100378080d6ec76522428b354b4fa
 +
      protected void runServer() {
          try {
-             if (!this.initServer()) {
-@@ -1173,9 +1178,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+             long serverStartTime = Util.getNanos(); // Paper
+@@ -1219,9 +1224,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  //MinecraftServer.currentTick = (int) (System.currentTimeMillis() / 50); // CraftBukkit // Paper - don't overwrite current tick time
                  lastTick = currentTime;
                  this.nextTickTimeNanos += i;
@@ -50,7 +50,7 @@ index 5415cc96c9acba64b1f26b76726226fb2756c908..0a2100378080d6ec76522428b354b4fa
                  // Paper start - rewrite chunk system
                  final Throwable crash = this.chunkSystemCrash;
                  if (crash != null) {
-@@ -1333,9 +1340,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1385,9 +1392,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      protected void waitUntilNextTick() {
          //this.executeAll(); // Paper - move this into the tick method for timings

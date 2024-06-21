@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index f921771c0aeba72f3f208703dbf300e8748ded17..43913931fb17f5a98391e4a6e797a7cb46d58977 100644
+index 13a51c939b8bd17584a474217823150688af809f..ac23c85f17e0a5cd9702888a873cc470428b3e34 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
-@@ -968,6 +968,22 @@ public class Metrics {
+@@ -973,6 +973,22 @@ public class Metrics {
                  }));
                  // Gale end - SIMD support - include in metrics
  

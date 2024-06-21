@@ -189,7 +189,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 7e32eecacf6f5e832dbfd0455e4bab1302a33d46..c7bb2416529a96614cdaf8e86e0c37690e69102e 100644
+index 1591b251f082eeeef6c86e3164570206ef82f6a8..d62cb22bbc061f37a5d798c8e3a48e747971a6dd 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -220,7 +220,7 @@ index 7e32eecacf6f5e832dbfd0455e4bab1302a33d46..c7bb2416529a96614cdaf8e86e0c3769
      public static long currentTickLong = 0L; // Paper - track current tick as a long
      public boolean isIteratingOverLevels = false; // Paper - Throw exception on world create while being ticked
  
-@@ -430,6 +431,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -433,6 +434,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          Runtime.getRuntime().addShutdownHook(new org.bukkit.craftbukkit.util.ServerShutdownThread(this));
          // CraftBukkit end
          this.paperConfigurations = services.paperConfigurations(); // Paper - add paper configuration files
@@ -274,7 +274,7 @@ index 33e3815a0c979609d4c7ab83ad91e87ac07a556d..67d4a82f371a4772128cc2218fd0a18c
      }
  
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 0761d5bc5f2813bb4a9f664ac7a05b9744d0a778..87ec971241047314e7d505fb6b35be4a456727de 100644
+index 7d82cc6b847124cf4225428ba310309544928148..ac703c9ef504779dffbd8d7e676dbb51fb94dd29 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -226,6 +226,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -289,7 +289,7 @@ index 0761d5bc5f2813bb4a9f664ac7a05b9744d0a778..87ec971241047314e7d505fb6b35be4a
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index b81ac6db8ba1ee0722e9e85f8de8ef91169a3198..ba1cecad79de47c29f42cb786647668bae189f22 100644
+index 798016774df02c3f7ebf909c9cc125f8427a39be..11f0017a8557f7528e379285bbb55e37c533463f 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -502,7 +502,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
@@ -302,7 +302,7 @@ index b81ac6db8ba1ee0722e9e85f8de8ef91169a3198..ba1cecad79de47c29f42cb786647668b
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 96ad3868a93964247790134fa5f4b18e5c07aea8..7d53bcbb62ed87d39dd1e47136343541cca2d547 100644
+index fee155c81df385faa474e3aec777a30375ecb07d..676969f0a0fe21dae1c30d63a8bb4b0e9b33d057 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -12,7 +12,6 @@ import java.util.function.Supplier;

@@ -33,10 +33,10 @@ index 8f97350aac2f19a0d19e35630261dacc7b46ce52..13d1908b378e5311d8bb7f9317b4b1c2
      doFirst {
          workingDir.mkdirs()
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index 16ecdf3c56809100032ca627a1769e4e8c452f08..f921771c0aeba72f3f208703dbf300e8748ded17 100644
+index 66477f772ffb9271cf647dfb7567d75c3d5145fb..13a51c939b8bd17584a474217823150688af809f 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
-@@ -928,6 +928,46 @@ public class Metrics {
+@@ -933,6 +933,46 @@ public class Metrics {
                  metrics.addCustomChart(new Metrics.DrilldownPie("gale_semantic_version", () -> semanticVersionMap));
                  // Gale end - semantic version - include in metrics
  
@@ -84,7 +84,7 @@ index 16ecdf3c56809100032ca627a1769e4e8c452f08..f921771c0aeba72f3f208703dbf300e8
  
          }
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index d42d6237831d500d0686b58abc4750896a1985c8..4fbdd8b1ead384762164c2d13180bfa230c40262 100644
+index e510366a69f44ea1772f5bbd1cf799d335b7b0da..91105ac1d3cbc8c0169540996edebd5e6e72bc82 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -20,6 +20,8 @@ import java.util.Locale;

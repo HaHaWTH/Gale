@@ -7,12 +7,12 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java b/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java
-index f52e104b3e07825caf0d6d1bda2e45c8437d6e20..df73ba5fad91eada64cdb2425c0f788dbbd953b8 100644
+index c1c119e2e788d5963de3a74a6b9724c71a168a8a..08eda5032c8a822037ca3c68206a5a94cff5e352 100644
 --- a/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java
 +++ b/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java
-@@ -52,7 +52,7 @@ public final class ChunkTaskScheduler {
+@@ -64,7 +64,7 @@ public final class ChunkTaskScheduler {
  
-     private static final Logger LOGGER = LoggerFactory.getLogger(ChunkTaskScheduler.class);
+     private static final Logger LOGGER = LogUtils.getClassLogger();
  
 -    static int newChunkSystemIOThreads;
 +    public static int newChunkSystemIOThreads; // Gale - metrics - chunk system IO threads - package-private -> public
@@ -20,10 +20,10 @@ index f52e104b3e07825caf0d6d1bda2e45c8437d6e20..df73ba5fad91eada64cdb2425c0f788d
      static int newChunkSystemGenPopulationParallelism;
      static int newChunkSystemLoadParallelism;
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index 6aaed8e8bf8c721fc834da5c76ac72a4c3e92458..2d5688979f269fa887448fe910ea87a87d93d1dd 100644
+index 4b002e8b75d117b726b0de274a76d3596fce015b..7e1405d5e2b847b28b07cb94fcbf5dec78706e34 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
-@@ -588,7 +588,7 @@ public class Metrics {
+@@ -593,7 +593,7 @@ public class Metrics {
              boolean logFailedRequests = config.getBoolean("logFailedRequests", false);
              // Only start Metrics, if it's enabled in the config
              if (config.getBoolean("enabled", true)) {
@@ -32,7 +32,7 @@ index 6aaed8e8bf8c721fc834da5c76ac72a4c3e92458..2d5688979f269fa887448fe910ea87a8
  
                  metrics.addCustomChart(new Metrics.SimplePie("minecraft_version", () -> {
                      String minecraftVersion = Bukkit.getVersion();
-@@ -598,20 +598,20 @@ public class Metrics {
+@@ -603,20 +603,20 @@ public class Metrics {
  
                  metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
                  metrics.addCustomChart(new Metrics.SimplePie("online_mode", () -> Bukkit.getOnlineMode() ? "online" : "offline"));
@@ -59,7 +59,7 @@ index 6aaed8e8bf8c721fc834da5c76ac72a4c3e92458..2d5688979f269fa887448fe910ea87a8
                      entry.put(javaVersion, 1);
  
                      // http://openjdk.java.net/jeps/223
-@@ -640,7 +640,7 @@ public class Metrics {
+@@ -645,7 +645,7 @@ public class Metrics {
                  }));
  
                  metrics.addCustomChart(new Metrics.DrilldownPie("legacy_plugins", () -> {
@@ -68,7 +68,7 @@ index 6aaed8e8bf8c721fc834da5c76ac72a4c3e92458..2d5688979f269fa887448fe910ea87a8
  
                      // count legacy plugins
                      int legacy = 0;
-@@ -651,7 +651,7 @@ public class Metrics {
+@@ -656,7 +656,7 @@ public class Metrics {
                      }
  
                      // insert real value as lower dimension
@@ -77,7 +77,7 @@ index 6aaed8e8bf8c721fc834da5c76ac72a4c3e92458..2d5688979f269fa887448fe910ea87a8
                      entry.put(String.valueOf(legacy), 1);
  
                      // create buckets as higher dimension
-@@ -671,6 +671,253 @@ public class Metrics {
+@@ -676,6 +676,253 @@ public class Metrics {
  
                      return map;
                  }));

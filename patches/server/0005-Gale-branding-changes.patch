@@ -463,6 +463,25 @@ index 790bad0494454ca12ee152e3de6da3da634d9b20..2596e0ee4df5b96f181e28a742ef3459
      }
  
      @Override
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index 68f60e77e0bfd42b6419491c1d59b6432974216b..1591b251f082eeeef6c86e3164570206ef82f6a8 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -966,7 +966,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+         shutdownThread = Thread.currentThread();
+         org.spigotmc.WatchdogThread.doStop(); // Paper
+         if (!isSameThread()) {
+-            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER)");
++            // Gale start - branding changes
++            /*
++            We do not want people to report thread issues to Paper,
++            but we do want people to report thread issues to Gale.
++            */
++            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER - If you think this is a Gale bug, please report it at https://github.com/GaleMC/Gale/issues)");
++            // Gale end - branding changes
+             while (this.getRunningThread().isAlive()) {
+                 this.getRunningThread().stop();
+                 try {
 diff --git a/src/main/java/net/minecraft/world/damagesource/DamageSource.java b/src/main/java/net/minecraft/world/damagesource/DamageSource.java
 index bb1a60180e58c1333e7bb33e8acf1b0225eda8a8..4d037e899e0b5548be406ad55acd2062603b7da1 100644
 --- a/src/main/java/net/minecraft/world/damagesource/DamageSource.java
@@ -476,6 +495,25 @@ index bb1a60180e58c1333e7bb33e8acf1b0225eda8a8..4d037e899e0b5548be406ad55acd2062
          }
          DamageSource damageSource = this.cloneInstance();
          damageSource.customEventDamager = entity;
+diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
+index 0615fd82b71efb9a397de01615050e6d906c2844..b797ca4b68d110bbf64eac4ae422a7bc8bce145a 100644
+--- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
++++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
+@@ -146,7 +146,13 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
+ 
+     // Paper start
+     private static void printOversizedLog(String msg, Path file, int x, int z) {
+-        org.apache.logging.log4j.LogManager.getLogger().fatal(msg + " (" + file.toString().replaceAll(".+[\\\\/]", "") + " - " + x + "," + z + ") Go clean it up to remove this message. /minecraft:tp " + (x<<4)+" 128 "+(z<<4) + " - DO NOT REPORT THIS TO PAPER - You may ask for help on Discord, but do not file an issue. These error messages can not be removed.");
++        // Gale start - branding changes
++        /*
++        We do not want people to report thread issues to Paper,
++        but we do want people to report thread issues to Gale.
++        */
++        org.apache.logging.log4j.LogManager.getLogger().fatal(msg + " (" + file.toString().replaceAll(".+[\\\\/]", "") + " - " + x + "," + z + ") Go clean it up to remove this message. /minecraft:tp " + (x<<4)+" 128 "+(z<<4) + " - DO NOT REPORT THIS TO PAPER OR GALE - You may ask for help on Discord, but do not file an issue. These error messages can not be removed. - If you think this is a Gale bug, please report it at https://github.com/GaleMC/Gale/issues)");
++        // Gale end - branding changes
+     }
+ 
+     private static CompoundTag readOversizedChunk(RegionFile regionfile, ChunkPos chunkCoordinate) throws IOException {
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e587212ed2c305 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
@@ -490,7 +528,7 @@ index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e58721
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 5a04134973dd1db7f778a57ec5f185feec370990..84b7717bff0d8644a924955cfe5a82285109dff5 100644
+index d70c5546c8bd6f364fad9b24880b6867efdab644..4250752a95301271f09590f0140f821a0090811a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 @@ -504,7 +504,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
@@ -693,10 +731,10 @@ index 0000000000000000000000000000000000000000..3d674eca7d20202d8f811c5c3e3946a1
 +
 +}
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index c68256c0c8e131497108f677c6b254c589ce67e2..8da63e1ff46ef2ec87080612510e43c10e5b372a 100644
+index e5e41dc2d4f7a8c3fea704212507ca0b951664db..ddfdd4db7643fddbc626a525923707d2be980005 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
-@@ -80,14 +80,20 @@ public class WatchdogThread extends Thread
+@@ -83,14 +83,20 @@ public class WatchdogThread extends Thread
                  if (isLongTimeout) {
                  // Paper end
                  log.log( Level.SEVERE, "------------------------------" );
@@ -720,7 +758,7 @@ index c68256c0c8e131497108f677c6b254c589ce67e2..8da63e1ff46ef2ec87080612510e43c1
                  //
                  if ( net.minecraft.world.level.Level.lastPhysicsProblem != null )
                  {
-@@ -109,12 +115,18 @@ public class WatchdogThread extends Thread
+@@ -112,12 +118,18 @@ public class WatchdogThread extends Thread
                  // Paper end
                  } else
                  {
@@ -738,10 +776,10 @@ index c68256c0c8e131497108f677c6b254c589ce67e2..8da63e1ff46ef2ec87080612510e43c1
                  log.log( Level.SEVERE, "------------------------------" );
 -                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to Paper!):" ); // Paper
 +                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to Gale!):" ); // Paper // Gale - branding changes
-                 ca.spottedleaf.moonrise.patches.chunk_system.scheduling.ChunkTaskScheduler.dumpAllChunkLoadInfo(isLongTimeout); // Paper - rewrite chunk system
+                 ca.spottedleaf.moonrise.patches.chunk_system.scheduling.ChunkTaskScheduler.dumpAllChunkLoadInfo(MinecraftServer.getServer(), isLongTimeout); // Paper - rewrite chunk system
                  WatchdogThread.dumpThread( ManagementFactory.getThreadMXBean().getThreadInfo( MinecraftServer.getServer().serverThread.getId(), Integer.MAX_VALUE ), log );
                  log.log( Level.SEVERE, "------------------------------" );
-@@ -129,7 +141,13 @@ public class WatchdogThread extends Thread
+@@ -132,7 +144,13 @@ public class WatchdogThread extends Thread
                      WatchdogThread.dumpThread( thread, log );
                  }
                  } else {
