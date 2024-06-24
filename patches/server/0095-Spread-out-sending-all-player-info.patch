@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 7ebe9f2842b76c2a12d8316916d22ff17a45b3ac..6afadb847906050566f0eeb8ba5ad5c539d0c9b7 100644
+index cf834a2cc39ecd058325d2ef9eb647289648bd8e..1b5bfdd69766c6de813b0ef2fcadcaf19a468c03 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -13,6 +13,8 @@ import java.net.SocketAddress;
@@ -157,7 +157,7 @@ index 7ebe9f2842b76c2a12d8316916d22ff17a45b3ac..6afadb847906050566f0eeb8ba5ad5c5
          }
  
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index e513e17f460927fcffd029bb3b3357ca85aa514d..f136510042db4c40a486b2ee3ed7e91a90bd9424 100644
+index 839f0b57db88ab7a6d6882f1fbedc1007bc95a63..0a97b72217b3509796d23fe9fe611b8ff020748c 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
 @@ -39,6 +39,7 @@ import net.minecraft.network.syncher.SynchedEntityData;

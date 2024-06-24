@@ -74,7 +74,7 @@ index 1223c5d23d0ea6aed068bdf0f5725e2ad49fc82c..5df85ba4904a6b4b69ab584e9f30d34c
          this.currentState = FishingHook.FishHookState.FLYING;
          this.noCulling = true;
 diff --git a/src/main/java/net/minecraft/world/entity/raid/Raid.java b/src/main/java/net/minecraft/world/entity/raid/Raid.java
-index 5c0e5803284bfc82c2dd8bba9ded0ba7aac4962a..2cc37e5734233954710c4ef55bf3b2918f2026d5 100644
+index 539e17bdeefd0be17a46cb65e034c7e0e4df181c..fbc95098b45478a8da395b9816c86571959d179c 100644
 --- a/src/main/java/net/minecraft/world/entity/raid/Raid.java
 +++ b/src/main/java/net/minecraft/world/entity/raid/Raid.java
 @@ -116,7 +116,7 @@ public class Raid {
