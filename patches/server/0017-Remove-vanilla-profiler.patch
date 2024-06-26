@@ -1128,7 +1128,7 @@ index 298e3eddd600f0b2e48ce2d4080cf68adff59a3a..6b3c57fc1231cd37e17a58137bb78411
  
      protected abstract T prepare(ResourceManager manager, ProfilerFiller profiler);
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 437956b18d5bffd93c46e0be34cf413e9c704e5a..314935f9021e1471726728b31039a60b2369c051 100644
+index 2519c08a45ce3febcf51ac308ad98ac0e2657cf3..796fea3424279ab299995b5b8a40ae8a275ba177 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -837,7 +837,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -1193,7 +1193,7 @@ index 437956b18d5bffd93c46e0be34cf413e9c704e5a..314935f9021e1471726728b31039a60b
              }
          }
      }
-@@ -3102,7 +3091,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3101,7 +3090,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
              this.processPortalCooldown();
              if (this.portalProcess != null) {
                  if (this.portalProcess.processPortalTeleportation(worldserver, this, this.canUsePortal(false))) {
@@ -1201,7 +1201,7 @@ index 437956b18d5bffd93c46e0be34cf413e9c704e5a..314935f9021e1471726728b31039a60b
                      this.setPortalCooldown();
                      DimensionTransition dimensiontransition = this.portalProcess.getPortalDestination(worldserver, this);
  
-@@ -3114,7 +3102,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3113,7 +3101,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                          }
                      }
  
@@ -1209,7 +1209,7 @@ index 437956b18d5bffd93c46e0be34cf413e9c704e5a..314935f9021e1471726728b31039a60b
                  } else if (this.portalProcess.hasExpired()) {
                      this.portalProcess = null;
                  }
-@@ -3615,7 +3602,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3614,7 +3601,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                      }
                  }
  
@@ -1217,7 +1217,7 @@ index 437956b18d5bffd93c46e0be34cf413e9c704e5a..314935f9021e1471726728b31039a60b
                  Entity entity2 = worldserver1.dimension() == worldserver.dimension() ? this : this.getType().create(worldserver1);
  
                  if (entity2 != null) {
-@@ -3651,7 +3637,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3650,7 +3636,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                      teleportTarget.postDimensionTransition().onTransition(entity2);
                  }
  
