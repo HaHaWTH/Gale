@@ -39,24 +39,11 @@ index fea92d280c6817cee1f18379d5ed51a3a22ee344..fd5d7feb9670a14cc6f7daa8ce6ba6a2
  
      private long lastFill = -1;
      private long nextRefill = -1;
-diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
-index 1362a47943cf1a51a185a15094b1f74c94bf40ef..0cf120199b92df68aa78373589ccdbcfbf940e3f 100644
---- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
-+++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
-@@ -110,7 +110,7 @@ public class RegionFile implements AutoCloseable {
-     }
- 
-     private void backupRegionFile() {
--        Path backup = this.path.getParent().resolve(this.path.getFileName() + "." + new java.util.Random().nextLong() + ".backup");
-+        Path backup = this.path.getParent().resolve(this.path.getFileName() + "." + new org.galemc.gale.random.XorShiftRandom().nextLong() + ".backup"); // Gale - xor-shift random
-         this.backupRegionFile(backup);
-     }
- 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index f2b20ed5063a293f0b464548f590d652170cd1d8..2abe6131cc04ed397446c2aa08f77f9da00ce8c5 100644
+index 8045d6c9398d1c88595da6e41aa1ed27fb6fbad0..f2aec38dc7a631e41983f2c21f93ee0b260058b0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-@@ -252,7 +252,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
+@@ -251,7 +251,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
      }
      // Paper end
  
@@ -66,7 +53,7 @@ index f2b20ed5063a293f0b464548f590d652170cd1d8..2abe6131cc04ed397446c2aa08f77f9d
      public CraftWorld(ServerLevel world, ChunkGenerator gen, BiomeProvider biomeProvider, Environment env) {
          this.world = world;
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java
-index 95e35c223f2ad9b6de6749544abd68de71e4f1ab..4370c27e5b7ab52092e261581558d793516af21d 100644
+index 759b6e54db93792c9862b1f1625118ac6fa49d7a..4b5e9bc33c25ac98c32aff1bd13788edf0eeee8c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftFirework.java
 @@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
@@ -79,7 +66,7 @@ index 95e35c223f2ad9b6de6749544abd68de71e4f1ab..4370c27e5b7ab52092e261581558d793
  
      public CraftFirework(CraftServer server, FireworkRocketEntity entity) {
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
-index 67125bbf3e3b37968b02908d441b21474579ce77..8fc6330817d2b3188f479c6c6a381e4d4f9872d5 100644
+index c3df5278231e13c43e9ea0804d95bf0542f2560a..abb8ff945b13c2cf4926a2f047d0e8dd074cea8f 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 @@ -10,6 +10,7 @@ import org.spongepowered.configurate.objectmapping.meta.PostProcess;
@@ -534,7 +521,7 @@ index 0000000000000000000000000000000000000000..60dc2c1deb0749168d03c5d94136e613
 +    }
 +}
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index 0a32b68ae0172fa637a37fcf82557ba799e3aee6..5e24b70b102cbf4dce2dec748dab1949a77b0d4d 100644
+index 86b678aa745e125ceaa271deec00d6290a02d88b..0b2f2fbe462ed628ef3d640824d4162e79279089 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
 @@ -38,6 +38,7 @@ import co.aikar.timings.MinecraftTimings;
