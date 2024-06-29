@@ -41,7 +41,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 4fbdd8b1ead384762164c2d13180bfa230c40262..bbf842eee5b67d8211f0af215f9c331c456d864d 100644
+index 91105ac1d3cbc8c0169540996edebd5e6e72bc82..73430880f231d41b6e2eb3694b4d462863555d1e 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -201,7 +201,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface

@@ -13,7 +13,7 @@ As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index c49e50a2ba51159c0f4651b0368c52200d144e47..a82b5ad8031becc63316288b840caf857201c554 100644
+index 474b67fbe23f7ba6890b7cf25e87859fa44740c1..cc89235cfea1cc02c59e64e02ad517f2db8745a3 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -314,7 +314,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess

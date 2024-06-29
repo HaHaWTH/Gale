@@ -13,7 +13,7 @@ As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index e7ca46e90da96354d132a483f2d45a91d121830b..fa4ca096dfd3afe8868b76a8576f0f2882f139ca 100644
+index cd844069b1fcb0a26c940724ee53b7e06d4280ed..cf834a2cc39ecd058325d2ef9eb647289648bd8e 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -483,7 +483,13 @@ public abstract class PlayerList {

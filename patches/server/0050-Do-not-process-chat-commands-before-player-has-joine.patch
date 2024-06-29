@@ -25,7 +25,7 @@ index 3d1aff8318620bc87a439e095bc1d06e4dafbba1..79b49aec7c5c80948b8f1c77ca6e4804
      public boolean isRealPlayer; // Paper
      public final com.destroystokyo.paper.util.misc.PooledLinkedHashSets.PooledObjectLinkedOpenHashSet<ServerPlayer> cachedSingleHashSet; // Paper
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index d20bd61a280e010a0542c6509273a3d25aa561fa..1308b82d293b7c2b84f8c74d3d655e6a9e87c2c8 100644
+index 13adcb90134f03cf951c3e7eaa3123e033224df6..4ff3dbb9c1bcac000e4ed293cbc1a48aa1738e8f 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2285,7 +2285,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
@@ -38,7 +38,7 @@ index d20bd61a280e010a0542c6509273a3d25aa561fa..1308b82d293b7c2b84f8c74d3d655e6a
              // CraftBukkit start
              if (sync) {
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 3d30427e75bdfb9cf453fb5cd2a344227da1641a..fc2e0a9ff78089b9e3e621ccb892f281e9bee47b 100644
+index ef177f21d654d69c128f3f39ea58f2d8ee598628..c6dc88ce33fa15673fc271e70f6d82dd4d514ede 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -350,6 +350,8 @@ public abstract class PlayerList {

@@ -22,7 +22,7 @@ data is already available in the blockPosition struct, so we use that
 instead of re-doing the casting.
 
 diff --git a/src/main/java/io/papermc/paper/util/MCUtil.java b/src/main/java/io/papermc/paper/util/MCUtil.java
-index 015a6463875b5ae46da0491b358adc568ac9a174..2429e743f8fcaa684dcdc0bd5774d82f0ea7f760 100644
+index a3288cd39a0d3563efed87a074a5dec28d303a9e..ef5274ec1cb239c6dc4ab4c2f3e8e98ec070bec0 100644
 --- a/src/main/java/io/papermc/paper/util/MCUtil.java
 +++ b/src/main/java/io/papermc/paper/util/MCUtil.java
 @@ -197,7 +197,7 @@ public final class MCUtil {
@@ -35,7 +35,7 @@ index 015a6463875b5ae46da0491b358adc568ac9a174..2429e743f8fcaa684dcdc0bd5774d82f
  
      public static long getCoordinateKey(final ChunkPos pair) {
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 795f7ac6479648fbfc34a3eb2ff954202f27789e..9a8bcf6c11f885a711dff08dfa8f87d9f3deef54 100644
+index e705d3fa09a76ca1268b562636eb77978f1c0eb3..474b67fbe23f7ba6890b7cf25e87859fa44740c1 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -315,7 +315,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess

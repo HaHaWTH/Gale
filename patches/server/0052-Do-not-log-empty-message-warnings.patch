@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 1308b82d293b7c2b84f8c74d3d655e6a9e87c2c8..794d9aa6f54f9c68dc4a65c7e3d2d247d742cabc 100644
+index 4ff3dbb9c1bcac000e4ed293cbc1a48aa1738e8f..f9647ce528d23743f687249ecaa6b51cfa3e62d2 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -194,6 +194,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
