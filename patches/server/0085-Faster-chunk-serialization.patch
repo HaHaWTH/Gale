@@ -291,7 +291,7 @@ index 9f438d9c6eb05e43d24e4af68188a3d4c46a938c..0af2e2cc59db228e01afa880f83c2024
 +
  }
 diff --git a/src/main/java/net/minecraft/util/ZeroBitStorage.java b/src/main/java/net/minecraft/util/ZeroBitStorage.java
-index 50040c497a819cd1229042ab3cb057d34a32cacc..64f906110a6cea49db69377e8869bda7c841f1d5 100644
+index e085197001ba0e50dc84fe488cf531cce0950cb1..267d22559002741c113755e75e7c75e4232cf644 100644
 --- a/src/main/java/net/minecraft/util/ZeroBitStorage.java
 +++ b/src/main/java/net/minecraft/util/ZeroBitStorage.java
 @@ -62,4 +62,6 @@ public class ZeroBitStorage implements BitStorage {

@@ -130,7 +130,7 @@ index 8757a6ac609d463f94846d66fe04f50e859e7ce8..a720a05c47b2137a07515461960603cc
  
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index f9647ce528d23743f687249ecaa6b51cfa3e62d2..deb4282880aa5f28100a202c73514c892f487be0 100644
+index 97c390c72b8e70affb35487138c55f214953f8e6..e533bb09c9eec023ec44e559969f2cb0f166d95b 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -9,6 +9,8 @@ import com.mojang.brigadier.suggestion.Suggestions;

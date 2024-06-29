@@ -47,7 +47,7 @@ index 474b67fbe23f7ba6890b7cf25e87859fa44740c1..cc89235cfea1cc02c59e64e02ad517f2
          this.absMoveTo(x, y, z);
          this.absRotateTo(yaw, pitch);
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 2a25238dcd741f9a5d16b202902210244d9a1947..316d1ef3975aab5565078dad11a8f4ca8133c836 100644
+index 72f199a6e65758fdc210401d80f4854f58329513..b5a41f189afdf9a11ff20fc4c503423b611a0327 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
 @@ -1724,13 +1724,29 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
