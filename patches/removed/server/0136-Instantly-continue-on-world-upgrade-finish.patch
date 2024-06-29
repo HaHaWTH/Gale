@@ -3,6 +3,8 @@ From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Fri, 24 Mar 2023 09:16:33 +0100
 Subject: [PATCH] Instantly continue on world upgrade finish
 
+Removed since 1.21
+
 License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 

@@ -3,6 +3,8 @@ From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Tue, 29 Nov 2022 21:30:27 +0100
 Subject: [PATCH] End gateway should check if entity can use portal
 
+Removed since 1.21
+
 License: MIT (https://opensource.org/licenses/MIT)
 Gale - https://galemc.org
 

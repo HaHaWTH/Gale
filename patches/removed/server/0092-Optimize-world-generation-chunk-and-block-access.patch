@@ -3,6 +3,8 @@ From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Thu, 1 Dec 2022 14:33:06 +0100
 Subject: [PATCH] Optimize world generation chunk and block access
 
+Removed since 1.21
+
 License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 Gale - https://galemc.org
 
