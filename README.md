@@ -64,5 +64,4 @@ Binaries are licensed under GPL-3.0.
 
 ## TODO
 check Simpler ShapelessRecipe comparison for vanilla patch
-check fix MC-26304 (needs tryParse? or just parse or withDefaultNamespace)
 check Cache CubeVoxelShape shape array (crash)
