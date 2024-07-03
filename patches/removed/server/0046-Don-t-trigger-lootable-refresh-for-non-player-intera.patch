@@ -3,6 +3,9 @@ From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Thu, 24 Nov 2022 22:07:56 +0100
 Subject: [PATCH] Don't trigger lootable refresh for non-player interaction
 
+Removed since 1.21
+Cause trial chamber don't drop items, unless make this configurable
+
 License: MIT (https://opensource.org/licenses/MIT)
 Gale - https://galemc.org
 
