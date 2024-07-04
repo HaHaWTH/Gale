@@ -1,0 +1,71 @@
+name: Automatically update Paper commit hash
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Gale repository
+        uses: actions/checkout@main
+        with:
+          path: 'Gale'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout Paper repository
+        uses: actions/checkout@main
+        with:
+          path: 'Paper'
+          repository: "PaperMC/Paper"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get Gale latest commit Hash
+        id: paperRef
+        run: |
+          ls
+          cd Paper
+          echo "::set-output name=paperRef::$(git rev-parse HEAD)"
+          cd ..
+
+      - name: Update paperRef in Gale
+        run: |
+          cd Gale
+          sed -i "s/\(paperRef\s*=\s*\).*/\1$PAPER_REF/" gradle.properties
+        env:
+          PAPER_REF: ${{ steps.paperRef.outputs.paperRef }}
+
+      - name: Grant execute permission for gradlew
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email no-reply@github.com
+          cd Gale
+          chmod +x gradlew
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version:  21
+
+      - name: Running tests before push
+        run: |
+          cd Gale
+          if ! git diff --quiet; then
+            echo "Running tests...."
+            ./gradlew applyPatches
+            ./gradlew createMojmapPaperclipJar
+          fi
+
+      - name: Check for changes and write to repository
+        run: |
+          cd Gale
+          if ! git diff --quiet; then
+            echo "Writing to repo....."
+            git add .
+            git commit -m "Updated Upstream (Paper)"
+            git push
+          else
+            echo "No changes to commit."
+          fi
