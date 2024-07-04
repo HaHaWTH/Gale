@@ -189,7 +189,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 1591b251f082eeeef6c86e3164570206ef82f6a8..d62cb22bbc061f37a5d798c8e3a48e747971a6dd 100644
+index 0cad1ba77b055c2665d1bec51d687294ccb88a88..19b48513ce511effefcd802332a78e2c3074e387 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -220,7 +220,7 @@ index 1591b251f082eeeef6c86e3164570206ef82f6a8..d62cb22bbc061f37a5d798c8e3a48e74
      public static long currentTickLong = 0L; // Paper - track current tick as a long
      public boolean isIteratingOverLevels = false; // Paper - Throw exception on world create while being ticked
  
-@@ -433,6 +434,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -495,6 +496,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          Runtime.getRuntime().addShutdownHook(new org.bukkit.craftbukkit.util.ServerShutdownThread(this));
          // CraftBukkit end
          this.paperConfigurations = services.paperConfigurations(); // Paper - add paper configuration files
@@ -289,10 +289,10 @@ index 7d82cc6b847124cf4225428ba310309544928148..ac703c9ef504779dffbd8d7e676dbb51
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 798016774df02c3f7ebf909c9cc125f8427a39be..11f0017a8557f7528e379285bbb55e37c533463f 100644
+index 2d97ca1f3c625c0206d35b785c57d9587924ed0a..152ac3595ae74f2b5dc5cacc72a539d16590d786 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -502,7 +502,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -519,7 +519,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
@@ -302,7 +302,7 @@ index 798016774df02c3f7ebf909c9cc125f8427a39be..11f0017a8557f7528e379285bbb55e37
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index fee155c81df385faa474e3aec777a30375ecb07d..676969f0a0fe21dae1c30d63a8bb4b0e9b33d057 100644
+index fa6b8ce6505a3c094187298a63b0e944e1e74af1..e27f118ff2f49234dee68bb89086d7f9d5e62130 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -12,7 +12,6 @@ import java.util.function.Supplier;
@@ -343,7 +343,7 @@ index fee155c81df385faa474e3aec777a30375ecb07d..676969f0a0fe21dae1c30d63a8bb4b0e
  
      public final com.destroystokyo.paper.antixray.ChunkPacketBlockController chunkPacketBlockController; // Paper - Anti-Xray
      public final co.aikar.timings.WorldTimingsHandler timings; // Paper
-@@ -258,9 +262,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -263,9 +267,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
      // Paper end - rewrite chunk system
  

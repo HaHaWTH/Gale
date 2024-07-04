@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 186c5eb85bb0807d49f8ad35a4a08c869fc0fa90..585f3ff427440b44a9d2c186bd0054d6d4e65ae8 100644
+index ac75bc19da217f7f2f5660345770ec89508ecc53..466315a6171c8962bd23fb5e2aaafbbbcc0479bd 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -716,7 +716,20 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -733,7 +733,20 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
                                  entity.stopRiding();
                              }
  
@@ -57,10 +57,10 @@ index 186c5eb85bb0807d49f8ad35a4a08c869fc0fa90..585f3ff427440b44a9d2c186bd0054d6
                      }
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 7de579a46300b94a4bf29f13e074cc365e384b99..85a16978a80d8b6a3f0df65eb4eb3a06b4b3c0af 100644
+index f489b74217b5cab017cbcade7e19fb7b8ec94f7c..09852f93fc200a971bd4db5212646d29db663161 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -995,12 +995,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1005,12 +1005,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          try {
              tickConsumer.accept(entity);
          } catch (Throwable throwable) {
@@ -74,4 +74,4 @@ index 7de579a46300b94a4bf29f13e074cc365e384b99..85a16978a80d8b6a3f0df65eb4eb3a06
 +            entity.discard(org.bukkit.event.entity.EntityRemoveEvent.Cause.DISCARD); // Gale - Airplane - remove lambda from ticking guard - diff on change ServerLevel#tick
              // Paper end - Prevent block entity and entity crashes
          }
-     }
+         this.moonrise$midTickTasks(); // Paper - rewrite chunk system

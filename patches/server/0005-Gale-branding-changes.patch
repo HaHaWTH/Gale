@@ -221,7 +221,7 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index fc4e25d39c309e3be83e9a380eb6f5f0b58f5191..8f97350aac2f19a0d19e35630261dacc7b46ce52 100644
+index 525a2087472f6fba3552efb8eaf6f485f158802c..b6b99aff8940d62bf63cebf260faf7f923c0baed 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -89,14 +89,14 @@ tasks.jar {
@@ -464,10 +464,10 @@ index 790bad0494454ca12ee152e3de6da3da634d9b20..2596e0ee4df5b96f181e28a742ef3459
  
      @Override
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 68f60e77e0bfd42b6419491c1d59b6432974216b..1591b251f082eeeef6c86e3164570206ef82f6a8 100644
+index 330bee331335454a61cf8350a6654217c8124445..0cad1ba77b055c2665d1bec51d687294ccb88a88 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -966,7 +966,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1028,7 +1028,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          shutdownThread = Thread.currentThread();
          org.spigotmc.WatchdogThread.doStop(); // Paper
          if (!isSameThread()) {
