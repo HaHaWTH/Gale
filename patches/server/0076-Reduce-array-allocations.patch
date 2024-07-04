@@ -573,10 +573,10 @@ index 7c3e561f2ca2522ab8336487c0307e1b69a397a8..a7ee93c0d94be3bb6c8ea8e8ca7f8abf
              String[] strings = new String[pattern.size() - l - k];
  
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 318ae232551b982c52ec609cc97649f206fd96b6..f23e4e0b2298eb509679cb63a08abe1a68c68c1f 100644
+index 2508e1bc36909ba024a379bc2e215c61bd8a41e8..3b94e292881f631656450638592e69b91ae0a39f 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1289,7 +1289,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1291,7 +1291,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public org.bukkit.entity.Entity[] getChunkEntities(int chunkX, int chunkZ) {
          ca.spottedleaf.moonrise.patches.chunk_system.level.entity.ChunkEntitySlices slices = ((ServerLevel)this).moonrise$getEntityLookup().getChunk(chunkX, chunkZ);
          if (slices == null) {

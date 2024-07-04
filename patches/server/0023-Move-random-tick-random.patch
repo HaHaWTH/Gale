@@ -19,10 +19,10 @@ require it to be initialized earlier. By moving it to the superclass, we
 initialize it earlier, ensuring that it is available sooner.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index db21e92d1e81e34a80342581107e20a314415481..10723ae32ff7c293ee6c67d8a62e1af6edf971c2 100644
+index 55c81b6fa0173ba32cd3f3cee448147ad55418d7..920e2d9441ddf007581875b80de7827d716a6972 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -961,7 +961,6 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -794,7 +794,6 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
      }
      // Paper start - optimise random block ticking
      private final BlockPos.MutableBlockPos chunkTickMutablePosition = new BlockPos.MutableBlockPos();
@@ -31,10 +31,10 @@ index db21e92d1e81e34a80342581107e20a314415481..10723ae32ff7c293ee6c67d8a62e1af6
  
      public void tickChunk(LevelChunk chunk, int randomTickSpeed) {
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 118d1a5aedce3f478f47b9e36cf419c15f3bd7ca..42750bdde718f9047f008afbb12c0836e9c3d089 100644
+index 91944ff33143ed28fa05be521375ead0768eb25b..9dd13830edf495d2fc55940e8d7f9cc20cf1936d 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -182,6 +182,8 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -183,6 +183,8 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public final Map<Explosion.CacheKey, Float> explosionDensityCache = new HashMap<>(); // Paper - Optimize explosions
      public java.util.ArrayDeque<net.minecraft.world.level.block.RedstoneTorchBlock.Toggle> redstoneUpdateInfos; // Paper - Faster redstone torch rapid clock removal; Move from Map in BlockRedstoneTorch to here
  

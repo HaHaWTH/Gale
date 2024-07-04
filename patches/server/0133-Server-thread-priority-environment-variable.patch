@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 5b2f18705b1b1da5c431b9061d5e5da5deab1589..25d1b4512f81802c658a5e0a03c8212ad69ac04e 100644
+index 564c1d0a04aff45f7f5bb598b9480ce7e8323b52..603c50248cf8ea5b1d55cdd1c84c7d49b1c5f8ff 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -191,6 +191,8 @@ import co.aikar.timings.MinecraftTimings; // Paper

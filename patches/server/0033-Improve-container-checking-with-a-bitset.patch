@@ -188,7 +188,7 @@ index 241fec02e6869c638d3a160819b32173a081467b..1380f521de979b8734ebd13dd420b312
      public int getContainerSize() {
          return this.container1.getContainerSize() + this.container2.getContainerSize();
 diff --git a/src/main/java/net/minecraft/world/Container.java b/src/main/java/net/minecraft/world/Container.java
-index f402dbbfe3a443e6bc51f88b85abe937852b52f0..2c6388d892d0b58ba1800b795418fc9541c3b94c 100644
+index 5db5ba026462ca642dcee718af732f80fadabef5..bd31beb514bf7607eeefebf3c027264b2c6949ab 100644
 --- a/src/main/java/net/minecraft/world/Container.java
 +++ b/src/main/java/net/minecraft/world/Container.java
 @@ -3,6 +3,8 @@ package net.minecraft.world;

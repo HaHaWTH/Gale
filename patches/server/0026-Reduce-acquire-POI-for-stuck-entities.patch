@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java b/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
-index e8aa27547e3fa1a42720889c7038d4fb0273e7b5..f053ee19875e6c1586ffe4ebb0284172af5fbb23 100644
+index e1b6fe9ecda25f86431baf414f1bfd3a26a8b2bd..b5242f2d450f863a3eb774d8a14bb00cbe699a16 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
 @@ -13,6 +13,7 @@ import net.minecraft.core.BlockPos;

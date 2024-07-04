@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/world/Container.java b/src/main/java/net/minecraft/world/Container.java
-index 5db5ba026462ca642dcee718af732f80fadabef5..cd380ceb40d38acc7eef289ded11259388becabd 100644
+index bd31beb514bf7607eeefebf3c027264b2c6949ab..70e6711c11361dae6d1f3b70582efe78f4bd7c07 100644
 --- a/src/main/java/net/minecraft/world/Container.java
 +++ b/src/main/java/net/minecraft/world/Container.java
-@@ -71,6 +71,20 @@ public interface Container extends Clearable {
+@@ -130,6 +130,20 @@ public interface Container extends Clearable {
          });
      }
  

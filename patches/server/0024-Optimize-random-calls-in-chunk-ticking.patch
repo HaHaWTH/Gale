@@ -52,10 +52,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index 4d12a8972007377b6541143e9a29b78b825cff68..a65c844d9dc715f75849e5cb665250dfa036af08 100644
+index ebae8578a2d0dfd0d329861f45d0f278fea1dd85..4200f3020b64160d3295995d8d9db1172f30573e 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-@@ -483,6 +483,7 @@ public class ServerChunkCache extends ChunkSource {
+@@ -423,6 +423,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
                  }
              }
  
@@ -64,27 +64,28 @@ index 4d12a8972007377b6541143e9a29b78b825cff68..a65c844d9dc715f75849e5cb665250df
                  this.level.timings.countNaturalMobs.startTiming(); // Paper - timings
                  int k = this.distanceManager.getNaturalSpawnChunkCount();
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index e018f5686406b58e09c9b62a9bcd4982c8aed905..896eedb9fc2cf99ccba0342993036fd00d19782a 100644
+index 920e2d9441ddf007581875b80de7827d716a6972..9eb143508ace36756af8f728cfc13d24299dc8b1 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -777,13 +777,15 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
-         });
-     }
+@@ -796,6 +796,8 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+     private final BlockPos.MutableBlockPos chunkTickMutablePosition = new BlockPos.MutableBlockPos();
+     // Paper end
  
 +    private int currentIceAndSnowTick = 0; protected void resetIceAndSnowTick() { this.currentIceAndSnowTick = this.randomTickRandom.nextInt(16); } // Gale - Airplane - optimize random calls in chunk ticking
 +
      public void tickChunk(LevelChunk chunk, int randomTickSpeed) {
          ChunkPos chunkcoordintpair = chunk.getPos();
          boolean flag = this.isRaining();
-         int j = chunkcoordintpair.getMinBlockX();
-         int k = chunkcoordintpair.getMinBlockZ();
+@@ -804,7 +806,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+ 
+         final BlockPos.MutableBlockPos blockposition = this.chunkTickMutablePosition; // Paper - use mutable to reduce allocation rate, final to force compile fail on change
  
 -        if (!this.paperConfig().environment.disableThunder && flag && this.isThundering() && this.spigotConfig.thunderChance > 0 && this.random.nextInt(this.spigotConfig.thunderChance) == 0) { // Spigot // Paper - Option to disable thunder
 +        if (!this.paperConfig().environment.disableThunder && flag && this.isThundering() && this.spigotConfig.thunderChance > 0 && /*this.random.nextInt(this.spigotConfig.thunderChance) == 0*/ chunk.shouldDoLightning(this.random)) { // Spigot // Paper - Option to disable thunder // Gale - Airplane - optimize random calls in chunk ticking - replace random with shouldDoLightning
-             BlockPos blockposition = this.findLightningTargetAround(this.getBlockRandomPos(j, 0, k, 15));
+             blockposition.set(this.findLightningTargetAround(this.getBlockRandomPos(j, 0, k, 15))); // Paper
  
              if (this.isRainingAt(blockposition)) {
-@@ -811,7 +813,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -832,7 +834,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
              }
          }
  
@@ -92,9 +93,9 @@ index e018f5686406b58e09c9b62a9bcd4982c8aed905..896eedb9fc2cf99ccba0342993036fd0
 +        if (!this.paperConfig().environment.disableIceAndSnow && (this.currentIceAndSnowTick++ & 15) == 0) { // Paper - Option to disable ice and snow // Gale - Airplane - optimize random calls in chunk ticking - optimize further random ticking
          for (int l = 0; l < randomTickSpeed; ++l) {
              if (this.random.nextInt(48) == 0) {
-                 this.tickPrecipitation(this.getBlockRandomPos(j, 0, k, 15));
+                 // Paper start
 diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
-index 715a39cf1d075e0ef7f32c9066714a21b46f64b0..60356b1c7afd23e43861f6ddc7ac9a7ad3dde4e2 100644
+index 5752576087e5ff411ff8c89fde7a761083945c23..f15b81fd738825543eecf6eb4afc007fe828090d 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 @@ -85,6 +85,18 @@ public class LevelChunk extends ChunkAccess implements ca.spottedleaf.moonrise.p
