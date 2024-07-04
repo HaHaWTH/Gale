@@ -65,5 +65,4 @@ Binaries are licensed under GPL-3.0.
 ## TODO
 check Simpler ShapelessRecipe comparison for vanilla patch
 check Cache CubeVoxelShape shape array (crash)
-check executeMidTickTasks in Remove lambda from ticking guard patch
 check backupRegionFile() in Add xor-shift random patch

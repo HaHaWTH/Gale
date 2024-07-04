@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index cd084f9d653a7952249e6d39bbce7b54d7da2db7..e705d3fa09a76ca1268b562636eb77978f1c0eb3 100644
+index 68e02e2ffdaf063471bf6022d328aad5475a5f94..985bc7856b165eee2df1edf3a53d9a8b40eb2516 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -4270,16 +4270,18 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -4271,16 +4271,18 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
      }
  
      public boolean updateFluidHeightAndDoFluidPushing(TagKey<Fluid> tag, double speed) {
@@ -60,7 +60,7 @@ index cd084f9d653a7952249e6d39bbce7b54d7da2db7..e705d3fa09a76ca1268b562636eb7797
              double d1 = 0.0D;
              boolean flag = this.isPushedByFluid();
              boolean flag1 = false;
-@@ -4287,14 +4289,61 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -4288,14 +4290,61 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
              int k1 = 0;
              BlockPos.MutableBlockPos blockposition_mutableblockposition = new BlockPos.MutableBlockPos();
  
@@ -128,7 +128,7 @@ index cd084f9d653a7952249e6d39bbce7b54d7da2db7..e705d3fa09a76ca1268b562636eb7797
  
                              if (d2 >= axisalignedbb.minY) {
                                  flag1 = true;
-@@ -4316,9 +4365,12 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -4317,9 +4366,12 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                                  // CraftBukkit end
                              }
                          }
@@ -142,18 +142,18 @@ index cd084f9d653a7952249e6d39bbce7b54d7da2db7..e705d3fa09a76ca1268b562636eb7797
              if (vec3d.length() > 0.0D) {
                  if (k1 > 0) {
 diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
-index f2e11bff414b521295bde721e01ae2166a6a3fd6..440a35f0b987187895a7f74efc4f1989e1bee907 100644
+index 8cd6c1d838e0332125fde3fc36475034aa4effa0..4e7b5f462127d01efba049a45e0773e60b95bc6e 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
-@@ -25,6 +25,7 @@ public class LevelChunkSection {
-     public final PalettedContainer<BlockState> states;
+@@ -26,6 +26,7 @@ public class LevelChunkSection {
      // CraftBukkit start - read/write
      private PalettedContainer<Holder<Biome>> biomes;
+     public final com.destroystokyo.paper.util.maplist.IBlockDataList tickingList = new com.destroystokyo.paper.util.maplist.IBlockDataList(); // Paper
 +    public short fluidStateCount; // Gale - Airplane - reduce entity fluid lookups if no fluids
  
      public LevelChunkSection(PalettedContainer<BlockState> datapaletteblock, PalettedContainer<Holder<Biome>> palettedcontainerro) {
          // CraftBukkit end
-@@ -82,6 +83,7 @@ public class LevelChunkSection {
+@@ -86,6 +87,7 @@ public class LevelChunkSection {
  
          if (!fluid.isEmpty()) {
              --this.tickingFluidCount;
@@ -161,7 +161,7 @@ index f2e11bff414b521295bde721e01ae2166a6a3fd6..440a35f0b987187895a7f74efc4f1989
          }
  
          if (!state.isAir()) {
-@@ -93,6 +95,7 @@ public class LevelChunkSection {
+@@ -100,6 +102,7 @@ public class LevelChunkSection {
  
          if (!fluid1.isEmpty()) {
              ++this.tickingFluidCount;
@@ -169,27 +169,11 @@ index f2e11bff414b521295bde721e01ae2166a6a3fd6..440a35f0b987187895a7f74efc4f1989
          }
  
          return iblockdata1;
-@@ -120,6 +123,7 @@ public class LevelChunkSection {
-             public int nonEmptyBlockCount;
-             public int tickingBlockCount;
-             public int tickingFluidCount;
-+            public int fluidStateCount; // Gale - Airplane - reduce entity fluid lookups if no fluids
- 
-             a(final LevelChunkSection chunksection) {}
- 
-@@ -138,6 +142,7 @@ public class LevelChunkSection {
+@@ -145,6 +148,7 @@ public class LevelChunkSection {
                      if (fluid.isRandomlyTicking()) {
-                         this.tickingFluidCount += i;
+                         this.tickingFluidCount = (short) (this.tickingFluidCount + 1);
                      }
 +                    this.fluidStateCount++; // Gale - Airplane - reduce entity fluid lookups if no fluids
                  }
  
-             }
-@@ -149,6 +154,7 @@ public class LevelChunkSection {
-         this.nonEmptyBlockCount = (short) a0.nonEmptyBlockCount;
-         this.tickingBlockCount = (short) a0.tickingBlockCount;
-         this.tickingFluidCount = (short) a0.tickingFluidCount;
-+        this.fluidStateCount = (short) a0.fluidStateCount; // Gale - Airplane - reduce entity fluid lookups if no fluids
-     }
- 
-     public PalettedContainer<BlockState> getStates() {
+             });

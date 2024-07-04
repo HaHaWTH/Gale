@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index ac75bc19da217f7f2f5660345770ec89508ecc53..466315a6171c8962bd23fb5e2aaafbbbcc0479bd 100644
+index 55c81b6fa0173ba32cd3f3cee448147ad55418d7..75f13e33f94b42bccbabfe1e7533c2ad2b42f105 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -733,7 +733,20 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
@@ -39,28 +39,28 @@ index ac75bc19da217f7f2f5660345770ec89508ecc53..466315a6171c8962bd23fb5e2aaafbbb
                              }
  
 -                            this.guardEntityTick(this::tickNonPassenger, entity);
-+                        // Gale start - Airplane - remove lambda from ticking guard - copied from guardEntityTick
-+                        try {
-+                            this.tickNonPassenger(entity); // Gale - Airplane - remove lambda from ticking guard - changed
-+                            //MinecraftServer.getServer().executeMidTickTasks(); // Tuinity - execute chunk tasks mid tick // TODO: waiting paper
-+                        } catch (Throwable throwable) {
-+                            if (throwable instanceof ThreadDeath) throw throwable; // Paper
-+                            // Paper start - Prevent block entity and entity crashes
-+                            final String msg = String.format("Entity threw exception at %s:%s,%s,%s", entity.level().getWorld().getName(), entity.getX(), entity.getY(), entity.getZ());
-+                            MinecraftServer.LOGGER.error(msg, throwable);
-+                            getCraftServer().getPluginManager().callEvent(new com.destroystokyo.paper.event.server.ServerExceptionEvent(new com.destroystokyo.paper.exception.ServerInternalException(msg, throwable))); // Paper - ServerExceptionEvent
-+                            entity.discard(org.bukkit.event.entity.EntityRemoveEvent.Cause.DISCARD);
-+                            // Paper end - Prevent block entity and entity crashes
-+                        }
-+                        // Gale end - Airplane - remove lambda from ticking guard - copied from guardEntityTick
++                            // Gale start - Airplane - remove lambda from ticking guard - copied from guardEntityTick
++                            try {
++                                this.tickNonPassenger(entity); // Gale - Airplane - remove lambda from ticking guard - changed
++                            } catch (Throwable throwable) {
++                                if (throwable instanceof ThreadDeath) throw throwable; // Paper
++                                // Paper start - Prevent block entity and entity crashes
++                                final String msg = String.format("Entity threw exception at %s:%s,%s,%s", entity.level().getWorld().getName(), entity.getX(), entity.getY(), entity.getZ());
++                                MinecraftServer.LOGGER.error(msg, throwable);
++                                getCraftServer().getPluginManager().callEvent(new com.destroystokyo.paper.event.server.ServerExceptionEvent(new com.destroystokyo.paper.exception.ServerInternalException(msg, throwable))); // Paper - ServerExceptionEvent
++                                entity.discard(org.bukkit.event.entity.EntityRemoveEvent.Cause.DISCARD);
++                                // Paper end - Prevent block entity and entity crashes
++                            }
++                            this.moonrise$midTickTasks(); // Paper - rewrite chunk system
++                            // Gale end - Airplane - remove lambda from ticking guard - copied from guardEntityTick
                          }
                      }
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index f489b74217b5cab017cbcade7e19fb7b8ec94f7c..09852f93fc200a971bd4db5212646d29db663161 100644
+index 394a4bb7bbb072f03887a37d58c53a3783d2c44a..318ae232551b982c52ec609cc97649f206fd96b6 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1005,12 +1005,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1007,15 +1007,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          try {
              tickConsumer.accept(entity);
          } catch (Throwable throwable) {
@@ -74,4 +74,8 @@ index f489b74217b5cab017cbcade7e19fb7b8ec94f7c..09852f93fc200a971bd4db5212646d29
 +            entity.discard(org.bukkit.event.entity.EntityRemoveEvent.Cause.DISCARD); // Gale - Airplane - remove lambda from ticking guard - diff on change ServerLevel#tick
              // Paper end - Prevent block entity and entity crashes
          }
-         this.moonrise$midTickTasks(); // Paper - rewrite chunk system
+-        this.moonrise$midTickTasks(); // Paper - rewrite chunk system
++        this.moonrise$midTickTasks(); // Paper - rewrite chunk system // Gale - Airplane - remove lambda from ticking guard - diff on change ServerLevel#tick
+     }
+     // Paper start - Option to prevent armor stands from doing entity lookups
+     @Override

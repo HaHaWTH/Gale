@@ -448,7 +448,7 @@ index 0ee04fe6ff6a4d09754f326526ae04fe7226bab2..365598a660e79d266f5d4a439cb1ba01
      }
  }
 diff --git a/src/main/java/net/minecraft/util/ZeroBitStorage.java b/src/main/java/net/minecraft/util/ZeroBitStorage.java
-index 50040c497a819cd1229042ab3cb057d34a32cacc..e085197001ba0e50dc84fe488cf531cce0950cb1 100644
+index 01f5b946fabbe34f31110e75973dab9f39897346..b9467fec08a30ef43cbc2bb2fdf00c3a1418554f 100644
 --- a/src/main/java/net/minecraft/util/ZeroBitStorage.java
 +++ b/src/main/java/net/minecraft/util/ZeroBitStorage.java
 @@ -5,7 +5,7 @@ import java.util.function.IntConsumer;
@@ -485,10 +485,10 @@ index f5e79db3ccde0730c3b4fb81c76ca6ed045a7374..5546a873fae5252df5fb4bf8781e70db
      private EquipmentSlotGroup(final int id, final String name, final Predicate<EquipmentSlot> slotPredicate) {
          this.id = id;
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index e70d2a9005f1ba5d6bdd08a70c8de99295759018..2a96e5cc0ff99c127fe6e4b1b0a1c9fe1424ed73 100644
+index b06766a45138e40022e4131832c8d6288e7f6c48..6ae8d4f50c6a4beab511ab9fdf540fb7a3ddd5d3 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -3220,7 +3220,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3225,7 +3225,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
      @Nullable
      private Map<EquipmentSlot, ItemStack> collectEquipmentChanges() {
          Map<EquipmentSlot, ItemStack> map = null;
@@ -573,10 +573,10 @@ index 7c3e561f2ca2522ab8336487c0307e1b69a397a8..a7ee93c0d94be3bb6c8ea8e8ca7f8abf
              String[] strings = new String[pattern.size() - l - k];
  
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 09852f93fc200a971bd4db5212646d29db663161..2fa7260811cc8946da1405a724cf44fb75a24489 100644
+index 318ae232551b982c52ec609cc97649f206fd96b6..f23e4e0b2298eb509679cb63a08abe1a68c68c1f 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1287,7 +1287,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1289,7 +1289,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public org.bukkit.entity.Entity[] getChunkEntities(int chunkX, int chunkZ) {
          ca.spottedleaf.moonrise.patches.chunk_system.level.entity.ChunkEntitySlices slices = ((ServerLevel)this).moonrise$getEntityLookup().getChunk(chunkX, chunkZ);
          if (slices == null) {

@@ -214,7 +214,7 @@ index 0000000000000000000000000000000000000000..349618b7f544bf9a30e0796d4d9a2640
 +    }
 +}
 diff --git a/src/main/java/net/minecraft/util/BitStorage.java b/src/main/java/net/minecraft/util/BitStorage.java
-index 68648c5a5e3ff079f832092af0f2f801c42d1ede..5a85e499aeb02885cab5ba7d571d6f6ae470bce8 100644
+index 8bafd5fd7499ba4a04bf706cfd1e156073716e21..b7df9eac4ee23fa489368af82ec9c07dea6ebd75 100644
 --- a/src/main/java/net/minecraft/util/BitStorage.java
 +++ b/src/main/java/net/minecraft/util/BitStorage.java
 @@ -1,6 +1,7 @@
@@ -225,15 +225,15 @@ index 68648c5a5e3ff079f832092af0f2f801c42d1ede..5a85e499aeb02885cab5ba7d571d6f6a
  
  public interface BitStorage {
      int getAndSet(int index, int value);
-@@ -20,4 +21,6 @@ public interface BitStorage {
-     void unpack(int[] out);
+@@ -31,4 +32,6 @@ public interface BitStorage {
  
-     BitStorage copy();
+     }
+     // Paper end
 +
 +    <T> void compact(Palette<T> srcPalette, Palette<T> dstPalette, short[] out); // Gale - Lithium - faster chunk serialization
  }
 diff --git a/src/main/java/net/minecraft/util/SimpleBitStorage.java b/src/main/java/net/minecraft/util/SimpleBitStorage.java
-index 9f438d9c6eb05e43d24e4af68188a3d4c46a938c..0af2e2cc59db228e01afa880f83c2024dade4ff0 100644
+index 8d7d763bf51cac556057645e6169c9447993189b..7846273b7e3519ad276373d8a2066856473b9e69 100644
 --- a/src/main/java/net/minecraft/util/SimpleBitStorage.java
 +++ b/src/main/java/net/minecraft/util/SimpleBitStorage.java
 @@ -2,6 +2,7 @@ package net.minecraft.util;
@@ -244,7 +244,7 @@ index 9f438d9c6eb05e43d24e4af68188a3d4c46a938c..0af2e2cc59db228e01afa880f83c2024
  import org.apache.commons.lang3.Validate;
  
  public class SimpleBitStorage implements BitStorage {
-@@ -367,4 +368,45 @@ public class SimpleBitStorage implements BitStorage {
+@@ -389,4 +390,45 @@ public class SimpleBitStorage implements BitStorage {
              super(message);
          }
      }
@@ -291,10 +291,10 @@ index 9f438d9c6eb05e43d24e4af68188a3d4c46a938c..0af2e2cc59db228e01afa880f83c2024
 +
  }
 diff --git a/src/main/java/net/minecraft/util/ZeroBitStorage.java b/src/main/java/net/minecraft/util/ZeroBitStorage.java
-index e085197001ba0e50dc84fe488cf531cce0950cb1..267d22559002741c113755e75e7c75e4232cf644 100644
+index b9467fec08a30ef43cbc2bb2fdf00c3a1418554f..4177cb798612bdcd3b8a1e7a5015061ff9535e35 100644
 --- a/src/main/java/net/minecraft/util/ZeroBitStorage.java
 +++ b/src/main/java/net/minecraft/util/ZeroBitStorage.java
-@@ -62,4 +62,6 @@ public class ZeroBitStorage implements BitStorage {
+@@ -71,4 +71,6 @@ public class ZeroBitStorage implements BitStorage {
      public BitStorage copy() {
          return this;
      }
@@ -313,7 +313,7 @@ index acae3eb30e0689048937f479dc3070f0688abdad..4b79f0474a9013dd4fdb68c6363ca194
      int onResize(int newBits, T object);
  }
 diff --git a/src/main/java/net/minecraft/world/level/chunk/PalettedContainer.java b/src/main/java/net/minecraft/world/level/chunk/PalettedContainer.java
-index 926c81a25180d508d662eb3fa35f771636164694..82ad713eede4bca015a5b4b1d5fd9b02f0e75a47 100644
+index 81368bf186365878db2e1ed305bb7bf36c26f61f..6402665ae8cc8664921ae0298e8b6fa4c31d8b23 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/PalettedContainer.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/PalettedContainer.java
 @@ -23,8 +23,25 @@ import net.minecraft.util.Mth;
