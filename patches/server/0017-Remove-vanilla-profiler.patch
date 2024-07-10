@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 3e454515360c22a26c9329e4032d525579110d7e..05745c9d55cb36fb09eb06f9412bf935f59fc3d0 100644
+index 1d1e76de60e40224f5cb81893f9ee50fe987badb..09a973aa95d96924303c7e55521b9f20cbc036a0 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -55,7 +55,6 @@ import net.minecraft.server.commands.CloneCommands;
@@ -56,7 +56,7 @@ index 3e454515360c22a26c9329e4032d525579110d7e..05745c9d55cb36fb09eb06f9412bf935
          DefaultGameModeCommands.register(this.dispatcher);
          DifficultyCommand.register(this.dispatcher);
          EffectCommands.register(this.dispatcher, commandRegistryAccess);
-@@ -343,9 +341,6 @@ public class Commands {
+@@ -340,9 +338,6 @@ public class Commands {
          // Paper end
          CommandSourceStack commandlistenerwrapper = (CommandSourceStack) parseresults.getContext().getSource();
  
@@ -66,7 +66,7 @@ index 3e454515360c22a26c9329e4032d525579110d7e..05745c9d55cb36fb09eb06f9412bf935
          ContextChain contextchain = this.finishParsing(parseresults, s, commandlistenerwrapper, label); // CraftBukkit // Paper - Add UnknownCommandEvent
  
          try {
-@@ -374,8 +369,6 @@ public class Commands {
+@@ -371,8 +366,6 @@ public class Commands {
                  commandlistenerwrapper.sendFailure(Component.literal(Util.describeError(exception)));
                  Commands.LOGGER.error("'/{}' threw an exception", s, exception);
              }
@@ -75,7 +75,7 @@ index 3e454515360c22a26c9329e4032d525579110d7e..05745c9d55cb36fb09eb06f9412bf935
          }
  
      }
-@@ -438,7 +431,7 @@ public class Commands {
+@@ -435,7 +428,7 @@ public class Commands {
              int j = minecraftserver.getGameRules().getInt(GameRules.RULE_MAX_COMMAND_FORK_COUNT);
  
              try {
@@ -963,10 +963,10 @@ index b26efc77a7669fd6b0ef498df23f0f78f1361073..55c81b6fa0173ba32cd3f3cee448147a
  
                  while (iterator.hasNext()) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 89ed20e9c629cf39a24c7a0ce5c4fee41fc64fd5..3d1aff8318620bc87a439e095bc1d06e4dafbba1 100644
+index 9d1e68c09fa7093cf0f6fa636f90cb15a44cbb38..57cc965c7147d0a1fac150e7bcae0f76d0b5c5ab 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-@@ -1371,7 +1371,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
+@@ -1373,7 +1373,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
                  this.unsetRemoved();
                  */
                  // CraftBukkit end
@@ -974,7 +974,7 @@ index 89ed20e9c629cf39a24c7a0ce5c4fee41fc64fd5..3d1aff8318620bc87a439e095bc1d06e
                  if (worldserver != null && resourcekey == LevelStem.OVERWORLD && worldserver.getTypeKey() == LevelStem.NETHER) { // CraftBukkit - empty to fall through to null to event
                      this.enteredNetherPosition = this.position();
                  }
-@@ -1387,8 +1386,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
+@@ -1389,8 +1388,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
                  worldserver = ((CraftWorld) exit.getWorld()).getHandle();
                  // CraftBukkit end
  
@@ -983,7 +983,7 @@ index 89ed20e9c629cf39a24c7a0ce5c4fee41fc64fd5..3d1aff8318620bc87a439e095bc1d06e
                  // CraftBukkit start
                  this.isChangingDimension = true; // CraftBukkit - Set teleport invulnerability only if player changing worlds
                  LevelData worlddata = worldserver.getLevelData();
-@@ -1405,7 +1402,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
+@@ -1407,7 +1404,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
                  this.connection.teleport(exit); // CraftBukkit - use internal teleport without event
                  this.connection.resetPosition();
                  worldserver.addDuringTeleport(this);
@@ -1211,7 +1211,7 @@ index 83f3ffdd8fa901b3de580d2359cdb5ead0d762cb..0f3dedcc20007385bdbfd9cab5209255
              }
          }
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index b9cef93fe382b666bec04ca95eeaf2d8acbb3c40..291f17ba3ad03cb4c989d9252ebeb556196f2148 100644
+index 909accac7538e1c0c0c51deb2ee0605697c059d0..13187ad613637509a59e8b3ba37afacd1925549d 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -440,7 +440,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -1230,7 +1230,7 @@ index b9cef93fe382b666bec04ca95eeaf2d8acbb3c40..291f17ba3ad03cb4c989d9252ebeb556
      }
  
      @Override
-@@ -3155,10 +3153,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3205,10 +3203,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          this.run += (f3 - this.run) * 0.3F;
@@ -1241,7 +1241,7 @@ index b9cef93fe382b666bec04ca95eeaf2d8acbb3c40..291f17ba3ad03cb4c989d9252ebeb556
  
          // Paper start - stop large pitch and yaw changes from crashing the server
          this.yRotO += Math.round((this.getYRot() - this.yRotO) / 360.0F) * 360.0F;
-@@ -3170,7 +3165,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3220,7 +3215,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
          this.yHeadRotO += Math.round((this.yHeadRot - this.yHeadRotO) / 360.0F) * 360.0F;
          // Paper end
  
@@ -1249,7 +1249,7 @@ index b9cef93fe382b666bec04ca95eeaf2d8acbb3c40..291f17ba3ad03cb4c989d9252ebeb556
          this.animStep += f2;
          if (this.isFallFlying()) {
              ++this.fallFlyTicks;
-@@ -3410,19 +3404,14 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3460,19 +3454,14 @@ public abstract class LivingEntity extends Entity implements Attackable {
          }
  
          this.setDeltaMovement(d0, d1, d2);
@@ -1269,7 +1269,7 @@ index b9cef93fe382b666bec04ca95eeaf2d8acbb3c40..291f17ba3ad03cb4c989d9252ebeb556
          if (this.jumping && this.isAffectedByFluids()) {
              double d3;
  
-@@ -3449,8 +3438,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3499,8 +3488,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.noJumpDelay = 0;
          }
  
@@ -1278,7 +1278,7 @@ index b9cef93fe382b666bec04ca95eeaf2d8acbb3c40..291f17ba3ad03cb4c989d9252ebeb556
          this.xxa *= 0.98F;
          this.zza *= 0.98F;
          this.updateFallFlying();
-@@ -3475,8 +3462,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3525,8 +3512,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.travel(vec3d1);
          }
  
@@ -1287,7 +1287,7 @@ index b9cef93fe382b666bec04ca95eeaf2d8acbb3c40..291f17ba3ad03cb4c989d9252ebeb556
          if (!this.level().isClientSide && !this.isDeadOrDying() && !this.freezeLocked) { // Paper - Freeze Tick Lock API
              int i = this.getTicksFrozen();
  
-@@ -3493,15 +3478,12 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3543,15 +3528,12 @@ public abstract class LivingEntity extends Entity implements Attackable {
              this.hurt(this.damageSources().freeze(), 1.0F);
          }
  
@@ -1522,10 +1522,10 @@ index 69986f75d3cf729204cca0c7e5428536af31f695..a6b8c6540886af41ef1bccbd76784fe3
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java b/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java
-index 792d9039ac0561464c666977ff8308e4c629e5eb..a70077521a13d0fbdc987b39a89345442c8e8cc3 100644
+index 729fd2d52dd48e25ee7a077a3ffafc80ecef7c9f..8ed9c15e90889a056382092c64eae406e5603ec0 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java
-@@ -131,12 +131,8 @@ public class Armadillo extends Animal {
+@@ -135,12 +135,8 @@ public class Armadillo extends Animal {
  
      @Override
      protected void customServerAiStep() {
@@ -1556,10 +1556,10 @@ index 01a0731e92d39c8718538244e34a271fb8717fc2..1147bf32f6efe02e51c838eb371f11c6
              Optional<Integer> optional = this.getBrain().getMemory(MemoryModuleType.PLAY_DEAD_TICKS);
  
 diff --git a/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java b/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java
-index 147974651d37e81d81ca97bfa31c9df9867492be..61df975e45ca5704654bb5b295a6e36aec8623ee 100644
+index 8941752e4600ccd11b3fa1147b2e414785589eed..c841a7c4d73a416d4722b4d409167ddba3304ae8 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java
-@@ -140,14 +140,10 @@ public class Camel extends AbstractHorse implements PlayerRideableJumping, Saddl
+@@ -143,14 +143,10 @@ public class Camel extends AbstractHorse implements PlayerRideableJumping, Saddl
  
      @Override
      protected void customServerAiStep() {

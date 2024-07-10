@@ -528,10 +528,10 @@ index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e58721
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index d70c5546c8bd6f364fad9b24880b6867efdab644..4250752a95301271f09590f0140f821a0090811a 100644
+index 3137391cadef7c67019561e65fedd0664e689eae..150769691fd0c6abad77a4823b5f7dd667a032d1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -504,7 +504,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -498,7 +498,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {

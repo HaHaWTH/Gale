@@ -485,10 +485,10 @@ index f5e79db3ccde0730c3b4fb81c76ca6ed045a7374..5546a873fae5252df5fb4bf8781e70db
      private EquipmentSlotGroup(final int id, final String name, final Predicate<EquipmentSlot> slotPredicate) {
          this.id = id;
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index b06766a45138e40022e4131832c8d6288e7f6c48..6ae8d4f50c6a4beab511ab9fdf540fb7a3ddd5d3 100644
+index e8d413ad5eeb3c8be38f2ddc3e69b69060aee7c3..6ceafcb6b40496b4e5733fab9a49f4f01240a7ce 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -3225,7 +3225,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3275,7 +3275,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
      @Nullable
      private Map<EquipmentSlot, ItemStack> collectEquipmentChanges() {
          Map<EquipmentSlot, ItemStack> map = null;

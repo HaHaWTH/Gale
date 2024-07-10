@@ -45,7 +45,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index f6faf01c766a72066ceac627ce7999fe3dc05a2c..4f36d5b8d00d260ad1e03274393a7afd5afed45b 100644
+index a3051cafbab789d1ca8c9af2f3486d77a1c5470b..156fdf06737afa40874a25313cf49b1bff30b50b 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
 @@ -114,6 +114,7 @@ import net.minecraft.world.phys.AABB;
@@ -56,7 +56,7 @@ index f6faf01c766a72066ceac627ce7999fe3dc05a2c..4f36d5b8d00d260ad1e03274393a7afd
  import org.slf4j.Logger;
  import org.bukkit.craftbukkit.entity.CraftHumanEntity;
  import org.bukkit.craftbukkit.event.CraftEventFactory;
-@@ -156,6 +157,7 @@ public abstract class Player extends LivingEntity {
+@@ -157,6 +158,7 @@ public abstract class Player extends LivingEntity {
      protected static final EntityDataAccessor<Byte> DATA_PLAYER_MAIN_HAND = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BYTE);
      protected static final EntityDataAccessor<CompoundTag> DATA_SHOULDER_LEFT = SynchedEntityData.defineId(Player.class, EntityDataSerializers.COMPOUND_TAG);
      protected static final EntityDataAccessor<CompoundTag> DATA_SHOULDER_RIGHT = SynchedEntityData.defineId(Player.class, EntityDataSerializers.COMPOUND_TAG);
@@ -64,7 +64,7 @@ index f6faf01c766a72066ceac627ce7999fe3dc05a2c..4f36d5b8d00d260ad1e03274393a7afd
      private long timeEntitySatOnShoulder;
      final Inventory inventory = new Inventory(this);
      protected PlayerEnderChestContainer enderChestInventory = new PlayerEnderChestContainer(this); // CraftBukkit - add "this" to constructor
-@@ -297,19 +299,23 @@ public abstract class Player extends LivingEntity {
+@@ -298,19 +300,23 @@ public abstract class Player extends LivingEntity {
          this.moveCloak();
          if (!this.level().isClientSide) {
              this.foodData.tick(this);
