@@ -356,10 +356,10 @@ index 244a19ecd0234fa1d7a6ecfea20751595688605d..f76ca394169d844a263a53c31c30e57d
          OptionSpec<Integer> optionspec11 = optionparser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(-1, new Integer[0]);
          OptionSpec<String> optionspec12 = optionparser.accepts("serverId").withRequiredArg();
 diff --git a/src/main/java/net/minecraft/server/level/ServerEntity.java b/src/main/java/net/minecraft/server/level/ServerEntity.java
-index ac5bdd0584cd48d95c97dfa791eee9f447082cea..8090e9b6bd8a3e93532322b5a61058545c7c3a6d 100644
+index 8b707bbc2fea71989311eb706e0d658d4dcbcdbf..54d4c648660808692ae998b6f93da90341a394c4 100644
 --- a/src/main/java/net/minecraft/server/level/ServerEntity.java
 +++ b/src/main/java/net/minecraft/server/level/ServerEntity.java
-@@ -338,7 +338,7 @@ public class ServerEntity {
+@@ -346,7 +346,7 @@ public class ServerEntity {
  
          if (this.entity instanceof LivingEntity) {
              List<Pair<EquipmentSlot, ItemStack>> list = Lists.newArrayList();

@@ -63,6 +63,5 @@ Patches are licensed under GPL-3.0, unless indicated differently in their header
 Binaries are licensed under GPL-3.0.
 
 ## TODO
-check Simpler ShapelessRecipe comparison for vanilla patch
 check Cache CubeVoxelShape shape array (crash)
 check backupRegionFile() in Add xor-shift random patch

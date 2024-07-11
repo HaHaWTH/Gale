@@ -289,10 +289,10 @@ index 7d82cc6b847124cf4225428ba310309544928148..ac703c9ef504779dffbd8d7e676dbb51
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 2d97ca1f3c625c0206d35b785c57d9587924ed0a..152ac3595ae74f2b5dc5cacc72a539d16590d786 100644
+index 2a752deb8cc44b49588be37198fe394a9c95683e..4b26fc350758822eae8d4d740e4276d4f17c59e0 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -519,7 +519,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -525,7 +525,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
@@ -302,7 +302,7 @@ index 2d97ca1f3c625c0206d35b785c57d9587924ed0a..152ac3595ae74f2b5dc5cacc72a539d1
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index fa6b8ce6505a3c094187298a63b0e944e1e74af1..e27f118ff2f49234dee68bb89086d7f9d5e62130 100644
+index 0d202ce8eb88bfdb8ca3306593d758fa483d8612..73407a5d33a24b50a250c38bc81f9a0f590e9f93 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -12,7 +12,6 @@ import java.util.function.Supplier;

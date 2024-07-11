@@ -64,10 +64,10 @@ index ebae8578a2d0dfd0d329861f45d0f278fea1dd85..4200f3020b64160d3295995d8d9db117
                  this.level.timings.countNaturalMobs.startTiming(); // Paper - timings
                  int k = this.distanceManager.getNaturalSpawnChunkCount();
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 920e2d9441ddf007581875b80de7827d716a6972..9eb143508ace36756af8f728cfc13d24299dc8b1 100644
+index a51c90ba7dbbef85cfb850d4d10d8eec9db83a82..9d7b5062b803ebe75fcb8ed238724309fc03f47f 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -796,6 +796,8 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -802,6 +802,8 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
      private final BlockPos.MutableBlockPos chunkTickMutablePosition = new BlockPos.MutableBlockPos();
      // Paper end
  
@@ -76,7 +76,7 @@ index 920e2d9441ddf007581875b80de7827d716a6972..9eb143508ace36756af8f728cfc13d24
      public void tickChunk(LevelChunk chunk, int randomTickSpeed) {
          ChunkPos chunkcoordintpair = chunk.getPos();
          boolean flag = this.isRaining();
-@@ -804,7 +806,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -810,7 +812,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
  
          final BlockPos.MutableBlockPos blockposition = this.chunkTickMutablePosition; // Paper - use mutable to reduce allocation rate, final to force compile fail on change
  
@@ -85,7 +85,7 @@ index 920e2d9441ddf007581875b80de7827d716a6972..9eb143508ace36756af8f728cfc13d24
              blockposition.set(this.findLightningTargetAround(this.getBlockRandomPos(j, 0, k, 15))); // Paper
  
              if (this.isRainingAt(blockposition)) {
-@@ -832,7 +834,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -838,7 +840,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
              }
          }
  
