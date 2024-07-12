@@ -26,7 +26,7 @@ index b47a8a082170bcb630c4354be7c77a4cac71d105..b49e3f2cdc1fa5ff3723fae452404664
              double d1 = (double) (center.y - maxRange);
              double d2 = (double) (center.x + maxRange);
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index a70317f5b5cf0fc5ab80782e6f22e76d3716b749..96cedc5d9fb7b88f2807e3db227940ea5ab57925 100644
+index 705890ab08f97158faaccadbaf7e534666ce86ff..3993b360455361acf6c49495283285992d71d927 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -467,7 +467,7 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
@@ -96,10 +96,10 @@ index 539e17bdeefd0be17a46cb65e034c7e0e4df181c..fbc95098b45478a8da395b9816c86571
          this.level = world;
          this.id = nbt.getInt("Id");
 diff --git a/src/main/java/net/minecraft/world/level/Explosion.java b/src/main/java/net/minecraft/world/level/Explosion.java
-index 807964a19ac15717715c9a92aeefadbeb5875681..26d5440007db5c820405e4184ededb1ffabf2934 100644
+index fbcf01243381ec5bb9d81b45ace22a86704e27c7..d6e43a9b061a45c8e785ab93bafc8a9721fca7d0 100644
 --- a/src/main/java/net/minecraft/world/level/Explosion.java
 +++ b/src/main/java/net/minecraft/world/level/Explosion.java
-@@ -94,7 +94,7 @@ public class Explosion {
+@@ -335,7 +335,7 @@ public class Explosion {
      }
  
      public Explosion(Level world, @Nullable Entity entity, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator behavior, double x, double y, double z, float power, boolean createFire, Explosion.BlockInteraction destructionType, ParticleOptions particle, ParticleOptions emitterParticle, Holder<SoundEvent> soundEvent) {

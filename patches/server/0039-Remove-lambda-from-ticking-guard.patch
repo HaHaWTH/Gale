@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 9d7b5062b803ebe75fcb8ed238724309fc03f47f..ba3e24f049da77bb88663e3c99a06eac027dc55b 100644
+index 4919999f2df67a97ad0607f90fc3dc28a787e817..9ff8779e47c82fd2fdfd43a07a256062140c64d7 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -739,7 +739,20 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -750,7 +750,20 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
                                  entity.stopRiding();
                              }
  
@@ -57,10 +57,10 @@ index 9d7b5062b803ebe75fcb8ed238724309fc03f47f..ba3e24f049da77bb88663e3c99a06eac
                      }
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 8b0c42c8e89f85c8cabcb74bd9a087f34b1c1dfc..2508e1bc36909ba024a379bc2e215c61bd8a41e8 100644
+index 876e7f28b81c5969acc100d4ca43f2dae546e80c..38b28f7fd27adb60eb35a0fb59f7de050e5370e3 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1009,15 +1009,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1388,15 +1388,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          try {
              tickConsumer.accept(entity);
          } catch (Throwable throwable) {

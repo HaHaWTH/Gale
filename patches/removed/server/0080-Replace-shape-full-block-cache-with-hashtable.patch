@@ -3,6 +3,7 @@ From: Dreeam <61569423+Dreeam-qwq@users.noreply.github.com>
 Date: Wed, 26 Jun 2024 18:52:28 +0800
 Subject: [PATCH] Replace shape full block cache with hashtable
 
+Removed since 1.21
 
 diff --git a/src/main/java/me/jellysquid/mods/lithium/common/util/collections/Object2BooleanCacheTable.java b/src/main/java/me/jellysquid/mods/lithium/common/util/collections/Object2BooleanCacheTable.java
 new file mode 100644
@@ -73,7 +74,7 @@ index 0000000000000000000000000000000000000000..5e422708ca0a6161892293a49342f78a
 +    }
 +}
 diff --git a/src/main/java/net/minecraft/world/level/block/Block.java b/src/main/java/net/minecraft/world/level/block/Block.java
-index 45704653310efe9cb755a644674b54b8722c2c84..313b0ffb1e3b37872e86ae3cb50c70ef4e01b8bd 100644
+index a7108b2be0746aa1f0e574d8c6f5ffad6d369835..3d703b6cb79939367b73b57df3d3ef497589a580 100644
 --- a/src/main/java/net/minecraft/world/level/block/Block.java
 +++ b/src/main/java/net/minecraft/world/level/block/Block.java
 @@ -68,11 +68,12 @@ public class Block extends BlockBehaviour implements ItemLike {
@@ -94,11 +95,11 @@ index 45704653310efe9cb755a644674b54b8722c2c84..313b0ffb1e3b37872e86ae3cb50c70ef
      public static final int UPDATE_NEIGHBORS = 1;
      public static final int UPDATE_CLIENTS = 2;
      public static final int UPDATE_INVISIBLE = 4;
-@@ -279,7 +280,7 @@ public class Block extends BlockBehaviour implements ItemLike {
+@@ -280,7 +281,7 @@ public class Block extends BlockBehaviour implements ItemLike {
      }
  
      public static boolean isShapeFullBlock(VoxelShape shape) {
--        return (Boolean) Block.SHAPE_FULL_BLOCK_CACHE.getUnchecked(shape);
+-        return ((ca.spottedleaf.moonrise.patches.collisions.shape.CollisionVoxelShape)shape).moonrise$isFullBlock(); // Paper - optimise collisions
 +        return SHAPE_FULL_BLOCK_CACHE.get(shape); // Gale - Lithium - replace shape full block cache with hashtable
      }
  

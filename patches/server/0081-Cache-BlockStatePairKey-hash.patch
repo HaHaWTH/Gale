@@ -13,7 +13,7 @@ As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
 Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/level/block/Block.java b/src/main/java/net/minecraft/world/level/block/Block.java
-index 313b0ffb1e3b37872e86ae3cb50c70ef4e01b8bd..ac0da3d2d1b83dd0fb3db170141a6b105476d8e6 100644
+index a7108b2be0746aa1f0e574d8c6f5ffad6d369835..94246e6e05a83758059e933a036558eb47d2e84b 100644
 --- a/src/main/java/net/minecraft/world/level/block/Block.java
 +++ b/src/main/java/net/minecraft/world/level/block/Block.java
 @@ -601,11 +601,18 @@ public class Block extends BlockBehaviour implements ItemLike {

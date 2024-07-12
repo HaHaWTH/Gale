@@ -13,7 +13,7 @@ As part of: VMP (https://github.com/RelativityMC/VMP-fabric)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 54ce3f4724d08abdf00bbb9eae70776a73d965f2..0c667db0abe536b3cbb07aea2c8026b681209c8e 100644
+index a1742922ed859f4031b445a1d186f4f70f058c35..6b7780e3899924838dc4431b973b659248acd049 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -324,6 +324,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -24,8 +24,8 @@ index 54ce3f4724d08abdf00bbb9eae70776a73d965f2..0c667db0abe536b3cbb07aea2c8026b6
      public boolean onGround;
      public boolean horizontalCollision;
      public boolean verticalCollision;
-@@ -1085,6 +1086,11 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
-     }
+@@ -1110,6 +1111,11 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+     // Paper end - detailed watchdog information
  
      public void move(MoverType movementType, Vec3 movement) {
 +        // Gale start - VMP - skip entity move if movement is zero
@@ -34,9 +34,9 @@ index 54ce3f4724d08abdf00bbb9eae70776a73d965f2..0c667db0abe536b3cbb07aea2c8026b6
 +        }
 +        // Gale end - VMP - skip entity move if movement is zero
          final Vec3 originalMovement = movement; // Paper - Expose pre-collision velocity
-         if (this.noPhysics) {
-             this.setPos(this.getX() + movement.x, this.getY() + movement.y, this.getZ() + movement.z);
-@@ -3990,6 +3996,11 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+         // Paper start - detailed watchdog information
+         io.papermc.paper.util.TickThread.ensureTickThread("Cannot move an entity off-main");
+@@ -4130,6 +4136,11 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
      }
  
      public final void setBoundingBox(AABB boundingBox) {

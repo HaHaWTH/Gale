@@ -304,7 +304,7 @@ index a2920b8a9eff77d9c5d1d7f70ad3abdacba8f0fa..b34ea5d45a69ffcf26275e79006a3d03
      protected CipherBase(Cipher cipher) {
          this.cipher = cipher;
 diff --git a/src/main/java/net/minecraft/network/Connection.java b/src/main/java/net/minecraft/network/Connection.java
-index 90a2c61c42cba7e38f167eccdd7a951a947963c4..9bfbbcafce95bfd48d519fc6b0b3ed900c361be7 100644
+index 3e550f8e7cd4f4e16f499a8a2a4b95420270f07a..ee4172ab8a0df871f509aeaee8d32f325c148fee 100644
 --- a/src/main/java/net/minecraft/network/Connection.java
 +++ b/src/main/java/net/minecraft/network/Connection.java
 @@ -326,7 +326,7 @@ public class Connection extends SimpleChannelInboundHandler<Packet<?>> {
@@ -356,10 +356,10 @@ index 244a19ecd0234fa1d7a6ecfea20751595688605d..f76ca394169d844a263a53c31c30e57d
          OptionSpec<Integer> optionspec11 = optionparser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(-1, new Integer[0]);
          OptionSpec<String> optionspec12 = optionparser.accepts("serverId").withRequiredArg();
 diff --git a/src/main/java/net/minecraft/server/level/ServerEntity.java b/src/main/java/net/minecraft/server/level/ServerEntity.java
-index 8b707bbc2fea71989311eb706e0d658d4dcbcdbf..54d4c648660808692ae998b6f93da90341a394c4 100644
+index 20b5a81d50397438b3200322f31b62db44ebdb3b..c80be65d190c85e7f0ea8233ebbbdbc1ea67f276 100644
 --- a/src/main/java/net/minecraft/server/level/ServerEntity.java
 +++ b/src/main/java/net/minecraft/server/level/ServerEntity.java
-@@ -346,7 +346,7 @@ public class ServerEntity {
+@@ -351,7 +351,7 @@ public class ServerEntity {
  
          if (this.entity instanceof LivingEntity) {
              List<Pair<EquipmentSlot, ItemStack>> list = Lists.newArrayList();
@@ -448,7 +448,7 @@ index 0ee04fe6ff6a4d09754f326526ae04fe7226bab2..365598a660e79d266f5d4a439cb1ba01
      }
  }
 diff --git a/src/main/java/net/minecraft/util/ZeroBitStorage.java b/src/main/java/net/minecraft/util/ZeroBitStorage.java
-index 01f5b946fabbe34f31110e75973dab9f39897346..b9467fec08a30ef43cbc2bb2fdf00c3a1418554f 100644
+index 50040c497a819cd1229042ab3cb057d34a32cacc..e085197001ba0e50dc84fe488cf531cce0950cb1 100644
 --- a/src/main/java/net/minecraft/util/ZeroBitStorage.java
 +++ b/src/main/java/net/minecraft/util/ZeroBitStorage.java
 @@ -5,7 +5,7 @@ import java.util.function.IntConsumer;
@@ -485,7 +485,7 @@ index f5e79db3ccde0730c3b4fb81c76ca6ed045a7374..5546a873fae5252df5fb4bf8781e70db
      private EquipmentSlotGroup(final int id, final String name, final Predicate<EquipmentSlot> slotPredicate) {
          this.id = id;
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index e8d413ad5eeb3c8be38f2ddc3e69b69060aee7c3..6ceafcb6b40496b4e5733fab9a49f4f01240a7ce 100644
+index 045abc7dfebce2501abcc1bebee18d5ba8aea1b0..0650254d7de55829c5d3c118ccf08ceec1cd08ac 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -3275,7 +3275,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -547,10 +547,10 @@ index 2a25238dcd741f9a5d16b202902210244d9a1947..72f199a6e65758fdc210401d80f4854f
  
                      for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index 312b57b4ef340935f4335989ce1d6a4b8b61532c..75c5ce50b11705ff18316d22a2366b926dcd061f 100644
+index 2c312c0b741fb96a008881e9e01fa660a1fb63ab..96427414e5af8663587a70608d66cf98516cf224 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
-@@ -1122,7 +1122,7 @@ public final class ItemStack implements DataComponentHolder {
+@@ -1124,7 +1124,7 @@ public final class ItemStack implements DataComponentHolder {
          ItemAttributeModifiers itemattributemodifiers = (ItemAttributeModifiers) this.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
  
          if (itemattributemodifiers.showInTooltip()) {
@@ -573,10 +573,10 @@ index 7c3e561f2ca2522ab8336487c0307e1b69a397a8..a7ee93c0d94be3bb6c8ea8e8ca7f8abf
              String[] strings = new String[pattern.size() - l - k];
  
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 2508e1bc36909ba024a379bc2e215c61bd8a41e8..3b94e292881f631656450638592e69b91ae0a39f 100644
+index 38b28f7fd27adb60eb35a0fb59f7de050e5370e3..336c96a331c893a81509672d9898669061d545bb 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1291,7 +1291,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1677,7 +1677,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public org.bukkit.entity.Entity[] getChunkEntities(int chunkX, int chunkZ) {
          ca.spottedleaf.moonrise.patches.chunk_system.level.entity.ChunkEntitySlices slices = ((ServerLevel)this).moonrise$getEntityLookup().getChunk(chunkX, chunkZ);
          if (slices == null) {

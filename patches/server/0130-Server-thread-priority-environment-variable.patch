@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 564c1d0a04aff45f7f5bb598b9480ce7e8323b52..603c50248cf8ea5b1d55cdd1c84c7d49b1c5f8ff 100644
+index af3cca0c4d00247231d31ea596268b57767e8d3a..d76d6a3b9ce126d588e5dca0fdc21059914d84f9 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -191,6 +191,8 @@ import co.aikar.timings.MinecraftTimings; // Paper
@@ -19,7 +19,7 @@ index 564c1d0a04aff45f7f5bb598b9480ce7e8323b52..603c50248cf8ea5b1d55cdd1c84c7d49
      private static MinecraftServer SERVER; // Paper
      public static final Logger LOGGER = LogUtils.getLogger();
      public static final net.kyori.adventure.text.logger.slf4j.ComponentLogger COMPONENT_LOGGER = net.kyori.adventure.text.logger.slf4j.ComponentLogger.logger(LOGGER.getName()); // Paper
-@@ -324,6 +326,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -325,6 +327,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          S s0 = serverFactory.apply(thread); // CraftBukkit - decompile error
  
          atomicreference.set(s0);

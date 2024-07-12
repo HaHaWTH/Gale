@@ -13,7 +13,7 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 3d1aff8318620bc87a439e095bc1d06e4dafbba1..79b49aec7c5c80948b8f1c77ca6e48049dae174e 100644
+index 57cc965c7147d0a1fac150e7bcae0f76d0b5c5ab..d18c3c20b556fbf5146eb7cc614cc1b0e442d52e 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -295,6 +295,7 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple

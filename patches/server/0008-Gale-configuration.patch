@@ -189,7 +189,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 0cad1ba77b055c2665d1bec51d687294ccb88a88..19b48513ce511effefcd802332a78e2c3074e387 100644
+index bccbc04c3322db5050871abcbf5ef592c38e95d4..6c7ab5870ec1393f1e23e6b6e4c346ec547f1eb8 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -220,7 +220,7 @@ index 0cad1ba77b055c2665d1bec51d687294ccb88a88..19b48513ce511effefcd802332a78e2c
      public static long currentTickLong = 0L; // Paper - track current tick as a long
      public boolean isIteratingOverLevels = false; // Paper - Throw exception on world create while being ticked
  
-@@ -495,6 +496,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -496,6 +497,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          Runtime.getRuntime().addShutdownHook(new org.bukkit.craftbukkit.util.ServerShutdownThread(this));
          // CraftBukkit end
          this.paperConfigurations = services.paperConfigurations(); // Paper - add paper configuration files
@@ -289,10 +289,10 @@ index 7d82cc6b847124cf4225428ba310309544928148..ac703c9ef504779dffbd8d7e676dbb51
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 2a752deb8cc44b49588be37198fe394a9c95683e..4b26fc350758822eae8d4d740e4276d4f17c59e0 100644
+index 4e5fc39f3839d4d626925bcef1c83415376195f4..6ff76ecf4c0f30e2ede834c3ec5199ba65295481 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -525,7 +525,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -536,7 +536,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
@@ -302,7 +302,7 @@ index 2a752deb8cc44b49588be37198fe394a9c95683e..4b26fc350758822eae8d4d740e4276d4
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 0d202ce8eb88bfdb8ca3306593d758fa483d8612..73407a5d33a24b50a250c38bc81f9a0f590e9f93 100644
+index c1f392cd7928a142192c87cf46ef2a4fc2495562..660472d4fd8e4677d27cead2399f14a626feccd3 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -12,7 +12,6 @@ import java.util.function.Supplier;
@@ -322,15 +322,15 @@ index 0d202ce8eb88bfdb8ca3306593d758fa483d8612..73407a5d33a24b50a250c38bc81f9a0f
  import net.minecraft.world.entity.item.ItemEntity;
  import net.minecraft.world.entity.player.Player;
  import net.minecraft.world.item.ItemStack;
-@@ -100,6 +97,7 @@ import org.bukkit.craftbukkit.block.data.CraftBlockData;
+@@ -101,6 +98,7 @@ import org.bukkit.craftbukkit.block.data.CraftBlockData;
  import org.bukkit.craftbukkit.util.CraftSpawnCategory;
  import org.bukkit.entity.SpawnCategory;
  import org.bukkit.event.block.BlockPhysicsEvent;
 +import org.galemc.gale.configuration.GaleWorldConfiguration;
  // CraftBukkit end
  
- public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedleaf.moonrise.patches.chunk_system.level.ChunkSystemLevel, ca.spottedleaf.moonrise.patches.chunk_system.world.ChunkSystemEntityGetter { // Paper - rewrite chunk system
-@@ -170,6 +168,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedleaf.moonrise.patches.chunk_system.level.ChunkSystemLevel, ca.spottedleaf.moonrise.patches.chunk_system.world.ChunkSystemEntityGetter, ca.spottedleaf.moonrise.patches.collisions.world.CollisionLevel { // Paper - rewrite chunk system // Paper - optimise collisions
+@@ -171,6 +169,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          return this.paperConfig;
      }
      // Paper end - add paper world config
@@ -343,9 +343,9 @@ index 0d202ce8eb88bfdb8ca3306593d758fa483d8612..73407a5d33a24b50a250c38bc81f9a0f
  
      public final com.destroystokyo.paper.antixray.ChunkPacketBlockController chunkPacketBlockController; // Paper - Anti-Xray
      public final co.aikar.timings.WorldTimingsHandler timings; // Paper
-@@ -263,9 +267,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -640,9 +644,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
-     // Paper end - rewrite chunk system
+     // Paper end - optimise collisions
  
 -    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray
 +    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray // Gale - Gale configuration
