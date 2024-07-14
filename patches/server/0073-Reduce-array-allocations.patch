@@ -101,6 +101,32 @@ index 87d2b3ec165e2e9e4bdbedd7adddaa2130ed507b..1260b9abca3d194507f3f982add32ef0
      }
  
      public void callEntitiesLoadEvent() {
+diff --git a/src/main/java/ca/spottedleaf/moonrise/patches/collisions/CollisionUtil.java b/src/main/java/ca/spottedleaf/moonrise/patches/collisions/CollisionUtil.java
+index 3cbd02085cc3e2ddb15458faea4b553868cff39a..0bb41d25325011c8afb8ea6caa890ffe0edd4bbb 100644
+--- a/src/main/java/ca/spottedleaf/moonrise/patches/collisions/CollisionUtil.java
++++ b/src/main/java/ca/spottedleaf/moonrise/patches/collisions/CollisionUtil.java
+@@ -1113,7 +1113,7 @@ public final class CollisionUtil {
+         }
+ 
+         private static final ca.spottedleaf.moonrise.patches.collisions.CollisionUtil.MergedVoxelCoordinateList EMPTY = new ca.spottedleaf.moonrise.patches.collisions.CollisionUtil.MergedVoxelCoordinateList(
+-                new double[] { 0.0 }, 0.0, new int[0], new int[0], 0
++                new double[] { 0.0 }, 0.0, me.titaniumtown.ArrayConstants.emptyIntArray, me.titaniumtown.ArrayConstants.emptyIntArray, 0 // Gale - JettPack - reduce array allocations
+         );
+ 
+         private static int[] getIndices(final int length) {
+diff --git a/src/main/java/ca/spottedleaf/moonrise/patches/collisions/util/EmptyStreamForMoveCall.java b/src/main/java/ca/spottedleaf/moonrise/patches/collisions/util/EmptyStreamForMoveCall.java
+index 673103f160cbe577c6e05f998706af4e6850011b..2c1eb34f1539555ba1988a2eeeea7b2f59eb610c 100644
+--- a/src/main/java/ca/spottedleaf/moonrise/patches/collisions/util/EmptyStreamForMoveCall.java
++++ b/src/main/java/ca/spottedleaf/moonrise/patches/collisions/util/EmptyStreamForMoveCall.java
+@@ -102,7 +102,7 @@ public final class EmptyStreamForMoveCall<T> implements java.util.stream.Stream<
+     @org.jetbrains.annotations.NotNull
+     @Override
+     public Object[] toArray() {
+-        return new Object[0];
++        return me.titaniumtown.ArrayConstants.emptyObjectArray; // Gale - JettPack - reduce array allocations
+     }
+ 
+     @org.jetbrains.annotations.NotNull
 diff --git a/src/main/java/com/destroystokyo/paper/util/maplist/EntityList.java b/src/main/java/com/destroystokyo/paper/util/maplist/EntityList.java
 index 0133ea6feb1ab88f021f66855669f58367e7420b..fda95d81f53ae779651bdf608a6fd163b4f1b98a 100644
 --- a/src/main/java/com/destroystokyo/paper/util/maplist/EntityList.java
@@ -355,6 +381,19 @@ index 244a19ecd0234fa1d7a6ecfea20751595688605d..f76ca394169d844a263a53c31c30e57d
          OptionSpec<String> optionspec10 = optionparser.accepts("world").withRequiredArg();
          OptionSpec<Integer> optionspec11 = optionparser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(-1, new Integer[0]);
          OptionSpec<String> optionspec12 = optionparser.accepts("serverId").withRequiredArg();
+diff --git a/src/main/java/net/minecraft/server/commands/SpawnArmorTrimsCommand.java b/src/main/java/net/minecraft/server/commands/SpawnArmorTrimsCommand.java
+index 9e00f7125874a3cd09bddb75b0dae6a59f28448f..036d2661acf90f127a585dc9fbc841e1c1435055 100644
+--- a/src/main/java/net/minecraft/server/commands/SpawnArmorTrimsCommand.java
++++ b/src/main/java/net/minecraft/server/commands/SpawnArmorTrimsCommand.java
+@@ -130,7 +130,7 @@ public class SpawnArmorTrimsCommand {
+                     armorStand.setYRot(180.0F);
+                     armorStand.setNoGravity(true);
+ 
+-                    for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
++                    for (EquipmentSlot equipmentSlot : EquipmentSlot.VALUES) { // Gale - JettPack - reduce array allocations
+                         Item item = MATERIAL_AND_SLOT_TO_ITEM.get(Pair.of(armorMaterial, equipmentSlot));
+                         if (item != null) {
+                             ItemStack itemStack = new ItemStack(item);
 diff --git a/src/main/java/net/minecraft/server/level/ServerEntity.java b/src/main/java/net/minecraft/server/level/ServerEntity.java
 index 20b5a81d50397438b3200322f31b62db44ebdb3b..c80be65d190c85e7f0ea8233ebbbdbc1ea67f276 100644
 --- a/src/main/java/net/minecraft/server/level/ServerEntity.java
@@ -484,6 +523,28 @@ index f5e79db3ccde0730c3b4fb81c76ca6ed045a7374..5546a873fae5252df5fb4bf8781e70db
  
      private EquipmentSlotGroup(final int id, final String name, final Predicate<EquipmentSlot> slotPredicate) {
          this.id = id;
+diff --git a/src/main/java/net/minecraft/world/entity/EquipmentTable.java b/src/main/java/net/minecraft/world/entity/EquipmentTable.java
+index d75673cc8a5aeb7051b1d4fe729faf408e266dc4..0b8e5c2da9f57dbf8703baa1de3e1cf8f31b6230 100644
+--- a/src/main/java/net/minecraft/world/entity/EquipmentTable.java
++++ b/src/main/java/net/minecraft/world/entity/EquipmentTable.java
+@@ -16,7 +16,7 @@ public record EquipmentTable(ResourceKey<LootTable> lootTable, Map<EquipmentSlot
+     public static final Codec<Map<EquipmentSlot, Float>> DROP_CHANCES_CODEC = Codec.either(Codec.FLOAT, Codec.unboundedMap(EquipmentSlot.CODEC, Codec.FLOAT))
+         .xmap(either -> either.map(EquipmentTable::createForAllSlots, Function.identity()), map -> {
+             boolean bl = map.values().stream().distinct().count() == 1L;
+-            boolean bl2 = map.keySet().containsAll(Arrays.asList(EquipmentSlot.values()));
++            boolean bl2 = map.keySet().containsAll(Arrays.asList(EquipmentSlot.VALUES)); // Gale - JettPack - reduce array allocations
+             return bl && bl2 ? Either.left(map.values().stream().findFirst().orElse(0.0F)) : Either.right((Map<EquipmentSlot, Float>)map);
+         });
+     public static final Codec<EquipmentTable> CODEC = RecordCodecBuilder.create(
+@@ -28,7 +28,7 @@ public record EquipmentTable(ResourceKey<LootTable> lootTable, Map<EquipmentSlot
+     );
+ 
+     private static Map<EquipmentSlot, Float> createForAllSlots(float dropChance) {
+-        return createForAllSlots(List.of(EquipmentSlot.values()), dropChance);
++        return createForAllSlots(List.of(EquipmentSlot.VALUES), dropChance); // Gale - JettPack - reduce array allocations
+     }
+ 
+     private static Map<EquipmentSlot, Float> createForAllSlots(List<EquipmentSlot> slots, float dropChance) {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 index 045abc7dfebce2501abcc1bebee18d5ba8aea1b0..0650254d7de55829c5d3c118ccf08ceec1cd08ac 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
@@ -572,6 +633,41 @@ index 7c3e561f2ca2522ab8336487c0307e1b69a397a8..a7ee93c0d94be3bb6c8ea8e8ca7f8abf
          } else {
              String[] strings = new String[pattern.size() - l - k];
  
+diff --git a/src/main/java/net/minecraft/world/item/enchantment/Enchantment.java b/src/main/java/net/minecraft/world/item/enchantment/Enchantment.java
+index 82e4672e7a5d1fbe238ad07d08ec2d5dcd6a99a8..161990842f19fc123fd9feca7231afec83802f47 100644
+--- a/src/main/java/net/minecraft/world/item/enchantment/Enchantment.java
++++ b/src/main/java/net/minecraft/world/item/enchantment/Enchantment.java
+@@ -109,7 +109,7 @@ public record Enchantment(Component description, Enchantment.EnchantmentDefiniti
+     public Map<EquipmentSlot, ItemStack> getSlotItems(LivingEntity entity) {
+         Map<EquipmentSlot, ItemStack> map = Maps.newEnumMap(EquipmentSlot.class);
+ 
+-        for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
++        for (EquipmentSlot equipmentSlot : EquipmentSlot.VALUES) { // Gale - JettPack - reduce array allocations
+             if (this.matchingSlot(equipmentSlot)) {
+                 ItemStack itemStack = entity.getItemBySlot(equipmentSlot);
+                 if (!itemStack.isEmpty()) {
+diff --git a/src/main/java/net/minecraft/world/item/enchantment/EnchantmentHelper.java b/src/main/java/net/minecraft/world/item/enchantment/EnchantmentHelper.java
+index fce49b17905ab97e691aa8499a5dfed67adf0c40..986d0151aeeb2ce0f752c424c526fb0cc6849308 100644
+--- a/src/main/java/net/minecraft/world/item/enchantment/EnchantmentHelper.java
++++ b/src/main/java/net/minecraft/world/item/enchantment/EnchantmentHelper.java
+@@ -143,7 +143,7 @@ public class EnchantmentHelper {
+     }
+ 
+     private static void runIterationOnEquipment(LivingEntity entity, EnchantmentHelper.EnchantmentInSlotVisitor contextAwareConsumer) {
+-        for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
++        for (EquipmentSlot equipmentSlot : EquipmentSlot.VALUES) { // Gale - JettPack - reduce array allocations
+             runIterationOnItem(entity.getItemBySlot(equipmentSlot), equipmentSlot, entity, contextAwareConsumer);
+         }
+     }
+@@ -418,7 +418,7 @@ public class EnchantmentHelper {
+     public static Optional<EnchantedItemInUse> getRandomItemWith(DataComponentType<?> componentType, LivingEntity entity, Predicate<ItemStack> stackPredicate) {
+         List<EnchantedItemInUse> list = new ArrayList<>();
+ 
+-        for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
++        for (EquipmentSlot equipmentSlot : EquipmentSlot.VALUES) { // Gale - JettPack - reduce array allocations
+             ItemStack itemStack = entity.getItemBySlot(equipmentSlot);
+             if (stackPredicate.test(itemStack)) {
+                 ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
 index 38b28f7fd27adb60eb35a0fb59f7de050e5370e3..336c96a331c893a81509672d9898669061d545bb 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
