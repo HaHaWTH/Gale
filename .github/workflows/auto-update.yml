@@ -30,6 +30,12 @@ jobs:
           echo "::set-output name=paperRef::$(git rev-parse HEAD)"
           cd ..
 
+      - name: Get Gale Current Paper commit Hash
+        id: curPaperRef
+        run: |
+          cd Gale
+          grep "^paperRef\s*=" gradle.properties | sed 's/^paperRef\s*=\s*//'
+
       - name: Update paperRef in Gale
         run: |
           cd Gale
@@ -39,8 +45,8 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email no-reply@github.com
+          git config --global user.name "Dreeam"
+          git config --global user.email 61569423+Dreeam-qwq@users.noreply.github.com
           cd Gale
           chmod +x gradlew
 
@@ -56,6 +62,7 @@ jobs:
             echo "Running tests...."
             ./gradlew applyPatches
             ./gradlew createMojmapPaperclipJar
+            ./gradlew rebuildPatches
           fi
 
       - name: Check for changes and write to repository
@@ -64,8 +71,10 @@ jobs:
           if ! git diff --quiet; then
             echo "Writing to repo....."
             git add .
-            git commit -m "Updated Upstream (Paper)"
+            ./scripts/upstreamCommit.sh --paper $CUR_PAPER_REF
             git push
           else
             echo "No changes to commit."
           fi
+        env:
+          CUR_PAPER_REF: ${{ steps.curPaperRef.outputs.curPaperRef }}
