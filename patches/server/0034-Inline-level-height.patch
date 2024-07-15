@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index b42b5499d8054625b57674570b0e1ce820ad692d..876e7f28b81c5969acc100d4ca43f2dae546e80c 100644
+index 9be6e2cf104f39bce8703b2cf235804e286f1a56..d54120728655bc32d480f16161e302dc897d4f5f 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -641,6 +641,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -653,6 +653,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
      // Paper end - optimise collisions
  
@@ -50,7 +50,7 @@ index b42b5499d8054625b57674570b0e1ce820ad692d..876e7f28b81c5969acc100d4ca43f2da
      protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray // Gale - Gale configuration // Gale - Purpur - remove vanilla profiler
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig(((net.minecraft.world.level.storage.PrimaryLevelData) worlddatamutable).getLevelName()); // Spigot
          this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper - create paper world config
-@@ -660,6 +669,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -672,6 +681,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          this.dimensionTypeRegistration = holder;
          final DimensionType dimensionmanager = (DimensionType) holder.value();
  

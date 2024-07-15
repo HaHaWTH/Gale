@@ -173,10 +173,10 @@ index 190c5f0b02a3d99054704ae1afbffb3498ddffe1..6f9ebc774cd5b4debb51973e88975ab2
  
      public int size() {
 diff --git a/src/main/java/io/papermc/paper/command/brigadier/PaperCommands.java b/src/main/java/io/papermc/paper/command/brigadier/PaperCommands.java
-index 27509813a90980be1dfc7bde27d0eba60adfc820..63a5e9e3a7012e7326a68206d508788de8e35825 100644
+index a3e128bde0fa4ab0ecab4172f02288a29b9fddc7..cbbb95692e47217932b5990057483589e8080f69 100644
 --- a/src/main/java/io/papermc/paper/command/brigadier/PaperCommands.java
 +++ b/src/main/java/io/papermc/paper/command/brigadier/PaperCommands.java
-@@ -184,7 +184,7 @@ public class PaperCommands implements Commands, PaperRegistrar<LifecycleEventOwn
+@@ -185,7 +185,7 @@ public class PaperCommands implements Commands, PaperRegistrar<LifecycleEventOwn
                      })
              )
              .executes((stack) -> {
@@ -669,10 +669,10 @@ index fce49b17905ab97e691aa8499a5dfed67adf0c40..986d0151aeeb2ce0f752c424c526fb0c
              if (stackPredicate.test(itemStack)) {
                  ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 38b28f7fd27adb60eb35a0fb59f7de050e5370e3..336c96a331c893a81509672d9898669061d545bb 100644
+index 3335409c3a5fbe3234a3de10d54189a82bf23043..d02812eabc5ab5d5671f227ad83d98a1a0d3bb0c 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1677,7 +1677,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1689,7 +1689,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public org.bukkit.entity.Entity[] getChunkEntities(int chunkX, int chunkZ) {
          ca.spottedleaf.moonrise.patches.chunk_system.level.entity.ChunkEntitySlices slices = ((ServerLevel)this).moonrise$getEntityLookup().getChunk(chunkX, chunkZ);
          if (slices == null) {

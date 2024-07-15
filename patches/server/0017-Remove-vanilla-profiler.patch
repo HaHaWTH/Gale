@@ -1777,7 +1777,7 @@ index a248d859cbce48f4a34c4771a7acffc17d7edc84..fbcf01243381ec5bb9d81b45ace22a86
  
          if (this.fire) {
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 660472d4fd8e4677d27cead2399f14a626feccd3..b42b5499d8054625b57674570b0e1ce820ad692d 100644
+index fa7b08052d57a5425020b391a7dec3b6ce8a81b7..9be6e2cf104f39bce8703b2cf235804e286f1a56 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -133,7 +133,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
@@ -1804,7 +1804,7 @@ index 660472d4fd8e4677d27cead2399f14a626feccd3..b42b5499d8054625b57674570b0e1ce8
          final List<Entity> ret = new java.util.ArrayList<>();
  
          ((ca.spottedleaf.moonrise.patches.chunk_system.level.ChunkSystemLevel)this).moonrise$getEntityLookup().getHardCollidingEntities(entity, box, ret, predicate);
-@@ -644,7 +641,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -656,7 +653,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
      // Paper end - optimise collisions
  
@@ -1813,7 +1813,7 @@ index 660472d4fd8e4677d27cead2399f14a626feccd3..b42b5499d8054625b57674570b0e1ce8
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig(((net.minecraft.world.level.storage.PrimaryLevelData) worlddatamutable).getLevelName()); // Spigot
          this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper - create paper world config
          this.galeConfig = galeWorldConfigCreator.apply(this.spigotConfig); // Gale - Gale configuration
-@@ -659,7 +656,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -671,7 +668,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          }
  
          // CraftBukkit end
@@ -1821,7 +1821,7 @@ index 660472d4fd8e4677d27cead2399f14a626feccd3..b42b5499d8054625b57674570b0e1ce8
          this.levelData = worlddatamutable;
          this.dimensionTypeRegistration = holder;
          final DimensionType dimensionmanager = (DimensionType) holder.value();
-@@ -1327,9 +1323,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1339,9 +1335,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
  
      protected void tickBlockEntities() {
@@ -1831,7 +1831,7 @@ index 660472d4fd8e4677d27cead2399f14a626feccd3..b42b5499d8054625b57674570b0e1ce8
          this.timings.tileEntityPending.startTiming(); // Spigot
          this.tickingBlockEntities = true;
          if (!this.pendingBlockEntityTickers.isEmpty()) {
-@@ -1372,7 +1365,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1384,7 +1377,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          this.timings.tileEntityTick.stopTiming(); // Spigot
          this.tickingBlockEntities = false;
          co.aikar.timings.TimingHistory.tileEntityTicks += this.blockEntityTickers.size(); // Paper
@@ -1839,7 +1839,7 @@ index 660472d4fd8e4677d27cead2399f14a626feccd3..b42b5499d8054625b57674570b0e1ce8
          this.spigotConfig.currentPrimedTnt = 0; // Spigot
      }
  
-@@ -1584,7 +1576,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1596,7 +1588,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
  
      @Override
      public List<Entity> getEntities(@Nullable Entity except, AABB box, Predicate<? super Entity> predicate) {
@@ -1847,7 +1847,7 @@ index 660472d4fd8e4677d27cead2399f14a626feccd3..b42b5499d8054625b57674570b0e1ce8
          // Paper start - rewrite chunk system
          final List<Entity> ret = new java.util.ArrayList<>();
  
-@@ -1610,8 +1601,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1622,8 +1613,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public <T extends Entity> void getEntities(final EntityTypeTest<Entity, T> entityTypeTest,
                                                 final AABB boundingBox, final Predicate<? super T> predicate,
                                                 final List<? super T> into, final int maxCount) {
@@ -1856,7 +1856,7 @@ index 660472d4fd8e4677d27cead2399f14a626feccd3..b42b5499d8054625b57674570b0e1ce8
          if (entityTypeTest instanceof net.minecraft.world.entity.EntityType<T> byType) {
              if (maxCount != Integer.MAX_VALUE) {
                  ((ca.spottedleaf.moonrise.patches.chunk_system.level.ChunkSystemLevel)this).moonrise$getEntityLookup().getEntities(byType, boundingBox, into, predicate, maxCount);
-@@ -1905,11 +1894,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1917,11 +1906,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
  
      public ProfilerFiller getProfiler() {
