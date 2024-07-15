@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index aabca85eb35085511b24ace968d3bf1b85303445..d77e3502ce709166126047da1f63d229a0943a90 100644
+index 87d547fa078bf0b9bde3f919e081af0921ee6225..4cb9ce2d80507a1b73bf09a78e3593612f913d44 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -13,6 +13,8 @@ import java.net.SocketAddress;
@@ -70,7 +70,7 @@ index aabca85eb35085511b24ace968d3bf1b85303445..d77e3502ce709166126047da1f63d229
          this.playersByName.put(player.getScoreboardName().toLowerCase(java.util.Locale.ROOT), player); // Spigot
          this.playersByUUID.put(player.getUUID(), player);
          // this.broadcastAll(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(entityplayer))); // CraftBukkit - replaced with loop below
-@@ -660,6 +664,7 @@ public abstract class PlayerList {
+@@ -661,6 +665,7 @@ public abstract class PlayerList {
          entityplayer.retireScheduler(); // Paper - Folia schedulers
          entityplayer.getAdvancements().stopListening();
          this.players.remove(entityplayer);
@@ -78,7 +78,7 @@ index aabca85eb35085511b24ace968d3bf1b85303445..d77e3502ce709166126047da1f63d229
          this.playersByName.remove(entityplayer.getScoreboardName().toLowerCase(java.util.Locale.ROOT)); // Spigot
          this.server.getCustomBossEvents().onPlayerDisconnect(entityplayer);
          UUID uuid = entityplayer.getUUID();
-@@ -816,6 +821,7 @@ public abstract class PlayerList {
+@@ -817,6 +822,7 @@ public abstract class PlayerList {
      public ServerPlayer respawn(ServerPlayer entityplayer, boolean flag, Entity.RemovalReason entity_removalreason, RespawnReason reason, Location location) {
          entityplayer.stopRiding(); // CraftBukkit
          this.players.remove(entityplayer);
@@ -86,7 +86,7 @@ index aabca85eb35085511b24ace968d3bf1b85303445..d77e3502ce709166126047da1f63d229
          this.playersByName.remove(entityplayer.getScoreboardName().toLowerCase(java.util.Locale.ROOT)); // Spigot
          entityplayer.serverLevel().removePlayerImmediately(entityplayer, entity_removalreason);
          /* CraftBukkit start
-@@ -898,6 +904,7 @@ public abstract class PlayerList {
+@@ -899,6 +905,7 @@ public abstract class PlayerList {
          if (!entityplayer.connection.isDisconnected()) {
              worldserver.addRespawnedPlayer(entityplayer1);
              this.players.add(entityplayer1);
@@ -94,7 +94,7 @@ index aabca85eb35085511b24ace968d3bf1b85303445..d77e3502ce709166126047da1f63d229
              this.playersByName.put(entityplayer1.getScoreboardName().toLowerCase(java.util.Locale.ROOT), entityplayer1); // Spigot
              this.playersByUUID.put(entityplayer1.getUUID(), entityplayer1);
          }
-@@ -976,20 +983,55 @@ public abstract class PlayerList {
+@@ -977,20 +984,55 @@ public abstract class PlayerList {
          this.sendPlayerPermissionLevel(player, i, recalculatePermissions); // Paper - avoid recalculating permissions if possible
      }
  

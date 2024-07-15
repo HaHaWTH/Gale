@@ -13,10 +13,10 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 57cc965c7147d0a1fac150e7bcae0f76d0b5c5ab..d18c3c20b556fbf5146eb7cc614cc1b0e442d52e 100644
+index ca7dba4f8b9a4d87fe7e990abd3f575db100bff6..f0ba5738958382cf22033c3c909df9e4ee3c83b6 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-@@ -295,6 +295,7 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
+@@ -296,6 +296,7 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
      public boolean joining = true;
      public boolean sentListPacket = false;
      public boolean supressTrackerForLogin = false; // Paper - Fire PlayerJoinEvent when Player is actually ready
@@ -38,7 +38,7 @@ index 13adcb90134f03cf951c3e7eaa3123e033224df6..4ff3dbb9c1bcac000e4ed293cbc1a48a
              // CraftBukkit start
              if (sync) {
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 5f20606cc2c79ad9a4c4d4d6c9e6a2a31a88b282..b6236d28c6ef3b94625950eb5934ebb11c14c9f4 100644
+index dfcaff15a145bf29e8a538d853bb04aec8c36179..3badc71743dbd4a1360081da1819a57bbb3c4e3d 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -350,6 +350,8 @@ public abstract class PlayerList {

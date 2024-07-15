@@ -13,7 +13,7 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index 2baf654b926d96c198ffe31835a7a45748078194..fe96ee6b36d38a7da61c80715716365d2a33f07d 100644
+index ccd6a21e502bfd25a0a84fdf1b6d6f2606cf7156..3b81ba4c283e474493e9bc97bbfa230a7878cdbc 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 @@ -431,11 +431,16 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon

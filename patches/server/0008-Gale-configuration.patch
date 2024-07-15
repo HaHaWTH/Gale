@@ -189,7 +189,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index bccbc04c3322db5050871abcbf5ef592c38e95d4..6c7ab5870ec1393f1e23e6b6e4c346ec547f1eb8 100644
+index aeae4f8d4ead24db315631c3d2c0b930d0d51e02..4dac66a7c5750e130db7bb5181672a879f83ce98 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -289,10 +289,10 @@ index 7d82cc6b847124cf4225428ba310309544928148..ac703c9ef504779dffbd8d7e676dbb51
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 4e5fc39f3839d4d626925bcef1c83415376195f4..6ff76ecf4c0f30e2ede834c3ec5199ba65295481 100644
+index b3ca52c0a1c4c9c2f4d86b83ad2d6308e3ba9e7c..90f5c98ed793fafb4b6f95b66f35583d15af77d8 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -536,7 +536,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -527,7 +527,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
@@ -302,7 +302,7 @@ index 4e5fc39f3839d4d626925bcef1c83415376195f4..6ff76ecf4c0f30e2ede834c3ec5199ba
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index a72a189f537e0a64c2c31e7eefbb49fa896a6f3c..fa7b08052d57a5425020b391a7dec3b6ce8a81b7 100644
+index bbb0d543197001fe8bb5179dde7201327fec4274..3a791b1f4b2e652408faf9ae133cef1e3f89b980 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -12,7 +12,6 @@ import java.util.function.Supplier;
@@ -343,9 +343,9 @@ index a72a189f537e0a64c2c31e7eefbb49fa896a6f3c..fa7b08052d57a5425020b391a7dec3b6
  
      public final com.destroystokyo.paper.antixray.ChunkPacketBlockController chunkPacketBlockController; // Paper - Anti-Xray
      public final co.aikar.timings.WorldTimingsHandler timings; // Paper
-@@ -652,9 +656,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -684,9 +688,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
-     // Paper end - optimise collisions
+     // Paper end - optimise random ticking
  
 -    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray
 +    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray // Gale - Gale configuration

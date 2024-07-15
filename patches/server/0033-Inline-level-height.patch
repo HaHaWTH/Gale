@@ -31,12 +31,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 9be6e2cf104f39bce8703b2cf235804e286f1a56..d54120728655bc32d480f16161e302dc897d4f5f 100644
+index 950d8d94ce2ae521b50b6aa523a92fe2be99a250..e82f6b86e70410b43335c0f6bf9fd9e85a9bb9a2 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -653,6 +653,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -685,6 +685,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
-     // Paper end - optimise collisions
+     // Paper end - optimise random ticking
  
 +    // Gale start - Airplane - inline level height
 +    private final int minBuildHeight, levelHeightAccessorMinSection, height, maxBuildHeight, levelHeightAccessorMaxSection;
@@ -50,7 +50,7 @@ index 9be6e2cf104f39bce8703b2cf235804e286f1a56..d54120728655bc32d480f16161e302dc
      protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray // Gale - Gale configuration // Gale - Purpur - remove vanilla profiler
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig(((net.minecraft.world.level.storage.PrimaryLevelData) worlddatamutable).getLevelName()); // Spigot
          this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper - create paper world config
-@@ -672,6 +681,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -704,6 +713,13 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          this.dimensionTypeRegistration = holder;
          final DimensionType dimensionmanager = (DimensionType) holder.value();
  

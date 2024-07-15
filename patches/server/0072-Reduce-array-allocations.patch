@@ -102,7 +102,7 @@ index 87d2b3ec165e2e9e4bdbedd7adddaa2130ed507b..1260b9abca3d194507f3f982add32ef0
  
      public void callEntitiesLoadEvent() {
 diff --git a/src/main/java/ca/spottedleaf/moonrise/patches/collisions/CollisionUtil.java b/src/main/java/ca/spottedleaf/moonrise/patches/collisions/CollisionUtil.java
-index 3cbd02085cc3e2ddb15458faea4b553868cff39a..0bb41d25325011c8afb8ea6caa890ffe0edd4bbb 100644
+index 748ab4d637ce463272bae4fdbab6842a27385126..6a3f1d5362b29db321d6c03d0f5ab5e6c915a02d 100644
 --- a/src/main/java/ca/spottedleaf/moonrise/patches/collisions/CollisionUtil.java
 +++ b/src/main/java/ca/spottedleaf/moonrise/patches/collisions/CollisionUtil.java
 @@ -1113,7 +1113,7 @@ public final class CollisionUtil {
@@ -487,7 +487,7 @@ index 0ee04fe6ff6a4d09754f326526ae04fe7226bab2..365598a660e79d266f5d4a439cb1ba01
      }
  }
 diff --git a/src/main/java/net/minecraft/util/ZeroBitStorage.java b/src/main/java/net/minecraft/util/ZeroBitStorage.java
-index 50040c497a819cd1229042ab3cb057d34a32cacc..e085197001ba0e50dc84fe488cf531cce0950cb1 100644
+index 15c5164d0ef41a978c16ee317fa73e97f2480207..0723c625c38e567f13b77dfe2a98684e5a6b9417 100644
 --- a/src/main/java/net/minecraft/util/ZeroBitStorage.java
 +++ b/src/main/java/net/minecraft/util/ZeroBitStorage.java
 @@ -5,7 +5,7 @@ import java.util.function.IntConsumer;
@@ -669,10 +669,10 @@ index fce49b17905ab97e691aa8499a5dfed67adf0c40..986d0151aeeb2ce0f752c424c526fb0c
              if (stackPredicate.test(itemStack)) {
                  ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 3335409c3a5fbe3234a3de10d54189a82bf23043..d02812eabc5ab5d5671f227ad83d98a1a0d3bb0c 100644
+index 4ec5f84925a52d6391439ec183c04be0114b39b5..9da1b9e2afac5d6a82eeff66f685c032c19e0366 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1689,7 +1689,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1721,7 +1721,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public org.bukkit.entity.Entity[] getChunkEntities(int chunkX, int chunkZ) {
          ca.spottedleaf.moonrise.patches.chunk_system.level.entity.ChunkEntitySlices slices = ((ServerLevel)this).moonrise$getEntityLookup().getChunk(chunkX, chunkZ);
          if (slices == null) {

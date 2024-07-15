@@ -463,25 +463,6 @@ index 790bad0494454ca12ee152e3de6da3da634d9b20..2596e0ee4df5b96f181e28a742ef3459
      }
  
      @Override
-diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 54e581db732c3a104142a2bbc228ecbe16aec0fc..bccbc04c3322db5050871abcbf5ef592c38e95d4 100644
---- a/src/main/java/net/minecraft/server/MinecraftServer.java
-+++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1029,7 +1029,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
-         shutdownThread = Thread.currentThread();
-         org.spigotmc.WatchdogThread.doStop(); // Paper
-         if (!isSameThread()) {
--            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER)");
-+            // Gale start - branding changes
-+            /*
-+            We do not want people to report thread issues to Paper,
-+            but we do want people to report thread issues to Gale.
-+            */
-+            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER - If you think this is a Gale bug, please report it at https://github.com/GaleMC/Gale/issues)");
-+            // Gale end - branding changes
-             while (this.getRunningThread().isAlive()) {
-                 this.getRunningThread().stop();
-                 try {
 diff --git a/src/main/java/net/minecraft/world/damagesource/DamageSource.java b/src/main/java/net/minecraft/world/damagesource/DamageSource.java
 index bb1a60180e58c1333e7bb33e8acf1b0225eda8a8..4d037e899e0b5548be406ad55acd2062603b7da1 100644
 --- a/src/main/java/net/minecraft/world/damagesource/DamageSource.java
@@ -496,10 +477,10 @@ index bb1a60180e58c1333e7bb33e8acf1b0225eda8a8..4d037e899e0b5548be406ad55acd2062
          DamageSource damageSource = this.cloneInstance();
          damageSource.customEventDamager = entity;
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index 0615fd82b71efb9a397de01615050e6d906c2844..b797ca4b68d110bbf64eac4ae422a7bc8bce145a 100644
+index 40689256711cc94a806ca1da346f4f62eda31526..11cf6a20550e252501a92be5bdffafcff007cbf9 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-@@ -146,7 +146,13 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
+@@ -177,7 +177,13 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
  
      // Paper start
      private static void printOversizedLog(String msg, Path file, int x, int z) {

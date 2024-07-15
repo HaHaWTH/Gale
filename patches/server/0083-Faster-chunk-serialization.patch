@@ -214,7 +214,7 @@ index 0000000000000000000000000000000000000000..349618b7f544bf9a30e0796d4d9a2640
 +    }
 +}
 diff --git a/src/main/java/net/minecraft/util/BitStorage.java b/src/main/java/net/minecraft/util/BitStorage.java
-index 68648c5a5e3ff079f832092af0f2f801c42d1ede..5a85e499aeb02885cab5ba7d571d6f6ae470bce8 100644
+index 19661e106612b8e4e152085fb398db7bd06acc23..f852d2c0c0e37df78dbea28e183aee3572978dee 100644
 --- a/src/main/java/net/minecraft/util/BitStorage.java
 +++ b/src/main/java/net/minecraft/util/BitStorage.java
 @@ -1,6 +1,7 @@
@@ -223,17 +223,17 @@ index 68648c5a5e3ff079f832092af0f2f801c42d1ede..5a85e499aeb02885cab5ba7d571d6f6a
  import java.util.function.IntConsumer;
 +import net.minecraft.world.level.chunk.Palette;
  
- public interface BitStorage {
+ public interface BitStorage extends ca.spottedleaf.moonrise.patches.block_counting.BlockCountingBitStorage { // Paper - block counting
      int getAndSet(int index, int value);
-@@ -20,4 +21,6 @@ public interface BitStorage {
-     void unpack(int[] out);
- 
-     BitStorage copy();
+@@ -38,4 +39,6 @@ public interface BitStorage extends ca.spottedleaf.moonrise.patches.block_counti
+         return ret;
+     }
+     // Paper end - block counting
 +
 +    <T> void compact(Palette<T> srcPalette, Palette<T> dstPalette, short[] out); // Gale - Lithium - faster chunk serialization
  }
 diff --git a/src/main/java/net/minecraft/util/SimpleBitStorage.java b/src/main/java/net/minecraft/util/SimpleBitStorage.java
-index 9f438d9c6eb05e43d24e4af68188a3d4c46a938c..0af2e2cc59db228e01afa880f83c2024dade4ff0 100644
+index 8acf2f2491a8d9d13392c5e89b2bd5c9918285e1..0b8b0cf58f637d72eae28e21266df14183f11fb1 100644
 --- a/src/main/java/net/minecraft/util/SimpleBitStorage.java
 +++ b/src/main/java/net/minecraft/util/SimpleBitStorage.java
 @@ -2,6 +2,7 @@ package net.minecraft.util;
@@ -244,7 +244,7 @@ index 9f438d9c6eb05e43d24e4af68188a3d4c46a938c..0af2e2cc59db228e01afa880f83c2024
  import org.apache.commons.lang3.Validate;
  
  public class SimpleBitStorage implements BitStorage {
-@@ -367,4 +368,45 @@ public class SimpleBitStorage implements BitStorage {
+@@ -401,4 +402,45 @@ public class SimpleBitStorage implements BitStorage {
              super(message);
          }
      }
@@ -291,13 +291,13 @@ index 9f438d9c6eb05e43d24e4af68188a3d4c46a938c..0af2e2cc59db228e01afa880f83c2024
 +
  }
 diff --git a/src/main/java/net/minecraft/util/ZeroBitStorage.java b/src/main/java/net/minecraft/util/ZeroBitStorage.java
-index e085197001ba0e50dc84fe488cf531cce0950cb1..267d22559002741c113755e75e7c75e4232cf644 100644
+index 0723c625c38e567f13b77dfe2a98684e5a6b9417..b02a0d9c71550d39aad08ed0932043531b661305 100644
 --- a/src/main/java/net/minecraft/util/ZeroBitStorage.java
 +++ b/src/main/java/net/minecraft/util/ZeroBitStorage.java
-@@ -62,4 +62,6 @@ public class ZeroBitStorage implements BitStorage {
-     public BitStorage copy() {
-         return this;
+@@ -80,4 +80,6 @@ public class ZeroBitStorage implements BitStorage {
+         return ret;
      }
+     // Paper end - block counting
 +
 +    @Override public <T> void compact(net.minecraft.world.level.chunk.Palette<T> srcPalette, net.minecraft.world.level.chunk.Palette<T> dstPalette, short[] out) {}  // Gale - Lithium - faster chunk serialization
  }
