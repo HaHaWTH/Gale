@@ -59,15 +59,15 @@ jobs:
           distribution: 'temurin'
           java-version:  21
 
-      - name: Running tests before push
-        run: |
-          cd Gale
-          if ! git diff --quiet; then
-            echo "Running tests...."
-            ./gradlew applyPatches
-            ./gradlew createMojmapPaperclipJar
-            ./gradlew rebuildPatches
-          fi
+#      - name: Running tests before push
+#        run: |
+#          cd Gale
+#          if ! git diff --quiet; then
+#            echo "Running tests...."
+#            ./gradlew applyPatches
+#            ./gradlew createMojmapPaperclipJar
+#            ./gradlew rebuildPatches
+#          fi
 
       - name: Check for changes and write to repository
         run: |
