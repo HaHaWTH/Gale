@@ -50,24 +50,25 @@ index fcfbca333234c09f7c056bbfcd9ac8860b20a8db..c780892d0043cbac80a62f5fbcc32ff4
 \ No newline at end of file
 +}
 diff --git a/src/main/java/ca/spottedleaf/moonrise/common/list/ReferenceList.java b/src/main/java/ca/spottedleaf/moonrise/common/list/ReferenceList.java
-index 93e8c8134da8ee1a9b777c708f992922a1a7de8b..0c7135fb58d1d724e41947fa40800be2ed8735e2 100644
+index 2e876b918672e8ef3b5197b7e6b1597247fdeaa1..8df9406b77eb3c225ebf88bf76a7adb666452f3b 100644
 --- a/src/main/java/ca/spottedleaf/moonrise/common/list/ReferenceList.java
 +++ b/src/main/java/ca/spottedleaf/moonrise/common/list/ReferenceList.java
-@@ -12,13 +12,11 @@ public final class ReferenceList<E> implements Iterable<E> {
-         this.referenceToIndex.defaultReturnValue(Integer.MIN_VALUE);
-     }
+@@ -7,14 +7,12 @@ import java.util.NoSuchElementException;
+ 
+ public final class ReferenceList<E> implements Iterable<E> {
  
 -    private static final Object[] EMPTY_LIST = new Object[0];
 -
+     private final Reference2IntOpenHashMap<E> referenceToIndex;
      private E[] references;
      private int count;
  
      public ReferenceList() {
--        this((E[])EMPTY_LIST, 0);
-+        this((E[]) me.titaniumtown.ArrayConstants.emptyObjectArray, 0); // Gale - JettPack - reduce array allocations
+-        this((E[])EMPTY_LIST);
++        this((E[]) me.titaniumtown.ArrayConstants.emptyObjectArray); // Gale - JettPack - reduce array allocations
      }
  
-     public ReferenceList(final E[] array, final int count) {
+     public ReferenceList(final E[] referenceArray) {
 diff --git a/src/main/java/ca/spottedleaf/moonrise/common/list/SortedList.java b/src/main/java/ca/spottedleaf/moonrise/common/list/SortedList.java
 index db92261a6cb3758391108361096417c61bc82cdc..1a14fddb36ca3c14d243304db629d0c5aac3906c 100644
 --- a/src/main/java/ca/spottedleaf/moonrise/common/list/SortedList.java
@@ -127,51 +128,6 @@ index 673103f160cbe577c6e05f998706af4e6850011b..2c1eb34f1539555ba1988a2eeeea7b2f
      }
  
      @org.jetbrains.annotations.NotNull
-diff --git a/src/main/java/com/destroystokyo/paper/util/maplist/EntityList.java b/src/main/java/com/destroystokyo/paper/util/maplist/EntityList.java
-index 0133ea6feb1ab88f021f66855669f58367e7420b..fda95d81f53ae779651bdf608a6fd163b4f1b98a 100644
---- a/src/main/java/com/destroystokyo/paper/util/maplist/EntityList.java
-+++ b/src/main/java/com/destroystokyo/paper/util/maplist/EntityList.java
-@@ -17,9 +17,7 @@ public final class EntityList implements Iterable<Entity> {
-         this.entityToIndex.defaultReturnValue(Integer.MIN_VALUE);
-     }
- 
--    protected static final Entity[] EMPTY_LIST = new Entity[0];
--
--    protected Entity[] entities = EMPTY_LIST;
-+    protected Entity[] entities = me.titaniumtown.ArrayConstants.emptyEntityArray; // Gale - JettPack - reduce array allocations
-     protected int count;
- 
-     public int size() {
-diff --git a/src/main/java/com/destroystokyo/paper/util/maplist/IBlockDataList.java b/src/main/java/com/destroystokyo/paper/util/maplist/IBlockDataList.java
-index 277cfd9d1e8fff5d9b5e534b75c3c5162d58b0b7..d5309380b89c947680e6bf1e3488764bd16b6ca0 100644
---- a/src/main/java/com/destroystokyo/paper/util/maplist/IBlockDataList.java
-+++ b/src/main/java/com/destroystokyo/paper/util/maplist/IBlockDataList.java
-@@ -20,9 +20,7 @@ public final class IBlockDataList {
-         this.map.defaultReturnValue(Long.MAX_VALUE);
-     }
- 
--    private static final long[] EMPTY_LIST = new long[0];
--
--    private long[] byIndex = EMPTY_LIST;
-+    private long[] byIndex = me.titaniumtown.ArrayConstants.emptyLongArray; // Gale - JettPack - reduce array allocations
-     private int size;
- 
-     public static int getLocationKey(final int x, final int y, final int z) {
-diff --git a/src/main/java/com/destroystokyo/paper/util/maplist/ReferenceList.java b/src/main/java/com/destroystokyo/paper/util/maplist/ReferenceList.java
-index 190c5f0b02a3d99054704ae1afbffb3498ddffe1..6f9ebc774cd5b4debb51973e88975ab23ddeb914 100644
---- a/src/main/java/com/destroystokyo/paper/util/maplist/ReferenceList.java
-+++ b/src/main/java/com/destroystokyo/paper/util/maplist/ReferenceList.java
-@@ -15,9 +15,7 @@ public final class ReferenceList<E> implements Iterable<E> {
-         this.referenceToIndex.defaultReturnValue(Integer.MIN_VALUE);
-     }
- 
--    protected static final Object[] EMPTY_LIST = new Object[0];
--
--    protected Object[] references = EMPTY_LIST;
-+    protected Object[] references = me.titaniumtown.ArrayConstants.emptyObjectArray; // Gale - JettPack - reduce array allocations
-     protected int count;
- 
-     public int size() {
 diff --git a/src/main/java/io/papermc/paper/command/brigadier/PaperCommands.java b/src/main/java/io/papermc/paper/command/brigadier/PaperCommands.java
 index a3e128bde0fa4ab0ecab4172f02288a29b9fddc7..cbbb95692e47217932b5990057483589e8080f69 100644
 --- a/src/main/java/io/papermc/paper/command/brigadier/PaperCommands.java
@@ -669,7 +625,7 @@ index fce49b17905ab97e691aa8499a5dfed67adf0c40..986d0151aeeb2ce0f752c424c526fb0c
              if (stackPredicate.test(itemStack)) {
                  ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 4ec5f84925a52d6391439ec183c04be0114b39b5..9da1b9e2afac5d6a82eeff66f685c032c19e0366 100644
+index d756e2ac71eced0de81b921f3215f51600b6b768..00b001e279ed1e79ad4171a5d2cedb2745ea946d 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -1721,7 +1721,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl

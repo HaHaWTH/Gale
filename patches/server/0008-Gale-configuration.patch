@@ -189,7 +189,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index aeae4f8d4ead24db315631c3d2c0b930d0d51e02..4dac66a7c5750e130db7bb5181672a879f83ce98 100644
+index 86f890280bfabac3b14b771ae67d28653ab2e3e8..dd874116d8d0e0ba81d50cc53e33e0ada63f905d 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -289,10 +289,10 @@ index 7d82cc6b847124cf4225428ba310309544928148..ac703c9ef504779dffbd8d7e676dbb51
          if (this.convertOldUsers()) {
              this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index b3ca52c0a1c4c9c2f4d86b83ad2d6308e3ba9e7c..90f5c98ed793fafb4b6f95b66f35583d15af77d8 100644
+index 2766ec28f028c0bd672009928bf64c1a6e5d07d6..3bdca1658cec40df0c31aa66e5102f2e9ba5de13 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -527,7 +527,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -546,7 +546,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
@@ -302,7 +302,7 @@ index b3ca52c0a1c4c9c2f4d86b83ad2d6308e3ba9e7c..90f5c98ed793fafb4b6f95b66f35583d
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index bbb0d543197001fe8bb5179dde7201327fec4274..3a791b1f4b2e652408faf9ae133cef1e3f89b980 100644
+index e2a0487089eb5a7bdc1433e4c75f69d8e9f9d5f9..90fc52bb3c8c48e055965f2f822c6199182f373b 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -12,7 +12,6 @@ import java.util.function.Supplier;
@@ -356,7 +356,7 @@ index bbb0d543197001fe8bb5179dde7201327fec4274..3a791b1f4b2e652408faf9ae133cef1e
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index caf6ff33b42472d30f28629470e12889f50490cc..eb4c9014afe2b59e991a2812c55eaa226925272c 100644
+index 81fa2bab6841ab375ff310d0fbbe6349fd44872a..4a0b8d90c1dad20ec7854c5aac6bf26f785a03bc 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1059,6 +1059,7 @@ public final class CraftServer implements Server {

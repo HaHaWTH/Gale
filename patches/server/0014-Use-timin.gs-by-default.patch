@@ -13,12 +13,12 @@ As part of: Mirai (https://github.com/etil2jz/Mirai)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/io/papermc/paper/configuration/GlobalConfiguration.java b/src/main/java/io/papermc/paper/configuration/GlobalConfiguration.java
-index f2e30d8743a97c0541808dc5c03300c0d881b843..71f1c1de486a72a6253b69b1a6a0a365faa5b5b4 100644
+index 379452394679c466a09441d4c12882d0d00d9ef3..b021721efaab5242b7d174a9c859fe06a5ca6054 100644
 --- a/src/main/java/io/papermc/paper/configuration/GlobalConfiguration.java
 +++ b/src/main/java/io/papermc/paper/configuration/GlobalConfiguration.java
 @@ -98,7 +98,7 @@ public class GlobalConfiguration extends ConfigurationPart {
      public class Timings extends ConfigurationPart {
-         public boolean enabled = true;
+         public boolean enabled = false;
          public boolean verbose = true;
 -        public String url = "https://timings.aikar.co/";
 +        public String url = "https://timin.gs/"; // Gale - use timin.gs by default

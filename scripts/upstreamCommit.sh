@@ -14,7 +14,7 @@ function getCommits() {
 set -e
 PS1="$"
 
-paperHash=$(git diff gradle.properties | awk '/^-paperCommit =/{print $NF}')
+paperHash=$(git diff gradle.properties | awk '/^-paperRef =/{print $NF}')
 
 TEMP=$(getopt --long paper: -o "" -- "$@")
 eval set -- "$TEMP"

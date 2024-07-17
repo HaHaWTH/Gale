@@ -31,22 +31,18 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/io/papermc/paper/configuration/GlobalConfiguration.java b/src/main/java/io/papermc/paper/configuration/GlobalConfiguration.java
-index 71f1c1de486a72a6253b69b1a6a0a365faa5b5b4..83ecb6402ddedd4a613afef7d3a9ad5a5ac6ae30 100644
+index b021721efaab5242b7d174a9c859fe06a5ca6054..65c7a798ae69602f586038ecb2c9ab4f7b968fce 100644
 --- a/src/main/java/io/papermc/paper/configuration/GlobalConfiguration.java
 +++ b/src/main/java/io/papermc/paper/configuration/GlobalConfiguration.java
-@@ -96,7 +96,10 @@ public class GlobalConfiguration extends ConfigurationPart {
- 
+@@ -97,6 +97,7 @@ public class GlobalConfiguration extends ConfigurationPart {
      @Deprecated(forRemoval = true)
      public class Timings extends ConfigurationPart {
--        public boolean enabled = true;
-+        // Gale start - recommend disabling timings on startup
-+        public boolean enabled = false; // Gale - set default value to false
-+        public boolean warnIfEnabled = true;
-+        // Gale end - recommend disabling timings on startup
+         public boolean enabled = false;
++        public boolean warnIfEnabled = true; // Gale - recommend disabling timings on startup
          public boolean verbose = true;
          public String url = "https://timin.gs/"; // Gale - use timin.gs by default
          public boolean serverNamePrivacy = false;
-@@ -110,6 +113,13 @@ public class GlobalConfiguration extends ConfigurationPart {
+@@ -110,6 +111,13 @@ public class GlobalConfiguration extends ConfigurationPart {
  
          @PostProcess
          private void postProcess() {

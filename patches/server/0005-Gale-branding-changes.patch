@@ -712,10 +712,10 @@ index 0000000000000000000000000000000000000000..3d674eca7d20202d8f811c5c3e3946a1
 +
 +}
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index 5e583d7226ce60d965ce9f019900793d45742d30..1647cf84bd8bb703967c6d4d8ac473291200c094 100644
+index f7a4fee9bb25ff256dc2e5ea26bfbceca6a49167..08fa6018bcab38d8c9ca05c84e229d69184ce01b 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
-@@ -155,14 +155,20 @@ public class WatchdogThread extends io.papermc.paper.util.TickThread // Paper -
+@@ -155,14 +155,20 @@ public class WatchdogThread extends ca.spottedleaf.moonrise.common.util.TickThre
                  if (isLongTimeout) {
                  // Paper end
                  log.log( Level.SEVERE, "------------------------------" );
@@ -739,7 +739,7 @@ index 5e583d7226ce60d965ce9f019900793d45742d30..1647cf84bd8bb703967c6d4d8ac47329
                  //
                  if ( net.minecraft.world.level.Level.lastPhysicsProblem != null )
                  {
-@@ -184,12 +190,18 @@ public class WatchdogThread extends io.papermc.paper.util.TickThread // Paper -
+@@ -184,12 +190,18 @@ public class WatchdogThread extends ca.spottedleaf.moonrise.common.util.TickThre
                  // Paper end
                  } else
                  {
@@ -760,7 +760,7 @@ index 5e583d7226ce60d965ce9f019900793d45742d30..1647cf84bd8bb703967c6d4d8ac47329
                  ca.spottedleaf.moonrise.patches.chunk_system.scheduling.ChunkTaskScheduler.dumpAllChunkLoadInfo(MinecraftServer.getServer(), isLongTimeout); // Paper - rewrite chunk system
                  this.dumpTickingInfo(); // Paper - log detailed tick information
                  WatchdogThread.dumpThread( ManagementFactory.getThreadMXBean().getThreadInfo( MinecraftServer.getServer().serverThread.getId(), Integer.MAX_VALUE ), log );
-@@ -205,7 +217,13 @@ public class WatchdogThread extends io.papermc.paper.util.TickThread // Paper -
+@@ -205,7 +217,13 @@ public class WatchdogThread extends ca.spottedleaf.moonrise.common.util.TickThre
                      WatchdogThread.dumpThread( thread, log );
                  }
                  } else {

@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java b/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java
-index c1c119e2e788d5963de3a74a6b9724c71a168a8a..08eda5032c8a822037ca3c68206a5a94cff5e352 100644
+index b1456c1ddf24b625c6caf41a9379d8c011e1c36c..be7a4e2fd8823925847949d33358d64d464ec79f 100644
 --- a/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java
 +++ b/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java
-@@ -64,7 +64,7 @@ public final class ChunkTaskScheduler {
+@@ -65,7 +65,7 @@ public final class ChunkTaskScheduler {
  
      private static final Logger LOGGER = LogUtils.getClassLogger();
  

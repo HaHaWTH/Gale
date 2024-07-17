@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 4b48cac0c8861dfaad16d5ecfa3e73c9b5db0bb7..a4091552f900b06fd629a22b0685759d5e2ce81d 100644
+index 54d484e7e89e3a43259fce06c6071c6bde77f56a..b533741f289235dc2b5d38f9d715ce35bf68464e 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -4434,16 +4434,18 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -70,8 +70,8 @@ index 4b48cac0c8861dfaad16d5ecfa3e73c9b5db0bb7..a4091552f900b06fd629a22b0685759d
 -                        blockposition_mutableblockposition.set(l1, i2, j2);
 -                        FluidState fluid = this.level().getFluidState(blockposition_mutableblockposition);
 +            // Gale start - Airplane - reduce entity fluid lookups if no fluids - based off CollisionUtil.getCollisionsForBlocksOrWorldBorder
-+            final int minSection = io.papermc.paper.util.WorldUtil.getMinSection(this.level());
-+            final int maxSection = io.papermc.paper.util.WorldUtil.getMaxSection(this.level());
++            final int minSection = ca.spottedleaf.moonrise.common.util.WorldUtil.getMinSection(this.level());
++            final int maxSection = ca.spottedleaf.moonrise.common.util.WorldUtil.getMaxSection(this.level());
 +            final int minBlock = minSection << 4;
 +            final int maxBlock = (maxSection << 4) | 15;
 +
