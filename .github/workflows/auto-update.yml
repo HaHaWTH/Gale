@@ -2,7 +2,6 @@ name: Automatically update Paper commit hash
 
 on:
   workflow_dispatch:
-  push:
   schedule:
     - cron: "0 0 * * *"
 
@@ -26,22 +25,18 @@ jobs:
       - name: Get Gale latest commit Hash
         id: paperRef
         run: |
-          ls
           cd Paper
           echo "::set-output name=paperRef::$(git rev-parse HEAD)"
-          cd ..
 
       - name: Get Gale Current Paper commit Hash
         id: currPaperRef
         run: |
-          ls
           cd Gale
           currPaperRef=$(grep "^paperRef\s*=" gradle.properties | sed 's/^paperRef\s*=\s*//')
           echo "::set-output name=currPaperRef::$currPaperRef"
 
       - name: Update paperRef in Gale
         run: |
-          ls
           cd Gale
           sed -i "s/\(paperRef\s*=\s*\).*/\1$PAPER_REF/" gradle.properties
         env:
@@ -49,9 +44,9 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: |
+          cd Gale
           git config --global user.name "Dreeam"
           git config --global user.email 61569423+Dreeam-qwq@users.noreply.github.com
-          cd Gale
           chmod +x gradlew
 
       - uses: actions/setup-java@v4
@@ -59,15 +54,15 @@ jobs:
           distribution: 'temurin'
           java-version:  21
 
-#      - name: Running tests before push
-#        run: |
-#          cd Gale
-#          if ! git diff --quiet; then
-#            echo "Running tests...."
-#            ./gradlew applyPatches
-#            ./gradlew createMojmapPaperclipJar
-#            ./gradlew rebuildPatches
-#          fi
+      - name: Running tests before push
+        run: |
+          cd Gale
+          if ! git diff --quiet; then
+            echo "Running tests...."
+            ./gradlew applyPatches
+            ./gradlew createMojmapPaperclipJar
+            ./gradlew rebuildPatches
+          fi
 
       - name: Check for changes and write to repository
         run: |
