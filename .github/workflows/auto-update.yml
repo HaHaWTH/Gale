@@ -2,6 +2,7 @@ name: Automatically update Paper commit hash
 
 on:
   workflow_dispatch:
+  push:
   schedule:
     - cron: "0 0 * * *"
 
@@ -31,13 +32,16 @@ jobs:
           cd ..
 
       - name: Get Gale Current Paper commit Hash
-        id: curPaperRef
+        id: currPaperRef
         run: |
+          ls
           cd Gale
-          grep "^paperRef\s*=" gradle.properties | sed 's/^paperRef\s*=\s*//'
+          currPaperRef=$(grep "^paperRef\s*=" gradle.properties | sed 's/^paperRef\s*=\s*//')
+          echo "::set-output name=currPaperRef::$currPaperRef"
 
       - name: Update paperRef in Gale
         run: |
+          ls
           cd Gale
           sed -i "s/\(paperRef\s*=\s*\).*/\1$PAPER_REF/" gradle.properties
         env:
@@ -72,10 +76,10 @@ jobs:
             echo "Writing to repo....."
             git add .
             chmod +x ./scripts/upstreamCommit.sh
-            ./scripts/upstreamCommit.sh --paper $CUR_PAPER_REF
+            ./scripts/upstreamCommit.sh --paper $CURR_PAPER_REF
             git push
           else
             echo "No changes to commit."
           fi
         env:
-          CUR_PAPER_REF: ${{ steps.curPaperRef.outputs.curPaperRef }}
+          CURR_PAPER_REF: ${{ steps.currPaperRef.outputs.currPaperRef }}
