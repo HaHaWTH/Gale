@@ -26,14 +26,14 @@ jobs:
         id: paperRef
         run: |
           cd Paper
-          echo "::set-output name=paperRef::$(git rev-parse HEAD)"
+          echo "paperRef=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
       - name: Get Gale Current Paper commit Hash
         id: currPaperRef
         run: |
           cd Gale
           currPaperRef=$(grep "^paperRef\s*=" gradle.properties | sed 's/^paperRef\s*=\s*//')
-          echo "::set-output name=currPaperRef::$currPaperRef"
+          echo "currPaperRef=$currPaperRef" >> $GITHUB_OUTPUT
 
       - name: Update paperRef in Gale
         run: |
