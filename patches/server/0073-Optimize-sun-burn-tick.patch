@@ -13,7 +13,7 @@ As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index c3cb06636c0b1aeb06b9dded5298651d1b8abb69..a1742922ed859f4031b445a1d186f4f70f058c35 100644
+index 00cbaf9518ca7a400489471e8151d02843fd59a4..05ab615451df6d85af426ca7035d26861988dc27 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -315,7 +315,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -47,10 +47,10 @@ index c3cb06636c0b1aeb06b9dded5298651d1b8abb69..a1742922ed859f4031b445a1d186f4f7
          this.absMoveTo(x, y, z);
          this.absRotateTo(yaw, pitch);
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 72f199a6e65758fdc210401d80f4854f58329513..b5a41f189afdf9a11ff20fc4c503423b611a0327 100644
+index 1e433f75b83c3013e7ee962a20773c8ba753a872..6e6095e8bfab28d8c1ac8bf65bb9a0c8ee19088e 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
-@@ -1724,13 +1724,29 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
+@@ -1722,13 +1722,29 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
  
      protected void playAttackSound() {}
  

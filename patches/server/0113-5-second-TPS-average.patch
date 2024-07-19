@@ -59,7 +59,7 @@ index 039a86034928a5eb7aaa2d7ca76a7bddcca346bd..7c32c60100cf2bd109eb8762efa856c1
      }
  
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index ece0bbc6524aa2db40a480b575d2e257fe4d84cd..b1eac1f972fcb4a3706febdbeb2c4a4892d03f0f 100644
+index 02d0b9cf7e593521cf11af9b9e52ab603536186a..74a49d97acc246605cfe5f637e72e138a0d93c6f 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -1133,6 +1133,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -70,7 +70,7 @@ index ece0bbc6524aa2db40a480b575d2e257fe4d84cd..b1eac1f972fcb4a3706febdbeb2c4a48
      public final RollingAverage tps1 = new RollingAverage(60);
      public final RollingAverage tps5 = new RollingAverage(60 * 5);
      public final RollingAverage tps15 = new RollingAverage(60 * 15);
-@@ -1247,6 +1248,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1248,6 +1249,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  if (++MinecraftServer.currentTick % MinecraftServer.SAMPLE_INTERVAL == 0) {
                      final long diff = currentTime - tickSection;
                      final java.math.BigDecimal currentTps = TPS_BASE.divide(new java.math.BigDecimal(diff), 30, java.math.RoundingMode.HALF_UP);
@@ -79,10 +79,10 @@ index ece0bbc6524aa2db40a480b575d2e257fe4d84cd..b1eac1f972fcb4a3706febdbeb2c4a48
                      tps5.add(currentTps, diff);
                      tps15.add(currentTps, diff);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 25228533084ffd9d9c82fecea8722ea6c1ee4bd3..dccad35758ec6ca8c7dff6e68ba61e0b97fe1835 100644
+index 3f74ecf452c53274d07b5aceb597c141a730f32c..0778b76984ebadbe79053ee378fcc8e8b5702928 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -3030,8 +3030,27 @@ public final class CraftServer implements Server {
+@@ -3039,8 +3039,27 @@ public final class CraftServer implements Server {
          };
      }
  

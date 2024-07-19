@@ -189,7 +189,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 86f890280bfabac3b14b771ae67d28653ab2e3e8..dd874116d8d0e0ba81d50cc53e33e0ada63f905d 100644
+index 57e84cf2219d28c37e4c042371afddf585334954..eadc4709ae518023dfcf1661c95e921ef3ae44b2 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -356,10 +356,10 @@ index e2a0487089eb5a7bdc1433e4c75f69d8e9f9d5f9..90fc52bb3c8c48e055965f2f822c6199
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 81fa2bab6841ab375ff310d0fbbe6349fd44872a..4a0b8d90c1dad20ec7854c5aac6bf26f785a03bc 100644
+index 3a91faeb6957e4e783b1de3e1145e7d1d164a857..497f75de077018588fe837a1a73a1c6a804e502d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1059,6 +1059,7 @@ public final class CraftServer implements Server {
+@@ -1068,6 +1068,7 @@ public final class CraftServer implements Server {
  
          org.spigotmc.SpigotConfig.init((File) this.console.options.valueOf("spigot-settings")); // Spigot
          this.console.paperConfigurations.reloadConfigs(this.console);
@@ -367,7 +367,7 @@ index 81fa2bab6841ab375ff310d0fbbe6349fd44872a..4a0b8d90c1dad20ec7854c5aac6bf26f
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters, config.spawnAnimals); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -2978,6 +2979,14 @@ public final class CraftServer implements Server {
+@@ -2987,6 +2988,14 @@ public final class CraftServer implements Server {
              return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
          }
  

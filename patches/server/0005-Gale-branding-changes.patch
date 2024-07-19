@@ -496,10 +496,10 @@ index 40689256711cc94a806ca1da346f4f62eda31526..11cf6a20550e252501a92be5bdffafcf
  
      private static CompoundTag readOversizedChunk(RegionFile regionfile, ChunkPos chunkCoordinate) throws IOException {
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e587212ed2c305 100644
+index 2f4d6b56301195f8d39ed50dffe842464065bfe1..bdfb969f88e68d89a5cad4b145bbc1441a110bac 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-@@ -503,7 +503,7 @@ public class CraftScheduler implements BukkitScheduler {
+@@ -492,7 +492,7 @@ public class CraftScheduler implements BukkitScheduler {
                  this.parsePending();
              } else {
                  // this.debugTail = this.debugTail.setNext(new CraftAsyncDebugger(currentTick + CraftScheduler.RECENT_TICKS, task.getOwner(), task.getTaskClass())); // Paper
@@ -509,10 +509,10 @@ index e85b9bb3f9c225d289a4959921970b9963881199..79192e3a0f27d48f35c0378b58e58721
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 3137391cadef7c67019561e65fedd0664e689eae..150769691fd0c6abad77a4823b5f7dd667a032d1 100644
+index 28b3ad04e1f4b38ce21084864a59a2cd81b3992c..fd855b7ea6680386af61156c3fb0a8746aa59295 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -498,7 +498,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -481,7 +481,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {

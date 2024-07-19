@@ -98,45 +98,11 @@ public class Main {
 }
 ```
 
-diff --git a/src/main/java/io/papermc/paper/util/MCUtil.java b/src/main/java/io/papermc/paper/util/MCUtil.java
-index 4f5badb9429b34ed999183321c98b60978715638..015a6463875b5ae46da0491b358adc568ac9a174 100644
---- a/src/main/java/io/papermc/paper/util/MCUtil.java
-+++ b/src/main/java/io/papermc/paper/util/MCUtil.java
-@@ -152,13 +152,11 @@ public final class MCUtil {
-     }
- 
-     public static int fastFloor(double x) {
--        int truncated = (int)x;
--        return x < (double)truncated ? truncated - 1 : truncated;
-+        return (int) Math.floor(x); // Gale - use platform math functions
-     }
- 
-     public static int fastFloor(float x) {
--        int truncated = (int)x;
--        return x < (double)truncated ? truncated - 1 : truncated;
-+        return (int) Math.floor(x); // Gale - use platform math functions
-     }
- 
-     public static float normalizeYaw(float f) {
-@@ -219,11 +217,11 @@ public final class MCUtil {
-     }
- 
-     public static int getChunkCoordinate(final double coordinate) {
--        return MCUtil.fastFloor(coordinate) >> 4;
-+        return ((int) Math.floor(coordinate)) >> 4; // Gale - use platform math functions
-     }
- 
-     public static int getBlockCoordinate(final double coordinate) {
--        return MCUtil.fastFloor(coordinate);
-+        return (int) Math.floor(coordinate); // Gale - use platform math functions
-     }
- 
-     public static long getBlockKey(final int x, final int y, final int z) {
 diff --git a/src/main/java/net/minecraft/util/Mth.java b/src/main/java/net/minecraft/util/Mth.java
-index f298cdfcf1539e467f57f9f7789de3cf2ca54665..4150562f61fbb5962bf6c7d2727da43feed89036 100644
+index f298cdfcf1539e467f57f9f7789de3cf2ca54665..3468b7fbc7440f220fce8039f237658a593df296 100644
 --- a/src/main/java/net/minecraft/util/Mth.java
 +++ b/src/main/java/net/minecraft/util/Mth.java
-@@ -58,13 +58,11 @@ public class Mth {
+@@ -58,18 +58,15 @@ public class Mth {
      }
  
      public static int floor(float value) {
@@ -152,7 +118,13 @@ index f298cdfcf1539e467f57f9f7789de3cf2ca54665..4150562f61fbb5962bf6c7d2727da43f
      }
  
      public static long lfloor(double value) {
-@@ -81,13 +79,11 @@ public class Mth {
+-        long l = (long)value;
+-        return value < (double)l ? l - 1L : l;
++        return (long) Math.floor(value); // Gale - use platform math functions
+     }
+ 
+     public static float abs(float value) {
+@@ -81,13 +78,11 @@ public class Mth {
      }
  
      public static int ceil(float value) {
@@ -168,7 +140,7 @@ index f298cdfcf1539e467f57f9f7789de3cf2ca54665..4150562f61fbb5962bf6c7d2727da43f
      }
  
      public static int clamp(int value, int min, int max) {
-@@ -123,15 +119,7 @@ public class Mth {
+@@ -123,15 +118,7 @@ public class Mth {
      }
  
      public static double absMax(double a, double b) {

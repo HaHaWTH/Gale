@@ -192,7 +192,7 @@ index 06648f9751fd8a322d0809ffebf6a544596ee1a4..47c09872c8283efaec2eca05b4d74dde
  
      @Override
 diff --git a/src/main/java/net/minecraft/nbt/CompoundTag.java b/src/main/java/net/minecraft/nbt/CompoundTag.java
-index 4e005b7b062e3231f564d284887ea1c2783a4e7d..b0a798ab6cf49131a41e953b2b3e975cf8ecf222 100644
+index d7bb00a946346dff0b0269cbd65276e146a63fb0..ea48637234fdb1e5f54342590def30e11b6a5df0 100644
 --- a/src/main/java/net/minecraft/nbt/CompoundTag.java
 +++ b/src/main/java/net/minecraft/nbt/CompoundTag.java
 @@ -409,7 +409,7 @@ public class CompoundTag implements Tag {
@@ -515,10 +515,10 @@ index 045abc7dfebce2501abcc1bebee18d5ba8aea1b0..0650254d7de55829c5d3c118ccf08cee
  
          for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index 2a25238dcd741f9a5d16b202902210244d9a1947..72f199a6e65758fdc210401d80f4854f58329513 100644
+index 02dd200670b02aeab934554b280f7f5d26af0df1..1e433f75b83c3013e7ee962a20773c8ba753a872 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
-@@ -1124,7 +1124,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
+@@ -1122,7 +1122,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
      @Override
      protected void dropCustomDeathLoot(ServerLevel world, DamageSource source, boolean causedByPlayer) {
          super.dropCustomDeathLoot(world, source, causedByPlayer);
@@ -527,7 +527,7 @@ index 2a25238dcd741f9a5d16b202902210244d9a1947..72f199a6e65758fdc210401d80f4854f
          int i = aenumitemslot.length;
  
          for (int j = 0; j < i; ++j) {
-@@ -1195,7 +1195,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
+@@ -1193,7 +1193,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
  
      public Set<EquipmentSlot> dropPreservedEquipment(Predicate<ItemStack> dropPredicate) {
          Set<EquipmentSlot> set = new HashSet();
@@ -536,7 +536,7 @@ index 2a25238dcd741f9a5d16b202902210244d9a1947..72f199a6e65758fdc210401d80f4854f
          int i = aenumitemslot.length;
  
          for (int j = 0; j < i; ++j) {
-@@ -1254,7 +1254,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
+@@ -1252,7 +1252,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
              }
  
              boolean flag = true;
@@ -545,7 +545,7 @@ index 2a25238dcd741f9a5d16b202902210244d9a1947..72f199a6e65758fdc210401d80f4854f
              int j = aenumitemslot.length;
  
              for (int k = 0; k < j; ++k) {
-@@ -1339,7 +1339,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
+@@ -1337,7 +1337,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
  
      protected void populateDefaultEquipmentEnchantments(ServerLevelAccessor world, RandomSource random, DifficultyInstance localDifficulty) {
          this.enchantSpawnedWeapon(world, random, localDifficulty);
@@ -554,7 +554,7 @@ index 2a25238dcd741f9a5d16b202902210244d9a1947..72f199a6e65758fdc210401d80f4854f
          int i = aenumitemslot.length;
  
          for (int j = 0; j < i; ++j) {
-@@ -1544,7 +1544,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
+@@ -1542,7 +1542,7 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
                  t0.setInvulnerable(this.isInvulnerable());
                  if (flag) {
                      t0.setCanPickUpLoot(this.canPickUpLoot());

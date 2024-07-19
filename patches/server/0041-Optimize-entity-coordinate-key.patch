@@ -21,21 +21,21 @@ FPU and ALU incurs a significant performance hit. The casted/rounded
 data is already available in the blockPosition struct, so we use that
 instead of re-doing the casting.
 
-diff --git a/src/main/java/io/papermc/paper/util/MCUtil.java b/src/main/java/io/papermc/paper/util/MCUtil.java
-index a3288cd39a0d3563efed87a074a5dec28d303a9e..ef5274ec1cb239c6dc4ab4c2f3e8e98ec070bec0 100644
---- a/src/main/java/io/papermc/paper/util/MCUtil.java
-+++ b/src/main/java/io/papermc/paper/util/MCUtil.java
-@@ -197,7 +197,7 @@ public final class MCUtil {
+diff --git a/src/main/java/ca/spottedleaf/moonrise/common/util/CoordinateUtils.java b/src/main/java/ca/spottedleaf/moonrise/common/util/CoordinateUtils.java
+index 31b92bd48828cbea25b44a9f0f96886347aa1ae6..036c1a287db04c0191e5f84b027ea68d31447cbc 100644
+--- a/src/main/java/ca/spottedleaf/moonrise/common/util/CoordinateUtils.java
++++ b/src/main/java/ca/spottedleaf/moonrise/common/util/CoordinateUtils.java
+@@ -16,7 +16,7 @@ public final class CoordinateUtils {
      }
  
-     public static long getCoordinateKey(final Entity entity) {
--        return ((long)(MCUtil.fastFloor(entity.getZ()) >> 4) << 32) | ((MCUtil.fastFloor(entity.getX()) >> 4) & 0xFFFFFFFFL);
-+        return ((long)(entity.blockPosition.getZ() >> 4) << 32) | ((entity.blockPosition.getX() >> 4) & 0xFFFFFFFFL); // Gale - Pufferfish - optimize entity coordinate key - eliminate double->long cast in hotpath
+     public static long getChunkKey(final Entity entity) {
+-        return ((Mth.lfloor(entity.getZ()) >> 4) << 32) | ((Mth.lfloor(entity.getX()) >> 4) & 0xFFFFFFFFL);
++        return ((long) (entity.blockPosition.getZ() >> 4) << 32) | ((entity.blockPosition.getX() >> 4) & 0xFFFFFFFFL); // Gale - Pufferfish - optimize entity coordinate key - eliminate double->long cast in hotpath
      }
  
-     public static long getCoordinateKey(final ChunkPos pair) {
+     public static long getChunkKey(final ChunkPos pos) {
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index a4091552f900b06fd629a22b0685759d5e2ce81d..c3cb06636c0b1aeb06b9dded5298651d1b8abb69 100644
+index dfc1f3b3097430f1553b0a0b03d7be3863d14c11..00cbaf9518ca7a400489471e8151d02843fd59a4 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -316,7 +316,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
