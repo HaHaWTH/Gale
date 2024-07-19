@@ -39,8 +39,21 @@ index fea92d280c6817cee1f18379d5ed51a3a22ee344..fd5d7feb9670a14cc6f7daa8ce6ba6a2
  
      private long lastFill = -1;
      private long nextRefill = -1;
+diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
+index eb0389ad86300665b6e057bcfa1d7c068dc6c6ab..6d864396f72220d9c92733a38ff6f2fd235238f5 100644
+--- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
++++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
+@@ -109,7 +109,7 @@ public class RegionFile implements AutoCloseable {
+     }
+ 
+     private void backupRegionFile() {
+-        Path backup = this.path.getParent().resolve(this.path.getFileName() + "." + new java.util.Random().nextLong() + ".backup");
++        Path backup = this.path.getParent().resolve(this.path.getFileName() + "." + new org.galemc.gale.random.XorShiftRandom().nextLong() + ".backup"); // Gale - xor-shift random
+         this.backupRegionFile(backup);
+     }
+ 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index 8045d6c9398d1c88595da6e41aa1ed27fb6fbad0..f2aec38dc7a631e41983f2c21f93ee0b260058b0 100644
+index 362ca138a5cd5ad19f1300015c2571794adc3649..1f354c6c09bc49e57a69db7cfa4f2a331dd02bdb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -251,7 +251,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {

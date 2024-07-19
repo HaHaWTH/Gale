@@ -65,4 +65,3 @@ Binaries are licensed under GPL-3.0.
 ## TODO
 check Cache CubeVoxelShape shape array (crash)
 check performance of Use aging cache for biome temperatures
-check backupRegionFile() in Add xor-shift random patch
