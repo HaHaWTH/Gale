@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index a302242681e477aa8f0d243e3a0ecf9f31c27c0a..fcc026e9b5ebf892d86f8395f3571b0a7c5b8311 100644
+index 22e840a7ec04b7ec5d3886dda023c05b6f0b55c7..6129fd5f7615ae0c9b98f86441ce76d9807bffb0 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -67,6 +67,15 @@ paperweight {
+@@ -71,6 +71,15 @@ paperweight {
      craftBukkitPackageVersion.set("v1_21_R1") // also needs to be updated in MappingEnvironment
  }
  

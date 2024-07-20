@@ -189,7 +189,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 57e84cf2219d28c37e4c042371afddf585334954..eadc4709ae518023dfcf1661c95e921ef3ae44b2 100644
+index 9325d6f95165a7cee00d7de736af723681cc16b4..590f9f43377b88e6c94eeccbb53c08a6067930cf 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -274,7 +274,7 @@ index 33e3815a0c979609d4c7ab83ad91e87ac07a556d..67d4a82f371a4772128cc2218fd0a18c
      }
  
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 7d82cc6b847124cf4225428ba310309544928148..ac703c9ef504779dffbd8d7e676dbb51fb94dd29 100644
+index dd56c8e041116ef3602a9f89c998c8208ab89b51..86c615518e315dd4425d17df163e88a150a4ef7c 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -226,6 +226,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -285,9 +285,9 @@ index 7d82cc6b847124cf4225428ba310309544928148..ac703c9ef504779dffbd8d7e676dbb51
 +        galeConfigurations.initializeGlobalConfiguration(this.registryAccess());
 +        galeConfigurations.initializeWorldDefaultsConfiguration(this.registryAccess());
 +        // Gale end - Gale configuration
+         this.server.spark.enableEarlyIfRequested(); // Paper - spark
          // Paper start - fix converting txt to json file; convert old users earlier after PlayerList creation but before file load/save
          if (this.convertOldUsers()) {
-             this.getProfileCache().save(false); // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
 index 2766ec28f028c0bd672009928bf64c1a6e5d07d6..3bdca1658cec40df0c31aa66e5102f2e9ba5de13 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
@@ -356,10 +356,10 @@ index e2a0487089eb5a7bdc1433e4c75f69d8e9f9d5f9..90fc52bb3c8c48e055965f2f822c6199
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 3a91faeb6957e4e783b1de3e1145e7d1d164a857..497f75de077018588fe837a1a73a1c6a804e502d 100644
+index c8b82bc41f2042bb4b067f06265a3a22e51f7629..a01e30045b02526db835f2e763d987146eec4c35 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1068,6 +1068,7 @@ public final class CraftServer implements Server {
+@@ -1070,6 +1070,7 @@ public final class CraftServer implements Server {
  
          org.spigotmc.SpigotConfig.init((File) this.console.options.valueOf("spigot-settings")); // Spigot
          this.console.paperConfigurations.reloadConfigs(this.console);
@@ -367,7 +367,7 @@ index 3a91faeb6957e4e783b1de3e1145e7d1d164a857..497f75de077018588fe837a1a73a1c6a
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters, config.spawnAnimals); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -2987,6 +2988,14 @@ public final class CraftServer implements Server {
+@@ -2991,6 +2992,14 @@ public final class CraftServer implements Server {
              return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
          }
  

@@ -1,0 +1,33 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martijn Muijsers <martijnmuijsers@live.nl>
+Date: Fri, 25 Nov 2022 15:07:55 +0100
+Subject: [PATCH] Do not log expired message warnings
+
+License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+Gale - https://galemc.org
+
+diff --git a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
+index e5625557d2cd70b19b9db5fd418c243b639188e8..67ab06ccd421f991035360bd037616c9fd5ceeb0 100644
+--- a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
++++ b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
+@@ -57,7 +57,7 @@ public class SignedMessageChain {
+                             throw new SignedMessageChain.DecodeException(SignedMessageChain.DecodeException.INVALID_SIGNATURE);
+                         } else {
+                             if (playerChatMessage.hasExpiredServer(Instant.now())) {
+-                                SignedMessageChain.LOGGER.warn("Received expired chat: '{}'. Is the client/server system time unsynchronized?", body.content());
++                                if (GaleGlobalConfiguration.get().logToConsole.chat.expiredMessageWarning) SignedMessageChain.LOGGER.warn("Received expired chat: '{}'. Is the client/server system time unsynchronized?", body.content()); // Gale - do not log expired message warnings
+                             }
+ 
+                             SignedMessageChain.this.nextLink = signedMessageLink.advance();
+diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
+index dfe4ea3fbdcd36e10a10041d006454a7e6f9e68a..3fd497761dfb5e10ae7a3fd83bee8013c3869117 100644
+--- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
++++ b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
+@@ -62,6 +62,7 @@ public class GaleGlobalConfiguration extends ConfigurationPart {
+         public Chat chat;
+         public class Chat extends ConfigurationPart {
+             public boolean emptyMessageWarning = false; // Gale - do not log empty message warnings
++            public boolean expiredMessageWarning = false; // Gale - do not log expired message warnings
+         }
+ 
+         // Gale start - Purpur - do not log plugin library loads

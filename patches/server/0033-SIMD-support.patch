@@ -1,0 +1,139 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martijn Muijsers <martijnmuijsers@live.nl>
+Date: Thu, 24 Nov 2022 01:19:12 +0100
+Subject: [PATCH] SIMD support
+
+License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+Gale - https://galemc.org
+
+This patch is based on the following patch:
+"Add SIMD utilities"
+By: Kevin Raneri <kevin.raneri@gmail.com>
+As part of: Pufferfish (https://github.com/pufferfish-gg/Pufferfish)
+Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+
+diff --git a/build.gradle.kts b/build.gradle.kts
+index 014ad39c084f37c274d8a6847814404dfb7c97c9..c25f76e726d614d183062c213ab83bd3404b6b15 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -77,6 +77,7 @@ tasks.withType<JavaCompile> {
+     compilerArgs.add("-Xlint:-module")
+     compilerArgs.add("-Xlint:-removal")
+     compilerArgs.add("-Xlint:-dep-ann")
++    compilerArgs.add("--add-modules=jdk.incubator.vector") // Gale - Pufferfish - SIMD support
+ }
+ // Gale end - hide irrelevant compilation warnings
+ 
+@@ -186,6 +187,7 @@ fun TaskContainer.registerRunTask(
+     minHeapSize = "${memoryGb}G"
+     maxHeapSize = "${memoryGb}G"
+     jvmArgs("--enable-preview") // Gale - enable preview features for development runs
++    jvmArgs("--add-modules=jdk.incubator.vector") // Gale - Pufferfish - SIMD support
+ 
+     doFirst {
+         workingDir.mkdirs()
+diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
+index 66477f772ffb9271cf647dfb7567d75c3d5145fb..13a51c939b8bd17584a474217823150688af809f 100644
+--- a/src/main/java/com/destroystokyo/paper/Metrics.java
++++ b/src/main/java/com/destroystokyo/paper/Metrics.java
+@@ -933,6 +933,46 @@ public class Metrics {
+                 metrics.addCustomChart(new Metrics.DrilldownPie("gale_semantic_version", () -> semanticVersionMap));
+                 // Gale end - semantic version - include in metrics
+ 
++                // Gale start - SIMD support - include in metrics
++                Map<String, Map<String, Integer>> simdSupportMap = new HashMap<>(2); // Empty until initialized
++                metrics.addCustomChart(new Metrics.DrilldownPie("simd_support", () -> {
++                    if (!gg.pufferfish.pufferfish.simd.SIMDDetection.isInitialized()) {
++                        return null;
++                    }
++                    if (simdSupportMap.isEmpty()) {
++                        // Initialize
++                        boolean isEnabled = gg.pufferfish.pufferfish.simd.SIMDDetection.isEnabled();
++
++                        // use details as lower dimension
++                        Map<String, Integer> entry = new HashMap<>(2);
++                        String details;
++                        if (isEnabled) {
++                            details = "int " + gg.pufferfish.pufferfish.simd.SIMDDetection.intVectorBitSize() + "*" + gg.pufferfish.pufferfish.simd.SIMDDetection.intElementSize() + ", float " + gg.pufferfish.pufferfish.simd.SIMDDetection.floatVectorBitSize() + "*" + gg.pufferfish.pufferfish.simd.SIMDDetection.floatElementSize();
++                        } else {
++                            if (!gg.pufferfish.pufferfish.simd.SIMDDetection.supportingJavaVersion()) {
++                                details = "unsupported Java";
++                                try {
++                                    var javaVersion = gg.pufferfish.pufferfish.simd.SIMDDetection.getJavaVersion();
++                                    details += " (" + javaVersion + ")";
++                                } catch (Throwable ignored) {}
++                            } else if (!gg.pufferfish.pufferfish.simd.SIMDDetection.testRunCompleted()) {
++                                details = "test failed";
++                            } else if (gg.pufferfish.pufferfish.simd.SIMDDetection.unsupportingLaneSize()) {
++                                details = "no supporting lane size";
++                            } else {
++                                details = "other reason";
++                            }
++                        }
++                        entry.put(details, 1);
++
++                        // use enabled or not as higher dimension
++                        simdSupportMap.put(String.valueOf(isEnabled), entry);
++
++                    }
++                    return simdSupportMap;
++                }));
++                // Gale end - SIMD support - include in metrics
++
+             }
+ 
+         }
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index 8538024c6345e79d08643e2d68ca146542b7860a..94e86acd4bc9c2be7c07fbd17364ba7bf9edb094 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -20,6 +20,8 @@ import java.util.Locale;
+ import java.util.Optional;
+ import java.util.function.BooleanSupplier;
+ import javax.annotation.Nullable;
++
++import gg.pufferfish.pufferfish.simd.SIMDDetection;
+ import net.minecraft.DefaultUncaughtExceptionHandler;
+ import net.minecraft.DefaultUncaughtExceptionHandlerWithName;
+ import net.minecraft.SharedConstants;
+@@ -58,6 +60,7 @@ import net.minecraft.world.level.GameType;
+ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+ import net.minecraft.world.level.storage.LevelStorageSource;
+ import org.galemc.gale.command.GaleCommands;
++import org.galemc.gale.configuration.GaleGlobalConfiguration;
+ import org.slf4j.Logger;
+ 
+ // CraftBukkit start
+@@ -246,6 +249,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
+         com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // Paper - load version history now
+ 
++        // Gale start - Pufferfish - SIMD support
++        // Initialize vectorization
++        try {
++            SIMDDetection.initialize();
++        } catch (Throwable ignored) {}
++        // Gale start - Pufferfish - SIMD support
++
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
+         this.setFlightAllowed(dedicatedserverproperties.allowFlight);
+         this.setMotd(dedicatedserverproperties.motd);
+diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
+index 8f8fd98f96cd390ba43033521982a13044df91cf..d46f952e5e425eb90f8c435276bfc4542e85f6a7 100644
+--- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
++++ b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
+@@ -25,6 +25,14 @@ public class GaleGlobalConfiguration extends ConfigurationPart {
+ 
+         public int dummyValue = 0;
+ 
++        // Gale start - Pufferfish - SIMD support
++        public Simd simd;
++        public class Simd extends ConfigurationPart {
++            public boolean warnIfDisabled = true;
++            public boolean logVectorSizesToConsole = false;
++        }
++        // Gale end - Pufferfish - SIMD support
++
+     }
+ 
+ }
