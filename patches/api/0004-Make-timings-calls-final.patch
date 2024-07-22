@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/co/aikar/timings/FullServerTickHandler.java b/src/main/java/co/aikar/timings/FullServerTickHandler.java
-index 36b8fe86335df851f9c85d6bb2a91368b4d945d1..16040016d7de911eddec278ec2adc2b856df9bcd 100644
+index 3e747abde6fefae90f1c15cb00158bc5303cbe50..fd9c06853a503aa787c4d93801714024465a7ee2 100644
 --- a/src/main/java/co/aikar/timings/FullServerTickHandler.java
 +++ b/src/main/java/co/aikar/timings/FullServerTickHandler.java
-@@ -19,8 +19,7 @@ public class FullServerTickHandler extends TimingHandler {
+@@ -22,8 +22,7 @@ public class FullServerTickHandler extends TimingHandler {
      }
  
      @NotNull
@@ -20,7 +20,7 @@ index 36b8fe86335df851f9c85d6bb2a91368b4d945d1..16040016d7de911eddec278ec2adc2b8
          if (TimingsManager.needsFullReset) {
              TimingsManager.resetTimings();
          } else if (TimingsManager.needsRecheckEnabled) {
-@@ -29,8 +28,7 @@ public class FullServerTickHandler extends TimingHandler {
+@@ -32,8 +31,7 @@ public class FullServerTickHandler extends TimingHandler {
          return super.startTiming();
      }
  
