@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 1d1e76de60e40224f5cb81893f9ee50fe987badb..09a973aa95d96924303c7e55521b9f20cbc036a0 100644
+index 1d1e76de60e40224f5cb81893f9ee50fe987badb..e4d658b43168dddf0957b8b71ba4202a788fbeb0 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -55,7 +55,6 @@ import net.minecraft.server.commands.CloneCommands;
@@ -48,7 +48,15 @@ index 1d1e76de60e40224f5cb81893f9ee50fe987badb..09a973aa95d96924303c7e55521b9f20
  import net.minecraft.server.commands.DebugConfigCommand;
  import net.minecraft.server.commands.DebugMobSpawningCommand;
  import net.minecraft.server.commands.DebugPathCommand;
-@@ -165,7 +164,6 @@ public class Commands {
+@@ -86,7 +85,6 @@ import net.minecraft.server.commands.OpCommand;
+ import net.minecraft.server.commands.PardonCommand;
+ import net.minecraft.server.commands.PardonIpCommand;
+ import net.minecraft.server.commands.ParticleCommand;
+-import net.minecraft.server.commands.PerfCommand;
+ import net.minecraft.server.commands.PlaceCommand;
+ import net.minecraft.server.commands.PlaySoundCommand;
+ import net.minecraft.server.commands.PublishCommand;
+@@ -165,7 +163,6 @@ public class Commands {
          DamageCommand.register(this.dispatcher, commandRegistryAccess);
          DataCommands.register(this.dispatcher);
          DataPackCommand.register(this.dispatcher);
@@ -56,7 +64,15 @@ index 1d1e76de60e40224f5cb81893f9ee50fe987badb..09a973aa95d96924303c7e55521b9f20
          DefaultGameModeCommands.register(this.dispatcher);
          DifficultyCommand.register(this.dispatcher);
          EffectCommands.register(this.dispatcher, commandRegistryAccess);
-@@ -340,9 +338,6 @@ public class Commands {
+@@ -242,7 +239,6 @@ public class Commands {
+             OpCommand.register(this.dispatcher);
+             PardonCommand.register(this.dispatcher);
+             PardonIpCommand.register(this.dispatcher);
+-            PerfCommand.register(this.dispatcher);
+             SaveAllCommand.register(this.dispatcher);
+             SaveOffCommand.register(this.dispatcher);
+             SaveOnCommand.register(this.dispatcher);
+@@ -340,9 +336,6 @@ public class Commands {
          // Paper end
          CommandSourceStack commandlistenerwrapper = (CommandSourceStack) parseresults.getContext().getSource();
  
@@ -66,7 +82,7 @@ index 1d1e76de60e40224f5cb81893f9ee50fe987badb..09a973aa95d96924303c7e55521b9f20
          ContextChain contextchain = this.finishParsing(parseresults, s, commandlistenerwrapper, label); // CraftBukkit // Paper - Add UnknownCommandEvent
  
          try {
-@@ -371,8 +366,6 @@ public class Commands {
+@@ -371,8 +364,6 @@ public class Commands {
                  commandlistenerwrapper.sendFailure(Component.literal(Util.describeError(exception)));
                  Commands.LOGGER.error("'/{}' threw an exception", s, exception);
              }
@@ -75,7 +91,7 @@ index 1d1e76de60e40224f5cb81893f9ee50fe987badb..09a973aa95d96924303c7e55521b9f20
          }
  
      }
-@@ -435,7 +428,7 @@ public class Commands {
+@@ -435,7 +426,7 @@ public class Commands {
              int j = minecraftserver.getGameRules().getInt(GameRules.RULE_MAX_COMMAND_FORK_COUNT);
  
              try {
@@ -602,6 +618,119 @@ index 9cd4f7c6910727c849ac7f5d675dc6105c4bbba2..f9f893a286147c9a8e49f78891381227
          }
  
      }
+diff --git a/src/main/java/net/minecraft/server/commands/PerfCommand.java b/src/main/java/net/minecraft/server/commands/PerfCommand.java
+deleted file mode 100644
+index 8c587f829c5e8c6b6df3150024c4ae704988c47b..0000000000000000000000000000000000000000
+--- a/src/main/java/net/minecraft/server/commands/PerfCommand.java
++++ /dev/null
+@@ -1,107 +0,0 @@
+-package net.minecraft.server.commands;
+-
+-import com.mojang.brigadier.CommandDispatcher;
+-import com.mojang.brigadier.exceptions.CommandSyntaxException;
+-import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+-import com.mojang.logging.LogUtils;
+-import java.io.IOException;
+-import java.nio.file.Path;
+-import java.nio.file.Paths;
+-import java.util.Locale;
+-import java.util.function.Consumer;
+-import net.minecraft.FileUtil;
+-import net.minecraft.SharedConstants;
+-import net.minecraft.SystemReport;
+-import net.minecraft.Util;
+-import net.minecraft.commands.CommandSourceStack;
+-import net.minecraft.commands.Commands;
+-import net.minecraft.network.chat.Component;
+-import net.minecraft.server.MinecraftServer;
+-import net.minecraft.util.FileZipper;
+-import net.minecraft.util.TimeUtil;
+-import net.minecraft.util.profiling.EmptyProfileResults;
+-import net.minecraft.util.profiling.ProfileResults;
+-import net.minecraft.util.profiling.metrics.storage.MetricsPersister;
+-import org.apache.commons.io.FileUtils;
+-import org.slf4j.Logger;
+-
+-public class PerfCommand {
+-    private static final Logger LOGGER = LogUtils.getLogger();
+-    private static final SimpleCommandExceptionType ERROR_NOT_RUNNING = new SimpleCommandExceptionType(Component.translatable("commands.perf.notRunning"));
+-    private static final SimpleCommandExceptionType ERROR_ALREADY_RUNNING = new SimpleCommandExceptionType(
+-        Component.translatable("commands.perf.alreadyRunning")
+-    );
+-
+-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+-        dispatcher.register(
+-            Commands.literal("perf")
+-                .requires(source -> source.hasPermission(4))
+-                .then(Commands.literal("start").executes(context -> startProfilingDedicatedServer(context.getSource())))
+-                .then(Commands.literal("stop").executes(context -> stopProfilingDedicatedServer(context.getSource())))
+-        );
+-    }
+-
+-    private static int startProfilingDedicatedServer(CommandSourceStack source) throws CommandSyntaxException {
+-        MinecraftServer minecraftServer = source.getServer();
+-        if (minecraftServer.isRecordingMetrics()) {
+-            throw ERROR_ALREADY_RUNNING.create();
+-        } else {
+-            Consumer<ProfileResults> consumer = result -> whenStopped(source, result);
+-            Consumer<Path> consumer2 = dumpDirectory -> saveResults(source, dumpDirectory, minecraftServer);
+-            minecraftServer.startRecordingMetrics(consumer, consumer2);
+-            source.sendSuccess(() -> Component.translatable("commands.perf.started"), false);
+-            return 0;
+-        }
+-    }
+-
+-    private static int stopProfilingDedicatedServer(CommandSourceStack source) throws CommandSyntaxException {
+-        MinecraftServer minecraftServer = source.getServer();
+-        if (!minecraftServer.isRecordingMetrics()) {
+-            throw ERROR_NOT_RUNNING.create();
+-        } else {
+-            minecraftServer.finishRecordingMetrics();
+-            return 0;
+-        }
+-    }
+-
+-    private static void saveResults(CommandSourceStack source, Path tempProfilingDirectory, MinecraftServer server) {
+-        String string = String.format(
+-            Locale.ROOT, "%s-%s-%s", Util.getFilenameFormattedDateTime(), server.getWorldData().getLevelName(), SharedConstants.getCurrentVersion().getId()
+-        );
+-
+-        String string2;
+-        try {
+-            string2 = FileUtil.findAvailableName(MetricsPersister.PROFILING_RESULTS_DIR, string, ".zip");
+-        } catch (IOException var11) {
+-            source.sendFailure(Component.translatable("commands.perf.reportFailed"));
+-            LOGGER.error("Failed to create report name", (Throwable)var11);
+-            return;
+-        }
+-
+-        try (FileZipper fileZipper = new FileZipper(MetricsPersister.PROFILING_RESULTS_DIR.resolve(string2))) {
+-            fileZipper.add(Paths.get("system.txt"), server.fillSystemReport(new SystemReport()).toLineSeparatedString());
+-            fileZipper.add(tempProfilingDirectory);
+-        }
+-
+-        try {
+-            FileUtils.forceDelete(tempProfilingDirectory.toFile());
+-        } catch (IOException var9) {
+-            LOGGER.warn("Failed to delete temporary profiling file {}", tempProfilingDirectory, var9);
+-        }
+-
+-        source.sendSuccess(() -> Component.translatable("commands.perf.reportSaved", string2), false);
+-    }
+-
+-    private static void whenStopped(CommandSourceStack source, ProfileResults result) {
+-        if (result != EmptyProfileResults.EMPTY) {
+-            int i = result.getTickDuration();
+-            double d = (double)result.getNanoDuration() / (double)TimeUtil.NANOSECONDS_PER_SECOND;
+-            source.sendSuccess(
+-                () -> Component.translatable(
+-                        "commands.perf.stopped", String.format(Locale.ROOT, "%.2f", d), i, String.format(Locale.ROOT, "%.2f", (double)i / d)
+-                    ),
+-                false
+-            );
+-        }
+-    }
+-}
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 index 8306edb6fb28e90ba4b432a07131e063daa70507..8538024c6345e79d08643e2d68ca146542b7860a 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
