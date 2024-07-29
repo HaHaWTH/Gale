@@ -59,10 +59,10 @@ index 039a86034928a5eb7aaa2d7ca76a7bddcca346bd..7c32c60100cf2bd109eb8762efa856c1
      }
  
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 29f34d369e7d5930f0e1ea146fa811893a0f8b85..24c7f05ed698aacd8892e3e6c2d844e29b251c80 100644
+index 2d25db0793acbdd1c95c0c6c0d7b50109d604bfe..79e2cd6e47e037aaec68afa3fa8544fee3955e8e 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1136,6 +1136,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1137,6 +1137,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      private static final long MAX_CATCHUP_BUFFER = TICK_TIME * TPS * 60L;
      private long lastTick = 0;
      private long catchupTime = 0;
@@ -70,7 +70,7 @@ index 29f34d369e7d5930f0e1ea146fa811893a0f8b85..24c7f05ed698aacd8892e3e6c2d844e2
      public final RollingAverage tps1 = new RollingAverage(60);
      public final RollingAverage tps5 = new RollingAverage(60 * 5);
      public final RollingAverage tps15 = new RollingAverage(60 * 15);
-@@ -1250,6 +1251,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1251,6 +1252,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  if (++MinecraftServer.currentTick % MinecraftServer.SAMPLE_INTERVAL == 0) {
                      final long diff = currentTime - tickSection;
                      final java.math.BigDecimal currentTps = TPS_BASE.divide(new java.math.BigDecimal(diff), 30, java.math.RoundingMode.HALF_UP);
