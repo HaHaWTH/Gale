@@ -13,10 +13,10 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index 406bd21684664db07cb0f541e619cc5f51070b7a..d2750fb7efbe8c1c77d4cb57f6ceec4fd968e326 100644
+index 3b3684d202e460a80b3e6e97afbaa4c84c4e3b3b..9fd7b17b7806636777de40abb9963ce770a97d15 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-@@ -441,11 +441,16 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -442,11 +442,16 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
              // Paper - chunk tick iteration optimisations
  
              if (this.level.tickRateManager().runsNormally()) {
@@ -34,7 +34,7 @@ index 406bd21684664db07cb0f541e619cc5f51070b7a..d2750fb7efbe8c1c77d4cb57f6ceec4f
                  if ((this.spawnFriendlies || this.spawnEnemies) && this.level.paperConfig().entities.spawning.perPlayerMobSpawns) { // don't count mobs when animals and monsters are disabled
                      // re-set mob counts
                      for (ServerPlayer player : this.level.players) {
-@@ -469,7 +474,11 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -470,7 +475,11 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
                  this.level.timings.countNaturalMobs.stopTiming(); // Paper - timings
  
                  this.lastSpawnState = spawnercreature_d;
@@ -47,7 +47,7 @@ index 406bd21684664db07cb0f541e619cc5f51070b7a..d2750fb7efbe8c1c77d4cb57f6ceec4f
  
                  if (!this.level.paperConfig().entities.spawning.perPlayerMobSpawns) Util.shuffle(list, this.level.random); // Paper - per player mob spawns - do not need this when per-player is enabled
                  // Paper start - PlayerNaturallySpawnCreaturesEvent
-@@ -492,7 +501,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -493,7 +502,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
  
                      if (true && this.chunkMap.anyPlayerCloseEnoughForSpawning(chunkcoordintpair)) { // Paper - rewrite chunk system
                          chunk1.incrementInhabitedTime(j);
@@ -56,7 +56,7 @@ index 406bd21684664db07cb0f541e619cc5f51070b7a..d2750fb7efbe8c1c77d4cb57f6ceec4f
                              NaturalSpawner.spawnForChunk(this.level, chunk1, spawnercreature_d, this.spawnFriendlies, this.spawnEnemies, flag1);
                          }
  
-@@ -535,6 +544,20 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -536,6 +545,20 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
          }
      }
  

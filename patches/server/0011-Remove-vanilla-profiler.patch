@@ -620,7 +620,7 @@ index 8306edb6fb28e90ba4b432a07131e063daa70507..8538024c6345e79d08643e2d68ca1465
      public SampleLogger getTickTimeLogger() {
          return this.tickTimeLogger;
 diff --git a/src/main/java/net/minecraft/server/level/ChunkMap.java b/src/main/java/net/minecraft/server/level/ChunkMap.java
-index d85cbcc06b35d5a3467d7d1c81c9f09c1a8db175..bfb5a1ffec9a01b86f65a577bbd4d2927f9718b0 100644
+index 1e0a6e5a3c907ab55ee6f2780a7d43bd455f2b7b..9f062c88fb5838a294b43ae254c945dca493dd55 100644
 --- a/src/main/java/net/minecraft/server/level/ChunkMap.java
 +++ b/src/main/java/net/minecraft/server/level/ChunkMap.java
 @@ -65,7 +65,6 @@ import net.minecraft.server.network.ServerPlayerConnection;
@@ -649,7 +649,7 @@ index d85cbcc06b35d5a3467d7d1c81c9f09c1a8db175..bfb5a1ffec9a01b86f65a577bbd4d292
  
      public boolean hasWork() {
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index 8a0b00d645e4cf2ca96ec7e8ebc6ef726a0ab8b0..406bd21684664db07cb0f541e619cc5f51070b7a 100644
+index dcb5651d1d9b10b40430fb2f713beedf68336704..3b3684d202e460a80b3e6e97afbaa4c84c4e3b3b 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 @@ -22,7 +22,6 @@ import net.minecraft.network.protocol.Packet;
@@ -660,10 +660,10 @@ index 8a0b00d645e4cf2ca96ec7e8ebc6ef726a0ab8b0..406bd21684664db07cb0f541e619cc5f
  import net.minecraft.util.thread.BlockableEventLoop;
  import net.minecraft.world.entity.Entity;
  import net.minecraft.world.entity.ai.village.poi.PoiManager;
-@@ -380,19 +379,15 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
- 
+@@ -381,19 +380,15 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
      // CraftBukkit start - modelled on below
      public void purgeUnload() {
+         if (true) return; // Paper - rewrite chunk system
 -        this.level.getProfiler().push("purge");
          this.distanceManager.purgeStaleTickets();
          this.runDistanceManagerUpdates();
@@ -680,7 +680,7 @@ index 8a0b00d645e4cf2ca96ec7e8ebc6ef726a0ab8b0..406bd21684664db07cb0f541e619cc5f
          this.level.timings.doChunkMap.startTiming(); // Spigot
          if (this.level.tickRateManager().runsNormally() || !tickChunks || this.level.spigotConfig.unloadFrozenChunks) { // Spigot
              this.distanceManager.purgeStaleTickets();
-@@ -400,7 +395,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -401,7 +396,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
  
          this.runDistanceManagerUpdates();
          this.level.timings.doChunkMap.stopTiming(); // Spigot
@@ -688,7 +688,7 @@ index 8a0b00d645e4cf2ca96ec7e8ebc6ef726a0ab8b0..406bd21684664db07cb0f541e619cc5f
          if (tickChunks) {
              this.level.timings.chunks.startTiming(); // Paper - timings
              ((ca.spottedleaf.moonrise.patches.chunk_system.level.ChunkSystemServerLevel)this.level).moonrise$getPlayerChunkLoader().tick(); // Paper - rewrite chunk system
-@@ -410,10 +404,8 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -411,10 +405,8 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
          }
  
          this.level.timings.doChunkUnload.startTiming(); // Spigot
@@ -699,7 +699,7 @@ index 8a0b00d645e4cf2ca96ec7e8ebc6ef726a0ab8b0..406bd21684664db07cb0f541e619cc5f
          this.clearCache();
      }
  
-@@ -424,10 +416,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -425,10 +417,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
  
          this.lastInhabitedUpdate = i;
          if (!this.level.isDebug()) {
@@ -710,7 +710,7 @@ index 8a0b00d645e4cf2ca96ec7e8ebc6ef726a0ab8b0..406bd21684664db07cb0f541e619cc5f
              // Paper start - chunk tick iteration optimisations
              List<ServerChunkCache.ChunkAndHolder> list;
              {
-@@ -453,7 +441,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -454,7 +442,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
              // Paper - chunk tick iteration optimisations
  
              if (this.level.tickRateManager().runsNormally()) {
@@ -718,7 +718,7 @@ index 8a0b00d645e4cf2ca96ec7e8ebc6ef726a0ab8b0..406bd21684664db07cb0f541e619cc5f
                  this.level.timings.countNaturalMobs.startTiming(); // Paper - timings
                  int k = this.distanceManager.getNaturalSpawnChunkCount();
                  // Paper start - Optional per player mob spawns
-@@ -482,7 +469,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -483,7 +470,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
                  this.level.timings.countNaturalMobs.stopTiming(); // Paper - timings
  
                  this.lastSpawnState = spawnercreature_d;
@@ -726,7 +726,7 @@ index 8a0b00d645e4cf2ca96ec7e8ebc6ef726a0ab8b0..406bd21684664db07cb0f541e619cc5f
                  boolean flag = this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) && !this.level.players().isEmpty(); // CraftBukkit
  
                  if (!this.level.paperConfig().entities.spawning.perPlayerMobSpawns) Util.shuffle(list, this.level.random); // Paper - per player mob spawns - do not need this when per-player is enabled
-@@ -522,7 +508,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -523,7 +509,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
                  }
                  this.level.timings.chunkTicks.stopTiming(); // Paper
  
@@ -734,7 +734,7 @@ index 8a0b00d645e4cf2ca96ec7e8ebc6ef726a0ab8b0..406bd21684664db07cb0f541e619cc5f
                  if (flag) {
                      try (co.aikar.timings.Timing ignored = this.level.timings.miscMobSpawning.startTiming()) { // Paper - timings
                      this.level.tickCustomSpawners(this.spawnEnemies, this.spawnFriendlies);
-@@ -530,7 +515,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -531,7 +516,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
                  }
              }
  
@@ -742,7 +742,7 @@ index 8a0b00d645e4cf2ca96ec7e8ebc6ef726a0ab8b0..406bd21684664db07cb0f541e619cc5f
              // Paper start - chunk tick iteration optimisations
              this.level.timings.broadcastChunkUpdates.startTiming(); // Paper - timing
              {
-@@ -548,8 +532,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -549,8 +533,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
              }
              this.level.timings.broadcastChunkUpdates.stopTiming(); // Paper - timing
              // Paper end - chunk tick iteration optimisations
@@ -751,7 +751,7 @@ index 8a0b00d645e4cf2ca96ec7e8ebc6ef726a0ab8b0..406bd21684664db07cb0f541e619cc5f
          }
      }
  
-@@ -730,7 +712,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -731,7 +713,6 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
  
          @Override
          protected void doRunTask(Runnable task) {
@@ -1120,7 +1120,7 @@ index 298e3eddd600f0b2e48ce2d4080cf68adff59a3a..6b3c57fc1231cd37e17a58137bb78411
  
      protected abstract T prepare(ResourceManager manager, ProfilerFiller profiler);
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 1f7594e22f0f08ae110ef9b42f15119358aa5723..e4751a821d73bcf6dad22abb6fc5ab394953029f 100644
+index 490ee48346395fcbaf2eb0151e9248f18974fea6..676490a66fd2c0b82302432bb5eba1334af6e524 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -858,7 +858,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
