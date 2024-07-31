@@ -129,10 +129,10 @@ index 673103f160cbe577c6e05f998706af4e6850011b..2c1eb34f1539555ba1988a2eeeea7b2f
  
      @org.jetbrains.annotations.NotNull
 diff --git a/src/main/java/io/papermc/paper/command/brigadier/PaperCommands.java b/src/main/java/io/papermc/paper/command/brigadier/PaperCommands.java
-index a3e128bde0fa4ab0ecab4172f02288a29b9fddc7..cbbb95692e47217932b5990057483589e8080f69 100644
+index da50ca4c6524e4f99ea4de2157d7ef900178d0f1..30869359911d3c53d8ee589376fc6efdf95e5ae8 100644
 --- a/src/main/java/io/papermc/paper/command/brigadier/PaperCommands.java
 +++ b/src/main/java/io/papermc/paper/command/brigadier/PaperCommands.java
-@@ -185,7 +185,7 @@ public class PaperCommands implements Commands, PaperRegistrar<LifecycleEventOwn
+@@ -189,7 +189,7 @@ public class PaperCommands implements Commands, PaperRegistrar<LifecycleEventOwn
                      })
              )
              .executes((stack) -> {
