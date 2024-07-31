@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index e09f09f33c4063bac676b175714a3cac12ab6db6..5cbf0ec9d106d33556451a96dcc165e693764cde 100644
+index 7aa13de4b3778e6708ed46ddcedde100f585a40f..1f2af396b7cddbbbb9a200bc6272309941f10e5b 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -760,7 +760,20 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -717,7 +717,20 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
                                  entity.stopRiding();
                              }
  

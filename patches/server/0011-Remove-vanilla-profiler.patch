@@ -776,7 +776,7 @@ index dcb5651d1d9b10b40430fb2f713beedf68336704..3b3684d202e460a80b3e6e97afbaa4c8
          }
  
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac12ab6db6 100644
+index 108a3edd8dff37c19feac1f247c57a9deae15887..7aa13de4b3778e6708ed46ddcedde100f585a40f 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -80,7 +80,6 @@ import net.minecraft.util.ProgressListener;
@@ -787,7 +787,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
  import net.minecraft.util.valueproviders.IntProvider;
  import net.minecraft.util.valueproviders.UniformInt;
  import net.minecraft.world.DifficultyInstance;
-@@ -546,15 +545,17 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -503,15 +502,17 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
@@ -808,7 +808,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
          this.pathTypesByPosCache = new PathTypeCache();
          this.navigatingMobs = new ObjectOpenHashSet();
          this.blockEvents = new ObjectLinkedOpenHashSet();
-@@ -667,16 +668,12 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -624,16 +625,12 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
      }
  
      public void tick(BooleanSupplier shouldKeepTicking) {
@@ -825,7 +825,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
              this.advanceWeatherCycle();
          }
  
-@@ -708,30 +705,23 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -665,30 +662,23 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
              this.tickTime();
          }
  
@@ -856,7 +856,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
          if (flag) {
              this.timings.doSounds.startTiming(); // Spigot
              this.runBlockEvents();
-@@ -739,7 +729,6 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -696,7 +686,6 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          }
  
          this.handlingTick = false;
@@ -864,7 +864,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
          boolean flag1 = !paperConfig().unsupportedSettings.disableWorldTickingWhenEmpty || !this.players.isEmpty() || !this.getForcedChunks().isEmpty(); // CraftBukkit - this prevents entity cleanup, other issues on servers with no players // Paper - restore this
  
          if (flag1) {
-@@ -747,12 +736,9 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -704,12 +693,9 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          }
  
          if (flag1 || this.emptyTime++ < 300) {
@@ -877,7 +877,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
              }
  
              org.spigotmc.ActivationRange.activateEntities(this); // Spigot
-@@ -762,9 +748,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -719,9 +705,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
                      if (false && this.shouldDiscardEntity(entity)) { // CraftBukkit - We prevent spawning in general, so this butchering is not needed
                          entity.discard();
                      } else if (!tickratemanager.isEntityFrozen(entity)) {
@@ -887,7 +887,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
                          if (true || this.chunkSource.chunkMap.getDistanceManager().inEntityTickingRange(entity.chunkPosition().toLong())) { // Paper - rewrite chunk system
                              Entity entity1 = entity.getVehicle();
  
-@@ -776,22 +760,17 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -733,22 +717,17 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
                                  entity.stopRiding();
                              }
  
@@ -910,7 +910,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
      }
  
      @Override
-@@ -903,9 +882,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -860,9 +839,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          boolean flag = this.isRaining();
          int j = chunkcoordintpair.getMinBlockX();
          int k = chunkcoordintpair.getMinBlockZ();
@@ -920,7 +920,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
          if (!this.paperConfig().environment.disableThunder && flag && this.isThundering() && this.spigotConfig.thunderChance > 0 && this.random.nextInt(this.spigotConfig.thunderChance) == 0) { // Spigot // Paper - Option to disable thunder
              BlockPos blockposition = this.findLightningTargetAround(this.getBlockRandomPos(j, 0, k, 15));
  
-@@ -934,8 +911,6 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -891,8 +868,6 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
              }
          }
  
@@ -929,7 +929,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
          if (!this.paperConfig().environment.disableIceAndSnow) { // Paper - Option to disable ice and snow
          for (int l = 0; l < randomTickSpeed; ++l) {
              if (this.random.nextInt(48) == 0) {
-@@ -944,14 +919,12 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -901,14 +876,12 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          }
          } // Paper - Option to disable ice and snow
  
@@ -944,7 +944,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
      }
  
      @VisibleForTesting
-@@ -1279,19 +1252,13 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -1236,19 +1209,13 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          try {
          // Paper end - timings
          entity.setOldPosAndRot();
@@ -964,7 +964,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
          } finally { timer.stopTiming(); } // Paper - timings
          Iterator iterator = entity.getPassengers().iterator();
  
-@@ -1320,12 +1287,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -1277,12 +1244,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
                  // Paper end
                  passenger.setOldPosAndRot();
                  ++passenger.tickCount;
@@ -977,7 +977,7 @@ index 3bdca1658cec40df0c31aa66e5102f2e9ba5de13..e09f09f33c4063bac676b175714a3cac
                  // Paper start - EAR 2
                  if (isActive) {
                  passenger.rideTick();
-@@ -1337,7 +1299,6 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -1294,7 +1256,6 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
                      vehicle.positionRider(passenger);
                  }
                  // Paper end - EAR 2

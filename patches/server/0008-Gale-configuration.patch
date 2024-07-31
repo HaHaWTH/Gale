@@ -289,10 +289,10 @@ index dd56c8e041116ef3602a9f89c998c8208ab89b51..86c615518e315dd4425d17df163e88a1
          // Paper start - fix converting txt to json file; convert old users earlier after PlayerList creation but before file load/save
          if (this.convertOldUsers()) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 2766ec28f028c0bd672009928bf64c1a6e5d07d6..3bdca1658cec40df0c31aa66e5102f2e9ba5de13 100644
+index 2fe9d9b38c01d04416843fdd48d3e33899b7de63..108a3edd8dff37c19feac1f247c57a9deae15887 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -546,7 +546,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -503,7 +503,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
          // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
  
          // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
