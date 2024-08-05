@@ -13,7 +13,7 @@ As part of: Slice (https://github.com/Cryptite/Slice)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index f5708e511611ec64430336f8247526b4a0a062aa..f55019443b3f33dc4e0f845e5906078b1257175a 100644
+index d507da667083632b58967122d34bd1089f398d68..aab6604b436a33c2481c69e240ca1028ddb24a59 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -916,7 +916,13 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -31,7 +31,7 @@ index f5708e511611ec64430336f8247526b4a0a062aa..f55019443b3f33dc4e0f845e5906078b
  
          this.firstTick = false;
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 89d451b322e9308dfcf7b6579ab558fa7bbc404f..38488750f556ebae7ed41a24b88f5752f3b54ec7 100644
+index 2692f835321bb16ecd4185970af01bfa97ca9f1f..93f4be842259ede94c94588f266c2270546e8311 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -126,6 +126,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {

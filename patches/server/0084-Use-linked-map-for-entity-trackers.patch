@@ -13,7 +13,7 @@ As part of: VMP (https://github.com/RelativityMC/VMP-fabric)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/server/level/ChunkMap.java b/src/main/java/net/minecraft/server/level/ChunkMap.java
-index caa295231c7d4573dca04eefcceedd2d067cc903..84d5891ed67e9123f9b8f029fb14f944e34c3332 100644
+index 0cca7c79ced15f9edf03f9593a78e2f155247c4d..e88b5769dab436ce20f6986995a57ccd9cc42950 100644
 --- a/src/main/java/net/minecraft/server/level/ChunkMap.java
 +++ b/src/main/java/net/minecraft/server/level/ChunkMap.java
 @@ -178,7 +178,7 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
