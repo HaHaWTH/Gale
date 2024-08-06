@@ -13,7 +13,7 @@ As part of: SportPaper (https://github.com/Electroid/SportPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 1f2af396b7cddbbbb9a200bc6272309941f10e5b..b5491374f17c93310cba14a29ade7f416dd68ab4 100644
+index bfefe93b1ab4facd4874210609ecbe244a4cff0d..0bc8711b91d81f37e65be17c3895a0dcfbe4f94e 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -1576,7 +1576,17 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.

@@ -3,8 +3,6 @@ From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Wed, 23 Nov 2022 23:32:51 +0100
 Subject: [PATCH] Optimize entity coordinate key
 
-Removed since 1.21
-
 License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 

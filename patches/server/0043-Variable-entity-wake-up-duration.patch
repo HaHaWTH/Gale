@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 28afbf8da166377b295302e6ea7c602da70100b1..f8a561d91686d6df89a7374ca223972e435978c9 100644
+index 9ac3c235a7adc42af1ba22aaa4efbce5b006f98d..42306d45d3b8f7807b344422fca7382eec52cde2 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -96,6 +96,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {

@@ -25,7 +25,7 @@ index e2633083327853b87a265aab93d7eba5c5f980a7..36d009fb72351457fc238b250b097878
      public boolean isRealPlayer; // Paper
      public com.destroystokyo.paper.event.entity.PlayerNaturallySpawnCreaturesEvent playerNaturallySpawnedEvent; // Paper - PlayerNaturallySpawnCreaturesEvent
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 13adcb90134f03cf951c3e7eaa3123e033224df6..4ff3dbb9c1bcac000e4ed293cbc1a48aa1738e8f 100644
+index 0563a4273f8cbb4ca9af52f6f708d43967575252..3581cd89052f6cc304bbf16ef406e6132b1a7e50 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2285,7 +2285,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl

@@ -13,7 +13,7 @@ As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 7349dee46483632cffa88d11694e2cd3a6fad911..93c48dd6b87d5bb7ba5a83b7c0f6c64544416bfc 100644
+index 8e79c569eb6b49382d1335ab8a247506db6afe95..8fe992f191819f828ebc5c1986572569a09d52a9 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -314,7 +314,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -22,7 +22,7 @@ index 7349dee46483632cffa88d11694e2cd3a6fad911..93c48dd6b87d5bb7ba5a83b7c0f6c645
      public double zo;
 -    private Vec3 position;
 +    public Vec3 position; // Gale - JettPack - optimize sun burn tick - private -> public
-     private BlockPos blockPosition;
+     public BlockPos blockPosition; // Gale - Pufferfish - optimize entity coordinate key - private -> public
      private ChunkPos chunkPosition;
      private Vec3 deltaMovement;
 @@ -2061,9 +2061,19 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
