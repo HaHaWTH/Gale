@@ -13,10 +13,10 @@ As part of: SportPaper (https://github.com/Electroid/SportPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index bfefe93b1ab4facd4874210609ecbe244a4cff0d..0bc8711b91d81f37e65be17c3895a0dcfbe4f94e 100644
+index 94bf091124aae1f0d318051076953be20c71cab2..8353c264597de5b1ddcc1643c87f6ea09a22523b 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -1576,7 +1576,17 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -1578,7 +1578,17 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
  
      @Override
      public void destroyBlockProgress(int entityId, BlockPos pos, int progress) {
@@ -35,7 +35,7 @@ index bfefe93b1ab4facd4874210609ecbe244a4cff0d..0bc8711b91d81f37e65be17c3895a0dc
  
          // CraftBukkit start
          Player entityhuman = null;
-@@ -1610,7 +1620,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -1612,7 +1622,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
                  // CraftBukkit end
  
                  if (d0 * d0 + d1 * d1 + d2 * d2 < 1024.0D) {
