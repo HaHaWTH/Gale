@@ -39,6 +39,19 @@ index fea92d280c6817cee1f18379d5ed51a3a22ee344..fd5d7feb9670a14cc6f7daa8ce6ba6a2
  
      private long lastFill = -1;
      private long nextRefill = -1;
+diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
+index f23ed06a943646f45e1291f35ab3025e1dfa6b49..83ba2e128fb72f786675d1eea709be3e3a319e80 100644
+--- a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
++++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
+@@ -129,7 +129,7 @@ public class LevelChunk extends ChunkAccess implements ca.spottedleaf.moonrise.p
+         this.defaultBlockState = empty ? VOID_AIR_BLOCKSTATE : AIR_BLOCKSTATE;
+         // Paper end - get block chunk optimisation
+ 
+-        this.lightningTick = new java.util.Random().nextInt(100000) << 1; // Gale - Airplane - optimize random calls in chunk ticking - initialize lightning tick
++        this.lightningTick = org.galemc.gale.configuration.GaleGlobalConfiguration.get().smallOptimizations.useXorShiftRandom.lightningRandomTick ? new org.galemc.gale.random.XorShiftRandom().nextInt(100000) << 1 : new java.util.Random().nextInt(100000) << 1; // Gale - Airplane - optimize random calls in chunk ticking - initialize lightning tick // Gale - xor-shift random
+     }
+ 
+     // CraftBukkit start
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
 index eb0389ad86300665b6e057bcfa1d7c068dc6c6ab..6d864396f72220d9c92733a38ff6f2fd235238f5 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
@@ -79,7 +92,7 @@ index 759b6e54db93792c9862b1f1625118ac6fa49d7a..4b5e9bc33c25ac98c32aff1bd13788ed
  
      public CraftFirework(CraftServer server, FireworkRocketEntity entity) {
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
-index 3e5efa90180308cbfaaa063d96ad788985720b8c..b8924f132607ecce6104343f6ecec004c1b78461 100644
+index 3e5efa90180308cbfaaa063d96ad788985720b8c..c57ebf0f37aba2d118e54f3c71697f29bb9a57a0 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 @@ -10,6 +10,7 @@ import org.spongepowered.configurate.objectmapping.meta.PostProcess;
@@ -90,7 +103,7 @@ index 3e5efa90180308cbfaaa063d96ad788985720b8c..b8924f132607ecce6104343f6ecec004
  import java.util.function.Consumer;
  
  @SuppressWarnings({"CanBeFinal", "FieldCanBeLocal", "FieldMayBeFinal", "NotNullFieldNotInitialized", "InnerClassMayBeStatic"})
-@@ -41,13 +42,26 @@ public class GaleGlobalConfiguration extends ConfigurationPart {
+@@ -41,13 +42,27 @@ public class GaleGlobalConfiguration extends ConfigurationPart {
  
          }
  
@@ -106,6 +119,7 @@ index 3e5efa90180308cbfaaa063d96ad788985720b8c..b8924f132607ecce6104343f6ecec004
 +            public boolean autoReplenishLootableRefill = true;
 +            public boolean elytraFireworkSpeed = true;
 +            public boolean entityWakeUpDuration = true;
++            public boolean lightningRandomTick = true;
 +
 +            @Setting("generate-tree-with-bukkit-api")
 +            public boolean generateTreeWithBukkitAPI = true;
