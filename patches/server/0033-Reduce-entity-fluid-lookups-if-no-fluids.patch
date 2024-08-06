@@ -142,7 +142,7 @@ index 2d3552ed0772d7bd7777b85879c10ca83c4baf37..7349dee46483632cffa88d11694e2cd3
              if (vec3d.length() > 0.0D) {
                  if (k1 > 0) {
 diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
-index c3b1caa352b988ec44fa2b2eb0536517711f5460..33747ef8211066155cd70ce2818862cf3e79db53 100644
+index c3b1caa352b988ec44fa2b2eb0536517711f5460..5bf0fa2057073f96189cd6e187c97493e779c179 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunkSection.java
 @@ -25,6 +25,7 @@ public class LevelChunkSection implements ca.spottedleaf.moonrise.patches.block_
@@ -169,11 +169,11 @@ index c3b1caa352b988ec44fa2b2eb0536517711f5460..33747ef8211066155cd70ce2818862cf
          }
  
          // Paper start - block counting
-@@ -208,6 +211,7 @@ public class LevelChunkSection implements ca.spottedleaf.moonrise.patches.block_
-                     if (fluid.isRandomlyTicking()) {
-                         this.tickingFluidCount += paletteCount;
+@@ -199,6 +202,7 @@ public class LevelChunkSection implements ca.spottedleaf.moonrise.patches.block_
+                     for (int i = 0; i < paletteCount; ++i) {
+                         this.tickingBlocks.add(raw[i], state);
                      }
 +                    this.fluidStateCount++; // Gale - Airplane - reduce entity fluid lookups if no fluids
                  }
-             }
-         }
+ 
+                 final FluidState fluid = state.getFluidState();
