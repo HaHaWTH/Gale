@@ -415,7 +415,7 @@ index b88aa184cd06a0485146f58a5b61a56a50911209..bf7ec7196d02553bc26caf87213fa241
  
      @Override
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-index 53f9d28bf3c6aafd4fdd6c12e0285500fe7350ce..415ad627084c35b4c022cff3ce782e2265a78759 100644
+index cab403efd471bb61835224eea4e99570d34dcaaa..5611217970bca6d4cc5feb10fb62fa13640b49d7 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 @@ -47,7 +47,10 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
@@ -488,7 +488,7 @@ index 53f9d28bf3c6aafd4fdd6c12e0285500fe7350ce..415ad627084c35b4c022cff3ce782e22
              if (!item.isEmpty()) {
                  foundItem = true;
                  ItemStack origItemStack = item;
-@@ -725,7 +751,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
+@@ -733,7 +759,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
  
          if (HopperBlockEntity.canPlaceItemInContainer(to, stack, slot, side)) {
              boolean flag = false;
@@ -497,7 +497,7 @@ index 53f9d28bf3c6aafd4fdd6c12e0285500fe7350ce..415ad627084c35b4c022cff3ce782e22
  
              if (itemstack1.isEmpty()) {
                  // Spigot start - SPIGOT-6693, InventorySubcontainer#setItem
-@@ -913,7 +939,10 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
+@@ -921,7 +947,10 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
  
      @Override
      protected void setItems(NonNullList<ItemStack> inventory) {
