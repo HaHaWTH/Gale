@@ -1234,7 +1234,7 @@ index 490ee48346395fcbaf2eb0151e9248f18974fea6..676490a66fd2c0b82302432bb5eba133
              }
          }
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index fe435d4a387bb28be6831cec0c8bb0a7c8b603a4..2463746163a8e08527fc55beb467aedf4ed5cd68 100644
+index ccd9dff20a60f019e0c320acfb526b8bf3e5f806..18491055d3e139b8ee91fd33773929ce8e61252f 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -440,7 +440,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -1765,7 +1765,7 @@ index 7e1871401ec5e3e9a85232053490259f132aec0a..ba49442ed0b7c05c50dbc2a640f5759e
              this.assignProfessionWhenSpawned = false;
          }
 diff --git a/src/main/java/net/minecraft/world/level/Explosion.java b/src/main/java/net/minecraft/world/level/Explosion.java
-index 6c66ee69beb55e5c5755bbf4d13c256541ce4468..b2f4686d4eb56bd134817419bf326d84675e0c2d 100644
+index ad57bf49476192dea6a7367cbd0ad3f11e142e1b..977640aa7f07da5b5e002bd98ae936760d40caf0 100644
 --- a/src/main/java/net/minecraft/world/level/Explosion.java
 +++ b/src/main/java/net/minecraft/world/level/Explosion.java
 @@ -646,7 +646,6 @@ public class Explosion {
@@ -1920,7 +1920,7 @@ index c5454b92ca2565461c799d7340160f9fb72c1b0f..a1a4b99167919bedb8a45c3b81889f58
 -    }
  }
 diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
-index 5453b7051337908ac1c8201827c1b5eec9e1608b..36540053590c30a902b9986dcf2e74375157822d 100644
+index 7c11853c5090fbc4fa5b3e73a69acf166158fdec..3720b1d9456376523c8c15fa753176e479f77483 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 @@ -25,7 +25,6 @@ import net.minecraft.network.FriendlyByteBuf;
@@ -1945,7 +1945,7 @@ index 5453b7051337908ac1c8201827c1b5eec9e1608b..36540053590c30a902b9986dcf2e7437
                  }
  
                  boolean flag3 = iblockdata1.hasBlockEntity();
-@@ -1018,9 +1012,6 @@ public class LevelChunk extends ChunkAccess implements ca.spottedleaf.moonrise.p
+@@ -1023,9 +1017,6 @@ public class LevelChunk extends ChunkAccess implements ca.spottedleaf.moonrise.p
  
                  if (LevelChunk.this.isTicking(blockposition)) {
                      try {
@@ -1955,7 +1955,7 @@ index 5453b7051337908ac1c8201827c1b5eec9e1608b..36540053590c30a902b9986dcf2e7437
                          this.blockEntity.tickTimer.startTiming(); // Spigot
                          BlockState iblockdata = LevelChunk.this.getBlockState(blockposition);
  
-@@ -1036,8 +1027,6 @@ public class LevelChunk extends ChunkAccess implements ca.spottedleaf.moonrise.p
+@@ -1041,8 +1032,6 @@ public class LevelChunk extends ChunkAccess implements ca.spottedleaf.moonrise.p
                              }
                              // Paper end - Remove the Block Entity if it's invalid
                          }
