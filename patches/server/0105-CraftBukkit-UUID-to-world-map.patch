@@ -13,7 +13,7 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index eb1604ce8845c14eeb90641a074381b277ef918f..39f1a7e9125253783e952853347391ab2896b05d 100644
+index f1969c6b4f5f7bbd75ae69e2c7f62d086429e320..0ef77faaa91e6041e6c7ef6168901e9756a4900b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -41,6 +41,9 @@ import java.util.logging.Logger;

@@ -40,7 +40,7 @@ index fea92d280c6817cee1f18379d5ed51a3a22ee344..fd5d7feb9670a14cc6f7daa8ce6ba6a2
      private long lastFill = -1;
      private long nextRefill = -1;
 diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
-index f23ed06a943646f45e1291f35ab3025e1dfa6b49..83ba2e128fb72f786675d1eea709be3e3a319e80 100644
+index 67103310c59bcf7bd6e873d97a4c88a032d9f999..4aa33233060b2b2bd809d92d35bd0933cb015d41 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 @@ -129,7 +129,7 @@ public class LevelChunk extends ChunkAccess implements ca.spottedleaf.moonrise.p
