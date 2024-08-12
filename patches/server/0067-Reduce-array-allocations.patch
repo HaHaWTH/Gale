@@ -312,7 +312,7 @@ index 4aa6232bf0f72fcde32d257100bd15b1c5192aaa..2d3f002f85721ff25d95f3f251077926
      private static final Codec<Object> ARG_CODEC = Codec.either(PRIMITIVE_ARG_CODEC, ComponentSerialization.CODEC)
          .xmap(
 diff --git a/src/main/java/net/minecraft/network/protocol/game/ClientboundSetEquipmentPacket.java b/src/main/java/net/minecraft/network/protocol/game/ClientboundSetEquipmentPacket.java
-index 3945ca04ede578121b370592482ac917f2d4cf96..ad0c87b8955a5cfa2b0011864756d68248e8c353 100644
+index d152871142d3def2ac04f50037db53b0527f7894..bf0db5e46a530a8d4c5ebaa58d0e14c4b457036b 100644
 --- a/src/main/java/net/minecraft/network/protocol/game/ClientboundSetEquipmentPacket.java
 +++ b/src/main/java/net/minecraft/network/protocol/game/ClientboundSetEquipmentPacket.java
 @@ -32,7 +32,7 @@ public class ClientboundSetEquipmentPacket implements Packet<ClientGamePacketLis
@@ -364,10 +364,10 @@ index 20b5a81d50397438b3200322f31b62db44ebdb3b..c80be65d190c85e7f0ea8233ebbbdbc1
  
              for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 966c93c1fe51ff07d92b90d5e0ae0aa7a632172b..bb96ee69a76a1acd29e680df8de55b92c72aa21a 100644
+index ffeab99978f2fb45c7fdf7ab923e8aecf6d33b3e..a81e3ef427b2ece00ecbf94b31cf10f88bb10df3 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2741,7 +2741,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2736,7 +2736,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                  entity.refreshEntityData(ServerGamePacketListenerImpl.this.player);
                                  // SPIGOT-7136 - Allays
                                  if (entity instanceof Allay) {
@@ -502,7 +502,7 @@ index d75673cc8a5aeb7051b1d4fe729faf408e266dc4..0b8e5c2da9f57dbf8703baa1de3e1cf8
  
      private static Map<EquipmentSlot, Float> createForAllSlots(List<EquipmentSlot> slots, float dropChance) {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 045abc7dfebce2501abcc1bebee18d5ba8aea1b0..0650254d7de55829c5d3c118ccf08ceec1cd08ac 100644
+index 79ed54c658059e62b16704e5d5fe1527be2717e3..5bf7c9050df8beddd71ecb2fc14414f5e4016d79 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -3275,7 +3275,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -564,7 +564,7 @@ index 02dd200670b02aeab934554b280f7f5d26af0df1..1e433f75b83c3013e7ee962a20773c8b
  
                      for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index 2c312c0b741fb96a008881e9e01fa660a1fb63ab..96427414e5af8663587a70608d66cf98516cf224 100644
+index b6a2f3e4f22f36e75a1630bd456c2f471edbb398..51b1244b7a1f1beeac66a2763dced74798aa6d1b 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
 @@ -1124,7 +1124,7 @@ public final class ItemStack implements DataComponentHolder {
