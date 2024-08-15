@@ -986,10 +986,10 @@ index 108a3edd8dff37c19feac1f247c57a9deae15887..7aa13de4b3778e6708ed46ddcedde100
  
                  while (iterator.hasNext()) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 5980b70e2d7273239245237189b2debcbccfbac3..e2633083327853b87a265aab93d7eba5c5f980a7 100644
+index 6c280abdef5f80b668d6090f9d35283a33e21e0c..85b24bf7dd5f98b9a2d700f1294b9306fb7979b3 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-@@ -1372,7 +1372,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
+@@ -1371,7 +1371,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
                  this.unsetRemoved();
                  */
                  // CraftBukkit end
@@ -997,7 +997,7 @@ index 5980b70e2d7273239245237189b2debcbccfbac3..e2633083327853b87a265aab93d7eba5
                  if (worldserver != null && resourcekey == LevelStem.OVERWORLD && worldserver.getTypeKey() == LevelStem.NETHER) { // CraftBukkit - empty to fall through to null to event
                      this.enteredNetherPosition = this.position();
                  }
-@@ -1388,8 +1387,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
+@@ -1387,8 +1386,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
                  worldserver = ((CraftWorld) exit.getWorld()).getHandle();
                  // CraftBukkit end
  
@@ -1006,7 +1006,7 @@ index 5980b70e2d7273239245237189b2debcbccfbac3..e2633083327853b87a265aab93d7eba5
                  // CraftBukkit start
                  this.isChangingDimension = true; // CraftBukkit - Set teleport invulnerability only if player changing worlds
                  LevelData worlddata = worldserver.getLevelData();
-@@ -1406,7 +1403,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
+@@ -1405,7 +1402,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
                  this.connection.teleport(exit); // CraftBukkit - use internal teleport without event
                  this.connection.resetPosition();
                  worldserver.addDuringTeleport(this);
