@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 35d0a81ea93389f1d4b6e97692771be54bf453d9..dc8cb39d5e9e62f117968a6c0624dea15465a89b 100644
+index 706319b06a4b42d5f4a07e96f13ebbc0aabeedcd..5f375295acf0d21e386a2885af212c5a3abe8b52 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -13,6 +13,8 @@ import java.net.SocketAddress;
@@ -86,7 +86,7 @@ index 35d0a81ea93389f1d4b6e97692771be54bf453d9..dc8cb39d5e9e62f117968a6c0624dea1
          this.playersByName.remove(entityplayer.getScoreboardName().toLowerCase(java.util.Locale.ROOT)); // Spigot
          entityplayer.serverLevel().removePlayerImmediately(entityplayer, entity_removalreason);
          /* CraftBukkit start
-@@ -899,6 +905,7 @@ public abstract class PlayerList {
+@@ -902,6 +908,7 @@ public abstract class PlayerList {
          if (!entityplayer.connection.isDisconnected()) {
              worldserver.addRespawnedPlayer(entityplayer1);
              this.players.add(entityplayer1);
@@ -94,7 +94,7 @@ index 35d0a81ea93389f1d4b6e97692771be54bf453d9..dc8cb39d5e9e62f117968a6c0624dea1
              this.playersByName.put(entityplayer1.getScoreboardName().toLowerCase(java.util.Locale.ROOT), entityplayer1); // Spigot
              this.playersByUUID.put(entityplayer1.getUUID(), entityplayer1);
          }
-@@ -977,20 +984,55 @@ public abstract class PlayerList {
+@@ -980,20 +987,55 @@ public abstract class PlayerList {
          this.sendPlayerPermissionLevel(player, i, recalculatePermissions); // Paper - avoid recalculating permissions if possible
      }
  

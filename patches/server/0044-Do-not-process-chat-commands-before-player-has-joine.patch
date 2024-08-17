@@ -13,7 +13,7 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 347422389337444bba4454d71b7f75db368ccbdf..b01994af95b2399d34dd63661a70f03ef2533342 100644
+index 85b24bf7dd5f98b9a2d700f1294b9306fb7979b3..4854f3ccb643a0f0487dbbe84dc2b7f7eeb9c627 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -297,6 +297,7 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
@@ -25,10 +25,10 @@ index 347422389337444bba4454d71b7f75db368ccbdf..b01994af95b2399d34dd63661a70f03e
      public boolean isRealPlayer; // Paper
      public com.destroystokyo.paper.event.entity.PlayerNaturallySpawnCreaturesEvent playerNaturallySpawnedEvent; // Paper - PlayerNaturallySpawnCreaturesEvent
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index c3b6bc82144218671ca89814e0f34f8a7bdefa4f..ed260aa3e8d31d451230727a6458f2235744176c 100644
+index 8cc340ff91a7757e70f23060a63d940342a206ec..d82481fed75609930dd8d5f59e14076b1bc54b97 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2280,7 +2280,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2352,7 +2352,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
              this.disconnect((Component) Component.translatable("multiplayer.disconnect.illegal_characters"), org.bukkit.event.player.PlayerKickEvent.Cause.ILLEGAL_CHARACTERS); // Paper
          } else if (this.player.isRemoved() || this.player.getChatVisibility() == ChatVisiblity.HIDDEN) { // CraftBukkit - dead men tell no tales
              this.send(new ClientboundSystemChatPacket(Component.translatable("chat.disabled.options").withStyle(ChatFormatting.RED), false));
@@ -38,7 +38,7 @@ index c3b6bc82144218671ca89814e0f34f8a7bdefa4f..ed260aa3e8d31d451230727a6458f223
              // CraftBukkit start
              if (sync) {
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 43eeb8ce4bc350c2b524ade11ca25d8d4d21bea5..0277371164e242b1d2fa6e5a1304af40ea845d0c 100644
+index 0368d6ba9cc9fe557d3c7172a87a7a5b15445e47..2e636ca778e9775e6002b766ef5793550b0e9e5e 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -350,6 +350,8 @@ public abstract class PlayerList {

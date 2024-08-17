@@ -364,10 +364,10 @@ index 20b5a81d50397438b3200322f31b62db44ebdb3b..c80be65d190c85e7f0ea8233ebbbdbc1
  
              for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index ffeab99978f2fb45c7fdf7ab923e8aecf6d33b3e..a81e3ef427b2ece00ecbf94b31cf10f88bb10df3 100644
+index 959ad817b4fc969a2fc7e7b64ca05e5ae5fecac4..a07786c80beb6222115843f233dd489140fa0eef 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2736,7 +2736,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2808,7 +2808,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                  entity.refreshEntityData(ServerGamePacketListenerImpl.this.player);
                                  // SPIGOT-7136 - Allays
                                  if (entity instanceof Allay) {
