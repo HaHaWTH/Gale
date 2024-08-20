@@ -90,7 +90,7 @@ index db92261a6cb3758391108361096417c61bc82cdc..1a14fddb36ca3c14d243304db629d0c5
  
      public SortedList(final E[] elements, final Comparator<? super E> comparator) {
 diff --git a/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/level/entity/ChunkEntitySlices.java b/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/level/entity/ChunkEntitySlices.java
-index 87d2b3ec165e2e9e4bdbedd7adddaa2130ed507b..1260b9abca3d194507f3f982add32ef01adcbcd7 100644
+index 5c7f2471a0b15ac2e714527296ad2aa7291999eb..7be7963dc0a59ed64ef635a2e94adb6c534a53e8 100644
 --- a/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/level/entity/ChunkEntitySlices.java
 +++ b/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/level/entity/ChunkEntitySlices.java
 @@ -187,7 +187,7 @@ public final class ChunkEntitySlices {
@@ -364,10 +364,10 @@ index 20b5a81d50397438b3200322f31b62db44ebdb3b..c80be65d190c85e7f0ea8233ebbbdbc1
  
              for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index c54f29181bbcd178ff5ab577baca419ec071f3b1..be229f74385da0f6459cd23c8502926b173408b6 100644
+index 401b738d3b0aa1e102a00a68840b8f5eda21a427..11e86d83b2bd8242203062b381a313190d673f63 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2808,7 +2808,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2812,7 +2812,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                  entity.refreshEntityData(ServerGamePacketListenerImpl.this.player);
                                  // SPIGOT-7136 - Allays
                                  if (entity instanceof Allay) {

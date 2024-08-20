@@ -22,7 +22,7 @@ you to easily disable books, should you want to preemptively remove this
 functionality before additional exploits are found.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 750f216400a473ed6895273c99ff89960bb56833..8cc340ff91a7757e70f23060a63d940342a206ec 100644
+index b13057c0792067cc6b0abdf0d64a9be2cc9389a4..6fad8731eb2aebefddbcc734bd29eb215423d85d 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -193,6 +193,8 @@ import net.minecraft.world.phys.Vec3;
@@ -44,8 +44,8 @@ index 750f216400a473ed6895273c99ff89960bb56833..8cc340ff91a7757e70f23060a63d9403
 +        }
 +        // Gale end - Pufferfish - make book writing configurable
          // Paper start - Book size limits
-         if (!this.cserver.isPrimaryThread()) {
-             List<String> pageList = packet.pages();
+         final io.papermc.paper.configuration.type.number.IntOr.Disabled pageMax = io.papermc.paper.configuration.GlobalConfiguration.get().itemValidation.bookSize.pageMax;
+         if (!this.cserver.isPrimaryThread() && pageMax.enabled()) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.java b/src/main/java/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.java
 index 0a808c5d242b2d9bea82d9d219227fbaf5741bf4..7d66126c1f5957c109a2426d53f5d0072886309b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/permissions/CraftDefaultPermissions.java

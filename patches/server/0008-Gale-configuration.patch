@@ -107,10 +107,10 @@ index 87e5f614ba988547a827486740db217e28585773..38d99d73a33911afa71d02a456bb4df6
 +
  }
 diff --git a/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java b/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java
-index 715d572351c295cd48c558bb1dfbef6126fc51d0..39d7fa7cd604fbd3374d58de9e3f97e3b163c852 100644
+index d937adbe40687546686cddb27f2ae34f2795e9db..88d7263eae0da911ec96589d0f66dcecc3825f77 100644
 --- a/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java
 +++ b/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java
-@@ -324,7 +324,7 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
+@@ -325,7 +325,7 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
          }
      }
  
@@ -119,7 +119,7 @@ index 715d572351c295cd48c558bb1dfbef6126fc51d0..39d7fa7cd604fbd3374d58de9e3f97e3
          return createWorldContextMap(level.convertable.levelDirectory.path(), level.serverLevelData.getLevelName(), level.dimension().location(), level.spigotConfig, level.registryAccess(), level.getGameRules());
      }
  
-@@ -427,17 +427,6 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
+@@ -428,17 +428,6 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
          return Files.exists(legacyConfig) && Files.isRegularFile(legacyConfig);
      }
  
@@ -137,7 +137,7 @@ index 715d572351c295cd48c558bb1dfbef6126fc51d0..39d7fa7cd604fbd3374d58de9e3f97e3
      @Deprecated
      public static YamlConfiguration loadLegacyConfigFile(File configFile) throws Exception {
          YamlConfiguration config = new YamlConfiguration();
-@@ -460,9 +449,16 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
+@@ -461,9 +450,16 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
      }
  
      // Symlinks are not correctly checked in createDirectories
@@ -356,7 +356,7 @@ index e2a0487089eb5a7bdc1433e4c75f69d8e9f9d5f9..90fc52bb3c8c48e055965f2f822c6199
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index f6de1c6e8fd9086b7bd725f75ee2606583591d6a..0c8fb79691bf03eb07b90e8c08134dcb5550d6a3 100644
+index 1b36e94617d4e777c419660936460d5cf8a4b3e8..bf5bed5f27455d0560ad6fb845516753e78ef701 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1070,6 +1070,7 @@ public final class CraftServer implements Server {
