@@ -509,7 +509,7 @@ index 2f4d6b56301195f8d39ed50dffe842464065bfe1..bdfb969f88e68d89a5cad4b145bbc144
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 41c34ffdf9d95a04ed55a1e09ebc78e8cf946777..51e30d84080c8d32138217e0e8eda181f7f737db 100644
+index 28dbe30a98a6730839949bc9a6a90b78619ff84d..394588a2ec825807bcf2d1383586a25f941dd774 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 @@ -487,7 +487,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
@@ -536,7 +536,7 @@ index 774556a62eb240da42e84db4502e2ed43495be17..0b5979723bb30f9011ac64c36d894aa4
          if (stream != null) {
 diff --git a/src/main/java/org/galemc/gale/version/AbstractPaperVersionFetcher.java b/src/main/java/org/galemc/gale/version/AbstractPaperVersionFetcher.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..75af21644eaf78abdebd722b671f3c47aa083a25
+index 0000000000000000000000000000000000000000..fab5d5af9ec6a20810ce5e437dd617684cc5768f
 --- /dev/null
 +++ b/src/main/java/org/galemc/gale/version/AbstractPaperVersionFetcher.java
 @@ -0,0 +1,154 @@
@@ -587,16 +587,16 @@ index 0000000000000000000000000000000000000000..75af21644eaf78abdebd722b671f3c47
 +    // Gale start - branding changes - version fetcher
 +    protected final String gitHubBranchName;
 +    protected final String downloadPage;
-+    protected final String projectDisplayName;
 +    protected final String organizationDisplayName;
++    protected final String projectDisplayName;
 +    protected final String gitHubOrganizationName;
 +    protected final String gitHubRepoName;
 +
-+    protected AbstractPaperVersionFetcher(String githubBranchName, String downloadPage, String projectDisplayName, String organizationDisplayName, String gitHubOrganizationName, String gitHubRepoName) {
++    protected AbstractPaperVersionFetcher(String githubBranchName, String downloadPage, String organizationDisplayName, String projectDisplayName, String gitHubOrganizationName, String gitHubRepoName) {
 +        this.gitHubBranchName = githubBranchName;
 +        this.downloadPage = downloadPage;
-+        this.projectDisplayName = projectDisplayName;
 +        this.organizationDisplayName = organizationDisplayName;
++        this.projectDisplayName = projectDisplayName;
 +        this.gitHubOrganizationName = gitHubOrganizationName;
 +        this.gitHubRepoName = gitHubRepoName;
 +    }
@@ -696,10 +696,10 @@ index 0000000000000000000000000000000000000000..75af21644eaf78abdebd722b671f3c47
 +}
 diff --git a/src/main/java/org/galemc/gale/version/GaleVersionFetcher.java b/src/main/java/org/galemc/gale/version/GaleVersionFetcher.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..3d674eca7d20202d8f811c5c3e3946a12046028a
+index 0000000000000000000000000000000000000000..de2d223b0fb51d2feff5450950d2889dac3bc83c
 --- /dev/null
 +++ b/src/main/java/org/galemc/gale/version/GaleVersionFetcher.java
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,17 @@
 +// Gale - branding changes - version fetcher
 +
 +package org.galemc.gale.version;
@@ -707,7 +707,13 @@ index 0000000000000000000000000000000000000000..3d674eca7d20202d8f811c5c3e3946a1
 +public class GaleVersionFetcher extends AbstractPaperVersionFetcher {
 +
 +    public GaleVersionFetcher() {
-+        super("ver/1.20.2", "https://github.com/GaleMC/Gale", "Gale", "GaleMC", "GaleMC", "Gale");
++        super(
++            "ver/1.21.1",
++            "https://github.com/Dreeam-qwq/Gale",
++            "GaleMC",
++            "Gale",
++            "GaleMC",
++            "Gale");
 +    }
 +
 +}
