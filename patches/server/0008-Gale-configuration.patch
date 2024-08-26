@@ -107,10 +107,10 @@ index 87e5f614ba988547a827486740db217e28585773..38d99d73a33911afa71d02a456bb4df6
 +
  }
 diff --git a/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java b/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java
-index d937adbe40687546686cddb27f2ae34f2795e9db..88d7263eae0da911ec96589d0f66dcecc3825f77 100644
+index 1029b6de6f36b08bf634b4056ef5701383f6f258..1dd9531ffa272b8248f78a9ec029edcd15339b5a 100644
 --- a/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java
 +++ b/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java
-@@ -325,7 +325,7 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
+@@ -323,7 +323,7 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
          }
      }
  
@@ -119,7 +119,7 @@ index d937adbe40687546686cddb27f2ae34f2795e9db..88d7263eae0da911ec96589d0f66dcec
          return createWorldContextMap(level.convertable.levelDirectory.path(), level.serverLevelData.getLevelName(), level.dimension().location(), level.spigotConfig, level.registryAccess(), level.getGameRules());
      }
  
-@@ -428,17 +428,6 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
+@@ -426,17 +426,6 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
          return Files.exists(legacyConfig) && Files.isRegularFile(legacyConfig);
      }
  
@@ -137,7 +137,7 @@ index d937adbe40687546686cddb27f2ae34f2795e9db..88d7263eae0da911ec96589d0f66dcec
      @Deprecated
      public static YamlConfiguration loadLegacyConfigFile(File configFile) throws Exception {
          YamlConfiguration config = new YamlConfiguration();
-@@ -461,9 +450,16 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
+@@ -459,9 +448,16 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
      }
  
      // Symlinks are not correctly checked in createDirectories

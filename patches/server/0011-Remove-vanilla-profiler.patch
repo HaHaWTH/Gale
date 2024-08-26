@@ -1136,7 +1136,7 @@ index 298e3eddd600f0b2e48ce2d4080cf68adff59a3a..6b3c57fc1231cd37e17a58137bb78411
  
      protected abstract T prepare(ResourceManager manager, ProfilerFiller profiler);
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 490ee48346395fcbaf2eb0151e9248f18974fea6..676490a66fd2c0b82302432bb5eba1334af6e524 100644
+index e0827d8bb3fa17d4f590a5342ff41a514f623e68..e328fea269e034f15ec0893491fdb81b22dcddb7 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -858,7 +858,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -1327,7 +1327,7 @@ index ccd9dff20a60f019e0c320acfb526b8bf3e5f806..18491055d3e139b8ee91fd33773929ce
          if (((ServerLevel) this.level()).hasEntityMoveEvent && !(this instanceof net.minecraft.world.entity.player.Player)) {
              if (this.xo != this.getX() || this.yo != this.getY() || this.zo != this.getZ() || this.yRotO != this.getYRot() || this.xRotO != this.getXRot()) {
 diff --git a/src/main/java/net/minecraft/world/entity/Mob.java b/src/main/java/net/minecraft/world/entity/Mob.java
-index f36a814bfd90af6457171512c131601b19905737..aa8ff09f440f7c7257ea2dafe4d7277c82554f12 100644
+index 763abeea3f14f15c27d600e0bdae44b387687bb4..427e2711b942a61b491b2fe9fc1d02e67d446ad0 100644
 --- a/src/main/java/net/minecraft/world/entity/Mob.java
 +++ b/src/main/java/net/minecraft/world/entity/Mob.java
 @@ -34,7 +34,6 @@ import net.minecraft.sounds.SoundEvent;
@@ -1382,7 +1382,7 @@ index f36a814bfd90af6457171512c131601b19905737..aa8ff09f440f7c7257ea2dafe4d7277c
      }
  
      protected Vec3i getPickupReach() {
-@@ -923,44 +918,23 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
+@@ -920,44 +915,23 @@ public abstract class Mob extends LivingEntity implements EquipmentUser, Leashab
              return;
          }
          // Paper end - Allow nerfed mobs to jump and float
