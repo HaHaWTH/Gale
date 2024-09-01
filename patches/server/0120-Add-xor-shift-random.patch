@@ -53,7 +53,7 @@ index 67103310c59bcf7bd6e873d97a4c88a032d9f999..4aa33233060b2b2bd809d92d35bd0933
  
      // CraftBukkit start
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
-index eb0389ad86300665b6e057bcfa1d7c068dc6c6ab..6d864396f72220d9c92733a38ff6f2fd235238f5 100644
+index 1e0439cf3f4008fa430acb90b45f5bc4cdd6d7f2..b0ef7d56d736353722dcb92442a43c07be290cf1 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
 @@ -109,7 +109,7 @@ public class RegionFile implements AutoCloseable {
@@ -66,10 +66,10 @@ index eb0389ad86300665b6e057bcfa1d7c068dc6c6ab..6d864396f72220d9c92733a38ff6f2fd
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index ffd284f0e25c6f20672f7225aafd37e6c87ccf03..9738a27e9f7168a4a67d195f209f343d4ad5afc6 100644
+index 90d4834f97d3ba996d46493246b1947511553424..f4a2086f54f183e72d9f1923b6313016a9e08d0a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-@@ -246,7 +246,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
+@@ -256,7 +256,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
      }
      // Paper end
  
