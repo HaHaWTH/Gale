@@ -221,7 +221,7 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 4175bee3238ba53d85cab942d31d38e90599330d..014ad39c084f37c274d8a6847814404dfb7c97c9 100644
+index 6dc490ddad517f89b21fcaa73d51654751752b06..5958e88ab7b003ea7408bb0a0f475bc2d3d99d67 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -93,14 +93,14 @@ tasks.jar {
@@ -418,10 +418,10 @@ index 532306cacd52579cdf37e4aca25887b1ed3ba6a1..6fca13221ef3e0bbcad2ebbe74d6aadf
 -    }
  }
 diff --git a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
-index c5d5648f4ca603ef2b1df723b58f9caf4dd3c722..e45e6b44b2a8f2cdae6e0048a812b92126aa17ca 100644
+index 6ee39b534b8d992655bc0cef3c299d12cbae0034..b78828e83d8128eace986aeb73213da3b3f905e4 100644
 --- a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
 +++ b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
-@@ -17,7 +17,7 @@ public final class PaperConsole extends SimpleTerminalConsole {
+@@ -20,7 +20,7 @@ public final class PaperConsole extends SimpleTerminalConsole {
      @Override
      protected LineReader buildReader(LineReaderBuilder builder) {
          builder
