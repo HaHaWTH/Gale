@@ -568,6 +568,19 @@ index 6de563b7adea957a7ead1c00c4900060fa5df277..ca0de5c58323d2e280847a80f8358e5d
                          )
                          .done()
                          .whenComplete(
+diff --git a/src/main/java/net/minecraft/server/ServerFunctionLibrary.java b/src/main/java/net/minecraft/server/ServerFunctionLibrary.java
+index 9fff5ca1e9707e4e6be5ecb92be936332d24bb96..6edae8a46cb7ced54551eac0b74e208b3108c60d 100644
+--- a/src/main/java/net/minecraft/server/ServerFunctionLibrary.java
++++ b/src/main/java/net/minecraft/server/ServerFunctionLibrary.java
+@@ -71,8 +71,6 @@ public class ServerFunctionLibrary implements PreparableReloadListener {
+     public CompletableFuture<Void> reload(
+         PreparableReloadListener.PreparationBarrier synchronizer,
+         ResourceManager manager,
+-        ProfilerFiller prepareProfiler,
+-        ProfilerFiller applyProfiler,
+         Executor prepareExecutor,
+         Executor applyExecutor
+     ) {
 diff --git a/src/main/java/net/minecraft/server/ServerFunctionManager.java b/src/main/java/net/minecraft/server/ServerFunctionManager.java
 index 9cd4f7c6910727c849ac7f5d675dc6105c4bbba2..f9f893a286147c9a8e49f78891381227380a2a14 100644
 --- a/src/main/java/net/minecraft/server/ServerFunctionManager.java
@@ -636,7 +649,7 @@ index 8306edb6fb28e90ba4b432a07131e063daa70507..8538024c6345e79d08643e2d68ca1465
      public SampleLogger getTickTimeLogger() {
          return this.tickTimeLogger;
 diff --git a/src/main/java/net/minecraft/server/level/ChunkMap.java b/src/main/java/net/minecraft/server/level/ChunkMap.java
-index 1e0a6e5a3c907ab55ee6f2780a7d43bd455f2b7b..9f062c88fb5838a294b43ae254c945dca493dd55 100644
+index af8cb316ac169aa8d98a88765b85bb013b9ba961..62bd7523e0d7d2dfdce1ee9edb2249c755f1ade3 100644
 --- a/src/main/java/net/minecraft/server/level/ChunkMap.java
 +++ b/src/main/java/net/minecraft/server/level/ChunkMap.java
 @@ -65,7 +65,6 @@ import net.minecraft.server.network.ServerPlayerConnection;
@@ -776,7 +789,7 @@ index dcb5651d1d9b10b40430fb2f713beedf68336704..3b3684d202e460a80b3e6e97afbaa4c8
          }
  
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 108a3edd8dff37c19feac1f247c57a9deae15887..7aa13de4b3778e6708ed46ddcedde100f585a40f 100644
+index a74d64c33182cc1f2ea78b6ddb6b358ec2c8a91c..05fcd254d3392949707e08b87a410a77243cad2a 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -80,7 +80,6 @@ import net.minecraft.util.ProgressListener;
@@ -986,7 +999,7 @@ index 108a3edd8dff37c19feac1f247c57a9deae15887..7aa13de4b3778e6708ed46ddcedde100
  
                  while (iterator.hasNext()) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 6c280abdef5f80b668d6090f9d35283a33e21e0c..85b24bf7dd5f98b9a2d700f1294b9306fb7979b3 100644
+index c396580a9cfd86ff261bed439bb4662ae88010b5..adba25adaaf32c07e6844faec12bcab860eab194 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -1371,7 +1371,6 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
@@ -1135,6 +1148,19 @@ index 298e3eddd600f0b2e48ce2d4080cf68adff59a3a..6b3c57fc1231cd37e17a58137bb78411
      }
  
      protected abstract T prepare(ResourceManager manager, ProfilerFiller profiler);
+diff --git a/src/main/java/net/minecraft/tags/TagManager.java b/src/main/java/net/minecraft/tags/TagManager.java
+index 2188274de5d1fe1aa5419be6247da6a3a2414a3b..3c60eb7a77eb302d0402dfa599a88cae80d6346d 100644
+--- a/src/main/java/net/minecraft/tags/TagManager.java
++++ b/src/main/java/net/minecraft/tags/TagManager.java
+@@ -32,8 +32,6 @@ public class TagManager implements PreparableReloadListener {
+     public CompletableFuture<Void> reload(
+         PreparableReloadListener.PreparationBarrier synchronizer,
+         ResourceManager manager,
+-        ProfilerFiller prepareProfiler,
+-        ProfilerFiller applyProfiler,
+         Executor prepareExecutor,
+         Executor applyExecutor
+     ) {
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
 index e0827d8bb3fa17d4f590a5342ff41a514f623e68..e328fea269e034f15ec0893491fdb81b22dcddb7 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
@@ -1234,7 +1260,7 @@ index e0827d8bb3fa17d4f590a5342ff41a514f623e68..e328fea269e034f15ec0893491fdb81b
              }
          }
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index ccd9dff20a60f019e0c320acfb526b8bf3e5f806..18491055d3e139b8ee91fd33773929ce8e61252f 100644
+index 9c9e2377f44b1f1bbd8bb0e8bc963a80f4f9ee68..3eb76e4b5466a2a068b4cde235a7d078e8527db5 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -440,7 +440,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
