@@ -377,10 +377,10 @@ index 93095ecefe3ce2209664e442b50a596cd0e7b0d4..6e010409af3856eb742e786669811f1f
  
                                  ServerGamePacketListenerImpl.this.player.containerMenu.sendAllDataToRemote(); // Paper - fix slot desync - always refresh player inventory
 diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-index 22865e638a50397d194fb39b883f73753de1f7f0..a60651bb5e1156db2b3ccd74e18661aa3f19b9c2 100644
+index 2754e5dda2bc50bff302cb569803bc8f1f04a9db..1d4f1cdfd2b221b0ed0cef3bc266c829fd3555ef 100644
 --- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-@@ -176,14 +176,16 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -181,14 +181,16 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
  
      @Override
      public void handleHello(ServerboundHelloPacket packet) {
@@ -399,7 +399,7 @@ index 22865e638a50397d194fb39b883f73753de1f7f0..a60651bb5e1156db2b3ccd74e18661aa
          this.requestedUsername = packet.name();
          GameProfile gameprofile = this.server.getSingleplayerProfile();
  
-@@ -279,7 +281,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -284,7 +286,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
  
      @Override
      public void handleKey(ServerboundKeyPacket packet) {
@@ -408,7 +408,7 @@ index 22865e638a50397d194fb39b883f73753de1f7f0..a60651bb5e1156db2b3ccd74e18661aa
  
          final String s;
  
-@@ -460,7 +462,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -465,7 +467,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
      @Override
      public void handleLoginAcknowledgement(ServerboundLoginAcknowledgedPacket packet) {
          PacketUtils.ensureRunningOnSameThread(packet, this, this.server); // CraftBukkit
@@ -502,7 +502,7 @@ index d75673cc8a5aeb7051b1d4fe729faf408e266dc4..0b8e5c2da9f57dbf8703baa1de3e1cf8
  
      private static Map<EquipmentSlot, Float> createForAllSlots(List<EquipmentSlot> slots, float dropChance) {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 79ed54c658059e62b16704e5d5fe1527be2717e3..5bf7c9050df8beddd71ecb2fc14414f5e4016d79 100644
+index e5df16e415d6c8dc8547a59af373ae2918ec42dc..6c6e279cd351720bd8d867e2c6207e98a35d2c9d 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -3275,7 +3275,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -564,10 +564,10 @@ index 427e2711b942a61b491b2fe9fc1d02e67d446ad0..9dbcebe04ad9dd2f5558e92e85749c70
  
                      for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index b6a2f3e4f22f36e75a1630bd456c2f471edbb398..51b1244b7a1f1beeac66a2763dced74798aa6d1b 100644
+index eec0ec43590be7e8ae5b530a7404c98b5e23cb53..21d8666ed24dae109792c094b9ce7eeb9100b4d9 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
-@@ -1124,7 +1124,7 @@ public final class ItemStack implements DataComponentHolder {
+@@ -1122,7 +1122,7 @@ public final class ItemStack implements DataComponentHolder {
          ItemAttributeModifiers itemattributemodifiers = (ItemAttributeModifiers) this.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
  
          if (itemattributemodifiers.showInTooltip()) {

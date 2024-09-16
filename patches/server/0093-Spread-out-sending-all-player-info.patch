@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 0f6fba34ca7bb83f40e4e47ba0fcdea754668033..78868d7b5fd0d25845937c6e63f81cb972569c04 100644
+index 9b265924086edfdd29d155a94ad968d62c2fa924..bd555d1f9ce00b53f8d3b2b82012cf3716e205a6 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -13,6 +13,8 @@ import java.net.SocketAddress;
@@ -94,7 +94,7 @@ index 0f6fba34ca7bb83f40e4e47ba0fcdea754668033..78868d7b5fd0d25845937c6e63f81cb9
              this.playersByName.put(entityplayer1.getScoreboardName().toLowerCase(java.util.Locale.ROOT), entityplayer1); // Spigot
              this.playersByUUID.put(entityplayer1.getUUID(), entityplayer1);
          }
-@@ -981,20 +988,55 @@ public abstract class PlayerList {
+@@ -986,20 +993,55 @@ public abstract class PlayerList {
          this.sendPlayerPermissionLevel(player, i, recalculatePermissions); // Paper - avoid recalculating permissions if possible
      }
  

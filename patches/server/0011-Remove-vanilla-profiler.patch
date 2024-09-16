@@ -1028,10 +1028,10 @@ index c396580a9cfd86ff261bed439bb4662ae88010b5..adba25adaaf32c07e6844faec12bcab8
                  this.connection.send(new ClientboundPlayerAbilitiesPacket(this.getAbilities()));
                  playerlist.sendLevelInfo(this, worldserver);
 diff --git a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index b43f87ff4b9853b5d4bbea5ff9686d64d9d0d26b..8757a6ac609d463f94846d66fe04f50e859e7ce8 100644
+index 6998f32f8d79dbdb6b31ffaa126602fc4a428616..148e66f9d749f2cd0da00b5fa95233f593329d99 100644
 --- a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-@@ -247,7 +247,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -252,7 +252,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
      }
  
      protected void keepConnectionAlive() {
@@ -1039,7 +1039,7 @@ index b43f87ff4b9853b5d4bbea5ff9686d64d9d0d26b..8757a6ac609d463f94846d66fe04f50e
          // Paper start - give clients a longer time to respond to pings as per pre 1.12.2 timings
          // This should effectively place the keepalive handling back to "as it was" before 1.12.2
          long currentTime = Util.getMillis();
-@@ -265,7 +264,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -270,7 +269,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
          }
          // Paper end - give clients a longer time to respond to pings as per pre 1.12.2 timings
  
@@ -1162,7 +1162,7 @@ index 2188274de5d1fe1aa5419be6247da6a3a2414a3b..3c60eb7a77eb302d0402dfa599a88cae
          Executor applyExecutor
      ) {
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index e0827d8bb3fa17d4f590a5342ff41a514f623e68..e328fea269e034f15ec0893491fdb81b22dcddb7 100644
+index 9f68c0fda7f5526eb97619f1a35ed3b78d1b3751..3a5f832578abbf3ead4d5bd99eee1438a2e74b35 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -858,7 +858,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -1260,7 +1260,7 @@ index e0827d8bb3fa17d4f590a5342ff41a514f623e68..e328fea269e034f15ec0893491fdb81b
              }
          }
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 9c9e2377f44b1f1bbd8bb0e8bc963a80f4f9ee68..3eb76e4b5466a2a068b4cde235a7d078e8527db5 100644
+index 30f4f1254fc295442d72d50479e8af635f2fe983..f4345d34196f319c93eb12a86b74881d3b12b005 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -440,7 +440,6 @@ public abstract class LivingEntity extends Entity implements Attackable {

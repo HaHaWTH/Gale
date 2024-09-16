@@ -289,7 +289,7 @@ index dd56c8e041116ef3602a9f89c998c8208ab89b51..86c615518e315dd4425d17df163e88a1
          // Paper start - fix converting txt to json file; convert old users earlier after PlayerList creation but before file load/save
          if (this.convertOldUsers()) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 2fe9d9b38c01d04416843fdd48d3e33899b7de63..108a3edd8dff37c19feac1f247c57a9deae15887 100644
+index c96f3dcd365bc140b1f4680ef6bd770c80f8eda1..a74d64c33182cc1f2ea78b6ddb6b358ec2c8a91c 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -503,7 +503,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
@@ -356,7 +356,7 @@ index e2a0487089eb5a7bdc1433e4c75f69d8e9f9d5f9..90fc52bb3c8c48e055965f2f822c6199
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 1b36e94617d4e777c419660936460d5cf8a4b3e8..bf5bed5f27455d0560ad6fb845516753e78ef701 100644
+index b7af2d4300facf41a025c8ca322bf6541949b3ab..49c1a96f35ac80b6de3f213d809d856bc21af5af 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1070,6 +1070,7 @@ public final class CraftServer implements Server {
@@ -367,7 +367,7 @@ index 1b36e94617d4e777c419660936460d5cf8a4b3e8..bf5bed5f27455d0560ad6fb845516753
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters, config.spawnAnimals); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -2991,6 +2992,14 @@ public final class CraftServer implements Server {
+@@ -2988,6 +2989,14 @@ public final class CraftServer implements Server {
              return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
          }
  

@@ -17,7 +17,7 @@ Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 This can help to hide annoying scanning bots from showing up in console.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-index b0f7a378f19b9837c060c891002cd5db756cdae1..22865e638a50397d194fb39b883f73753de1f7f0 100644
+index 40638b439966619e9c70a18a32abd95b2178fe9f..2754e5dda2bc50bff302cb569803bc8f1f04a9db 100644
 --- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 @@ -44,6 +44,7 @@ import net.minecraft.util.CryptException;
@@ -28,7 +28,7 @@ index b0f7a378f19b9837c060c891002cd5db756cdae1..22865e638a50397d194fb39b883f7375
  import org.slf4j.Logger;
  import net.minecraft.network.protocol.Packet;
  import net.minecraft.network.protocol.PacketUtils;
-@@ -141,6 +142,14 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -146,6 +147,14 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
  
      public void disconnect(Component reason) {
          try {

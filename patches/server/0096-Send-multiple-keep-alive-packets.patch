@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index 8757a6ac609d463f94846d66fe04f50e859e7ce8..a720a05c47b2137a07515461960603cc5c939d16 100644
+index 148e66f9d749f2cd0da00b5fa95233f593329d99..8847873e5fc1fdf272d3acb84289a54efaa62b64 100644
 --- a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 @@ -4,6 +4,9 @@ import com.mojang.authlib.GameProfile;
@@ -58,7 +58,7 @@ index 8757a6ac609d463f94846d66fe04f50e859e7ce8..a720a05c47b2137a07515461960603cc
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -74,10 +78,14 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -79,10 +83,14 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
      private long keepAliveChallenge;
      private long closedListenerTime;
      private boolean closed = false;
@@ -74,7 +74,7 @@ index 8757a6ac609d463f94846d66fe04f50e859e7ce8..a720a05c47b2137a07515461960603cc
      protected static final ResourceLocation MINECRAFT_BRAND = ResourceLocation.withDefaultNamespace("brand"); // Paper - Brand support
  
      public ServerCommonPacketListenerImpl(MinecraftServer minecraftserver, Connection networkmanager, CommonListenerCookie commonlistenercookie, ServerPlayer player) { // CraftBukkit
-@@ -125,6 +133,16 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -130,6 +138,16 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
      @Override
      public void handleKeepAlive(ServerboundKeepAlivePacket packet) {
          //PacketUtils.ensureRunningOnSameThread(packet, this, this.player.serverLevel()); // CraftBukkit // Paper - handle ServerboundKeepAlivePacket async
@@ -91,7 +91,7 @@ index 8757a6ac609d463f94846d66fe04f50e859e7ce8..a720a05c47b2137a07515461960603cc
          if (this.keepAlivePending && packet.getId() == this.keepAliveChallenge) {
              int i = (int) (Util.getMillis() - this.keepAliveTime);
  
-@@ -137,6 +155,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -142,6 +160,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
              });
              // Paper end - This needs to be handled on the main thread for plugins
          }
@@ -99,7 +99,7 @@ index 8757a6ac609d463f94846d66fe04f50e859e7ce8..a720a05c47b2137a07515461960603cc
  
      }
  
-@@ -252,6 +271,21 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -257,6 +276,21 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
          long currentTime = Util.getMillis();
          long elapsedTime = currentTime - this.keepAliveTime;
  
@@ -121,7 +121,7 @@ index 8757a6ac609d463f94846d66fe04f50e859e7ce8..a720a05c47b2137a07515461960603cc
          if (!this.isSingleplayerOwner() && elapsedTime >= 15000L) { // Paper - use vanilla's 15000L between keep alive packets
              if (this.keepAlivePending && !this.processedDisconnect && elapsedTime >= KEEPALIVE_LIMIT) { // Paper - check keepalive limit, don't fire if already disconnected
                  this.disconnect(ServerCommonPacketListenerImpl.TIMEOUT_DISCONNECTION_MESSAGE, PlayerKickEvent.Cause.TIMEOUT); // Paper - kick event cause
-@@ -262,6 +296,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -267,6 +301,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
                  this.send(new ClientboundKeepAlivePacket(this.keepAliveChallenge));
              }
          }
@@ -130,7 +130,7 @@ index 8757a6ac609d463f94846d66fe04f50e859e7ce8..a720a05c47b2137a07515461960603cc
  
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index f4b7ac0d9571daf751196e342016601dbd2f2787..ec3f2907cd850c163d2e703fcbb8c025c0eaeedb 100644
+index 6e010409af3856eb742e786669811f1f7ea217d8..1816eea82d60e4433541a90c83825529301c6818 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -9,6 +9,8 @@ import com.mojang.brigadier.suggestion.Suggestions;
