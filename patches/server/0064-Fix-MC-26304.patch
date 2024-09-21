@@ -13,7 +13,7 @@ As part of: Mirai (https://github.com/etil2jz/Mirai)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/BrewingStandBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/BrewingStandBlockEntity.java
-index a2fafef89d5354e2cb02f5672810909950a57777..b9c590bfa0ebc2f6399f6b98a084a0074b331483 100644
+index bf2c303a314205590a2839e0f729af3a9ff40a86..56288c4cd5693835690234b0da13c2bd3e11ef45 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/BrewingStandBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/BrewingStandBlockEntity.java
 @@ -47,6 +47,7 @@ public class BrewingStandBlockEntity extends BaseContainerBlockEntity implements
@@ -24,7 +24,7 @@ index a2fafef89d5354e2cb02f5672810909950a57777..b9c590bfa0ebc2f6399f6b98a084a007
      private NonNullList<ItemStack> items;
      public int brewTime;
      private boolean[] lastPotionCount;
-@@ -303,6 +304,22 @@ public class BrewingStandBlockEntity extends BaseContainerBlockEntity implements
+@@ -301,6 +302,22 @@ public class BrewingStandBlockEntity extends BaseContainerBlockEntity implements
          }
  
          this.fuel = nbt.getByte("Fuel");
@@ -47,7 +47,7 @@ index a2fafef89d5354e2cb02f5672810909950a57777..b9c590bfa0ebc2f6399f6b98a084a007
      }
  
      @Override
-@@ -311,6 +328,18 @@ public class BrewingStandBlockEntity extends BaseContainerBlockEntity implements
+@@ -309,6 +326,18 @@ public class BrewingStandBlockEntity extends BaseContainerBlockEntity implements
          nbt.putShort("BrewTime", (short) this.brewTime);
          ContainerHelper.saveAllItems(nbt, this.items, registryLookup);
          nbt.putByte("Fuel", (byte) this.fuel);
