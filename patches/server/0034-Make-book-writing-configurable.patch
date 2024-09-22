@@ -22,7 +22,7 @@ you to easily disable books, should you want to preemptively remove this
 functionality before additional exploits are found.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index b13057c0792067cc6b0abdf0d64a9be2cc9389a4..6fad8731eb2aebefddbcc734bd29eb215423d85d 100644
+index fcccf989c25f0a259b160c4ff7873f7009e64d14..793967c558feaf35de8043f26318ef9707bf8e1c 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -193,6 +193,8 @@ import net.minecraft.world.phys.Vec3;

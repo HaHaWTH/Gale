@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 2df8f9f7c631f7c4a67cfcaf218de1d29448d489..bfefe93b1ab4facd4874210609ecbe244a4cff0d 100644
+index 4a5857f2454090fc87ecd1cc9d0a39c31918d197..a6ebe6bb04744a53937d729b9cec028463e19ac1 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -717,7 +717,20 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.

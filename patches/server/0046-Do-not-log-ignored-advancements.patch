@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/PlayerAdvancements.java b/src/main/java/net/minecraft/server/PlayerAdvancements.java
-index 9fabf9322acd663c4452b562494e74aa42eb19da..749dbb091af02c2e5922de14fc2743b7649f2928 100644
+index 862a4bf003b7f810fb57dbcd150a1417c902b633..c4a5f744c089a7ef1ffbb3a19379fb510fb54af3 100644
 --- a/src/main/java/net/minecraft/server/PlayerAdvancements.java
 +++ b/src/main/java/net/minecraft/server/PlayerAdvancements.java
 @@ -45,6 +45,7 @@ import net.minecraft.server.level.ServerPlayer;

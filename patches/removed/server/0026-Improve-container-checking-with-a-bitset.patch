@@ -3,6 +3,8 @@ From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Wed, 23 Nov 2022 22:11:06 +0100
 Subject: [PATCH] Improve container checking with a bitset
 
+Removed since 1.21.1, performance regression
+
 License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 

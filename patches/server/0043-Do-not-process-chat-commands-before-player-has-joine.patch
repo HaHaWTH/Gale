@@ -13,7 +13,7 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 85b24bf7dd5f98b9a2d700f1294b9306fb7979b3..4854f3ccb643a0f0487dbbe84dc2b7f7eeb9c627 100644
+index adba25adaaf32c07e6844faec12bcab860eab194..978aa293c771c065a435d564e4355c837678a92b 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -297,6 +297,7 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
@@ -25,7 +25,7 @@ index 85b24bf7dd5f98b9a2d700f1294b9306fb7979b3..4854f3ccb643a0f0487dbbe84dc2b7f7
      public boolean isRealPlayer; // Paper
      public com.destroystokyo.paper.event.entity.PlayerNaturallySpawnCreaturesEvent playerNaturallySpawnedEvent; // Paper - PlayerNaturallySpawnCreaturesEvent
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 6fad8731eb2aebefddbcc734bd29eb215423d85d..67240d108f1fcbc3eb8b7840798e833d511cd46e 100644
+index 793967c558feaf35de8043f26318ef9707bf8e1c..57392fd6bd7c7bf0a242e656c03afcdc8b5d15a8 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2356,7 +2356,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
@@ -38,7 +38,7 @@ index 6fad8731eb2aebefddbcc734bd29eb215423d85d..67240d108f1fcbc3eb8b7840798e833d
              // CraftBukkit start
              if (sync) {
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 0368d6ba9cc9fe557d3c7172a87a7a5b15445e47..2e636ca778e9775e6002b766ef5793550b0e9e5e 100644
+index c13922d2fb1c15f895b14d4cb6d5379b59ea1ef8..c7c03291e9b49fbaaae8774ab3dcdc442c588e3a 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -350,6 +350,8 @@ public abstract class PlayerList {
