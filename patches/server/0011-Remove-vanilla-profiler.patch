@@ -1162,7 +1162,7 @@ index 2188274de5d1fe1aa5419be6247da6a3a2414a3b..3c60eb7a77eb302d0402dfa599a88cae
          Executor applyExecutor
      ) {
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 9f68c0fda7f5526eb97619f1a35ed3b78d1b3751..3a5f832578abbf3ead4d5bd99eee1438a2e74b35 100644
+index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f2631e40e 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -858,7 +858,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -1243,7 +1243,7 @@ index 9f68c0fda7f5526eb97619f1a35ed3b78d1b3751..3a5f832578abbf3ead4d5bd99eee1438
                  } else if (this.portalProcess.hasExpired()) {
                      this.portalProcess = null;
                  }
-@@ -3775,7 +3762,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3777,7 +3764,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                      }
                  }
  
@@ -1251,7 +1251,7 @@ index 9f68c0fda7f5526eb97619f1a35ed3b78d1b3751..3a5f832578abbf3ead4d5bd99eee1438
                  Entity entity2 = worldserver1.dimension() == worldserver.dimension() ? this : this.getType().create(worldserver1);
  
                  if (entity2 != null) {
-@@ -3811,7 +3797,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3813,7 +3799,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                      teleportTarget.postDimensionTransition().onTransition(entity2);
                  }
  

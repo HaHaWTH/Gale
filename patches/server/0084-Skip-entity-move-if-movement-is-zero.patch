@@ -13,7 +13,7 @@ As part of: VMP (https://github.com/RelativityMC/VMP-fabric)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index e41f7ee8f0a0db423aa213d5bf6d885db8ec2920..6b442c11dbe262bd051cb44c5e7753a8ea8d80e3 100644
+index 1503473c2b75ec54012f4f9faa3703f997f641b9..0271f01414041d05bcdfc047e26d3ba265307593 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -323,6 +323,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -36,7 +36,7 @@ index e41f7ee8f0a0db423aa213d5bf6d885db8ec2920..6b442c11dbe262bd051cb44c5e7753a8
          final Vec3 originalMovement = movement; // Paper - Expose pre-collision velocity
          // Paper start - detailed watchdog information
          ca.spottedleaf.moonrise.common.util.TickThread.ensureTickThread("Cannot move an entity off-main");
-@@ -4130,6 +4136,11 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -4132,6 +4138,11 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
      }
  
      public final void setBoundingBox(AABB boundingBox) {
