@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 1d1e76de60e40224f5cb81893f9ee50fe987badb..e4d658b43168dddf0957b8b71ba4202a788fbeb0 100644
+index 5af48400f87500166dd889c57a8df0aadb08d43d..6ad2a538df3edcb8799aa89e7fe9cb4e15713ae0 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -55,7 +55,6 @@ import net.minecraft.server.commands.CloneCommands;
@@ -789,7 +789,7 @@ index dcb5651d1d9b10b40430fb2f713beedf68336704..3b3684d202e460a80b3e6e97afbaa4c8
          }
  
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index a74d64c33182cc1f2ea78b6ddb6b358ec2c8a91c..05fcd254d3392949707e08b87a410a77243cad2a 100644
+index e20b7a1ad141834a10c5f23f9b27cc41fa25ac0d..9b2833fc9906dc6c0ac254adabc0f471991439a8 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -80,7 +80,6 @@ import net.minecraft.util.ProgressListener;
@@ -1791,10 +1791,10 @@ index 7e1871401ec5e3e9a85232053490259f132aec0a..ba49442ed0b7c05c50dbc2a640f5759e
              this.assignProfessionWhenSpawned = false;
          }
 diff --git a/src/main/java/net/minecraft/world/level/Explosion.java b/src/main/java/net/minecraft/world/level/Explosion.java
-index ad57bf49476192dea6a7367cbd0ad3f11e142e1b..977640aa7f07da5b5e002bd98ae936760d40caf0 100644
+index f696afd7e241bf1966a2d505b5d59bff824b43e4..94e0a6cdf5c340dd11374e890963d043a440650a 100644
 --- a/src/main/java/net/minecraft/world/level/Explosion.java
 +++ b/src/main/java/net/minecraft/world/level/Explosion.java
-@@ -646,7 +646,6 @@ public class Explosion {
+@@ -647,7 +647,6 @@ public class Explosion {
          }
  
          if (flag1) {
@@ -1802,7 +1802,7 @@ index ad57bf49476192dea6a7367cbd0ad3f11e142e1b..977640aa7f07da5b5e002bd98ae93676
              List<Pair<ItemStack, BlockPos>> list = new ArrayList();
  
              Util.shuffle(this.toBlow, this.level.random);
-@@ -721,7 +720,6 @@ public class Explosion {
+@@ -722,7 +721,6 @@ public class Explosion {
                  Block.popResource(this.level, (BlockPos) pair.getSecond(), (ItemStack) pair.getFirst());
              }
  
@@ -1811,7 +1811,7 @@ index ad57bf49476192dea6a7367cbd0ad3f11e142e1b..977640aa7f07da5b5e002bd98ae93676
  
          if (this.fire) {
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 90fc52bb3c8c48e055965f2f822c6199182f373b..abebc41e69a41cbf940ffd10dae4815202b525dc 100644
+index 32cd737206dd9f2bcfdacfe17dc0621ee34b589a..9dfc38c1b062c8ad52ecff4b0731f0650c1ebeef 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -133,7 +133,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
@@ -1873,7 +1873,7 @@ index 90fc52bb3c8c48e055965f2f822c6199182f373b..abebc41e69a41cbf940ffd10dae48152
          this.spigotConfig.currentPrimedTnt = 0; // Spigot
      }
  
-@@ -1628,7 +1620,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1645,7 +1637,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
  
      @Override
      public List<Entity> getEntities(@Nullable Entity except, AABB box, Predicate<? super Entity> predicate) {
@@ -1881,7 +1881,7 @@ index 90fc52bb3c8c48e055965f2f822c6199182f373b..abebc41e69a41cbf940ffd10dae48152
          // Paper start - rewrite chunk system
          final List<Entity> ret = new java.util.ArrayList<>();
  
-@@ -1654,8 +1645,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1671,8 +1662,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public <T extends Entity> void getEntities(final EntityTypeTest<Entity, T> entityTypeTest,
                                                 final AABB boundingBox, final Predicate<? super T> predicate,
                                                 final List<? super T> into, final int maxCount) {
@@ -1890,7 +1890,7 @@ index 90fc52bb3c8c48e055965f2f822c6199182f373b..abebc41e69a41cbf940ffd10dae48152
          if (entityTypeTest instanceof net.minecraft.world.entity.EntityType<T> byType) {
              if (maxCount != Integer.MAX_VALUE) {
                  ((ca.spottedleaf.moonrise.patches.chunk_system.level.ChunkSystemLevel)this).moonrise$getEntityLookup().getEntities(byType, boundingBox, into, predicate, maxCount);
-@@ -1949,11 +1938,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1966,11 +1955,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
  
      public ProfilerFiller getProfiler() {

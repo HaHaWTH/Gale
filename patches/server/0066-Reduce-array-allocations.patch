@@ -625,10 +625,10 @@ index fce49b17905ab97e691aa8499a5dfed67adf0c40..986d0151aeeb2ce0f752c424c526fb0c
              if (stackPredicate.test(itemStack)) {
                  ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index d756e2ac71eced0de81b921f3215f51600b6b768..00b001e279ed1e79ad4171a5d2cedb2745ea946d 100644
+index 0b373e194a4cf1d579165424aee21f4c62ae45b1..a28385bbc885f2103093a80066c89f09b650484a 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1721,7 +1721,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1738,7 +1738,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public org.bukkit.entity.Entity[] getChunkEntities(int chunkX, int chunkZ) {
          ca.spottedleaf.moonrise.patches.chunk_system.level.entity.ChunkEntitySlices slices = ((ServerLevel)this).moonrise$getEntityLookup().getChunk(chunkX, chunkZ);
          if (slices == null) {

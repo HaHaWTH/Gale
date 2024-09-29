@@ -96,10 +96,10 @@ index 5c0e5803284bfc82c2dd8bba9ded0ba7aac4962a..2cc37e5734233954710c4ef55bf3b291
          this.level = world;
          this.id = nbt.getInt("Id");
 diff --git a/src/main/java/net/minecraft/world/level/Explosion.java b/src/main/java/net/minecraft/world/level/Explosion.java
-index 977640aa7f07da5b5e002bd98ae936760d40caf0..e895eb8049268560031e8483635668aa3f83dbe0 100644
+index 94e0a6cdf5c340dd11374e890963d043a440650a..df04f39d8e40eaab3a29ed33f253728d236c6957 100644
 --- a/src/main/java/net/minecraft/world/level/Explosion.java
 +++ b/src/main/java/net/minecraft/world/level/Explosion.java
-@@ -335,7 +335,7 @@ public class Explosion {
+@@ -336,7 +336,7 @@ public class Explosion {
      }
  
      public Explosion(Level world, @Nullable Entity entity, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator behavior, double x, double y, double z, float power, boolean createFire, Explosion.BlockInteraction destructionType, ParticleOptions particle, ParticleOptions emitterParticle, Holder<SoundEvent> soundEvent) {
