@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 540fe7e2c110e79c3742f229b3ed8c54b101d260..aabcd87ed238fe6b2215aeaa49bdb3d429ba92e9 100644
+index 2074c9aee1affbce57571398f8519f0d425cf5e3..ad74527efe65484724c66b0dd76986d61b861667 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -130,6 +130,15 @@ val generateApiVersioningFile by tasks.registering {
+@@ -131,6 +131,15 @@ val generateApiVersioningFile by tasks.registering {
      }
  }
  
@@ -26,7 +26,7 @@ index 540fe7e2c110e79c3742f229b3ed8c54b101d260..aabcd87ed238fe6b2215aeaa49bdb3d4
  tasks.jar {
      from(generateApiVersioningFile.map { it.outputs.files.singleFile }) {
          into("META-INF/maven/${project.group}/${project.name}")
-@@ -188,6 +197,8 @@ tasks.withType<Javadoc> {
+@@ -189,6 +198,8 @@ tasks.withType<Javadoc> {
              into("build/docs/javadoc")
          }
      }

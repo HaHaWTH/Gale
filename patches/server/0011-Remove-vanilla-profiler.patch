@@ -1162,7 +1162,7 @@ index 2188274de5d1fe1aa5419be6247da6a3a2414a3b..3c60eb7a77eb302d0402dfa599a88cae
          Executor applyExecutor
      ) {
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f2631e40e 100644
+index 4b54d0ea31062972e68ee8fafe3cfaf68f65a5cd..1d997cf3ef35ec428477d57d3b03fc57bca36407 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -858,7 +858,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -1182,7 +1182,7 @@ index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f
      }
  
      public void setSharedFlagOnFire(boolean onFire) {
-@@ -1136,7 +1133,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1138,7 +1135,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                  }
              }
  
@@ -1190,7 +1190,7 @@ index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f
              if (this.stuckSpeedMultiplier.lengthSqr() > 1.0E-7D) {
                  movement = movement.multiply(this.stuckSpeedMultiplier);
                  this.stuckSpeedMultiplier = Vec3.ZERO;
-@@ -1145,7 +1141,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1147,7 +1143,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
              // Paper start - ignore movement changes while inactive.
              if (isTemporarilyActive && !(this instanceof ItemEntity) && movement == getDeltaMovement() && movementType == MoverType.SELF) {
                  setDeltaMovement(Vec3.ZERO);
@@ -1198,7 +1198,7 @@ index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f
                  return;
              }
              // Paper end
-@@ -1166,8 +1161,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1168,8 +1163,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                  this.setPos(this.getX() + vec3d1.x, this.getY() + vec3d1.y, this.getZ() + vec3d1.z);
              }
  
@@ -1207,7 +1207,7 @@ index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f
              boolean flag = !Mth.equal(movement.x, vec3d1.x);
              boolean flag1 = !Mth.equal(movement.z, vec3d1.z);
  
-@@ -1185,9 +1178,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1187,9 +1180,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
              BlockState iblockdata = this.level().getBlockState(blockposition);
  
              this.checkFallDamage(vec3d1.y, this.onGround(), iblockdata, blockposition);
@@ -1218,7 +1218,7 @@ index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f
                  if (this.horizontalCollision) {
                      Vec3 vec3d2 = this.getDeltaMovement();
  
-@@ -1288,8 +1279,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -1290,8 +1281,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                  if (this.isOnFire() && (this.isInPowderSnow || this.isInWaterRainOrBubble())) {
                      this.setRemainingFireTicks(-this.getFireImmuneTicks());
                  }
@@ -1227,7 +1227,7 @@ index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f
              }
          }
          // Paper start - detailed watchdog information
-@@ -3262,7 +3251,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3264,7 +3253,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
              this.processPortalCooldown();
              if (this.portalProcess != null) {
                  if (this.portalProcess.processPortalTeleportation(worldserver, this, this.canUsePortal(false))) {
@@ -1235,7 +1235,7 @@ index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f
                      this.setPortalCooldown();
                      DimensionTransition dimensiontransition = this.portalProcess.getPortalDestination(worldserver, this);
  
-@@ -3274,7 +3262,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3276,7 +3264,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                          }
                      }
  
@@ -1243,7 +1243,7 @@ index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f
                  } else if (this.portalProcess.hasExpired()) {
                      this.portalProcess = null;
                  }
-@@ -3777,7 +3764,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3779,7 +3766,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                      }
                  }
  
@@ -1251,7 +1251,7 @@ index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f
                  Entity entity2 = worldserver1.dimension() == worldserver.dimension() ? this : this.getType().create(worldserver1);
  
                  if (entity2 != null) {
-@@ -3813,7 +3799,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -3815,7 +3801,6 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
                      teleportTarget.postDimensionTransition().onTransition(entity2);
                  }
  
@@ -1260,7 +1260,7 @@ index bc45c74987974b4828201e06fc8b1f3fbc0af8b4..cbf78ffff3b6c7048c430954c30db42f
              }
          }
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 30f4f1254fc295442d72d50479e8af635f2fe983..f4345d34196f319c93eb12a86b74881d3b12b005 100644
+index 2aa6374cd4a96efd85899be8cd3172a8257bfe6b..2994230ba5252b6af4d54a351d78536c07e0a48e 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -440,7 +440,6 @@ public abstract class LivingEntity extends Entity implements Attackable {
