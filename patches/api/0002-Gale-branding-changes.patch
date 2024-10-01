@@ -46,7 +46,7 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index ad74527efe65484724c66b0dd76986d61b861667..24e6d4170356c018d7e7aab0bb5b583985c2c338 100644
+index 7d5f68599e680bd6ce21ff32c902a994e8fc6538..a4c827331900d292febae384701bcd51add111d9 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -149,6 +149,12 @@ tasks.jar {
@@ -63,10 +63,10 @@ index ad74527efe65484724c66b0dd76986d61b861667..24e6d4170356c018d7e7aab0bb5b5839
  
  tasks.withType<Javadoc> {
 diff --git a/src/main/java/io/papermc/paper/ServerBuildInfo.java b/src/main/java/io/papermc/paper/ServerBuildInfo.java
-index 9df9d09aa477d4cd3c496ba0933c816df1ef0964..bdc8d830f54e4567ec0b03041221fdcd016ce76c 100644
+index 652ff54e7c50412503725d628bfe72ed03059790..b68770f6992b044d13e67d9affa6933c90ca8fb8 100644
 --- a/src/main/java/io/papermc/paper/ServerBuildInfo.java
 +++ b/src/main/java/io/papermc/paper/ServerBuildInfo.java
-@@ -18,6 +18,13 @@ public interface ServerBuildInfo {
+@@ -19,6 +19,13 @@ public interface ServerBuildInfo {
       */
      Key BRAND_PAPER_ID = Key.key("papermc", "paper");
  
