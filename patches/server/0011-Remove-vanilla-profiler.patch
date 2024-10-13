@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 5af48400f87500166dd889c57a8df0aadb08d43d..6ad2a538df3edcb8799aa89e7fe9cb4e15713ae0 100644
+index 5af48400f87500166dd889c57a8df0aadb08d43d..bbfd3e2a7e6a9a47d80bfea765e77b16c269562a 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -55,7 +55,6 @@ import net.minecraft.server.commands.CloneCommands;
@@ -48,15 +48,7 @@ index 5af48400f87500166dd889c57a8df0aadb08d43d..6ad2a538df3edcb8799aa89e7fe9cb4e
  import net.minecraft.server.commands.DebugConfigCommand;
  import net.minecraft.server.commands.DebugMobSpawningCommand;
  import net.minecraft.server.commands.DebugPathCommand;
-@@ -86,7 +85,6 @@ import net.minecraft.server.commands.OpCommand;
- import net.minecraft.server.commands.PardonCommand;
- import net.minecraft.server.commands.PardonIpCommand;
- import net.minecraft.server.commands.ParticleCommand;
--import net.minecraft.server.commands.PerfCommand;
- import net.minecraft.server.commands.PlaceCommand;
- import net.minecraft.server.commands.PlaySoundCommand;
- import net.minecraft.server.commands.PublishCommand;
-@@ -165,7 +163,6 @@ public class Commands {
+@@ -165,7 +164,6 @@ public class Commands {
          DamageCommand.register(this.dispatcher, commandRegistryAccess);
          DataCommands.register(this.dispatcher);
          DataPackCommand.register(this.dispatcher);
@@ -64,15 +56,7 @@ index 5af48400f87500166dd889c57a8df0aadb08d43d..6ad2a538df3edcb8799aa89e7fe9cb4e
          DefaultGameModeCommands.register(this.dispatcher);
          DifficultyCommand.register(this.dispatcher);
          EffectCommands.register(this.dispatcher, commandRegistryAccess);
-@@ -242,7 +239,6 @@ public class Commands {
-             OpCommand.register(this.dispatcher);
-             PardonCommand.register(this.dispatcher);
-             PardonIpCommand.register(this.dispatcher);
--            PerfCommand.register(this.dispatcher);
-             SaveAllCommand.register(this.dispatcher);
-             SaveOffCommand.register(this.dispatcher);
-             SaveOnCommand.register(this.dispatcher);
-@@ -340,9 +336,6 @@ public class Commands {
+@@ -340,9 +338,6 @@ public class Commands {
          // Paper end
          CommandSourceStack commandlistenerwrapper = (CommandSourceStack) parseresults.getContext().getSource();
  
@@ -82,7 +66,7 @@ index 5af48400f87500166dd889c57a8df0aadb08d43d..6ad2a538df3edcb8799aa89e7fe9cb4e
          ContextChain contextchain = this.finishParsing(parseresults, s, commandlistenerwrapper, label); // CraftBukkit // Paper - Add UnknownCommandEvent
  
          try {
-@@ -371,8 +364,6 @@ public class Commands {
+@@ -371,8 +366,6 @@ public class Commands {
                  commandlistenerwrapper.sendFailure(Component.literal(Util.describeError(exception)));
                  Commands.LOGGER.error("'/{}' threw an exception", s, exception);
              }
@@ -91,7 +75,7 @@ index 5af48400f87500166dd889c57a8df0aadb08d43d..6ad2a538df3edcb8799aa89e7fe9cb4e
          }
  
      }
-@@ -435,7 +426,7 @@ public class Commands {
+@@ -435,7 +428,7 @@ public class Commands {
              int j = minecraftserver.getGameRules().getInt(GameRules.RULE_MAX_COMMAND_FORK_COUNT);
  
              try {
@@ -631,6 +615,58 @@ index 9cd4f7c6910727c849ac7f5d675dc6105c4bbba2..f9f893a286147c9a8e49f78891381227
          }
  
      }
+diff --git a/src/main/java/net/minecraft/server/commands/PerfCommand.java b/src/main/java/net/minecraft/server/commands/PerfCommand.java
+index 8c587f829c5e8c6b6df3150024c4ae704988c47b..9f00cd7d23710787d0cb94377f21a541b7e19a95 100644
+--- a/src/main/java/net/minecraft/server/commands/PerfCommand.java
++++ b/src/main/java/net/minecraft/server/commands/PerfCommand.java
+@@ -42,6 +42,9 @@ public class PerfCommand {
+     }
+ 
+     private static int startProfilingDedicatedServer(CommandSourceStack source) throws CommandSyntaxException {
++        // Gale start - Purpur - remove vanilla profiler
++        return removedMessage(source);
++        /*
+         MinecraftServer minecraftServer = source.getServer();
+         if (minecraftServer.isRecordingMetrics()) {
+             throw ERROR_ALREADY_RUNNING.create();
+@@ -52,9 +55,14 @@ public class PerfCommand {
+             source.sendSuccess(() -> Component.translatable("commands.perf.started"), false);
+             return 0;
+         }
++         */
++        // Gale end - Purpur - remove vanilla profiler
+     }
+ 
+     private static int stopProfilingDedicatedServer(CommandSourceStack source) throws CommandSyntaxException {
++        // Gale start - Purpur - remove vanilla profiler
++        return removedMessage(source);
++        /*
+         MinecraftServer minecraftServer = source.getServer();
+         if (!minecraftServer.isRecordingMetrics()) {
+             throw ERROR_NOT_RUNNING.create();
+@@ -62,8 +70,22 @@ public class PerfCommand {
+             minecraftServer.finishRecordingMetrics();
+             return 0;
+         }
++         */
++        // Gale end - Purpur - remove vanilla profiler
+     }
+ 
++    // Gale start - Purpur - remove vanilla profiler
++    private static int removedMessage(CommandSourceStack source) {
++        net.kyori.adventure.text.minimessage.MiniMessage mm = net.kyori.adventure.text.minimessage.MiniMessage.miniMessage();
++
++        source.getSender().sendMessage(mm.deserialize("<gold>Gale has removed Mojang's Profiler to save your performance. Please use <click:suggest_command:'/spark'><grey>/spark</grey></click> instead"));
++        source.getSender().sendMessage(mm.deserialize("<gold>For more information, view its documentation at"));
++        source.getSender().sendMessage(mm.deserialize("<gold><click:open_url:'https://spark.lucko.me/docs/Command-Usage'>https://spark.lucko.me/docs/Command-Usage</click>"));
++
++        return 0;
++    }
++    // Gale end - Purpur - remove vanilla profiler
++
+     private static void saveResults(CommandSourceStack source, Path tempProfilingDirectory, MinecraftServer server) {
+         String string = String.format(
+             Locale.ROOT, "%s-%s-%s", Util.getFilenameFormattedDateTime(), server.getWorldData().getLevelName(), SharedConstants.getCurrentVersion().getId()
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 index 8306edb6fb28e90ba4b432a07131e063daa70507..8538024c6345e79d08643e2d68ca146542b7860a 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
