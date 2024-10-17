@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index 148e66f9d749f2cd0da00b5fa95233f593329d99..8847873e5fc1fdf272d3acb84289a54efaa62b64 100644
+index edbca98fb87abdd345ca14331e4121ef1ec41e50..c8d4d1591628f3ea337a853148e172667cc5c744 100644
 --- a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 @@ -4,6 +4,9 @@ import com.mojang.authlib.GameProfile;
@@ -91,15 +91,15 @@ index 148e66f9d749f2cd0da00b5fa95233f593329d99..8847873e5fc1fdf272d3acb84289a54e
          if (this.keepAlivePending && packet.getId() == this.keepAliveChallenge) {
              int i = (int) (Util.getMillis() - this.keepAliveTime);
  
-@@ -142,6 +160,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
-             });
-             // Paper end - This needs to be handled on the main thread for plugins
+@@ -138,6 +156,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+         } else if (!this.isSingleplayerOwner()) {
+             this.disconnectAsync(ServerCommonPacketListenerImpl.TIMEOUT_DISCONNECTION_MESSAGE, PlayerKickEvent.Cause.TIMEOUT); // Paper - add proper async disconnect
          }
 +        } // Gale - Purpur - send multiple keep-alive packets
  
      }
  
-@@ -257,6 +276,21 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -253,6 +272,21 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
          long currentTime = Util.getMillis();
          long elapsedTime = currentTime - this.keepAliveTime;
  
@@ -121,7 +121,7 @@ index 148e66f9d749f2cd0da00b5fa95233f593329d99..8847873e5fc1fdf272d3acb84289a54e
          if (!this.isSingleplayerOwner() && elapsedTime >= 15000L) { // Paper - use vanilla's 15000L between keep alive packets
              if (this.keepAlivePending && !this.processedDisconnect && elapsedTime >= KEEPALIVE_LIMIT) { // Paper - check keepalive limit, don't fire if already disconnected
                  this.disconnect(ServerCommonPacketListenerImpl.TIMEOUT_DISCONNECTION_MESSAGE, PlayerKickEvent.Cause.TIMEOUT); // Paper - kick event cause
-@@ -267,6 +301,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -263,6 +297,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
                  this.send(new ClientboundKeepAlivePacket(this.keepAliveChallenge));
              }
          }
@@ -130,7 +130,7 @@ index 148e66f9d749f2cd0da00b5fa95233f593329d99..8847873e5fc1fdf272d3acb84289a54e
  
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 7694c5f1d1ffe60d7be3c2591afddd472b6c5ce6..fb8d5235c261c6128091e55141971e7e3e6ba671 100644
+index c507dbfe5bb793d896acda167fb6d0f21c8afb7a..184b4d7e8badf8a3bd99f8884ebef2af5bea3bfa 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -9,6 +9,8 @@ import com.mojang.brigadier.suggestion.Suggestions;

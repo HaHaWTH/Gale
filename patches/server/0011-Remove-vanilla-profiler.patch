@@ -1064,10 +1064,10 @@ index c396580a9cfd86ff261bed439bb4662ae88010b5..adba25adaaf32c07e6844faec12bcab8
                  this.connection.send(new ClientboundPlayerAbilitiesPacket(this.getAbilities()));
                  playerlist.sendLevelInfo(this, worldserver);
 diff --git a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index 6998f32f8d79dbdb6b31ffaa126602fc4a428616..148e66f9d749f2cd0da00b5fa95233f593329d99 100644
+index 7174f8c89a7cdcf40ff28f6636ecfb23b13ccdaa..edbca98fb87abdd345ca14331e4121ef1ec41e50 100644
 --- a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-@@ -252,7 +252,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -248,7 +248,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
      }
  
      protected void keepConnectionAlive() {
@@ -1075,7 +1075,7 @@ index 6998f32f8d79dbdb6b31ffaa126602fc4a428616..148e66f9d749f2cd0da00b5fa95233f5
          // Paper start - give clients a longer time to respond to pings as per pre 1.12.2 timings
          // This should effectively place the keepalive handling back to "as it was" before 1.12.2
          long currentTime = Util.getMillis();
-@@ -270,7 +269,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -266,7 +265,6 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
          }
          // Paper end - give clients a longer time to respond to pings as per pre 1.12.2 timings
  
