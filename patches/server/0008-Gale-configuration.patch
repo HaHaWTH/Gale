@@ -289,7 +289,7 @@ index dd56c8e041116ef3602a9f89c998c8208ab89b51..86c615518e315dd4425d17df163e88a1
          // Paper start - fix converting txt to json file; convert old users earlier after PlayerList creation but before file load/save
          if (this.convertOldUsers()) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index c96f3dcd365bc140b1f4680ef6bd770c80f8eda1..a74d64c33182cc1f2ea78b6ddb6b358ec2c8a91c 100644
+index f9abf63e12ea930275121b470e4e4906cff0fc12..e20b7a1ad141834a10c5f23f9b27cc41fa25ac0d 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -503,7 +503,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
@@ -302,7 +302,7 @@ index c96f3dcd365bc140b1f4680ef6bd770c80f8eda1..a74d64c33182cc1f2ea78b6ddb6b358e
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index e2a0487089eb5a7bdc1433e4c75f69d8e9f9d5f9..90fc52bb3c8c48e055965f2f822c6199182f373b 100644
+index 507671476c3d2d92a2fdb05be24443af27d26dcf..32cd737206dd9f2bcfdacfe17dc0621ee34b589a 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -12,7 +12,6 @@ import java.util.function.Supplier;
@@ -356,10 +356,10 @@ index e2a0487089eb5a7bdc1433e4c75f69d8e9f9d5f9..90fc52bb3c8c48e055965f2f822c6199
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b7af2d4300facf41a025c8ca322bf6541949b3ab..49c1a96f35ac80b6de3f213d809d856bc21af5af 100644
+index c7df339aeb62ee627edaf1bb4c8474b61e357ba6..b1c1e600100ac31ecb20473b8ad2853676dff84a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1070,6 +1070,7 @@ public final class CraftServer implements Server {
+@@ -1072,6 +1072,7 @@ public final class CraftServer implements Server {
  
          org.spigotmc.SpigotConfig.init((File) this.console.options.valueOf("spigot-settings")); // Spigot
          this.console.paperConfigurations.reloadConfigs(this.console);
@@ -367,7 +367,7 @@ index b7af2d4300facf41a025c8ca322bf6541949b3ab..49c1a96f35ac80b6de3f213d809d856b
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters, config.spawnAnimals); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -2988,6 +2989,14 @@ public final class CraftServer implements Server {
+@@ -2990,6 +2991,14 @@ public final class CraftServer implements Server {
              return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
          }
  

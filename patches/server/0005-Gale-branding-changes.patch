@@ -221,10 +221,10 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 4aa427c7a6957f13d6a8823c90c1092aaa0ee2b4..99fa23c42005881459d6f74c98bf9dbdf233a9ef 100644
+index adb8c4f3ed3cb22b62a4b4eb867b197b10cfac54..badd1433e27e2e95b165618de280cba1ff10a69d 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -93,14 +93,14 @@ tasks.jar {
+@@ -94,14 +94,14 @@ tasks.jar {
          val gitBranch = git("rev-parse", "--abbrev-ref", "HEAD").getText().trim() // Paper
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -244,7 +244,7 @@ index 4aa427c7a6957f13d6a8823c90c1092aaa0ee2b4..99fa23c42005881459d6f74c98bf9dbd
              "Build-Number" to (build ?: ""),
              "Build-Time" to Instant.now().toString(),
              "Git-Branch" to gitBranch, // Paper
-@@ -237,3 +237,22 @@ tasks.registerRunTask("runReobfPaperclip") {
+@@ -242,3 +242,22 @@ tasks.registerRunTask("runReobfPaperclip") {
      classpath(rootProject.tasks.named<io.papermc.paperweight.tasks.CreatePaperclipJar>("createReobfPaperclipJar").flatMap { it.outputZip })
      mainClass.set(null as String?)
  }
@@ -509,10 +509,10 @@ index 2f4d6b56301195f8d39ed50dffe842464065bfe1..bdfb969f88e68d89a5cad4b145bbc144
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 7d32c032b63b9c4674489b30c845fe2de8275808..138e062d18d85702f4af8ac896ec26b10951fa5d 100644
+index d06aab9bd5cd901c8367f9680f5d27ddb17b3dc4..4d0de69b730599d7a89903dd862b89d51ba79e1b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -483,7 +483,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -489,7 +489,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {

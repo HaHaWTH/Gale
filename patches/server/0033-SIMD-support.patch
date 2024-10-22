@@ -13,10 +13,10 @@ As part of: Pufferfish (https://github.com/pufferfish-gg/Pufferfish)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index ea1787aee4907a2d708ebb1fe38362ab37a80a57..980cb87b8654f2c64cf2b3cecf5c195392631b66 100644
+index badd1433e27e2e95b165618de280cba1ff10a69d..5ebc35cadc960d428e8a91642ddce0875078d790 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -77,6 +77,7 @@ tasks.withType<JavaCompile> {
+@@ -78,6 +78,7 @@ tasks.withType<JavaCompile> {
      compilerArgs.add("-Xlint:-module")
      compilerArgs.add("-Xlint:-removal")
      compilerArgs.add("-Xlint:-dep-ann")
@@ -24,7 +24,7 @@ index ea1787aee4907a2d708ebb1fe38362ab37a80a57..980cb87b8654f2c64cf2b3cecf5c1953
  }
  // Gale end - hide irrelevant compilation warnings
  
-@@ -186,6 +187,7 @@ fun TaskContainer.registerRunTask(
+@@ -191,6 +192,7 @@ fun TaskContainer.registerRunTask(
      minHeapSize = "${memoryGb}G"
      maxHeapSize = "${memoryGb}G"
      jvmArgs("--enable-preview") // Gale - enable preview features for development runs
