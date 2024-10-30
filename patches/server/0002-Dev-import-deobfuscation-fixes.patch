@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java b/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
-index b0d26b0eadb2a43924629424a6c13198aace8f69..bcba8224b9a210bced04ff370a73b3067109fa71 100644
+index b0d26b0eadb2a43924629424a6c13198aace8f69..e8b8c453a7ff7af0a60ae915cfd85aba313139c9 100644
 --- a/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
 +++ b/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
 @@ -52,7 +52,7 @@ public class BuildContexts<T extends ExecutionCommandSource<T>> {
@@ -15,7 +15,7 @@ index b0d26b0eadb2a43924629424a6c13198aace8f69..bcba8224b9a210bced04ff370a73b306
  
                      RedirectModifier<T> redirectModifier = commandContext.getRedirectModifier();
 -                    if (redirectModifier instanceof CustomModifierExecutor<T> customModifierExecutor) {
-+                    if (redirectModifier instanceof CustomModifierExecutor customModifierExecutor) { // Gale - dev import deobfuscation fixes
++                    if (redirectModifier instanceof CustomModifierExecutor.ModifierAdapter<T> customModifierExecutor) { // Gale - dev import deobfuscation fixes
                          customModifierExecutor.apply(baseSource, list, contextChain, chainModifiers, ExecutionControl.create(context, frame));
                          return;
                      }
@@ -24,71 +24,71 @@ index b0d26b0eadb2a43924629424a6c13198aace8f69..bcba8224b9a210bced04ff370a73b306
          if (list.isEmpty()) {
              if (chainModifiers.isReturn()) {
 -                context.queueNext(new CommandQueueEntry<>(frame, FallthroughTask.instance()));
-+                context.queueNext(new CommandQueueEntry<>(frame, (EntryAction<T>) FallthroughTask.instance())); // Gale - dev import deobfuscation fixes
++                context.queueNext(new CommandQueueEntry<T>(frame, FallthroughTask.instance())); // Gale - dev import deobfuscation fixes
              }
          } else {
              CommandContext<T> commandContext2 = contextChain.getTopContext();
 -            if (commandContext2.getCommand() instanceof CustomCommandExecutor<T> customCommandExecutor) {
-+            if (commandContext2.getCommand() instanceof CustomCommandExecutor customCommandExecutor) { // Gale - dev import deobfuscation fixes
++            if (commandContext2.getCommand() instanceof CustomCommandExecutor.CommandAdapter<T> customCommandExecutor) { // Gale - dev import deobfuscation fixes
                  ExecutionControl<T> executionControl = ExecutionControl.create(context, frame);
  
                  for (T executionCommandSource2 : list) {
 diff --git a/src/main/java/net/minecraft/util/ExtraCodecs.java b/src/main/java/net/minecraft/util/ExtraCodecs.java
-index 68dda6a3257ca18c1e6c7659d62455da46d187e2..24a478c0e874692964fb1c670277aca94f273749 100644
+index 68dda6a3257ca18c1e6c7659d62455da46d187e2..f8fa36b7c3763fed2392d62188bd210241e8f313 100644
 --- a/src/main/java/net/minecraft/util/ExtraCodecs.java
 +++ b/src/main/java/net/minecraft/util/ExtraCodecs.java
-@@ -224,7 +224,7 @@ public class ExtraCodecs {
+@@ -223,7 +223,7 @@ public class ExtraCodecs {
+                 P object2 = listx.get(1);
                  return combineFunction.apply(object, object2);
              }), pair -> ImmutableList.of(leftFunction.apply((I)pair), rightFunction.apply((I)pair)));
-         Codec<I> codec3 = RecordCodecBuilder.<Pair>create(
--                instance -> instance.group(codec.fieldOf(leftFieldName).forGetter(Pair::getFirst), codec.fieldOf(rightFieldName).forGetter(Pair::getSecond))
-+                instance -> instance.group(codec.fieldOf(leftFieldName).forGetter(pair -> (P) pair.getFirst()), codec.fieldOf(rightFieldName).forGetter(pair -> (P) pair.getSecond())) // Gale - dev import deobfuscation fixes
+-        Codec<I> codec3 = RecordCodecBuilder.<Pair>create(
++        Codec<I> codec3 = RecordCodecBuilder.<Pair<P, P>>create( // Gale - dev import deobfuscation fixes
+                 instance -> instance.group(codec.fieldOf(leftFieldName).forGetter(Pair::getFirst), codec.fieldOf(rightFieldName).forGetter(Pair::getSecond))
                          .apply(instance, Pair::of)
              )
-             .comapFlatMap(
-@@ -247,7 +247,7 @@ public class ExtraCodecs {
+@@ -240,14 +240,14 @@ public class ExtraCodecs {
+             });
+     }
+ 
+-    public static <A> ResultFunction<A> orElsePartial(A object) {
++    public static <A> ResultFunction<A> orElsePartial(A objectA) { // Gale - dev import deobfuscation fixes
+         return new ResultFunction<A>() {
+             public <T> DataResult<Pair<A, T>> apply(DynamicOps<T> dynamicOps, T object, DataResult<Pair<A, T>> dataResult) {
+                 MutableObject<String> mutableObject = new MutableObject<>();
                  Optional<Pair<A, T>> optional = dataResult.resultOrPartial(mutableObject::setValue);
                  return optional.isPresent()
                      ? dataResult
 -                    : DataResult.error(() -> "(" + mutableObject.getValue() + " -> using default)", Pair.of(object, object));
-+                    : DataResult.error(() -> "(" + mutableObject.getValue() + " -> using default)", Pair.of((A) object, object)); // Gale - dev import deobfuscation fixes
++                    : DataResult.error(() -> "(" + mutableObject.getValue() + " -> using default)", Pair.of(objectA, object)); // Gale - dev import deobfuscation fixes
              }
  
              public <T> DataResult<T> coApply(DynamicOps<T> dynamicOps, A object, DataResult<T> dataResult) {
+@@ -256,7 +256,7 @@ public class ExtraCodecs {
+ 
+             @Override
+             public String toString() {
+-                return "OrElsePartial[" + object + "]";
++                return "OrElsePartial[" + objectA + "]"; // Gale - dev import deobfuscation fixes
+             }
+         };
+     }
 diff --git a/src/main/java/net/minecraft/util/datafix/fixes/ChunkProtoTickListFix.java b/src/main/java/net/minecraft/util/datafix/fixes/ChunkProtoTickListFix.java
-index 2942534d265416a3693848d76538c04735bc14fa..1665e457bbfea822f5822c31f6c93f3a0d6fa7a3 100644
+index 2942534d265416a3693848d76538c04735bc14fa..3f48037d5d6a4965b895fde69825d3b2a74770e8 100644
 --- a/src/main/java/net/minecraft/util/datafix/fixes/ChunkProtoTickListFix.java
 +++ b/src/main/java/net/minecraft/util/datafix/fixes/ChunkProtoTickListFix.java
-@@ -18,6 +18,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
- import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
- import java.util.Collections;
- import java.util.List;
-+import java.util.Map;
- import java.util.Optional;
- import java.util.function.Function;
- import java.util.function.Supplier;
-@@ -186,7 +187,7 @@ public class ChunkProtoTickListFix extends DataFix {
+@@ -186,7 +186,7 @@ public class ChunkProtoTickListFix extends DataFix {
          int k = packedLocalPos >>> 8 & 15;
          String string = blockIdGetter.apply(sectionSupplier != null ? sectionSupplier.get().get(i, j, k) : null);
          return levelDynamic.createMap(
 -            ImmutableMap.builder()
-+            (Map) ImmutableMap.builder() // Gale - dev import deobfuscation fixes
++            ImmutableMap.<Dynamic<?>, Dynamic<?>>builder() // Gale - dev import deobfuscation fixes
                  .put(levelDynamic.createString("i"), levelDynamic.createString(string))
                  .put(levelDynamic.createString("x"), levelDynamic.createInt(sectionX * 16 + i))
                  .put(levelDynamic.createString("y"), levelDynamic.createInt(sectionY * 16 + j))
 diff --git a/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java b/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
-index 9167bad12e1be3f4163f85987862b044a630b2eb..9df053ddff459d4aab478106c6e66a5fc3cda8f6 100644
+index 9167bad12e1be3f4163f85987862b044a630b2eb..7ba3a3ca57b55f796a90b700b930f365c3508484 100644
 --- a/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
 +++ b/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
-@@ -155,7 +155,7 @@ public class SurfaceRules {
- 
-         @Override
-         public SurfaceRules.SurfaceRule apply(SurfaceRules.Context context) {
--            return context.system::getBand;
-+            return (x, y, z) -> context.system.getBand(x, y, z); // Gale - dev import deobfuscation fixes
-         }
-     }
- 
 @@ -177,10 +177,10 @@ public class SurfaceRules {
          }
  
