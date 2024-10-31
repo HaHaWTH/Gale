@@ -188,7 +188,7 @@ index a2e314549f4b4182a817ecd477235f56fb95c5f5..7ecf0ff4dc106999d1f3a419482f9bf1
      public double getLevelX() {
          return (double) this.worldPosition.getX() + 0.5D;
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 00a327bd0e4e0f2def0bb29d5ecff4f0ec4ba1eb..c869a559b67ecdfb8f9617e1f54fb9c28bb3c766 100644
+index 00a327bd0e4e0f2def0bb29d5ecff4f0ec4ba1eb..a52de3800a3e4b8ff6a521c8c5edcca9d49f7473 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -57,6 +57,37 @@ public class GaleWorldConfiguration extends ConfigurationPart {
@@ -202,12 +202,12 @@ index 00a327bd0e4e0f2def0bb29d5ecff4f0ec4ba1eb..c869a559b67ecdfb8f9617e1f54fb9c2
 +                public Hopper hopper;
 +                public class Hopper extends ConfigurationPart {
 +
-+                    public int interval = 20;
++                    public int interval = 1;
 +
 +                    public Minecart minecart;
 +                    public class Minecart extends ConfigurationPart {
 +
-+                        public int interval = 20;
++                        public int interval = 1;
 +
 +                        public TemporaryImmunity temporaryImmunity;
 +                        public class TemporaryImmunity extends ConfigurationPart {
