@@ -13,7 +13,7 @@ As part of: EmpireCraft (https://github.com/starlis/empirecraft)
 Licensed under: MIT (https://opensource.org/licenses/MIT)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 1f5223c3f152e8d3f21e59f282ccede8c35346c0..a5aefd1224b8cd6957a0a9654075fa06c6a69d99 100644
+index 85a61984d241fe702e2cda22e5ea5dde239084f3..f4249ec6ea3afbc9976d292724d4fd1a42c95feb 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -292,6 +292,7 @@ public class ServerPlayer extends Player {
@@ -25,10 +25,10 @@ index 1f5223c3f152e8d3f21e59f282ccede8c35346c0..a5aefd1224b8cd6957a0a9654075fa06
      public boolean isRealPlayer; // Paper
      public final com.destroystokyo.paper.util.misc.PooledLinkedHashSets.PooledObjectLinkedOpenHashSet<ServerPlayer> cachedSingleHashSet; // Paper
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 94c5da09a691904fbab82c5b5ed5dd94d33b7021..c45e8cb4dd627023c31f8bd87455ed07aa9feb36 100644
+index 5e7ba258d4146493e7e657a63e44946302ec077c..c90c01be14ef3f2c6db56160b8d5f0f71861077d 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2340,7 +2340,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2338,7 +2338,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
              this.disconnect(Component.translatable("multiplayer.disconnect.illegal_characters"), org.bukkit.event.player.PlayerKickEvent.Cause.ILLEGAL_CHARACTERS); // Paper
          } else if (this.player.isRemoved() || this.player.getChatVisibility() == ChatVisiblity.HIDDEN) { // CraftBukkit - dead men tell no tales
              this.send(new ClientboundSystemChatPacket(Component.translatable("chat.disabled.options").withStyle(ChatFormatting.RED), false));
@@ -38,7 +38,7 @@ index 94c5da09a691904fbab82c5b5ed5dd94d33b7021..c45e8cb4dd627023c31f8bd87455ed07
              // CraftBukkit start
              if (sync) {
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index a2142930b4d4b05987c90496fb9d733d99040aa0..523f183f2a8b8f97088eab57f9b28e777b93bef0 100644
+index c8fcbb4260b5ffdaf6d713f2e9f9495ff8fdf0b0..ac7a5f90e2e0f6b6815f874c814b4bacaa1b1259 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -350,6 +350,8 @@ public abstract class PlayerList {
