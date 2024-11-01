@@ -118,7 +118,7 @@ index f626a2f28f2aebb3237cebb6afef3c4fa1a6cb37..2200d34ce40c61c0eee81b8f8903458c
  
      public int forkLimit() {
 diff --git a/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java b/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
-index bcba8224b9a210bced04ff370a73b3067109fa71..260b3ea95a77e01ada2b0e40fbae511c8d5a26a9 100644
+index e8b8c453a7ff7af0a60ae915cfd85aba313139c9..0bb5f1e421b56703d9c4d99a98db29d31ffc26f9 100644
 --- a/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
 +++ b/src/main/java/net/minecraft/commands/execution/tasks/BuildContexts.java
 @@ -42,9 +42,6 @@ public class BuildContexts<T extends ExecutionCommandSource<T>> {
@@ -1941,7 +1941,7 @@ index 32cd737206dd9f2bcfdacfe17dc0621ee34b589a..9dfc38c1b062c8ad52ecff4b0731f065
  
      @Override
 diff --git a/src/main/java/net/minecraft/world/level/NaturalSpawner.java b/src/main/java/net/minecraft/world/level/NaturalSpawner.java
-index e524b27d185da3e88668f8ef107517272860bd66..2c992661d4864cf826464f840c9d13c09b26f86f 100644
+index 743a33ae2814c513b84b1a60e50a3c24527568f8..f636037bb443e35872fcd50483e88b3597b6ad67 100644
 --- a/src/main/java/net/minecraft/world/level/NaturalSpawner.java
 +++ b/src/main/java/net/minecraft/world/level/NaturalSpawner.java
 @@ -127,7 +127,6 @@ public final class NaturalSpawner {
@@ -1952,7 +1952,7 @@ index e524b27d185da3e88668f8ef107517272860bd66..2c992661d4864cf826464f840c9d13c0
          world.timings.mobSpawn.startTiming(); // Spigot
          MobCategory[] aenumcreaturetype = NaturalSpawner.SPAWNING_CATEGORIES;
          int i = aenumcreaturetype.length;
-@@ -182,7 +181,6 @@ public final class NaturalSpawner {
+@@ -181,7 +180,6 @@ public final class NaturalSpawner {
          }
  
          world.timings.mobSpawn.stopTiming(); // Spigot
