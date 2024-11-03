@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/world/entity/ambient/Bat.java b/src/main/java/net/minecraft/world/entity/ambient/Bat.java
-index dc27ddf5131e7398a5390a5187261d4c7fb6ccaa..c888ca771efa7a570b8302d48e69fbb69bf98bd9 100644
+index 60c2868f255d372226e0c1389caaa5477bbef41e..46ec05c0ec7c794481e996dd9f51c396a5f75f97 100644
 --- a/src/main/java/net/minecraft/world/entity/ambient/Bat.java
 +++ b/src/main/java/net/minecraft/world/entity/ambient/Bat.java
-@@ -239,12 +239,60 @@ public class Bat extends AmbientCreature {
+@@ -242,12 +242,60 @@ public class Bat extends AmbientCreature {
          }
      }
  

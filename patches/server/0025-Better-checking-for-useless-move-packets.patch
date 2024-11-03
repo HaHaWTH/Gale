@@ -31,22 +31,22 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerEntity.java b/src/main/java/net/minecraft/server/level/ServerEntity.java
-index 8ea2f24695f5dad55e21f238b69442513e7a90c6..20b5a81d50397438b3200322f31b62db44ebdb3b 100644
+index 90eb4927fa51ce3df86aa7b6c71f49150a03e337..bf813380d5767ce05cdeca7084e6f19aa106803a 100644
 --- a/src/main/java/net/minecraft/server/level/ServerEntity.java
 +++ b/src/main/java/net/minecraft/server/level/ServerEntity.java
-@@ -193,6 +193,7 @@ public class ServerEntity {
-                 boolean flag6 = k < -32768L || k > 32767L || l < -32768L || l > 32767L || i1 < -32768L || i1 > 32767L;
+@@ -207,6 +207,7 @@ public class ServerEntity {
+                     boolean flag5 = i < -32768L || i > 32767L || j < -32768L || j > 32767L || k < -32768L || k > 32767L;
  
-                 if (!this.forceStateResync && !flag6 && this.teleportDelay <= 400 && !this.wasRiding && this.wasOnGround == this.entity.onGround()) { // Paper - fix desync when a player is added to the tracker
-+                    if (flag2 || flag3 || this.entity instanceof AbstractArrow) { // Gale - Airplane - better checking for useless move packets
-                     if ((!flag2 || !flag3) && !(this.entity instanceof AbstractArrow)) {
-                         if (flag2) {
-                             packet1 = new ClientboundMoveEntityPacket.Pos(this.entity.getId(), (short) ((int) k), (short) ((int) l), (short) ((int) i1), this.entity.onGround());
-@@ -206,6 +207,7 @@ public class ServerEntity {
-                         flag4 = true;
-                         flag5 = true;
-                     }
-+                    } // Gale - Airplane - better checking for useless move packets
-                 } else {
-                     this.wasOnGround = this.entity.onGround();
-                     this.teleportDelay = 0;
+                     if (!this.forceStateResync && !flag5 && this.teleportDelay <= 400 && !this.wasRiding && this.wasOnGround == this.entity.onGround()) { // Paper - fix desync when a player is added to the tracker
++                        if (flag2 || flag || this.entity instanceof AbstractArrow) { // Gale - Airplane - better checking for useless move packets
+                         if ((!flag2 || !flag) && !(this.entity instanceof AbstractArrow)) {
+                             if (flag2) {
+                                 packet1 = new ClientboundMoveEntityPacket.Pos(this.entity.getId(), (short) ((int) i), (short) ((int) j), (short) ((int) k), this.entity.onGround());
+@@ -220,6 +221,7 @@ public class ServerEntity {
+                             flag3 = true;
+                             flag4 = true;
+                         }
++                        } // Gale - Airplane - better checking for useless move packets
+                     } else {
+                         this.wasOnGround = this.entity.onGround();
+                         this.teleportDelay = 0;

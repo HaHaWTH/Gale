@@ -31,21 +31,20 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/monster/EnderMan.java b/src/main/java/net/minecraft/world/entity/monster/EnderMan.java
-index 828c51477cd8f35d591367b30bf4feef6a250292..7b05ef99702af0e8a7d2a652984c4f8c15eefed8 100644
+index 48dcd2bc12ce1d08cc5195bff5460dc0dd9902d3..b14935c32409ccc4e65e7d642342e113142443f8 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/EnderMan.java
 +++ b/src/main/java/net/minecraft/world/entity/monster/EnderMan.java
-@@ -320,11 +320,17 @@ public class EnderMan extends Monster implements NeutralMob {
+@@ -307,11 +307,17 @@ public class EnderMan extends Monster implements NeutralMob {
      private boolean teleport(double x, double y, double z) {
          BlockPos.MutableBlockPos blockposition_mutableblockposition = new BlockPos.MutableBlockPos(x, y, z);
  
--        while (blockposition_mutableblockposition.getY() > this.level().getMinBuildHeight() && !this.level().getBlockState(blockposition_mutableblockposition).blocksMotion()) {
 +        // Gale start - Airplane - single chunk lookup
 +        net.minecraft.world.level.chunk.LevelChunk chunk = this.level().getChunkIfLoaded(blockposition_mutableblockposition);
 +        if (chunk == null) {
 +            return false;
 +        }
-+        while (blockposition_mutableblockposition.getY() > this.level().getMinBuildHeight() && !chunk.getBlockState(blockposition_mutableblockposition).blocksMotion()) {
-+            // Gale end - Airplane - single chunk lookup
++
+         while (blockposition_mutableblockposition.getY() > this.level().getMinY() && !this.level().getBlockState(blockposition_mutableblockposition).blocksMotion()) {
              blockposition_mutableblockposition.move(Direction.DOWN);
          }
  

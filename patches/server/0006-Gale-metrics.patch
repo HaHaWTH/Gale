@@ -6,21 +6,35 @@ Subject: [PATCH] Gale metrics
 License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
-diff --git a/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java b/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java
-index b1456c1ddf24b625c6caf41a9379d8c011e1c36c..be7a4e2fd8823925847949d33358d64d464ec79f 100644
---- a/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java
-+++ b/src/main/java/ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.java
-@@ -65,7 +65,7 @@ public final class ChunkTaskScheduler {
+diff --git a/src/main/java/ca/spottedleaf/moonrise/common/util/MoonriseCommon.java b/src/main/java/ca/spottedleaf/moonrise/common/util/MoonriseCommon.java
+index c125c70a68130be373acc989053a6c0e487be924..bd43c483c2f0837d3d4db9e0a9bc624c8c7b65ba 100644
+--- a/src/main/java/ca/spottedleaf/moonrise/common/util/MoonriseCommon.java
++++ b/src/main/java/ca/spottedleaf/moonrise/common/util/MoonriseCommon.java
+@@ -11,6 +11,10 @@ import java.util.function.Consumer;
+ public final class MoonriseCommon {
  
-     private static final Logger LOGGER = LogUtils.getClassLogger();
+     private static final Logger LOGGER = LoggerFactory.getLogger(MoonriseCommon.class);
++    // Gale start - metrics - chunk system IO threads
++    public static int chunkSystemIOThreads;
++    public static int chunkSystemWorkerThreads;
++    // Gale end - metrics - chunk system IO threads
  
--    static int newChunkSystemIOThreads;
-+    public static int newChunkSystemIOThreads; // Gale - metrics - chunk system IO threads - package-private -> public
-     static int newChunkSystemGenParallelism;
-     static int newChunkSystemGenPopulationParallelism;
-     static int newChunkSystemLoadParallelism;
+     public static final PrioritisedThreadPool WORKER_POOL = new PrioritisedThreadPool(
+             new Consumer<>() {
+@@ -54,6 +58,11 @@ public final class MoonriseCommon {
+ 
+         final int ioThreads = Math.max(1, configIoThreads);
+ 
++        // Gale start - metrics - chunk system IO threads
++        chunkSystemIOThreads = ioThreads;
++        chunkSystemWorkerThreads = workerThreads;
++        // Gale end - metrics - chunk system IO threads
++
+         WORKER_POOL.adjustThreadCount(workerThreads);
+         IO_POOL.adjustThreadCount(ioThreads);
+ 
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index 4b002e8b75d117b726b0de274a76d3596fce015b..7e1405d5e2b847b28b07cb94fcbf5dec78706e34 100644
+index 4b002e8b75d117b726b0de274a76d3596fce015b..e848529892c07cad638090a39ef738b4a068db3e 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
 @@ -593,7 +593,7 @@ public class Metrics {
@@ -77,7 +91,7 @@ index 4b002e8b75d117b726b0de274a76d3596fce015b..7e1405d5e2b847b28b07cb94fcbf5dec
                      entry.put(String.valueOf(legacy), 1);
  
                      // create buckets as higher dimension
-@@ -676,6 +676,253 @@ public class Metrics {
+@@ -676,6 +676,256 @@ public class Metrics {
  
                      return map;
                  }));
@@ -216,7 +230,10 @@ index 4b002e8b75d117b726b0de274a76d3596fce015b..7e1405d5e2b847b28b07cb94fcbf5dec
 +                }));
 +                // Gale end - metrics - netty threads
 +
-+                metrics.addCustomChart(new Metrics.SimplePie("chunk_system_io_thread_count", () -> String.valueOf(ca.spottedleaf.moonrise.patches.chunk_system.scheduling.ChunkTaskScheduler.newChunkSystemIOThreads))); // Gale - metrics - chunk system IO threads
++                // Gale start - metrics - chunk system threads
++                metrics.addCustomChart(new Metrics.SimplePie("chunk_system_io_thread_count", () -> String.valueOf(ca.spottedleaf.moonrise.common.util.MoonriseCommon.chunkSystemIOThreads)));
++                metrics.addCustomChart(new Metrics.SimplePie("chunk_system_worker_thread_count", () -> String.valueOf(ca.spottedleaf.moonrise.common.util.MoonriseCommon.chunkSystemWorkerThreads)));
++                // Gale end - metrics - chunk system threads
 +
 +                // Gale start - metrics - physical cores
 +                metrics.addCustomChart(new Metrics.SimplePie("physical_core_count", () -> {

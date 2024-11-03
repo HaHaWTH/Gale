@@ -221,7 +221,7 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index adb8c4f3ed3cb22b62a4b4eb867b197b10cfac54..badd1433e27e2e95b165618de280cba1ff10a69d 100644
+index c8c3599a780bbc02a1ead1fe66498733ea4075c2..ead700089f8867e38699db409c13162f1014f58a 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -94,14 +94,14 @@ tasks.jar {
@@ -477,10 +477,10 @@ index bb1a60180e58c1333e7bb33e8acf1b0225eda8a8..4d037e899e0b5548be406ad55acd2062
          DamageSource damageSource = this.cloneInstance();
          damageSource.customEventDamager = entity;
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index 40689256711cc94a806ca1da346f4f62eda31526..11cf6a20550e252501a92be5bdffafcff007cbf9 100644
+index 78922c3e9a69db1774dd846047b79e9523d7cf41..84bc6585702f8d7a801530b09f18912ac083404d 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-@@ -177,7 +177,13 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
+@@ -274,7 +274,13 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
  
      // Paper start
      private static void printOversizedLog(String msg, Path file, int x, int z) {
@@ -496,24 +496,24 @@ index 40689256711cc94a806ca1da346f4f62eda31526..11cf6a20550e252501a92be5bdffafcf
  
      private static CompoundTag readOversizedChunk(RegionFile regionfile, ChunkPos chunkCoordinate) throws IOException {
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index 2f4d6b56301195f8d39ed50dffe842464065bfe1..bdfb969f88e68d89a5cad4b145bbc1441a110bac 100644
+index 6fef86e47e37eab6721cfd67d494afb25a2ded68..29aa7549e0082f0061a94b5b2f59aeec39b17c6c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-@@ -492,7 +492,7 @@ public class CraftScheduler implements BukkitScheduler {
+@@ -491,7 +491,7 @@ public class CraftScheduler implements BukkitScheduler {
                  this.parsePending();
              } else {
-                 // this.debugTail = this.debugTail.setNext(new CraftAsyncDebugger(currentTick + CraftScheduler.RECENT_TICKS, task.getOwner(), task.getTaskClass())); // Paper
+                 // this.debugTail = this.debugTail.setNext(new CraftAsyncDebugger(this.currentTick + CraftScheduler.RECENT_TICKS, task.getOwner(), task.getTaskClass())); // Paper
 -                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to Paper"); // Paper
 +                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to Gale"); // Paper // Gale - branding changes
                  // We don't need to parse pending
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index d06aab9bd5cd901c8367f9680f5d27ddb17b3dc4..4d0de69b730599d7a89903dd862b89d51ba79e1b 100644
+index 83020837e29ee627b1081daddb4bdee147b95af3..71d526cf165ff63a7344e19864eed409f3952fbb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -489,7 +489,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
- 
+@@ -505,7 +505,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+     // Paper start
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
 -        return new com.destroystokyo.paper.PaperVersionFetcher();

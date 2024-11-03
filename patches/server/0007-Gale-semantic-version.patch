@@ -7,10 +7,10 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index 7e1405d5e2b847b28b07cb94fcbf5dec78706e34..66477f772ffb9271cf647dfb7567d75c3d5145fb 100644
+index e848529892c07cad638090a39ef738b4a068db3e..cb9e42fea57856f9ab649e33df26071db1b7790f 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
-@@ -923,6 +923,16 @@ public class Metrics {
+@@ -926,6 +926,16 @@ public class Metrics {
                  }));
                  // Gale end - metrics - runtime max memory
  

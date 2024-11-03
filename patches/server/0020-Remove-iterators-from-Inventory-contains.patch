@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/player/Inventory.java b/src/main/java/net/minecraft/world/entity/player/Inventory.java
-index 6e66141dca61f777b354854b5d0bac2570b8bf3b..06104744bb778a922adaaee2d91252cd37080f8f 100644
+index ad82e5aeb565b23c3ec565fa60e1f31d1710bd4e..5bf4164f0b9a3d4e6b8e9de87d80683c98a21298 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Inventory.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Inventory.java
-@@ -643,6 +643,8 @@ public class Inventory implements Container, Nameable {
+@@ -649,6 +649,8 @@ public class Inventory implements Container, Nameable {
      }
  
      public boolean contains(ItemStack stack) {
@@ -43,7 +43,7 @@ index 6e66141dca61f777b354854b5d0bac2570b8bf3b..06104744bb778a922adaaee2d91252cd
          Iterator iterator = this.compartments.iterator();
  
          while (iterator.hasNext()) {
-@@ -679,25 +681,34 @@ public class Inventory implements Container, Nameable {
+@@ -685,25 +687,34 @@ public class Inventory implements Container, Nameable {
  
          return false;
      }
@@ -89,24 +89,24 @@ index 6e66141dca61f777b354854b5d0bac2570b8bf3b..06104744bb778a922adaaee2d91252cd
      public void replaceWith(Inventory other) {
          for (int i = 0; i < this.getContainerSize(); ++i) {
 diff --git a/src/main/java/net/minecraft/world/level/saveddata/maps/MapItemSavedData.java b/src/main/java/net/minecraft/world/level/saveddata/maps/MapItemSavedData.java
-index 17f33c83c6033564d6bf4fbd388b0b847c68adb3..73e546cc828850365dae0131bf8d997f58473823 100644
+index ae321b3b8d98e42ef07fd1f0f738c1a2b428f6db..b15b0c8057e61c6aef05c0865e2c3e06adcf938b 100644
 --- a/src/main/java/net/minecraft/world/level/saveddata/maps/MapItemSavedData.java
 +++ b/src/main/java/net/minecraft/world/level/saveddata/maps/MapItemSavedData.java
-@@ -295,7 +295,7 @@ public class MapItemSavedData extends SavedData {
+@@ -294,7 +294,7 @@ public class MapItemSavedData extends SavedData {
  
          Predicate<ItemStack> predicate = MapItemSavedData.mapMatcher(stack);
  
 -        if (!player.getInventory().contains(predicate)) {
-+        if (!player.getInventory().containsMatchedMap(predicate)) {
++        if (!player.getInventory().containsMatchedMap(predicate)) { // Gale - Airplane - remove iterators from Inventory#contains
              this.removeDecoration(player.getName().getString());
          }
  
 @@ -303,7 +303,7 @@ public class MapItemSavedData extends SavedData {
-             MapItemSavedData.HoldingPlayer worldmap_worldmaphumantracker1 = (MapItemSavedData.HoldingPlayer) this.carriedBy.get(i);
-             String s = worldmap_worldmaphumantracker1.player.getName().getString();
+             Player entityhuman1 = worldmap_worldmaphumantracker1.player;
+             String s = entityhuman1.getName().getString();
  
--            if (!worldmap_worldmaphumantracker1.player.isRemoved() && (worldmap_worldmaphumantracker1.player.getInventory().contains(predicate) || stack.isFramed())) {
-+            if (!worldmap_worldmaphumantracker1.player.isRemoved() && (worldmap_worldmaphumantracker1.player.getInventory().containsMatchedMap(predicate) || stack.isFramed())) {
-                 if (!stack.isFramed() && worldmap_worldmaphumantracker1.player.level().dimension() == this.dimension && this.trackingPosition) {
-                     this.addDecoration(MapDecorationTypes.PLAYER, worldmap_worldmaphumantracker1.player.level(), s, worldmap_worldmaphumantracker1.player.getX(), worldmap_worldmaphumantracker1.player.getZ(), (double) worldmap_worldmaphumantracker1.player.getYRot(), (Component) null);
+-            if (!entityhuman1.isRemoved() && (entityhuman1.getInventory().contains(predicate) || stack.isFramed())) {
++            if (!entityhuman1.isRemoved() && (entityhuman1.getInventory().containsMatchedMap(predicate) || stack.isFramed())) { // Gale - Airplane - remove iterators from Inventory#contains
+                 if (!stack.isFramed() && entityhuman1.level().dimension() == this.dimension && this.trackingPosition) {
+                     this.addDecoration(MapDecorationTypes.PLAYER, entityhuman1.level(), s, entityhuman1.getX(), entityhuman1.getZ(), (double) entityhuman1.getYRot(), (Component) null);
                  }

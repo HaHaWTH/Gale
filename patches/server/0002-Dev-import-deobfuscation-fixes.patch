@@ -34,10 +34,10 @@ index b0d26b0eadb2a43924629424a6c13198aace8f69..e8b8c453a7ff7af0a60ae915cfd85aba
  
                  for (T executionCommandSource2 : list) {
 diff --git a/src/main/java/net/minecraft/util/ExtraCodecs.java b/src/main/java/net/minecraft/util/ExtraCodecs.java
-index 68dda6a3257ca18c1e6c7659d62455da46d187e2..f8fa36b7c3763fed2392d62188bd210241e8f313 100644
+index eaa47e644926d6ec32e1c70523a0e713bc4c4906..4e7ed7fa08fabb4c253c75db41f7f24947aefff0 100644
 --- a/src/main/java/net/minecraft/util/ExtraCodecs.java
 +++ b/src/main/java/net/minecraft/util/ExtraCodecs.java
-@@ -223,7 +223,7 @@ public class ExtraCodecs {
+@@ -226,7 +226,7 @@ public class ExtraCodecs {
                  P object2 = listx.get(1);
                  return combineFunction.apply(object, object2);
              }), pair -> ImmutableList.of(leftFunction.apply((I)pair), rightFunction.apply((I)pair)));
@@ -46,7 +46,7 @@ index 68dda6a3257ca18c1e6c7659d62455da46d187e2..f8fa36b7c3763fed2392d62188bd2102
                  instance -> instance.group(codec.fieldOf(leftFieldName).forGetter(Pair::getFirst), codec.fieldOf(rightFieldName).forGetter(Pair::getSecond))
                          .apply(instance, Pair::of)
              )
-@@ -240,14 +240,14 @@ public class ExtraCodecs {
+@@ -243,14 +243,14 @@ public class ExtraCodecs {
              });
      }
  
@@ -63,7 +63,7 @@ index 68dda6a3257ca18c1e6c7659d62455da46d187e2..f8fa36b7c3763fed2392d62188bd2102
              }
  
              public <T> DataResult<T> coApply(DynamicOps<T> dynamicOps, A object, DataResult<T> dataResult) {
-@@ -256,7 +256,7 @@ public class ExtraCodecs {
+@@ -259,7 +259,7 @@ public class ExtraCodecs {
  
              @Override
              public String toString() {
@@ -86,7 +86,7 @@ index 2942534d265416a3693848d76538c04735bc14fa..3f48037d5d6a4965b895fde69825d3b2
                  .put(levelDynamic.createString("x"), levelDynamic.createInt(sectionX * 16 + i))
                  .put(levelDynamic.createString("y"), levelDynamic.createInt(sectionY * 16 + j))
 diff --git a/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java b/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
-index 9167bad12e1be3f4163f85987862b044a630b2eb..7ba3a3ca57b55f796a90b700b930f365c3508484 100644
+index 7174613ef2cac0f27c72dcfa2f822199ffbc79e5..38428ba2c522108f4f9f7986bc3535d1232ac1f8 100644
 --- a/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
 +++ b/src/main/java/net/minecraft/world/level/levelgen/SurfaceRules.java
 @@ -177,10 +177,10 @@ public class SurfaceRules {
@@ -102,7 +102,7 @@ index 9167bad12e1be3f4163f85987862b044a630b2eb..7ba3a3ca57b55f796a90b700b930f365
                  }
  
                  @Override
-@@ -514,12 +514,14 @@ public class SurfaceRules {
+@@ -522,12 +522,14 @@ public class SurfaceRules {
          }
  
          @Override
@@ -120,7 +120,7 @@ index 9167bad12e1be3f4163f85987862b044a630b2eb..7ba3a3ca57b55f796a90b700b930f365
                  }
  
                  @Override
-@@ -655,12 +657,12 @@ public class SurfaceRules {
+@@ -663,12 +665,12 @@ public class SurfaceRules {
          }
  
          @Override
@@ -135,7 +135,7 @@ index 9167bad12e1be3f4163f85987862b044a630b2eb..7ba3a3ca57b55f796a90b700b930f365
                  }
  
                  @Override
-@@ -748,26 +750,32 @@ public class SurfaceRules {
+@@ -756,26 +758,32 @@ public class SurfaceRules {
          }
  
          @Override
@@ -178,7 +178,7 @@ index 9167bad12e1be3f4163f85987862b044a630b2eb..7ba3a3ca57b55f796a90b700b930f365
                          return (double)randomSource.nextFloat() < d;
                      }
                  }
-@@ -795,10 +803,10 @@ public class SurfaceRules {
+@@ -803,10 +811,10 @@ public class SurfaceRules {
          }
  
          @Override
@@ -191,7 +191,7 @@ index 9167bad12e1be3f4163f85987862b044a630b2eb..7ba3a3ca57b55f796a90b700b930f365
                  }
  
                  @Override
-@@ -833,10 +841,10 @@ public class SurfaceRules {
+@@ -841,10 +849,10 @@ public class SurfaceRules {
          }
  
          @Override

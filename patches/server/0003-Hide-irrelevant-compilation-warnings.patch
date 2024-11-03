@@ -7,11 +7,11 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index ee1b8fbab56ff0a85a4f2bd071a0de5111aa1d4f..381b4b5d2cc54497c7db46218acc58313552ad78 100644
+index d600158c16341591ec7cd08d7c2894fb34fdab4b..5cc16e573241106d2a8b67c2f6e1a9338cfe6708 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -72,6 +72,15 @@ paperweight {
-     craftBukkitPackageVersion.set("v1_21_R1") // also needs to be updated in MappingEnvironment
+     craftBukkitPackageVersion.set("v1_21_R2") // also needs to be updated in MappingEnvironment
  }
  
 +// Gale start - hide irrelevant compilation warnings

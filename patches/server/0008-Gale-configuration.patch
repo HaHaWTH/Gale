@@ -12,31 +12,6 @@ By: Jake Potrebic <jake.m.potrebic@gmail.com>
 As part of: Paper (https://github.com/PaperMC/Paper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
-diff --git a/src/main/java/co/aikar/timings/TimingsExport.java b/src/main/java/co/aikar/timings/TimingsExport.java
-index 7620c72a4c243cbeea245203ce03a97cbfa7d922..29796a404e210f7864f4b33b3367e02531bca2a0 100644
---- a/src/main/java/co/aikar/timings/TimingsExport.java
-+++ b/src/main/java/co/aikar/timings/TimingsExport.java
-@@ -240,7 +240,10 @@ public class TimingsExport extends Thread {
-         parent.put("config", createObject(
-             pair("spigot", mapAsJSON(Bukkit.spigot().getSpigotConfig(), null)),
-             pair("bukkit", mapAsJSON(Bukkit.spigot().getBukkitConfig(), null)),
--            pair("paper", mapAsJSON(Bukkit.spigot().getPaperConfig(), null))
-+            // Gale start - Gale configuration - include in timings
-+            pair("paper", mapAsJSON(Bukkit.spigot().getPaperConfig(), null)),
-+            pair("gale", mapAsJSON(Bukkit.spigot().getGaleConfig(), null))
-+            // Gale end - Gale configuration - include in timings
-         ));
- 
-         new TimingsExport(listeners, parent, history).start();
-@@ -281,7 +284,7 @@ public class TimingsExport extends Thread {
-         return timingsCost;
-     }
- 
--    private static JSONObject mapAsJSON(ConfigurationSection config, String parentKey) {
-+    public static JSONObject mapAsJSON(ConfigurationSection config, String parentKey) { // Gale - Gale configuration
- 
-         JSONObject object = new JSONObject();
-         for (String key : config.getKeys(false)) {
 diff --git a/src/main/java/io/papermc/paper/configuration/Configurations.java b/src/main/java/io/papermc/paper/configuration/Configurations.java
 index 87e5f614ba988547a827486740db217e28585773..38d99d73a33911afa71d02a456bb4df62ce75166 100644
 --- a/src/main/java/io/papermc/paper/configuration/Configurations.java
@@ -189,7 +164,7 @@ index 8f23276796037d048eb114952891a01a40971b3e..ac9ceb54b894119cb30a22d37e035e2c
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 696d075ca2883f3c37e35f983c4d020e5db89d16..1840332f79c5cfc2a913d80d9885939be92f87d6 100644
+index 64b56abf8900d0424100da460fc68ac964394793..072e0188280d4d49fd5a96dbfa95344eec250e8b 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -3,9 +3,6 @@ package net.minecraft.server;
@@ -202,7 +177,7 @@ index 696d075ca2883f3c37e35f983c4d020e5db89d16..1840332f79c5cfc2a913d80d9885939b
  import com.google.common.collect.Lists;
  import com.google.common.collect.Maps;
  import com.google.common.collect.Sets;
-@@ -149,6 +146,9 @@ import net.minecraft.world.level.levelgen.WorldOptions;
+@@ -156,6 +153,9 @@ import net.minecraft.world.level.levelgen.WorldOptions;
  import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
  import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
  import net.minecraft.world.level.storage.WorldData;
@@ -212,7 +187,7 @@ index 696d075ca2883f3c37e35f983c4d020e5db89d16..1840332f79c5cfc2a913d80d9885939b
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -317,6 +317,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -327,6 +327,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      public final double[] recentTps = new double[ 3 ];
      // Spigot end
      public final io.papermc.paper.configuration.PaperConfigurations paperConfigurations; // Paper - add paper configuration files
@@ -220,7 +195,7 @@ index 696d075ca2883f3c37e35f983c4d020e5db89d16..1840332f79c5cfc2a913d80d9885939b
      public boolean isIteratingOverLevels = false; // Paper - Throw exception on world create while being ticked
  
      public volatile Thread shutdownThread; // Paper
-@@ -496,6 +497,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -510,6 +511,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          Runtime.getRuntime().addShutdownHook(new org.bukkit.craftbukkit.util.ServerShutdownThread(this));
          // CraftBukkit end
          this.paperConfigurations = services.paperConfigurations(); // Paper - add paper configuration files
@@ -274,10 +249,10 @@ index 33e3815a0c979609d4c7ab83ad91e87ac07a556d..67d4a82f371a4772128cc2218fd0a18c
      }
  
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index dd56c8e041116ef3602a9f89c998c8208ab89b51..86c615518e315dd4425d17df163e88a150a4ef7c 100644
+index 17a158ff6ce6520b69a5a0032ba4c05449dd0cf8..9ce281e220089ea2a9218c25879f42aafa0a4011 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -226,6 +226,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -223,6 +223,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          this.paperConfigurations.initializeGlobalConfiguration(this.registryAccess());
          this.paperConfigurations.initializeWorldDefaultsConfiguration(this.registryAccess());
          // Paper end - initialize global and world-defaults configuration
@@ -289,23 +264,23 @@ index dd56c8e041116ef3602a9f89c998c8208ab89b51..86c615518e315dd4425d17df163e88a1
          // Paper start - fix converting txt to json file; convert old users earlier after PlayerList creation but before file load/save
          if (this.convertOldUsers()) {
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index f9abf63e12ea930275121b470e4e4906cff0fc12..e20b7a1ad141834a10c5f23f9b27cc41fa25ac0d 100644
+index 5964d601c05176f48167cc92057a59e52a4da92b..d406eebb7efb00b79128bdceb71d51be4efbce4c 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -503,7 +503,7 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
-         // Holder holder = worlddimension.type(); // CraftBukkit - decompile error
+@@ -590,7 +590,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
  
-         // Objects.requireNonNull(minecraftserver); // CraftBukkit - decompile error
--        super(iworlddataserver, resourcekey, minecraftserver.registryAccess(), worlddimension.type(), minecraftserver::getProfiler, false, flag, i, minecraftserver.getMaxChainedNeighborUpdates(), gen, biomeProvider, env, spigotConfig -> minecraftserver.paperConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess(), iworlddataserver.getGameRules())), executor); // Paper - create paper world configs; Async-Anti-Xray: Pass executor
-+        super(iworlddataserver, resourcekey, minecraftserver.registryAccess(), worlddimension.type(), minecraftserver::getProfiler, false, flag, i, minecraftserver.getMaxChainedNeighborUpdates(), gen, biomeProvider, env, spigotConfig -> minecraftserver.paperConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess(), iworlddataserver.getGameRules())), spigotConfig -> minecraftserver.galeConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess(), iworlddataserver.getGameRules())), executor); // Paper - create paper world configs; Async-Anti-Xray: Pass executor // Gale - Gale configuration
+     // Add env and gen to constructor, IWorldDataServer -> WorldDataServer
+     public ServerLevel(MinecraftServer minecraftserver, Executor executor, LevelStorageSource.LevelStorageAccess convertable_conversionsession, PrimaryLevelData iworlddataserver, ResourceKey<Level> resourcekey, LevelStem worlddimension, ChunkProgressListener worldloadlistener, boolean flag, long i, List<CustomSpawner> list, boolean flag1, @Nullable RandomSequences randomsequences, org.bukkit.World.Environment env, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider) {
+-        super(iworlddataserver, resourcekey, minecraftserver.registryAccess(), worlddimension.type(), false, flag, i, minecraftserver.getMaxChainedNeighborUpdates(), gen, biomeProvider, env, spigotConfig -> minecraftserver.paperConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess(), iworlddataserver.getGameRules())), executor); // Paper - create paper world configs; Async-Anti-Xray: Pass executor
++        super(iworlddataserver, resourcekey, minecraftserver.registryAccess(), worlddimension.type(), false, flag, i, minecraftserver.getMaxChainedNeighborUpdates(), gen, biomeProvider, env, spigotConfig -> minecraftserver.paperConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess(), iworlddataserver.getGameRules())), spigotConfig -> minecraftserver.galeConfigurations.createWorldConfig(io.papermc.paper.configuration.PaperConfigurations.createWorldContextMap(convertable_conversionsession.levelDirectory.path(), iworlddataserver.getLevelName(), resourcekey.location(), spigotConfig, minecraftserver.registryAccess(), iworlddataserver.getGameRules())), executor); // Paper - create paper world configs; Async-Anti-Xray: Pass executor // Gale - Gale configuration
          this.pvpMode = minecraftserver.isPvpAllowed();
          this.convertable = convertable_conversionsession;
          this.uuid = WorldUUID.getUUID(convertable_conversionsession.levelDirectory.path().toFile());
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 507671476c3d2d92a2fdb05be24443af27d26dcf..32cd737206dd9f2bcfdacfe17dc0621ee34b589a 100644
+index 022de445bbbb869c38be4972c98dcf1c665539ec..c0e4b996715dec16dd181b7dac87c361a16a1f7f 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -12,7 +12,6 @@ import java.util.function.Supplier;
+@@ -11,7 +11,6 @@ import java.util.function.Predicate;
  import javax.annotation.Nullable;
  import net.minecraft.CrashReport;
  import net.minecraft.CrashReportCategory;
@@ -322,15 +297,15 @@ index 507671476c3d2d92a2fdb05be24443af27d26dcf..32cd737206dd9f2bcfdacfe17dc0621e
  import net.minecraft.world.entity.item.ItemEntity;
  import net.minecraft.world.entity.player.Player;
  import net.minecraft.world.item.ItemStack;
-@@ -101,6 +98,7 @@ import org.bukkit.craftbukkit.block.data.CraftBlockData;
+@@ -103,6 +100,7 @@ import org.bukkit.craftbukkit.block.data.CraftBlockData;
  import org.bukkit.craftbukkit.util.CraftSpawnCategory;
  import org.bukkit.entity.SpawnCategory;
  import org.bukkit.event.block.BlockPhysicsEvent;
 +import org.galemc.gale.configuration.GaleWorldConfiguration;
  // CraftBukkit end
  
- public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedleaf.moonrise.patches.chunk_system.level.ChunkSystemLevel, ca.spottedleaf.moonrise.patches.chunk_system.world.ChunkSystemEntityGetter, ca.spottedleaf.moonrise.patches.collisions.world.CollisionLevel { // Paper - rewrite chunk system // Paper - optimise collisions
-@@ -171,6 +169,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedleaf.moonrise.patches.chunk_system.level.ChunkSystemLevel, ca.spottedleaf.moonrise.patches.chunk_system.world.ChunkSystemEntityGetter { // Paper - rewrite chunk system // Paper - optimise collisions
+@@ -172,6 +170,12 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          return this.paperConfig;
      }
      // Paper end - add paper world config
@@ -342,13 +317,18 @@ index 507671476c3d2d92a2fdb05be24443af27d26dcf..32cd737206dd9f2bcfdacfe17dc0621e
 +    // Gale end - Gale configuration
  
      public final com.destroystokyo.paper.antixray.ChunkPacketBlockController chunkPacketBlockController; // Paper - Anti-Xray
-     public final co.aikar.timings.WorldTimingsHandler timings; // Paper
-@@ -684,9 +688,10 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+     public static BlockPos lastPhysicsProblem; // Spigot
+@@ -830,7 +834,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
      // Paper end - optimise random ticking
  
--    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray
-+    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray // Gale - Gale configuration
+-    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray
++    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray // Gale - Gale configuration
+         // Paper start - getblock optimisations - cache world height/sections
+         final DimensionType dimType = holder.value();
+         this.minY = dimType.minY();
+@@ -842,6 +846,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+         // Paper end - getblock optimisations - cache world height/sections
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig(((net.minecraft.world.level.storage.PrimaryLevelData) worlddatamutable).getLevelName()); // Spigot
          this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper - create paper world config
 +        this.galeConfig = galeWorldConfigCreator.apply(this.spigotConfig); // Gale - Gale configuration
@@ -356,18 +336,18 @@ index 507671476c3d2d92a2fdb05be24443af27d26dcf..32cd737206dd9f2bcfdacfe17dc0621e
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index c7df339aeb62ee627edaf1bb4c8474b61e357ba6..b1c1e600100ac31ecb20473b8ad2853676dff84a 100644
+index b185a9b474121b8a4067816b3c3c39270c2a202e..9009da78ba2d7751b974123ce76a37af98189b6a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1072,6 +1072,7 @@ public final class CraftServer implements Server {
+@@ -1074,6 +1074,7 @@ public final class CraftServer implements Server {
  
          org.spigotmc.SpigotConfig.init((File) this.console.options.valueOf("spigot-settings")); // Spigot
          this.console.paperConfigurations.reloadConfigs(this.console);
 +        this.console.galeConfigurations.reloadConfigs(this.console); // Gale - Gale configuration
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
-             world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters, config.spawnAnimals); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -2990,6 +2991,14 @@ public final class CraftServer implements Server {
+             world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
+@@ -3009,6 +3010,14 @@ public final class CraftServer implements Server {
              return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
          }
  
@@ -790,31 +770,6 @@ index 0000000000000000000000000000000000000000..b82bb95b524c95cdefb81abef906eded
 +
 +        public int dummyValue = 0;
 +
-+    }
-+
-+}
-diff --git a/src/main/java/org/galemc/gale/configuration/timingsexport/GaleConfigurationTimingsExport.java b/src/main/java/org/galemc/gale/configuration/timingsexport/GaleConfigurationTimingsExport.java
-new file mode 100644
-index 0000000000000000000000000000000000000000..579c2e69d8f6ce8398eb1297d1d1ead98c9068a5
---- /dev/null
-+++ b/src/main/java/org/galemc/gale/configuration/timingsexport/GaleConfigurationTimingsExport.java
-@@ -0,0 +1,19 @@
-+// Gale - Gale configuration
-+
-+package org.galemc.gale.configuration.timingsexport;
-+
-+import co.aikar.timings.TimingsExport;
-+import org.bukkit.Bukkit;
-+import org.jetbrains.annotations.NotNull;
-+import org.json.simple.JSONObject;
-+
-+public final class GaleConfigurationTimingsExport {
-+
-+    private GaleConfigurationTimingsExport() {}
-+
-+    public static @NotNull JSONObject get() {
-+        var json = TimingsExport.mapAsJSON(Bukkit.spigot().getGaleConfig(), null);
-+        return json;
 +    }
 +
 +}

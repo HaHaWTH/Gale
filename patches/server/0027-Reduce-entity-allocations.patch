@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 3a5f832578abbf3ead4d5bd99eee1438a2e74b35..e26d98cb34e9fd2c599ce72d8c83f1431f4bf991 100644
+index ca4ce69ecad2291d196c4126e4cbde69554dd50c..5e939e377c35fe69d66ecb79266dcfc429e34f5c 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -445,6 +445,7 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
@@ -43,7 +43,7 @@ index 3a5f832578abbf3ead4d5bd99eee1438a2e74b35..e26d98cb34e9fd2c599ce72d8c83f143
          return this.yRot;
      }
 diff --git a/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java b/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java
-index 69992ebc999ea3ff9e47e4e049bcc514c01150ca..f9f6745d45aaba4a7106f80d403dcf9ae40e1d6c 100644
+index 94d04a20f97405e02d7cccaabadc7a7e86e336f7..edd791da70fd7e18c42133dcd771f212cb25abab 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/attributes/AttributeMap.java
 @@ -23,9 +23,11 @@ public class AttributeMap {
