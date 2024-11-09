@@ -1,4 +1,3 @@
 ## TODOs
 Check chunk sys threads in gale metrics
-Check to use simple random by default in tick chunk opt (add back move random patch)
-check fluid cache
+Do a benchmark for `Remove streams and iterators from range check`, getEffectiveRange in ChunkMap

@@ -3,8 +3,6 @@ From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Wed, 23 Nov 2022 16:53:40 +0100
 Subject: [PATCH] Move random tick random
 
-Removed since 1.21
-
 License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
@@ -21,26 +19,27 @@ require it to be initialized earlier. By moving it to the superclass, we
 initialize it earlier, ensuring that it is available sooner.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 713360d4135b5b586176ba6897e8c9f533e48b32..a51c90ba7dbbef85cfb850d4d10d8eec9db83a82 100644
+index 3401602c57337e96012c2768b38f523ca7dd6798..91042db25973e6a9fefebef2bc8f1471ddf34e58 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -800,7 +800,6 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
+@@ -836,8 +836,6 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
      }
-     // Paper start - optimise random block ticking
-     private final BlockPos.MutableBlockPos chunkTickMutablePosition = new BlockPos.MutableBlockPos();
--    private final io.papermc.paper.util.math.ThreadUnsafeRandom randomTickRandom = new io.papermc.paper.util.math.ThreadUnsafeRandom(this.random.nextLong());
-     // Paper end
  
-     public void tickChunk(LevelChunk chunk, int randomTickSpeed) {
+     // Paper start - optimise random ticking
+-    private final ca.spottedleaf.moonrise.common.util.SimpleRandom simpleRandom = new ca.spottedleaf.moonrise.common.util.SimpleRandom(0L);
+-
+     private void optimiseRandomTick(final LevelChunk chunk, final int tickSpeed) {
+         final LevelChunkSection[] sections = chunk.getSections();
+         final int minSection = ca.spottedleaf.moonrise.common.util.WorldUtil.getMinSection((ServerLevel)(Object)this);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 91944ff33143ed28fa05be521375ead0768eb25b..9dd13830edf495d2fc55940e8d7f9cc20cf1936d 100644
+index 38408c004bdf8e31ad8665f75205a0f42ef1ff99..f40d3ef570eb7d079d30f88470d95b3de12695ee 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -183,6 +183,8 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
-     public final Map<Explosion.CacheKey, Float> explosionDensityCache = new HashMap<>(); // Paper - Optimize explosions
+     public final Map<ServerExplosion.CacheKey, Float> explosionDensityCache = new HashMap<>(); // Paper - Optimize explosions
      public java.util.ArrayDeque<net.minecraft.world.level.block.RedstoneTorchBlock.Toggle> redstoneUpdateInfos; // Paper - Faster redstone torch rapid clock removal; Move from Map in BlockRedstoneTorch to here
  
-+    public final io.papermc.paper.util.math.ThreadUnsafeRandom randomTickRandom = new io.papermc.paper.util.math.ThreadUnsafeRandom(this.random.nextLong()); // Gale - Pufferfish - move random tick random
++    public final ca.spottedleaf.moonrise.common.util.SimpleRandom simpleRandom = new ca.spottedleaf.moonrise.common.util.SimpleRandom(0L); // Gale - Pufferfish - move random tick random
 +
      public CraftWorld getWorld() {
          return this.world;
