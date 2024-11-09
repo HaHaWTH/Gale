@@ -1,0 +1,36 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martijn Muijsers <martijnmuijsers@live.nl>
+Date: Thu, 24 Nov 2022 23:45:57 +0100
+Subject: [PATCH] Do not log empty message warnings
+
+License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+Gale - https://galemc.org
+
+diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+index ad53a045efaa6ed44a5b345586366b7c50e5688a..25e91c5e5f5cf1a9dbb2931b964c754408926788 100644
+--- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
++++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+@@ -2543,7 +2543,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+         // CraftBukkit start
+         String s = message.signedContent();
+         if (s.isEmpty()) {
+-            ServerGamePacketListenerImpl.LOGGER.warn(this.player.getScoreboardName() + " tried to send an empty message");
++            if (org.galemc.gale.configuration.GaleGlobalConfiguration.get().logToConsole.chat.emptyMessageWarning) ServerGamePacketListenerImpl.LOGGER.warn(this.player.getScoreboardName() + " tried to send an empty message"); // Gale - do not log empty message warnings
+         } else if (this.getCraftPlayer().isConversing()) {
+             final String conversationInput = s;
+             this.server.processQueue.add(new Runnable() {
+diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
+index 56aa01dfbfc0817b71315322ed3f676bd62ad825..8ef64ac15626633ecdba555b39a20da11d917b65 100644
+--- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
++++ b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
+@@ -53,5 +53,10 @@ public class GaleGlobalConfiguration extends ConfigurationPart {
+ 
+         public boolean invalidStatistics = true; // Gale - EMC - do not log invalid statistics
+ 
++        public Chat chat;
++        public class Chat extends ConfigurationPart {
++            public boolean emptyMessageWarning = false; // Gale - do not log empty message warnings
++        }
++
+     }
+ }
