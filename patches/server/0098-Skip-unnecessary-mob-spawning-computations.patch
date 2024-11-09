@@ -1,0 +1,74 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martijn Muijsers <martijnmuijsers@live.nl>
+Date: Sun, 25 Dec 2022 20:29:03 +0100
+Subject: [PATCH] Skip unnecessary mob spawning computations
+
+License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+Gale - https://galemc.org
+
+This patch is based on the following patch:
+"Only create a spawner state when we are actually spawning mobs"
+By: PureGero <puregero@gmail.com>
+As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
+Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+
+diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
+index 9b42517eed2dd8644c9db759690f09aeef6ab3b2..4d416ef3a1c528a1ce221aed43b8823f90a3df49 100644
+--- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
++++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
+@@ -524,10 +524,15 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+     }
+ 
+     private void tickChunks(long timeDelta, List<LevelChunk> chunks) { // Gale - Purpur - remove vanilla profiler
++        // Gale start - MultiPaper - skip unnecessary mob spawning computations
++        NaturalSpawner.SpawnState spawnercreature_d; // moved down
++        final boolean flag = this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) && !this.level.players().isEmpty(); // CraftBukkit
++        boolean flagAndHasNaturalSpawn = flag && this.anySpawnCategoryIsSpawnedThisTick();
++        if (flagAndHasNaturalSpawn) {
++            // Gale end - MultiPaper - skip unnecessary mob spawning computations
+         int j = this.distanceManager.getNaturalSpawnChunkCount();
+         // Paper start - Optional per player mob spawns
+         final int naturalSpawnChunkCount = j;
+-        NaturalSpawner.SpawnState spawnercreature_d; // moved down
+         if ((this.spawnFriendlies || this.spawnEnemies) && this.level.paperConfig().entities.spawning.perPlayerMobSpawns) { // don't count mobs when animals and monsters are disabled
+             // re-set mob counts
+             for (ServerPlayer player : this.level.players) {
+@@ -550,11 +555,15 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+         // Paper end - Optional per player mob spawns
+ 
+         this.lastSpawnState = spawnercreature_d;
+-        boolean flag = this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) && !this.level.players().isEmpty(); // CraftBukkit
++            // Gale start - MultiPaper - skip unnecessary mob spawning computations
++        } else {
++            spawnercreature_d = null;
++        }
++        // Gale end - MultiPaper - skip unnecessary mob spawning computations
+         int k = this.level.getGameRules().getInt(GameRules.RULE_RANDOMTICKING);
+         List list1;
+ 
+-        if (flag && (this.spawnEnemies || this.spawnFriendlies)) {
++        if (flagAndHasNaturalSpawn && (this.spawnEnemies || this.spawnFriendlies)) { // Gale - MultiPaper - skip unnecessary mob spawning computations
+             // Paper start - PlayerNaturallySpawnCreaturesEvent
+             int chunkRange = level.spigotConfig.mobSpawnRange;
+             chunkRange = (chunkRange > level.spigotConfig.viewDistance) ? (byte) level.spigotConfig.viewDistance : chunkRange;
+@@ -593,6 +602,20 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+ 
+     }
+ 
++    // Gale start - MultiPaper - skip unnecessary mob spawning computations
++    public boolean anySpawnCategoryIsSpawnedThisTick() {
++        long gameTime = this.level.getLevelData().getGameTime();
++
++        for (long ticksForSpawnCategory : this.level.ticksPerSpawnCategory.values()) {
++            if (ticksForSpawnCategory != 0L && gameTime % ticksForSpawnCategory == 0L) {
++                return true;
++            }
++        }
++
++        return false;
++    }
++    // Gale end - MultiPaper - skip unnecessary mob spawning computations
++
+     private void getFullChunk(long pos, Consumer<LevelChunk> chunkConsumer) {
+         // Paper start - rewrite chunk system
+         // note: bypass currentlyLoaded from getChunkNow
