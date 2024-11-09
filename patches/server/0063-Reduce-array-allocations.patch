@@ -337,7 +337,7 @@ index 254c80c60bdeaf8d3b65777648f7e863a4480a31..c45121f6c4ed3b6bd9faf3f3d3bbddd6
          return ret;
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 25e91c5e5f5cf1a9dbb2931b964c754408926788..fda212ff9961d7ce0d99bfb7fbe49b15034f6e57 100644
+index 25e91c5e5f5cf1a9dbb2931b964c754408926788..534d72803949c75314e9c0d225bb889aa6a3d4c6 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2842,7 +2842,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
@@ -345,7 +345,7 @@ index 25e91c5e5f5cf1a9dbb2931b964c754408926788..fda212ff9961d7ce0d99bfb7fbe49b15
                                  // SPIGOT-7136 - Allays
                                  if (entity instanceof Allay || entity instanceof net.minecraft.world.entity.animal.horse.AbstractHorse) { // Paper - Fix horse armor desync
 -                                    ServerGamePacketListenerImpl.this.send(new ClientboundSetEquipmentPacket(entity.getId(), Arrays.stream(net.minecraft.world.entity.EquipmentSlot.values()).map((slot) -> Pair.of(slot, ((LivingEntity) entity).getItemBySlot(slot).copy())).collect(Collectors.toList()), true)); // Paper - sanitize
-+                                    ServerGamePacketListenerImpl.this.send(new ClientboundSetEquipmentPacket(entity.getId(), Arrays.stream(net.minecraft.world.entity.EquipmentSlot.VALUES).map((slot) -> Pair.of(slot, ((LivingEntity) entity).getItemBySlot(slot).copy())).collect(Collectors.toList()), true)); // Paper - sanitize // Gale - JettPack - reduce array allocations
++                                    ServerGamePacketListenerImpl.this.send(new ClientboundSetEquipmentPacket(entity.getId(), Arrays.stream(net.minecraft.world.entity.EquipmentSlot.VALUES_ARRAY).map((slot) -> Pair.of(slot, ((LivingEntity) entity).getItemBySlot(slot).copy())).collect(Collectors.toList()), true)); // Paper - sanitize // Gale - JettPack - reduce array allocations
                                  }
  
                                  ServerGamePacketListenerImpl.this.player.containerMenu.sendAllDataToRemote(); // Paper - fix slot desync - always refresh player inventory
@@ -416,6 +416,20 @@ index 1f9c436a632e4f110be61cf76fcfc3b7eb80334e..6c6ac02129dc7499137da33d8b3d3255
      private final int size;
  
      public ZeroBitStorage(int size) {
+diff --git a/src/main/java/net/minecraft/world/entity/EquipmentSlot.java b/src/main/java/net/minecraft/world/entity/EquipmentSlot.java
+index 1a3c9a2b572f7caaf21beb3054d0d1b19c3a174b..c9d2f6ea976f873b76c20194b0ec4895b5adced2 100644
+--- a/src/main/java/net/minecraft/world/entity/EquipmentSlot.java
++++ b/src/main/java/net/minecraft/world/entity/EquipmentSlot.java
+@@ -19,7 +19,8 @@ public enum EquipmentSlot implements StringRepresentable {
+     BODY(EquipmentSlot.Type.ANIMAL_ARMOR, 0, 1, 6, "body");
+ 
+     public static final int NO_COUNT_LIMIT = 0;
+-    public static final List<EquipmentSlot> VALUES = List.of(values());
++    public static final EquipmentSlot[] VALUES_ARRAY = values(); // Gale - JettPack - reduce array allocations
++    public static final List<EquipmentSlot> VALUES = List.of(VALUES_ARRAY);
+     public static final IntFunction<EquipmentSlot> BY_ID = ByIdMap.continuous(slot -> slot.id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+     public static final StringRepresentable.EnumCodec<EquipmentSlot> CODEC = StringRepresentable.fromEnum(EquipmentSlot::values);
+     public static final StreamCodec<ByteBuf, EquipmentSlot> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, slot -> slot.id);
 diff --git a/src/main/java/net/minecraft/world/entity/EquipmentSlotGroup.java b/src/main/java/net/minecraft/world/entity/EquipmentSlotGroup.java
 index f5e79db3ccde0730c3b4fb81c76ca6ed045a7374..5546a873fae5252df5fb4bf8781e70db64522dec 100644
 --- a/src/main/java/net/minecraft/world/entity/EquipmentSlotGroup.java
@@ -534,7 +548,7 @@ index b968d22e149bf9063f14167fe9856868e5933303..98ef0631fd7843182589f55bb00f2cf1
  
          @Nullable
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftEquipmentSlot.java b/src/main/java/org/bukkit/craftbukkit/CraftEquipmentSlot.java
-index ae86c45c1d49c7646c721991910592091e7333f8..3bf62117fb052a4d10fd4ccd4e1b63caff511f36 100644
+index ae86c45c1d49c7646c721991910592091e7333f8..1368191d6f76d1b4246b1bae7d5afdda44050965 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftEquipmentSlot.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftEquipmentSlot.java
 @@ -7,8 +7,10 @@ import org.bukkit.inventory.EquipmentSlot;
@@ -544,8 +558,8 @@ index ae86c45c1d49c7646c721991910592091e7333f8..3bf62117fb052a4d10fd4ccd4e1b63ca
 -    private static final net.minecraft.world.entity.EquipmentSlot[] slots = new net.minecraft.world.entity.EquipmentSlot[EquipmentSlot.values().length];
 -    private static final EquipmentSlot[] enums = new EquipmentSlot[net.minecraft.world.entity.EquipmentSlot.values().length];
 +    // Gale start - JettPack - reduce array allocations
-+    private static final net.minecraft.world.entity.EquipmentSlot[] slots = net.minecraft.world.entity.EquipmentSlot.VALUES;
-+    private static final EquipmentSlot[] enums = new EquipmentSlot[net.minecraft.world.entity.EquipmentSlot.VALUES.length];
++    private static final net.minecraft.world.entity.EquipmentSlot[] slots = net.minecraft.world.entity.EquipmentSlot.VALUES_ARRAY;
++    private static final EquipmentSlot[] enums = new EquipmentSlot[net.minecraft.world.entity.EquipmentSlot.VALUES.size()];
 +    // Gale end - JettPack - reduce array allocations
  
      static {

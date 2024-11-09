@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java b/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java
-index 8c4532a250f8679d729a35c17e9b5bd339264450..7cdf57f96539e8218b3834f3f24336f93cd6938c 100644
+index 8c4532a250f8679d729a35c17e9b5bd339264450..d2e65b6b06929c016aefb36de70391d25232e460 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/WaterAnimal.java
 @@ -74,6 +74,6 @@ public abstract class WaterAnimal extends PathfinderMob {
@@ -45,7 +45,7 @@ index 8c4532a250f8679d729a35c17e9b5bd339264450..7cdf57f96539e8218b3834f3f24336f9
          j = world.getMinecraftWorld().paperConfig().entities.spawning.wateranimalSpawnHeight.minimum.or(j);
          // Paper end - Make water animal spawn height configurable
 -        return pos.getY() >= j && pos.getY() <= i && world.getFluidState(pos.below()).is(FluidTags.WATER) && world.getBlockState(pos.above()).is(Blocks.WATER);
-+        return ((reason == MobSpawnType.SPAWNER && world.getMinecraftWorld().galeConfig().gameplayMechanics.fixes.mc238526) || (pos.getY() >= j && pos.getY() <= i)) && world.getFluidState(pos.below()).is(FluidTags.WATER) && world.getBlockState(pos.above()).is(Blocks.WATER); // Gale - Purpur - fix MC-238526
++        return ((reason == EntitySpawnReason.SPAWNER && world.getMinecraftWorld().galeConfig().gameplayMechanics.fixes.mc238526) || (pos.getY() >= j && pos.getY() <= i)) && world.getFluidState(pos.below()).is(FluidTags.WATER) && world.getBlockState(pos.above()).is(Blocks.WATER); // Gale - Purpur - fix MC-238526
      }
  }
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
