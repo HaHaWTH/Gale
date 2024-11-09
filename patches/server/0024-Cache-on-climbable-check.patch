@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 74ee200081f372e66e1d2a5a291fff42758ba965..4c299ce47caafaa233355cb71aab8d622008f346 100644
+index 098bedc39031b03a4cab24c0c02983e89174cead..206a1461178706e56f4b3c92c9121dd4177edd4c 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -2109,6 +2109,20 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -56,10 +56,10 @@ index 74ee200081f372e66e1d2a5a291fff42758ba965..4c299ce47caafaa233355cb71aab8d62
          if (this.isSpectator()) {
              return false;
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index 133bcf639a45bd7fa1a2d02410ea3e8568265007..f8a57248da47cf8cfb47dc92b36c191338c8d598 100644
+index bd7c37123c70d2afdef252f39548725d4ef318ed..24536f70309f802d45714e06bace339f1d9f1013 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
-@@ -294,7 +294,7 @@ public class ActivationRange
+@@ -295,7 +295,7 @@ public class ActivationRange
          if ( entity instanceof LivingEntity )
          {
              LivingEntity living = (LivingEntity) entity;

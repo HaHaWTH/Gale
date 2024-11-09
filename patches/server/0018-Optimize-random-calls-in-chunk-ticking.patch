@@ -52,10 +52,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index ebed376154ce30bf75fcdc2bd23c4dab251e1719..01a6e1fd4d7271f5a223765dab7976efcdf1fd92 100644
+index 0f9ea834c02114ad864abd13382665c02cb69ba4..9b42517eed2dd8644c9db759690f09aeef6ab3b2 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-@@ -471,6 +471,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -465,6 +465,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
  
          this.lastInhabitedUpdate = i;
          if (!this.level.isDebug()) {
