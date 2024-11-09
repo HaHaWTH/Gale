@@ -18,7 +18,7 @@ this patch is focused around the sensors used for ai
 delete the line of sight cache less often and use a faster nearby comparison
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 1dcc770cec01c19d5d72b3b28281f951be6c9777..93fae6169e06cbb4bfbff194ccddf51a5c190d28 100644
+index e4986e69898b95380b0efb6a5125514a0fa8314c..1f53cc73dca25ed82b08d1a2f46236a8919af7fb 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -1030,10 +1030,9 @@ public abstract class LivingEntity extends Entity implements Attackable {

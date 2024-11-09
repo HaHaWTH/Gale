@@ -286,7 +286,7 @@ index a2920b8a9eff77d9c5d1d7f70ad3abdacba8f0fa..b34ea5d45a69ffcf26275e79006a3d03
      protected CipherBase(Cipher cipher) {
          this.cipher = cipher;
 diff --git a/src/main/java/net/minecraft/network/Connection.java b/src/main/java/net/minecraft/network/Connection.java
-index 3e550f8e7cd4f4e16f499a8a2a4b95420270f07a..ee4172ab8a0df871f509aeaee8d32f325c148fee 100644
+index 4a8356a714ed50d4a32bcf046a2e16491bef014b..71bcc4c69ea4bf12eed7b3238c7703b9cdbc159e 100644
 --- a/src/main/java/net/minecraft/network/Connection.java
 +++ b/src/main/java/net/minecraft/network/Connection.java
 @@ -326,7 +326,7 @@ public class Connection extends SimpleChannelInboundHandler<Packet<?>> {
@@ -364,7 +364,7 @@ index 20b5a81d50397438b3200322f31b62db44ebdb3b..c80be65d190c85e7f0ea8233ebbbdbc1
  
              for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 71478e620198f373ad92cf40a49ecbfb14fd326e..7694c5f1d1ffe60d7be3c2591afddd472b6c5ce6 100644
+index b9fd0526e244ee3eb16b82f80ad3818ec55929e0..c507dbfe5bb793d896acda167fb6d0f21c8afb7a 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2824,7 +2824,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
@@ -502,7 +502,7 @@ index d75673cc8a5aeb7051b1d4fe729faf408e266dc4..0b8e5c2da9f57dbf8703baa1de3e1cf8
  
      private static Map<EquipmentSlot, Float> createForAllSlots(List<EquipmentSlot> slots, float dropChance) {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index e5df16e415d6c8dc8547a59af373ae2918ec42dc..6c6e279cd351720bd8d867e2c6207e98a35d2c9d 100644
+index 81010bc37cd5a0b9b15f7017ae55950d6648cc29..b08e104adcaf0fd70d5a622766243ef57cb1e4bf 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -3275,7 +3275,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -564,7 +564,7 @@ index 427e2711b942a61b491b2fe9fc1d02e67d446ad0..9dbcebe04ad9dd2f5558e92e85749c70
  
                      for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index eec0ec43590be7e8ae5b530a7404c98b5e23cb53..21d8666ed24dae109792c094b9ce7eeb9100b4d9 100644
+index 522b817f23f08eb720fe9d05eec7f548d2761603..e7f15d4add57bce1e87c80649e845f0764811381 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
 @@ -1122,7 +1122,7 @@ public final class ItemStack implements DataComponentHolder {

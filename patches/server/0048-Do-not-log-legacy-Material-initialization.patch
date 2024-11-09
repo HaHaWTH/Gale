@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java b/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java
-index dc591702d1ad41209bb80e8d05f4ca11f20816f2..38a5b11d52ffcd1e3f7ffe8d617e7d3fd93f07c6 100644
+index fa599f9533fbc18608d8d1d00dddd7ac2ecc4e31..72336a3769ce405bd2aeb14e24815122b130dab8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java
 +++ b/src/main/java/org/bukkit/craftbukkit/legacy/CraftLegacy.java
 @@ -31,6 +31,7 @@ import org.bukkit.Material;

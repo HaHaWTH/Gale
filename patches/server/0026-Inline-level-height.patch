@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index abebc41e69a41cbf940ffd10dae4815202b525dc..a48b1639ffa83ae2d1e614d32a339f08366da57c 100644
+index 9dfc38c1b062c8ad52ecff4b0731f0650c1ebeef..4aa38c29fa18f321b70fa58f308a4c15b03d61d3 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -685,6 +685,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl

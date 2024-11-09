@@ -31,7 +31,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 4a5857f2454090fc87ecd1cc9d0a39c31918d197..a6ebe6bb04744a53937d729b9cec028463e19ac1 100644
+index 4e9c49496c3d26b59eaa37662aefb73e8a48c5ee..5bfab30730304614bcd0ea3d558ad458182e04b9 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -717,7 +717,20 @@ public class ServerLevel extends Level implements WorldGenLevel, ca.spottedleaf.
@@ -57,7 +57,7 @@ index 4a5857f2454090fc87ecd1cc9d0a39c31918d197..a6ebe6bb04744a53937d729b9cec0284
                      }
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index a48b1639ffa83ae2d1e614d32a339f08366da57c..d756e2ac71eced0de81b921f3215f51600b6b768 100644
+index 4aa38c29fa18f321b70fa58f308a4c15b03d61d3..0b373e194a4cf1d579165424aee21f4c62ae45b1 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -1432,15 +1432,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl

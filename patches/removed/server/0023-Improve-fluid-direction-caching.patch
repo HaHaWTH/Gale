@@ -3,6 +3,8 @@ From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Wed, 23 Nov 2022 20:35:40 +0100
 Subject: [PATCH] Improve fluid direction caching
 
+Removed since 1.21.1, Paper 1.21.3, or Moonrise's imple is a bit faster
+
 License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 

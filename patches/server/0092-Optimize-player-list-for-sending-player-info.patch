@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index bd555d1f9ce00b53f8d3b2b82012cf3716e205a6..da20474463e776cdd922a905482cd7412486a2f0 100644
+index bea08b08d3cc29774d2ebc7c577eabb36b5d47fd..487130545e58661c7757513f295977407ad19295 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -1029,14 +1029,18 @@ public abstract class PlayerList {

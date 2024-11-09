@@ -19,7 +19,7 @@ index 9ac3c235a7adc42af1ba22aaa4efbce5b006f98d..42306d45d3b8f7807b344422fca7382e
  
      }
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index f83c2b35cc279666686be3af558473b5d93bf7cd..86b678aa745e125ceaa271deec00d6290a02d88b 100644
+index 24046e59d4675d33056bbfb55f0158ef236342f7..a7ebba9de1807c403128854356d41446a8a56f73 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
 @@ -38,6 +38,7 @@ import co.aikar.timings.MinecraftTimings;

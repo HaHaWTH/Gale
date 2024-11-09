@@ -29,7 +29,7 @@ index 14e412ebf75b0e06ab53a1c8f9dd1be6ad1e2680..f962e82e2c70f328a23dc99193d072f8
      }
  
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index cce00b627b905793f8c663dc62e74fac895e618d..1c4051cb47fc2e070cef363bd670dff35baff35b 100644
+index 17e122612ae50c06872d666e435b08d30cf9a6cc..d0862e9c83e2b167fe6510fba1a50f0fdb0bf5c7 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -102,6 +102,7 @@ import net.minecraft.world.phys.Vec3;
