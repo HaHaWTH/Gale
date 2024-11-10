@@ -17,10 +17,10 @@ Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 
 diff --git a/src/main/java/net/caffeinemc/mods/lithium/common/world/chunk/LithiumHashPalette.java b/src/main/java/net/caffeinemc/mods/lithium/common/world/chunk/LithiumHashPalette.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..de160b56e3e565038394ecac7a78e156f5201f05
+index 0000000000000000000000000000000000000000..0acca8a5e32acf5a63217fca17928d3925ca37d8
 --- /dev/null
 +++ b/src/main/java/net/caffeinemc/mods/lithium/common/world/chunk/LithiumHashPalette.java
-@@ -0,0 +1,192 @@
+@@ -0,0 +1,198 @@
 +// Gale - Lithium - faster chunk serialization
 +
 +package net.caffeinemc.mods.lithium.common.world.chunk;
@@ -35,6 +35,7 @@ index 0000000000000000000000000000000000000000..de160b56e3e565038394ecac7a78e156
 +import net.minecraft.core.IdMap;
 +import net.minecraft.network.FriendlyByteBuf;
 +import net.minecraft.network.VarInt;
++import net.minecraft.world.level.chunk.MissingPaletteEntryException;
 +import net.minecraft.world.level.chunk.Palette;
 +import net.minecraft.world.level.chunk.PaletteResize;
 +
@@ -144,11 +145,16 @@ index 0000000000000000000000000000000000000000..de160b56e3e565038394ecac7a78e156
 +    public T valueFor(int id) {
 +        T[] entries = this.entries;
 +
++        T entry = null;
 +        if (id >= 0 && id < entries.length) {
-+            return entries[id];
++            entry = entries[id];
 +        }
 +
-+        return null;
++        if (entry != null) {
++            return entry;
++        } else {
++            throw new MissingPaletteEntryException(id);
++        }
 +    }
 +
 +    @Override
