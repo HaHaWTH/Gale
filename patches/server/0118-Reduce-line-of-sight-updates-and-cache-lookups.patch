@@ -18,23 +18,10 @@ this patch is focused around the sensors used for ai
 delete the line of sight cache less often and use a faster nearby comparison
 
 diff --git a/src/main/java/net/minecraft/world/entity/ai/sensing/Sensing.java b/src/main/java/net/minecraft/world/entity/ai/sensing/Sensing.java
-index 57472cb54e9fd83e980e3c57f28d6e6643f422e8..ce50852a9b18679a80e9393e8d904935917e0439 100644
+index 57472cb54e9fd83e980e3c57f28d6e6643f422e8..aa5fb4288057e97a41ce41df5009ad4d887e6e64 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/sensing/Sensing.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/sensing/Sensing.java
-@@ -1,39 +1,81 @@
- package net.minecraft.world.entity.ai.sensing;
- 
--import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
--import it.unimi.dsi.fastutil.ints.IntSet;
-+import it.unimi.dsi.fastutil.ints.Int2IntMap;
-+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
-+import it.unimi.dsi.fastutil.ints.IntArrayList;
-+import it.unimi.dsi.fastutil.ints.IntList;
- import net.minecraft.world.entity.Entity;
- import net.minecraft.world.entity.Mob;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
-+import org.jetbrains.annotations.NotNull;
-+import org.jetbrains.annotations.Nullable;
+@@ -7,33 +7,70 @@ import net.minecraft.world.entity.Mob;
  
  public class Sensing {
      private final Mob mob;
@@ -42,10 +29,10 @@ index 57472cb54e9fd83e980e3c57f28d6e6643f422e8..ce50852a9b18679a80e9393e8d904935
 -    private final IntSet seen = new IntOpenHashSet(2);
 -    private final IntSet unseen = new IntOpenHashSet(2);
 -    // Gale end - initialize line of sight cache with low capacity
-+    private final Int2IntMap seen = new Int2IntOpenHashMap(2); // Gale end - initialize line of sight cache with low capacity // Gale - Petal - reduce line of sight cache lookups - merge sets
++    private final it.unimi.dsi.fastutil.ints.Int2IntMap seen = new it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap(2); // Gale end - initialize line of sight cache with low capacity // Gale - Petal - reduce line of sight cache lookups - merge sets
 +
 +    // Gale start - Petal - reduce line of sight updates - expiring entity id lists
-+    private final @NotNull IntList @Nullable [] expiring;
++    private final @org.jetbrains.annotations.NotNull it.unimi.dsi.fastutil.ints.IntList @org.jetbrains.annotations.Nullable [] expiring;
 +    private int currentCacheAddIndex = 0;
 +    private int nextToExpireIndex = 1;
 +    // Gale end - Petal - reduce line of sight updates - expiring entity id lists
@@ -53,13 +40,13 @@ index 57472cb54e9fd83e980e3c57f28d6e6643f422e8..ce50852a9b18679a80e9393e8d904935
      public Sensing(Mob owner) {
          this.mob = owner;
 +        // Gale start - Petal - reduce line of sight updates - expiring entity id lists
-+        int updateLineOfSightInterval = GaleGlobalConfiguration.get().smallOptimizations.reducedIntervals.updateEntityLineOfSight;
++        int updateLineOfSightInterval = org.galemc.gale.configuration.GaleGlobalConfiguration.get().smallOptimizations.reducedIntervals.updateEntityLineOfSight;
 +        if (updateLineOfSightInterval <= 1) {
 +            this.expiring = null;
 +        } else {
-+            this.expiring = new IntList[updateLineOfSightInterval];
++            this.expiring = new it.unimi.dsi.fastutil.ints.IntList[updateLineOfSightInterval];
 +            for (int i = 0; i < updateLineOfSightInterval; i++) {
-+                this.expiring[i] = new IntArrayList(0);
++                this.expiring[i] = new it.unimi.dsi.fastutil.ints.IntArrayList(0);
 +            }
 +        }
 +        // Gale end - Petal - reduce line of sight updates - expiring entity id lists

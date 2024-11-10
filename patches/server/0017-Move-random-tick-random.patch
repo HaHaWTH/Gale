@@ -32,10 +32,10 @@ index 3401602c57337e96012c2768b38f523ca7dd6798..91042db25973e6a9fefebef2bc8f1471
          final LevelChunkSection[] sections = chunk.getSections();
          final int minSection = ca.spottedleaf.moonrise.common.util.WorldUtil.getMinSection((ServerLevel)(Object)this);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 38408c004bdf8e31ad8665f75205a0f42ef1ff99..f40d3ef570eb7d079d30f88470d95b3de12695ee 100644
+index a0cbeefb01aadfb1aa06d7216d222351c0805422..1e1e3a0951a852171601199524e7181e115d9931 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -183,6 +183,8 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -185,6 +185,8 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public final Map<ServerExplosion.CacheKey, Float> explosionDensityCache = new HashMap<>(); // Paper - Optimize explosions
      public java.util.ArrayDeque<net.minecraft.world.level.block.RedstoneTorchBlock.Toggle> redstoneUpdateInfos; // Paper - Faster redstone torch rapid clock removal; Move from Map in BlockRedstoneTorch to here
  

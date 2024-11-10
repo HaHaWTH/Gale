@@ -45,18 +45,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index af9dcde80e5fe7c3fda8728cf2a9d1a4849eaba3..88297235b3b63dcf1bdbb7feff88ce71091b9618 100644
+index 0e46efa30dc980a348caed64c4a8734e5a6a095a..f59ea87c3b7b9b4c46fed1bafff106ed97c9ff70 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
-@@ -118,6 +118,7 @@ import net.minecraft.world.phys.AABB;
- import net.minecraft.world.phys.Vec3;
- import net.minecraft.world.scores.PlayerTeam;
- import net.minecraft.world.scores.Scoreboard;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
- import org.slf4j.Logger;
- import org.bukkit.craftbukkit.entity.CraftHumanEntity;
- import org.bukkit.craftbukkit.event.CraftEventFactory;
-@@ -157,6 +158,7 @@ public abstract class Player extends LivingEntity {
+@@ -156,6 +156,7 @@ public abstract class Player extends LivingEntity {
      protected static final EntityDataAccessor<Byte> DATA_PLAYER_MAIN_HAND = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BYTE);
      protected static final EntityDataAccessor<CompoundTag> DATA_SHOULDER_LEFT = SynchedEntityData.defineId(Player.class, EntityDataSerializers.COMPOUND_TAG);
      protected static final EntityDataAccessor<CompoundTag> DATA_SHOULDER_RIGHT = SynchedEntityData.defineId(Player.class, EntityDataSerializers.COMPOUND_TAG);
@@ -64,7 +56,7 @@ index af9dcde80e5fe7c3fda8728cf2a9d1a4849eaba3..88297235b3b63dcf1bdbb7feff88ce71
      private long timeEntitySatOnShoulder;
      final Inventory inventory = new Inventory(this);
      protected PlayerEnderChestContainer enderChestInventory = new PlayerEnderChestContainer(this); // CraftBukkit - add "this" to constructor
-@@ -298,19 +300,23 @@ public abstract class Player extends LivingEntity {
+@@ -297,19 +298,23 @@ public abstract class Player extends LivingEntity {
          this.moveCloak();
          if (this instanceof ServerPlayer entityplayer) {
              this.foodData.tick(entityplayer);

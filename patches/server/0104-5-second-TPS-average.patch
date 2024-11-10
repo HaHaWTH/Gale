@@ -58,7 +58,7 @@ index 12b327eea95e0de9e9c39b7d039badee8ec46508..6178f0212214a2a075cea60c758dca79
      }
  
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 8a643e65d805e167516ff3331ab9c6482aa3ec8a..b033967d20094e04e300762db40d193a1dc0065f 100644
+index 4ac560e7af98a7387f9c3a6338ff90d0d57e010d..34715de444d13373fb535c1940e0ad4e7dea67da 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -1155,6 +1155,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -78,10 +78,10 @@ index 8a643e65d805e167516ff3331ab9c6482aa3ec8a..b033967d20094e04e300762db40d193a
                      tps5.add(currentTps, diff);
                      tps15.add(currentTps, diff);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 30c697b9ec0a032c08baf58bf3d8a1c4b0a4b2ca..2f125143a4c9ea64c2469d4e83050573464984fa 100644
+index 5d1514070b671835d022add4fc99bd896d5c2463..097ed1ea3e3c3a2758ecc1a5cdebab3b70c23fcb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -3071,8 +3071,27 @@ public final class CraftServer implements Server {
+@@ -3068,8 +3068,27 @@ public final class CraftServer implements Server {
          };
      }
  

@@ -7,23 +7,23 @@ License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 Gale - https://galemc.org
 
 This patch is based on the following mixins and classes:
-* "me/jellysquid/mods/lithium/common/world/chunk/CompactingPackedIntegerArray.java"
-* "me/jellysquid/mods/lithium/common/world/chunk/LithiumHashPalette.java"
-* "me/jellysquid/mods/lithium/mixin/chunk/serialization/PackedIntegerArrayMixin.java"
-* "me/jellysquid/mods/lithium/mixin/chunk/serialization/PalettedContainerMixin.java"
+* "net/caffeinemc/mods/lithium/common/world/chunk/CompactingPackedIntegerArray.java"
+* "net/caffeinemc/mods/lithium/common/world/chunk/LithiumHashPalette.java"
+* "net/caffeinemc/mods/lithium/mixin/chunk/serialization/PackedIntegerArrayMixin.java"
+* "net/caffeinemc/mods/lithium/mixin/chunk/serialization/PalettedContainerMixin.java"
 By: Angeline <jellysquid3@users.noreply.github.com>
 As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
 Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 
-diff --git a/src/main/java/me/jellysquid/mods/lithium/common/world/chunk/LithiumHashPalette.java b/src/main/java/me/jellysquid/mods/lithium/common/world/chunk/LithiumHashPalette.java
+diff --git a/src/main/java/net/caffeinemc/mods/lithium/common/world/chunk/LithiumHashPalette.java b/src/main/java/net/caffeinemc/mods/lithium/common/world/chunk/LithiumHashPalette.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..e1dbb7d14b78a75a345371013c01d20d2d88da06
+index 0000000000000000000000000000000000000000..19eaa1aef1630885d6d5698838664697bd27cd62
 --- /dev/null
-+++ b/src/main/java/me/jellysquid/mods/lithium/common/world/chunk/LithiumHashPalette.java
++++ b/src/main/java/net/caffeinemc/mods/lithium/common/world/chunk/LithiumHashPalette.java
 @@ -0,0 +1,199 @@
 +// Gale - Lithium - faster chunk serialization
 +
-+package me.jellysquid.mods.lithium.common.world.chunk;
++package net.caffeinemc.mods.lithium.common.world.chunk;
 +
 +import com.google.common.collect.ImmutableList;
 +import it.unimi.dsi.fastutil.HashCommon;
@@ -221,44 +221,28 @@ index 0000000000000000000000000000000000000000..e1dbb7d14b78a75a345371013c01d20d
 +    }
 +}
 diff --git a/src/main/java/net/minecraft/util/BitStorage.java b/src/main/java/net/minecraft/util/BitStorage.java
-index e4e153cb8899e70273aa150b8ea26907cf68b15c..3e65360293adf19c5411f9e187ddc1d720b7c235 100644
+index e4e153cb8899e70273aa150b8ea26907cf68b15c..ddb0d2f47e2a598431802bf21259715fd845f453 100644
 --- a/src/main/java/net/minecraft/util/BitStorage.java
 +++ b/src/main/java/net/minecraft/util/BitStorage.java
-@@ -1,6 +1,7 @@
- package net.minecraft.util;
- 
- import java.util.function.IntConsumer;
-+import net.minecraft.world.level.chunk.Palette;
- 
- public interface BitStorage extends ca.spottedleaf.moonrise.patches.block_counting.BlockCountingBitStorage { // Paper - block counting
-     int getAndSet(int index, int value);
-@@ -38,4 +39,6 @@ public interface BitStorage extends ca.spottedleaf.moonrise.patches.block_counti
+@@ -38,4 +38,6 @@ public interface BitStorage extends ca.spottedleaf.moonrise.patches.block_counti
          return ret;
      }
      // Paper end - block counting
 +
-+    <T> void compact(Palette<T> srcPalette, Palette<T> dstPalette, short[] out); // Gale - Lithium - faster chunk serialization
++    <T> void compact(net.minecraft.world.level.chunk.Palette<T> srcPalette, net.minecraft.world.level.chunk.Palette<T> dstPalette, short[] out); // Gale - Lithium - faster chunk serialization
  }
 diff --git a/src/main/java/net/minecraft/util/SimpleBitStorage.java b/src/main/java/net/minecraft/util/SimpleBitStorage.java
-index d99ec470b4653beab630999a5b2c1a6428b20c38..52c157b4f688da7cf3f14211535b64ee6d65d10f 100644
+index d99ec470b4653beab630999a5b2c1a6428b20c38..f8640b8cce9018d877ec69bbba241d5d9e89b8d8 100644
 --- a/src/main/java/net/minecraft/util/SimpleBitStorage.java
 +++ b/src/main/java/net/minecraft/util/SimpleBitStorage.java
-@@ -2,6 +2,7 @@ package net.minecraft.util;
- 
- import java.util.function.IntConsumer;
- import javax.annotation.Nullable;
-+import net.minecraft.world.level.chunk.Palette;
- import org.apache.commons.lang3.Validate;
- 
- public class SimpleBitStorage implements BitStorage {
-@@ -472,4 +473,45 @@ public class SimpleBitStorage implements BitStorage {
+@@ -472,4 +472,45 @@ public class SimpleBitStorage implements BitStorage {
              super(message);
          }
      }
 +
 +    // Gale start - Lithium - faster chunk serialization
 +    @Override
-+    public <T> void compact(Palette<T> srcPalette, Palette<T> dstPalette, short[] out) {
++    public <T> void compact(net.minecraft.world.level.chunk.Palette<T> srcPalette, net.minecraft.world.level.chunk.Palette<T> dstPalette, short[] out) {
 +        if (this.size >= Short.MAX_VALUE) {
 +            throw new IllegalStateException("Array too large");
 +        }
@@ -320,14 +304,11 @@ index acae3eb30e0689048937f479dc3070f0688abdad..4b79f0474a9013dd4fdb68c6363ca194
      int onResize(int newBits, T object);
  }
 diff --git a/src/main/java/net/minecraft/world/level/chunk/PalettedContainer.java b/src/main/java/net/minecraft/world/level/chunk/PalettedContainer.java
-index 8b84bf2272556ac3321cbf16361d7f48a1cc6873..bdfd50069284ba59d48f85fee1ee8e9b67310fda 100644
+index 8b84bf2272556ac3321cbf16361d7f48a1cc6873..5dfce8eb4d5a3cc6e8564d648e1cd86bfc7feeee 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/PalettedContainer.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/PalettedContainer.java
-@@ -23,8 +23,25 @@ import net.minecraft.util.Mth;
- import net.minecraft.util.SimpleBitStorage;
- import net.minecraft.util.ThreadingDetector;
+@@ -25,6 +25,22 @@ import net.minecraft.util.ThreadingDetector;
  import net.minecraft.util.ZeroBitStorage;
-+import me.jellysquid.mods.lithium.common.world.chunk.LithiumHashPalette;
  
  public class PalettedContainer<T> implements PaletteResize<T>, PalettedContainerRO<T> {
 +
@@ -349,7 +330,7 @@ index 8b84bf2272556ac3321cbf16361d7f48a1cc6873..bdfd50069284ba59d48f85fee1ee8e9b
      private static final int MIN_PALETTE_BITS = 0;
      private final PaletteResize<T> dummyPaletteResize = (newSize, added) -> 0;
      public final IdMap<T> registry;
-@@ -348,28 +365,54 @@ public class PalettedContainer<T> implements PaletteResize<T>, PalettedContainer
+@@ -348,28 +364,54 @@ public class PalettedContainer<T> implements PaletteResize<T>, PalettedContainer
      public synchronized PalettedContainerRO.PackedData<T> pack(IdMap<T> idList, PalettedContainer.Strategy paletteProvider) { // Paper - synchronize
          this.acquire();
  
@@ -371,20 +352,20 @@ index 8b84bf2272556ac3321cbf16361d7f48a1cc6873..bdfd50069284ba59d48f85fee1ee8e9b
 -            } else {
 -                optional = Optional.empty();
 +            // The palette that will be serialized
-+            LithiumHashPalette<T> hashPalette = null;
++            net.caffeinemc.mods.lithium.common.world.chunk.LithiumHashPalette<T> hashPalette = null;
 +
 +            final Palette<T> palette = this.data.palette();
 +            final BitStorage storage = this.data.storage();
 +            if (storage instanceof ZeroBitStorage || palette.getSize() == 1) {
 +                // If the palette only contains one entry, don't attempt to repack it.
 +                elements = List.of(palette.valueFor(0));
-+            } else if (palette instanceof LithiumHashPalette<T> lithiumHashPalette) {
++            } else if (palette instanceof net.caffeinemc.mods.lithium.common.world.chunk.LithiumHashPalette<T> lithiumHashPalette) {
 +                hashPalette = lithiumHashPalette;
              }
  
 -            var12 = new PalettedContainerRO.PackedData<>(hashMapPalette.getEntries(), optional);
 +            if (elements == null) {
-+                LithiumHashPalette<T> compactedPalette = new LithiumHashPalette<>(idList, storage.getBits(), this.dummyPaletteResize);
++                net.caffeinemc.mods.lithium.common.world.chunk.LithiumHashPalette<T> compactedPalette = new net.caffeinemc.mods.lithium.common.world.chunk.LithiumHashPalette<>(idList, storage.getBits(), this.dummyPaletteResize);
 +                short[] array = this.getOrCreate(paletteProvider.size());
 +
 +                storage.compact(this.data.palette(), compactedPalette, array);
@@ -419,7 +400,7 @@ index 8b84bf2272556ac3321cbf16361d7f48a1cc6873..bdfd50069284ba59d48f85fee1ee8e9b
      }
  
      private static <T> void swapPalette(int[] is, IntUnaryOperator applier) {
-@@ -409,13 +452,35 @@ public class PalettedContainer<T> implements PaletteResize<T>, PalettedContainer
+@@ -409,13 +451,35 @@ public class PalettedContainer<T> implements PaletteResize<T>, PalettedContainer
  
      @Override
      public void count(PalettedContainer.CountConsumer<T> counter) {

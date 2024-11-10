@@ -350,10 +350,10 @@ index 25e91c5e5f5cf1a9dbb2931b964c754408926788..534d72803949c75314e9c0d225bb889a
  
                                  ServerGamePacketListenerImpl.this.player.containerMenu.sendAllDataToRemote(); // Paper - fix slot desync - always refresh player inventory
 diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-index e2c527456e277d27baff558d59234263eef5ecac..7ff64c46a554fd779a9bea42213af3b3e67ed795 100644
+index f89eb72f34ff3dcbb04ec0c9e98dfedce203911a..2f494450b5d67f9c6eb6ed6ebb8164257f124274 100644
 --- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-@@ -181,14 +181,16 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -180,14 +180,16 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
  
      @Override
      public void handleHello(ServerboundHelloPacket packet) {
@@ -372,7 +372,7 @@ index e2c527456e277d27baff558d59234263eef5ecac..7ff64c46a554fd779a9bea42213af3b3
          this.requestedUsername = packet.name();
          GameProfile gameprofile = this.server.getSingleplayerProfile();
  
-@@ -284,7 +286,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -283,7 +285,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
  
      @Override
      public void handleKey(ServerboundKeyPacket packet) {
@@ -381,7 +381,7 @@ index e2c527456e277d27baff558d59234263eef5ecac..7ff64c46a554fd779a9bea42213af3b3
  
          final String s;
  
-@@ -465,7 +467,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -464,7 +466,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
      @Override
      public void handleLoginAcknowledgement(ServerboundLoginAcknowledgedPacket packet) {
          PacketUtils.ensureRunningOnSameThread(packet, this, this.server); // CraftBukkit
@@ -469,10 +469,10 @@ index 2490a42c9c35c7e080279ef8566288a28362d167..542916b15fd42d8262b24ead91f146cd
              String[] strings = new String[pattern.size() - l - k];
  
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 15f3c2dd02dad613c272382dec3639819c2d7d56..bb47bca85e3d9f20383ca6e87db1df9ad49e1db6 100644
+index 7352adfa3341efcb1b3342d4055d4def83fad120..51d8b22d30ae2271005a5377e2463a7f6bd85674 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1746,7 +1746,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1748,7 +1748,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public org.bukkit.entity.Entity[] getChunkEntities(int chunkX, int chunkZ) {
          ca.spottedleaf.moonrise.patches.chunk_system.level.entity.ChunkEntitySlices slices = ((ServerLevel)this).moonrise$getEntityLookup().getChunk(chunkX, chunkZ);
          if (slices == null) {
@@ -481,7 +481,7 @@ index 15f3c2dd02dad613c272382dec3639819c2d7d56..bb47bca85e3d9f20383ca6e87db1df9a
          }
  
          List<org.bukkit.entity.Entity> ret = new java.util.ArrayList<>();
-@@ -1757,7 +1757,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1759,7 +1759,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
              }
          }
  

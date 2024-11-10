@@ -37,32 +37,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-index d777e5914148103dbdbfef7c8e4f8e012fa58b6d..a37d73ee6cbf7dd8b230b8caa598f734c8e97e38 100644
+index d777e5914148103dbdbfef7c8e4f8e012fa58b6d..92815589da3c2a1cb768ac8081660c9c2ccb2b14 100644
 --- a/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-@@ -4,6 +4,9 @@ import com.mojang.authlib.GameProfile;
- import com.mojang.logging.LogUtils;
- import java.util.Objects;
- import javax.annotation.Nullable;
-+
-+import it.unimi.dsi.fastutil.longs.LongArrayList;
-+import it.unimi.dsi.fastutil.longs.LongList;
- import net.minecraft.ChatFormatting;
- import net.minecraft.CrashReport;
- import net.minecraft.CrashReportCategory;
-@@ -31,6 +34,7 @@ import net.minecraft.server.level.ClientInformation;
- import net.minecraft.server.level.ServerPlayer;
- import net.minecraft.util.VisibleForDebug;
- import net.minecraft.util.thread.BlockableEventLoop;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
- import org.slf4j.Logger;
- 
- // CraftBukkit start
-@@ -79,10 +83,14 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -79,10 +79,14 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
      private long keepAliveChallenge;
      private long closedListenerTime;
      private boolean closed = false;
-+    private LongList keepAlives = new LongArrayList(); // Gale - Purpur - send multiple keep-alive packets
++    private it.unimi.dsi.fastutil.longs.LongList keepAlives = new it.unimi.dsi.fastutil.longs.LongArrayList(); // Gale - Purpur - send multiple keep-alive packets
      private int latency;
      private volatile boolean suspendFlushingOnServerThread = false;
      public final java.util.Map<java.util.UUID, net.kyori.adventure.resource.ResourcePackCallback> packCallbacks = new java.util.concurrent.ConcurrentHashMap<>(); // Paper - adventure resource pack callbacks
@@ -74,12 +56,12 @@ index d777e5914148103dbdbfef7c8e4f8e012fa58b6d..a37d73ee6cbf7dd8b230b8caa598f734
      protected static final ResourceLocation MINECRAFT_BRAND = ResourceLocation.withDefaultNamespace("brand"); // Paper - Brand support
  
      public ServerCommonPacketListenerImpl(MinecraftServer minecraftserver, Connection networkmanager, CommonListenerCookie commonlistenercookie, ServerPlayer player) { // CraftBukkit
-@@ -136,6 +144,16 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -136,6 +140,16 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
      @Override
      public void handleKeepAlive(ServerboundKeepAlivePacket packet) {
          //PacketUtils.ensureRunningOnSameThread(packet, this, this.player.serverLevel()); // CraftBukkit // Paper - handle ServerboundKeepAlivePacket async
 +        // Gale start - Purpur - send multiple keep-alive packets
-+        if (GaleGlobalConfiguration.get().misc.keepalive.sendMultiple) {
++        if (org.galemc.gale.configuration.GaleGlobalConfiguration.get().misc.keepalive.sendMultiple) {
 +            if (this.keepAlivePending && !keepAlives.isEmpty() && keepAlives.contains(packet.getId())) {
 +                int ping = (int) (Util.getMillis() - packet.getId());
 +                this.latency = (this.latency * 3 + ping) / 4;
@@ -91,7 +73,7 @@ index d777e5914148103dbdbfef7c8e4f8e012fa58b6d..a37d73ee6cbf7dd8b230b8caa598f734
          if (this.keepAlivePending && packet.getId() == this.keepAliveChallenge) {
              int i = (int) (Util.getMillis() - this.keepAliveTime);
  
-@@ -144,6 +162,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -144,6 +158,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
          } else if (!this.isSingleplayerOwner()) {
              this.disconnectAsync(ServerCommonPacketListenerImpl.TIMEOUT_DISCONNECTION_MESSAGE, PlayerKickEvent.Cause.TIMEOUT); // Paper - add proper async disconnect
          }
@@ -99,12 +81,12 @@ index d777e5914148103dbdbfef7c8e4f8e012fa58b6d..a37d73ee6cbf7dd8b230b8caa598f734
  
      }
  
-@@ -259,6 +278,21 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -259,6 +274,21 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
          long currentTime = Util.getMillis();
          long elapsedTime = currentTime - this.keepAliveTime;
  
 +        // Gale start - Purpur - send multiple keep-alive packets
-+        if (GaleGlobalConfiguration.get().misc.keepalive.sendMultiple) {
++        if (org.galemc.gale.configuration.GaleGlobalConfiguration.get().misc.keepalive.sendMultiple) {
 +            if (elapsedTime >= 1000L) { // 1 second
 +                if (this.keepAlivePending && !this.processedDisconnect && this.keepAlives.size() >= KEEPALIVE_LIMIT_IN_SECONDS) {
 +                    LOGGER.warn("{} was kicked due to keepalive timeout!", this.player.getScoreboardName());
@@ -121,7 +103,7 @@ index d777e5914148103dbdbfef7c8e4f8e012fa58b6d..a37d73ee6cbf7dd8b230b8caa598f734
          if (!this.isSingleplayerOwner() && elapsedTime >= 15000L) { // Paper - use vanilla's 15000L between keep alive packets
              if (this.keepAlivePending && !this.processedDisconnect && elapsedTime >= KEEPALIVE_LIMIT) { // Paper - check keepalive limit, don't fire if already disconnected
                  this.disconnect(ServerCommonPacketListenerImpl.TIMEOUT_DISCONNECTION_MESSAGE, PlayerKickEvent.Cause.TIMEOUT); // Paper - kick event cause
-@@ -269,6 +303,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
+@@ -269,6 +299,7 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
                  this.send(new ClientboundKeepAlivePacket(this.keepAliveChallenge));
              }
          }
@@ -129,27 +111,6 @@ index d777e5914148103dbdbfef7c8e4f8e012fa58b6d..a37d73ee6cbf7dd8b230b8caa598f734
          // Paper end - give clients a longer time to respond to pings as per pre 1.12.2 timings
      }
  
-diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index fda212ff9961d7ce0d99bfb7fbe49b15034f6e57..0d6a5651f7c341cfbc6788004b4ac1728af6a606 100644
---- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-+++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -9,6 +9,8 @@ import com.mojang.brigadier.suggestion.Suggestions;
- import com.mojang.logging.LogUtils;
- import it.unimi.dsi.fastutil.ints.Int2ObjectMap.Entry;
- import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
-+import it.unimi.dsi.fastutil.longs.LongArrayList;
-+import it.unimi.dsi.fastutil.longs.LongList;
- import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
- import it.unimi.dsi.fastutil.objects.ObjectIterator;
- import java.net.SocketAddress;
-@@ -3567,6 +3569,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
-     }
- 
-     @Override
-+
-     public void handlePlayerAbilities(ServerboundPlayerAbilitiesPacket packet) {
-         PacketUtils.ensureRunningOnSameThread(packet, this, this.player.serverLevel());
-         // CraftBukkit start
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java
 index b0da100cf972d4e39b130c99550ebcc763f055ee..b2ee56fa4be361e9151389787313594493dd7a2e 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleGlobalConfiguration.java

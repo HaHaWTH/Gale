@@ -17,23 +17,15 @@ Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 This can help to hide annoying scanning bots from showing up in console.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-index 033755682c61c889723c3669b5cff4de147f637e..e2c527456e277d27baff558d59234263eef5ecac 100644
+index 033755682c61c889723c3669b5cff4de147f637e..f89eb72f34ff3dcbb04ec0c9e98dfedce203911a 100644
 --- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-@@ -44,6 +44,7 @@ import net.minecraft.util.CryptException;
- import net.minecraft.util.RandomSource;
- import net.minecraft.util.StringUtil;
- import org.apache.commons.lang3.Validate;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
- import org.slf4j.Logger;
- import net.minecraft.network.protocol.Packet;
- import net.minecraft.network.protocol.PacketUtils;
-@@ -146,6 +147,14 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -146,6 +146,14 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
  
      public void disconnect(Component reason) {
          try {
 +            // Gale start - Pufferfish - do not log disconnections with null id
-+            if (!GaleGlobalConfiguration.get().logToConsole.nullIdDisconnections && this.authenticatedProfile != null && this.authenticatedProfile.getId() == null) {
++            if (!org.galemc.gale.configuration.GaleGlobalConfiguration.get().logToConsole.nullIdDisconnections && this.authenticatedProfile != null && this.authenticatedProfile.getId() == null) {
 +                var reasonString = reason.getString();
 +                if ("Disconnected".equals(reasonString) || Component.translatable("multiplayer.disconnect.generic").getString().equals(reasonString)) {
 +                    return;

@@ -110,19 +110,10 @@ index 0000000000000000000000000000000000000000..00b16e4aacba50996b81fac81c3f78b6
 +
 +}
 diff --git a/src/main/java/org/bukkit/map/MapPalette.java b/src/main/java/org/bukkit/map/MapPalette.java
-index 3a9aaca2e76411a9c27f9f5e0f22d060d5a66d06..9eec0c781eeaa543a568f1ea490749199593cfec 100644
+index c80faa079eca1564847070f0338fc98024639829..8a12bac4f9b0c5798ea1bd7d7aa10ad5d7ced579 100644
 --- a/src/main/java/org/bukkit/map/MapPalette.java
 +++ b/src/main/java/org/bukkit/map/MapPalette.java
-@@ -5,6 +5,8 @@ import java.awt.Color;
- import java.awt.Graphics2D;
- import java.awt.Image;
- import java.awt.image.BufferedImage;
-+
-+import gg.pufferfish.pufferfish.simd.SIMDDetection;
- import org.jetbrains.annotations.NotNull;
- import org.jetbrains.annotations.Nullable;
- 
-@@ -40,7 +42,7 @@ public final class MapPalette {
+@@ -40,7 +40,7 @@ public final class MapPalette {
      }
  
      @NotNull
@@ -131,11 +122,11 @@ index 3a9aaca2e76411a9c27f9f5e0f22d060d5a66d06..9eec0c781eeaa543a568f1ea49074919
          c(0, 0, 0, 0), c(0, 0, 0, 0), c(0, 0, 0, 0), c(0, 0, 0, 0),
          c(89, 125, 39), c(109, 153, 48), c(127, 178, 56), c(67, 94, 29),
          c(174, 164, 115), c(213, 201, 140), c(247, 233, 163), c(130, 123, 86),
-@@ -211,9 +213,15 @@ public final class MapPalette {
+@@ -211,9 +211,15 @@ public final class MapPalette {
          temp.getRGB(0, 0, temp.getWidth(), temp.getHeight(), pixels, 0, temp.getWidth());
  
          byte[] result = new byte[temp.getWidth() * temp.getHeight()];
-+        if ((mapColorCache != null && mapColorCache.isCached()) || !SIMDDetection.isEnabled()) { // Gale - Pufferfish - vectorized map color conversion
++        if ((mapColorCache != null && mapColorCache.isCached()) || !gg.pufferfish.pufferfish.simd.SIMDDetection.isEnabled()) { // Gale - Pufferfish - vectorized map color conversion
          for (int i = 0; i < pixels.length; i++) {
              result[i] = matchColor(new Color(pixels[i], true));
          }

@@ -84,34 +84,17 @@ index cb9e42fea57856f9ab649e33df26071db1b7790f..1f158ed7ed5c115e892311d5f72a9131
  
          }
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 7c3e5d77a63b433c3212c8aab5a37d2af5634091..8ff28f6f40f35e6523ec6fac2d5f0de7c84630c5 100644
+index bd3a4bb0192d2af4868bcd96b1b6205c4b05fe20..3c63a956b5b04de5181a1827a4df8a1efb726b0c 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -19,6 +19,8 @@ import java.util.List;
- import java.util.Locale;
- import java.util.Optional;
- import javax.annotation.Nullable;
-+
-+import gg.pufferfish.pufferfish.simd.SIMDDetection;
- import net.minecraft.DefaultUncaughtExceptionHandler;
- import net.minecraft.DefaultUncaughtExceptionHandlerWithName;
- import net.minecraft.SharedConstants;
-@@ -57,6 +59,7 @@ import net.minecraft.world.level.GameType;
- import net.minecraft.world.level.block.entity.SkullBlockEntity;
- import net.minecraft.world.level.storage.LevelStorageSource;
- import org.galemc.gale.command.GaleCommands;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
- import org.slf4j.Logger;
- 
- // CraftBukkit start
-@@ -243,6 +246,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -242,6 +242,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
          com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // Paper - load version history now
  
 +        // Gale start - Pufferfish - SIMD support
 +        // Initialize vectorization
 +        try {
-+            SIMDDetection.initialize();
++            gg.pufferfish.pufferfish.simd.SIMDDetection.initialize();
 +        } catch (Throwable ignored) {}
 +        // Gale start - Pufferfish - SIMD support
 +

@@ -268,47 +268,17 @@ index c8c3599a780bbc02a1ead1fe66498733ea4075c2..ead700089f8867e38699db409c13162f
 +}
 +// Gale end - package license into jar
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 532306cacd52579cdf37e4aca25887b1ed3ba6a1..6fca13221ef3e0bbcad2ebbe74d6aadf8ed2c539 100644
+index 532306cacd52579cdf37e4aca25887b1ed3ba6a1..2beea17d87464683faaefa835206f2654df9bde0 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-@@ -1,6 +1,5 @@
- package com.destroystokyo.paper;
- 
--import com.destroystokyo.paper.util.VersionFetcher;
- import com.google.common.base.Charsets;
- import com.google.common.io.Resources;
- import com.google.gson.Gson;
-@@ -8,80 +7,37 @@ import com.google.gson.JsonArray;
- import com.google.gson.JsonElement;
- import com.google.gson.JsonObject;
- import com.google.gson.JsonSyntaxException;
--import com.mojang.logging.LogUtils;
- import io.papermc.paper.ServerBuildInfo;
- import java.io.BufferedReader;
- import java.io.IOException;
--import java.io.InputStreamReader;
--import java.net.HttpURLConnection;
- import java.net.URI;
--import java.util.Optional;
--import java.util.OptionalInt;
- import java.util.stream.StreamSupport;
--import net.kyori.adventure.text.Component;
--import net.kyori.adventure.text.event.ClickEvent;
--import net.kyori.adventure.text.format.NamedTextColor;
--import net.kyori.adventure.text.format.TextDecoration;
- import org.checkerframework.checker.nullness.qual.NonNull;
--import org.checkerframework.checker.nullness.qual.Nullable;
- import org.checkerframework.framework.qual.DefaultQualifier;
--import org.slf4j.Logger;
--
--import static net.kyori.adventure.text.Component.text;
--import static net.kyori.adventure.text.format.TextColor.color;
-+import org.galemc.gale.version.AbstractPaperVersionFetcher;
+@@ -30,58 +30,35 @@ import org.slf4j.Logger;
+ import static net.kyori.adventure.text.Component.text;
+ import static net.kyori.adventure.text.format.TextColor.color;
  
 +// Gale start - branding changes - version fetcher
 +/**
 + * The original version fetcher for Paper. Most of the original content of this class has been moved to
-+ * {@link AbstractPaperVersionFetcher}.
++ * {@link org.galemc.gale.version.AbstractPaperVersionFetcher}.
 + */
  @DefaultQualifier(NonNull.class)
 -public class PaperVersionFetcher implements VersionFetcher {
@@ -316,13 +286,20 @@ index 532306cacd52579cdf37e4aca25887b1ed3ba6a1..6fca13221ef3e0bbcad2ebbe74d6aadf
 -    private static final int DISTANCE_ERROR = -1;
 -    private static final int DISTANCE_UNKNOWN = -2;
 -    private static final String DOWNLOAD_PAGE = "https://papermc.io/downloads/paper";
-+public class PaperVersionFetcher extends AbstractPaperVersionFetcher {
++public class PaperVersionFetcher extends org.galemc.gale.version.AbstractPaperVersionFetcher {
  
 -    @Override
 -    public long getCacheTime() {
 -        return 720000;
 +    public PaperVersionFetcher() {
-+        super("master", "https://papermc.io/downloads/paper", "Paper", "PaperMC", "PaperMC", "Paper");
++        super(
++            "master",
++            "https://papermc.io/downloads/paper",
++            "PaperMC",
++            "Paper",
++            "PaperMC",
++            "Paper"
++        );
      }
  
      @Override
@@ -374,7 +351,7 @@ index 532306cacd52579cdf37e4aca25887b1ed3ba6a1..6fca13221ef3e0bbcad2ebbe74d6aadf
  
      private static int fetchDistanceFromSiteApi(final ServerBuildInfo build, final int jenkinsBuild) {
          try {
-@@ -105,42 +61,4 @@ public class PaperVersionFetcher implements VersionFetcher {
+@@ -105,42 +82,4 @@ public class PaperVersionFetcher implements VersionFetcher {
              return DISTANCE_ERROR;
          }
      }

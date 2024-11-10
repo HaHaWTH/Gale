@@ -19,18 +19,10 @@ index 9ac3c235a7adc42af1ba22aaa4efbce5b006f98d..42306d45d3b8f7807b344422fca7382e
  
      }
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index 24536f70309f802d45714e06bace339f1d9f1013..d3fd27647aca128aa651bcc07dacd77d326f51c1 100644
+index 24536f70309f802d45714e06bace339f1d9f1013..21363541030d0381a8e139b409453b57a4eb6eaf 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
-@@ -37,6 +37,7 @@ import net.minecraft.world.entity.projectile.ThrownTrident;
- import net.minecraft.world.entity.raid.Raider;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.phys.AABB;
-+import org.galemc.gale.configuration.GaleWorldConfiguration;
- 
- public class ActivationRange
- {
-@@ -69,28 +70,41 @@ public class ActivationRange
+@@ -69,28 +69,40 @@ public class ActivationRange
          if (entity.activationType == ActivationType.VILLAGER) {
              if (inactiveFor > config.wakeUpInactiveVillagersEvery && world.wakeupInactiveRemainingVillagers > 0) {
                  world.wakeupInactiveRemainingVillagers--;
@@ -64,8 +56,7 @@ index 24536f70309f802d45714e06bace339f1d9f1013..d3fd27647aca128aa651bcc07dacd77d
 +    private static final java.util.Random wakeUpDurationRandom = new java.util.Random();
 +
 +    private static int getWakeUpDurationWithVariance(Entity entity, int wakeUpDuration) {
-+        GaleWorldConfiguration config = entity.level().galeConfig();
-+        double deviation = config.gameplayMechanics.entityWakeUpDurationRatioStandardDeviation;
++        double deviation = entity.level().galeConfig().gameplayMechanics.entityWakeUpDurationRatioStandardDeviation;
 +        if (deviation <= 0) {
 +            return wakeUpDuration;
 +        }

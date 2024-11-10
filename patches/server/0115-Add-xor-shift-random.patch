@@ -548,10 +548,10 @@ index 0000000000000000000000000000000000000000..60dc2c1deb0749168d03c5d94136e613
 +    }
 +}
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index d3fd27647aca128aa651bcc07dacd77d326f51c1..d17dbf62e4e789805857cc3adeb45b309ecb909c 100644
+index 21363541030d0381a8e139b409453b57a4eb6eaf..93f82e84abad1bdaabf59169415991acaf3f074d 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
-@@ -93,7 +93,7 @@ public class ActivationRange
+@@ -92,7 +92,7 @@ public class ActivationRange
      // Paper end
  
      // Gale start - variable entity wake-up duration
@@ -559,4 +559,4 @@ index d3fd27647aca128aa651bcc07dacd77d326f51c1..d17dbf62e4e789805857cc3adeb45b30
 +    public static java.util.Random wakeUpDurationRandom; // Gale - xor-shift random - set in GaleGlobalConfiguration
  
      private static int getWakeUpDurationWithVariance(Entity entity, int wakeUpDuration) {
-         GaleWorldConfiguration config = entity.level().galeConfig();
+         double deviation = entity.level().galeConfig().gameplayMechanics.entityWakeUpDurationRatioStandardDeviation;

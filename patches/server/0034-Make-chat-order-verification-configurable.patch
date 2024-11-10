@@ -13,23 +13,15 @@ As part of: Pufferfish (https://github.com/pufferfish-gg/Pufferfish)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
-index 300929a406905f5ff1ede664d5b99fb0938d4d2e..e5625557d2cd70b19b9db5fd418c243b639188e8 100644
+index 300929a406905f5ff1ede664d5b99fb0938d4d2e..987e595ba3d19b081f22891f01dc25fbabb5bb9f 100644
 --- a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
 +++ b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
-@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
- import net.minecraft.util.SignatureValidator;
- import net.minecraft.util.Signer;
- import net.minecraft.world.entity.player.ProfilePublicKey;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
- import org.slf4j.Logger;
- 
- public class SignedMessageChain {
-@@ -45,7 +46,7 @@ public class SignedMessageChain {
+@@ -45,7 +45,7 @@ public class SignedMessageChain {
                      SignedMessageLink signedMessageLink = SignedMessageChain.this.nextLink;
                      if (signedMessageLink == null) {
                          throw new SignedMessageChain.DecodeException(SignedMessageChain.DecodeException.CHAIN_BROKEN);
 -                    } else if (body.timeStamp().isBefore(SignedMessageChain.this.lastTimeStamp)) {
-+                    } else if (body.timeStamp().isBefore(SignedMessageChain.this.lastTimeStamp) && GaleGlobalConfiguration.get().misc.verifyChatOrder) { // Gale - Pufferfish - make chat order verification configurable
++                    } else if (body.timeStamp().isBefore(SignedMessageChain.this.lastTimeStamp) && org.galemc.gale.configuration.GaleGlobalConfiguration.get().misc.verifyChatOrder) { // Gale - Pufferfish - make chat order verification configurable
                          this.setChainBroken();
                          throw new SignedMessageChain.DecodeException(SignedMessageChain.DecodeException.OUT_OF_ORDER_CHAT, org.bukkit.event.player.PlayerKickEvent.Cause.OUT_OF_ORDER_CHAT); // Paper - kick event causes
                      } else {

@@ -17,18 +17,10 @@ Licensed under: MIT (https://opensource.org/licenses/MIT)
 Only do an item "suck in" action once per second
 
 diff --git a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
-index 0f086af57a5ff08c264dcbf89a8c3931ec73a609..cf8efbb5df9a2142c403fd3972b6b4124fcd81ad 100644
+index 0f086af57a5ff08c264dcbf89a8c3931ec73a609..ca36be3c3189adc99ef04e4ce4307948adda1deb 100644
 --- a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
-@@ -12,6 +12,7 @@ import net.minecraft.world.entity.Mob;
- import net.minecraft.world.entity.MoverType;
- import net.minecraft.world.entity.SlotAccess;
- import net.minecraft.world.entity.TraceableEntity;
-+import net.minecraft.world.entity.vehicle.MinecartHopper;
- import net.minecraft.world.item.Item;
- import net.minecraft.world.item.ItemStack;
- import net.minecraft.world.level.Explosion;
-@@ -234,11 +235,31 @@ public class ItemEntity extends Entity implements TraceableEntity {
+@@ -234,11 +234,31 @@ public class ItemEntity extends Entity implements TraceableEntity {
                  }
                  // CraftBukkit end
                  this.discard(EntityRemoveEvent.Cause.DESPAWN); // CraftBukkit - add Bukkit remove cause
@@ -49,8 +41,8 @@ index 0f086af57a5ff08c264dcbf89a8c3931ec73a609..cf8efbb5df9a2142c403fd3972b6b412
 +        if (config.temporaryImmunity.duration > 0 && this.isAlive() && this.onGround && !this.isRemoved() && (config.temporaryImmunity.nearbyItemMaxAge == -1 || this.age <= config.temporaryImmunity.nearbyItemMaxAge) && this.age % Math.max(1, config.temporaryImmunity.checkForMinecartNearItemInterval) == 0 && config.temporaryImmunity.maxItemHorizontalDistance >= 0 && config.temporaryImmunity.maxItemVerticalDistance >= 0) {
 +            net.minecraft.world.phys.AABB aabb = this.getBoundingBox().inflate(config.temporaryImmunity.maxItemHorizontalDistance, config.temporaryImmunity.maxItemVerticalDistance, config.temporaryImmunity.maxItemHorizontalDistance);
 +            for (Entity entity : this.level().getEntities(this, aabb)) {
-+                if (entity instanceof MinecartHopper) {
-+                    ((MinecartHopper) entity).pickupImmunity = MinecraftServer.currentTick + config.temporaryImmunity.duration;
++                if (entity instanceof net.minecraft.world.entity.vehicle.MinecartHopper hopper) {
++                    hopper.pickupImmunity = MinecraftServer.currentTick + config.temporaryImmunity.duration;
 +                }
 +            }
 +        }
@@ -60,7 +52,7 @@ index 0f086af57a5ff08c264dcbf89a8c3931ec73a609..cf8efbb5df9a2142c403fd3972b6b412
      // Spigot start - copied from above
      @Override
      public void inactiveTick() {
-@@ -259,7 +280,13 @@ public class ItemEntity extends Entity implements TraceableEntity {
+@@ -259,7 +279,13 @@ public class ItemEntity extends Entity implements TraceableEntity {
              }
              // CraftBukkit end
              this.discard(EntityRemoveEvent.Cause.DESPAWN); // CraftBukkit - add Bukkit remove cause
@@ -113,26 +105,10 @@ index 5f042e294db605827000123252b0df646968f897..e1cc15f28fe8da23b74ff4504c5b2da2
  
      double getLevelY();
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-index 5ebbdb94d9b91c442ff60eb6872f740ebd790fa0..c893eecf67c65d68298da0c607f3b9b3df22a198 100644
+index 5ebbdb94d9b91c442ff60eb6872f740ebd790fa0..aa55698303f7ffc6542f34311234be6c6b400a9d 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-@@ -11,6 +11,7 @@ import net.minecraft.core.NonNullList;
- import net.minecraft.nbt.CompoundTag;
- import net.minecraft.network.chat.Component;
- import net.minecraft.tags.BlockTags;
-+import net.minecraft.server.MinecraftServer;
- import net.minecraft.world.CompoundContainer;
- import net.minecraft.world.Container;
- import net.minecraft.world.ContainerHelper;
-@@ -20,6 +21,7 @@ import net.minecraft.world.entity.Entity;
- import net.minecraft.world.entity.EntitySelector;
- import net.minecraft.world.entity.item.ItemEntity;
- import net.minecraft.world.entity.player.Player;
-+import net.minecraft.world.entity.vehicle.MinecartHopper;
- import net.minecraft.world.inventory.AbstractContainerMenu;
- import net.minecraft.world.inventory.HopperMenu;
- import net.minecraft.world.item.ItemStack;
-@@ -568,7 +570,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
+@@ -568,7 +568,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
          } else {
              boolean flag = hopper.isGridAligned() && iblockdata.isCollisionShapeFullBlock(world, blockposition) && !iblockdata.is(BlockTags.DOES_NOT_BLOCK_HOPPERS);
  
@@ -141,7 +117,7 @@ index 5ebbdb94d9b91c442ff60eb6872f740ebd790fa0..c893eecf67c65d68298da0c607f3b9b3
                  Iterator iterator = HopperBlockEntity.getItemsAtAndAbove(world, hopper).iterator();
  
                  while (iterator.hasNext()) {
-@@ -882,6 +884,31 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
+@@ -882,6 +882,31 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
          return first.getCount() < first.getMaxStackSize() && ItemStack.isSameItemSameComponents(first, second); // Paper - Perf: Optimize Hoppers; used to return true for full itemstacks?!
      }
  
@@ -153,8 +129,8 @@ index 5ebbdb94d9b91c442ff60eb6872f740ebd790fa0..c893eecf67c65d68298da0c607f3b9b3
 +    }
 +    private static boolean shouldSuckIn(Level world, Hopper hopper) {
 +        int suckInterval;
-+        if (hopper instanceof MinecartHopper minecartHopper) {
-+            if (minecartHopper.pickupImmunity > MinecraftServer.currentTick) {
++        if (hopper instanceof net.minecraft.world.entity.vehicle.MinecartHopper minecartHopper) {
++            if (minecartHopper.pickupImmunity > net.minecraft.server.MinecraftServer.currentTick) {
 +                return true;
 +            }
 +            suckInterval = world.galeConfig().smallOptimizations.reducedIntervals.checkNearbyItem.hopper.minecart.interval;
