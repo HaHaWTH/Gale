@@ -37,23 +37,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/stats/ServerRecipeBook.java b/src/main/java/net/minecraft/stats/ServerRecipeBook.java
-index 8a2584deccbf19de8a18fcfcb9c65318b60afe57..457d774dbfd441abfb108e0a11e675fadcd55092 100644
+index 8a2584deccbf19de8a18fcfcb9c65318b60afe57..2aaf3ba2c2d2d7cdf1848d6dc4d334dd77617907 100644
 --- a/src/main/java/net/minecraft/stats/ServerRecipeBook.java
 +++ b/src/main/java/net/minecraft/stats/ServerRecipeBook.java
-@@ -18,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
- import net.minecraft.server.level.ServerPlayer;
- import net.minecraft.world.item.crafting.RecipeHolder;
- import net.minecraft.world.item.crafting.RecipeManager;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
- import org.slf4j.Logger;
- 
- import org.bukkit.craftbukkit.event.CraftEventFactory; // CraftBukkit
-@@ -125,7 +126,7 @@ public class ServerRecipeBook extends RecipeBook {
+@@ -125,7 +125,7 @@ public class ServerRecipeBook extends RecipeBook {
                  Optional<RecipeHolder<?>> optional = recipeManager.byKey(minecraftkey);
  
                  if (optional.isEmpty()) {
 -                    ServerRecipeBook.LOGGER.error("Tried to load unrecognized recipe: {} removed now.", minecraftkey);
-+                    if (GaleGlobalConfiguration.get().logToConsole.unrecognizedRecipes) ServerRecipeBook.LOGGER.error("Tried to load unrecognized recipe: {} removed now.", minecraftkey); // Gale - Purpur - do not log unrecognized recipes
++                    if (org.galemc.gale.configuration.GaleGlobalConfiguration.get().logToConsole.unrecognizedRecipes) ServerRecipeBook.LOGGER.error("Tried to load unrecognized recipe: {} removed now.", minecraftkey); // Gale - Purpur - do not log unrecognized recipes
                  } else {
                      handler.accept((RecipeHolder) optional.get());
                  }

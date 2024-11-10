@@ -23,10 +23,10 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index c0e1ba2815867b0cf08a770de706c3a210c4ffad..d2cc2d8ce298621c1e2f197ce260ab0174d0948f 100644
+index 6fca00ff9d89558bb4e2bc38d4626b8cefa6e949..a28904a6d3bddad0057be4eea79cd404e855e19e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -3271,4 +3271,22 @@ public final class CraftServer implements Server {
+@@ -3268,4 +3268,22 @@ public final class CraftServer implements Server {
          return this.potionBrewer;
      }
      // Paper end

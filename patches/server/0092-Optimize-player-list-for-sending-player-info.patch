@@ -37,10 +37,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index af1ad9690d5fdd96f67837e952b0093d55b827ad..949ecc013163b5d33631b9ca54b32ff5bf3d1dae 100644
+index 280b9035c7462f102cbfc9240f59ffe9cb2ec247..e596a9cb93d159f6d793b200ba02d79c13fc9469 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -1028,14 +1028,18 @@ public abstract class PlayerList {
+@@ -1026,14 +1026,18 @@ public abstract class PlayerList {
          // Gale start - Purpur - spread out sending all player info
          ServerPlayer[] sendAllPlayerInfoBucket = this.sendAllPlayerInfoBuckets[this.sendAllPlayerInfoIn];
          if (sendAllPlayerInfoBucket != null) {

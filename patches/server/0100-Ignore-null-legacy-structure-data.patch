@@ -13,26 +13,18 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/level/levelgen/structure/LegacyStructureDataHandler.java b/src/main/java/net/minecraft/world/level/levelgen/structure/LegacyStructureDataHandler.java
-index 541314ba47ea158e4751aa4e853117f8861fad82..eb61a0f1cea465884baa17c2d0a0768d46c9dcd0 100644
+index 541314ba47ea158e4751aa4e853117f8861fad82..26b01f04541d1b98380534639dc6cf0941c0498e 100644
 --- a/src/main/java/net/minecraft/world/level/levelgen/structure/LegacyStructureDataHandler.java
 +++ b/src/main/java/net/minecraft/world/level/levelgen/structure/LegacyStructureDataHandler.java
-@@ -20,6 +20,7 @@ import net.minecraft.util.datafix.DataFixTypes;
- import net.minecraft.world.level.ChunkPos;
- import net.minecraft.world.level.dimension.LevelStem;
- import net.minecraft.world.level.storage.DimensionDataStorage;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
- 
- public class LegacyStructureDataHandler {
- 
-@@ -172,6 +173,7 @@ public class LegacyStructureDataHandler {
+@@ -172,6 +172,7 @@ public class LegacyStructureDataHandler {
  
      private void populateCaches(@Nullable DimensionDataStorage persistentStateManager) {
          if (persistentStateManager != null) {
-+            boolean ignoreNullLegacyStructureData = GaleGlobalConfiguration.get().misc.ignoreNullLegacyStructureData; // Gale - MultiPaper - ignore null legacy structure data
++            boolean ignoreNullLegacyStructureData = org.galemc.gale.configuration.GaleGlobalConfiguration.get().misc.ignoreNullLegacyStructureData; // Gale - MultiPaper - ignore null legacy structure data
              Iterator iterator = this.legacyKeys.iterator();
  
              while (iterator.hasNext()) {
-@@ -179,7 +181,11 @@ public class LegacyStructureDataHandler {
+@@ -179,7 +180,11 @@ public class LegacyStructureDataHandler {
                  CompoundTag nbttagcompound = new CompoundTag();
  
                  try {

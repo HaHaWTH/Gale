@@ -364,10 +364,10 @@ index 20b5a81d50397438b3200322f31b62db44ebdb3b..c80be65d190c85e7f0ea8233ebbbdbc1
  
              for (int j = 0; j < i; ++j) {
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index b9fd0526e244ee3eb16b82f80ad3818ec55929e0..c507dbfe5bb793d896acda167fb6d0f21c8afb7a 100644
+index 3ec0ca40b9f20217073fdd02e03bc6bc20676e51..abad5d2b6d96a13b57049f65edf9219a4f5cf1fb 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2824,7 +2824,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -2821,7 +2821,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                  entity.refreshEntityData(ServerGamePacketListenerImpl.this.player);
                                  // SPIGOT-7136 - Allays
                                  if (entity instanceof Allay || entity instanceof net.minecraft.world.entity.animal.horse.AbstractHorse) { // Paper - Fix horse armor desync
@@ -502,10 +502,10 @@ index d75673cc8a5aeb7051b1d4fe729faf408e266dc4..0b8e5c2da9f57dbf8703baa1de3e1cf8
  
      private static Map<EquipmentSlot, Float> createForAllSlots(List<EquipmentSlot> slots, float dropChance) {
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 81010bc37cd5a0b9b15f7017ae55950d6648cc29..b08e104adcaf0fd70d5a622766243ef57cb1e4bf 100644
+index bb91ef6d5eb3a4b30a49bf653623b306434a314a..641bac4c506ec356d6de9ec5be2efcd1d46f1b9e 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -3275,7 +3275,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3276,7 +3276,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
      @Nullable
      private Map<EquipmentSlot, ItemStack> collectEquipmentChanges() {
          Map<EquipmentSlot, ItemStack> map = null;

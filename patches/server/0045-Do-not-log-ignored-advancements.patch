@@ -37,23 +37,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/PlayerAdvancements.java b/src/main/java/net/minecraft/server/PlayerAdvancements.java
-index 862a4bf003b7f810fb57dbcd150a1417c902b633..c4a5f744c089a7ef1ffbb3a19379fb510fb54af3 100644
+index 862a4bf003b7f810fb57dbcd150a1417c902b633..720c9bc6f93a979c18024175e7986db60c224420 100644
 --- a/src/main/java/net/minecraft/server/PlayerAdvancements.java
 +++ b/src/main/java/net/minecraft/server/PlayerAdvancements.java
-@@ -45,6 +45,7 @@ import net.minecraft.server.level.ServerPlayer;
- import net.minecraft.server.players.PlayerList;
- import net.minecraft.util.datafix.DataFixTypes;
- import net.minecraft.world.level.GameRules;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
- import org.slf4j.Logger;
- 
- public class PlayerAdvancements {
-@@ -199,7 +200,7 @@ public class PlayerAdvancements {
+@@ -199,7 +199,7 @@ public class PlayerAdvancements {
  
              if (advancementholder == null) {
                  if (!minecraftkey.getNamespace().equals("minecraft")) return; // CraftBukkit
 -                PlayerAdvancements.LOGGER.warn("Ignored advancement '{}' in progress file {} - it doesn't exist anymore?", minecraftkey, this.playerSavePath);
-+                if (GaleGlobalConfiguration.get().logToConsole.ignoredAdvancements) PlayerAdvancements.LOGGER.warn("Ignored advancement '{}' in progress file {} - it doesn't exist anymore?", minecraftkey, this.playerSavePath); // Gale - Purpur - do not log ignored advancements
++                if (org.galemc.gale.configuration.GaleGlobalConfiguration.get().logToConsole.ignoredAdvancements) PlayerAdvancements.LOGGER.warn("Ignored advancement '{}' in progress file {} - it doesn't exist anymore?", minecraftkey, this.playerSavePath); // Gale - Purpur - do not log ignored advancements
              } else {
                  this.startProgress(advancementholder, advancementprogress);
                  this.progressChanged.add(advancementholder);

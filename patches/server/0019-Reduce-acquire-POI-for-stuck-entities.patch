@@ -31,23 +31,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java b/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
-index e1b6fe9ecda25f86431baf414f1bfd3a26a8b2bd..b5242f2d450f863a3eb774d8a14bb00cbe699a16 100644
+index e1b6fe9ecda25f86431baf414f1bfd3a26a8b2bd..59732e3b17c20143ecbdc6afa480fdbdc1afc55f 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
-@@ -13,6 +13,7 @@ import net.minecraft.core.BlockPos;
- import net.minecraft.core.GlobalPos;
- import net.minecraft.core.Holder;
- import net.minecraft.network.protocol.game.DebugPackets;
-+import net.minecraft.server.level.ServerLevel;
- import net.minecraft.util.RandomSource;
- import net.minecraft.world.entity.Mob;
- import net.minecraft.world.entity.PathfinderMob;
-@@ -26,6 +27,13 @@ import org.apache.commons.lang3.mutable.MutableLong;
+@@ -26,6 +26,13 @@ import org.apache.commons.lang3.mutable.MutableLong;
  public class AcquirePoi {
      public static final int SCAN_RANGE = 48;
  
 +    // Gale start - Airplane - reduce acquire POI for stuck entities
-+    public static void addAdditionalTimeToMutableLongIfEntityIsStuck(MutableLong mutableLong, ServerLevel world, PathfinderMob entity) {
++    public static void addAdditionalTimeToMutableLongIfEntityIsStuck(MutableLong mutableLong, net.minecraft.server.level.ServerLevel world, PathfinderMob entity) {
 +        long stuckEntityAdditionalWaitTime = world.galeConfig().smallOptimizations.reducedIntervals.acquirePoiForStuckEntity;
 +        mutableLong.add(stuckEntityAdditionalWaitTime <= 0L ? 0L : entity.getNavigation().isStuck() ? stuckEntityAdditionalWaitTime : 0L);
 +    }
@@ -56,7 +48,7 @@ index e1b6fe9ecda25f86431baf414f1bfd3a26a8b2bd..b5242f2d450f863a3eb774d8a14bb00c
      public static BehaviorControl<PathfinderMob> create(
          Predicate<Holder<PoiType>> poiPredicate, MemoryModuleType<GlobalPos> poiPosModule, boolean onlyRunIfChild, Optional<Byte> entityStatus
      ) {
-@@ -52,12 +60,13 @@ public class AcquirePoi {
+@@ -52,12 +59,13 @@ public class AcquirePoi {
                                      return false;
                                  } else if (mutableLong.getValue() == 0L) {
                                      mutableLong.setValue(world.getGameTime() + (long)world.random.nextInt(20));

@@ -548,18 +548,10 @@ index 0000000000000000000000000000000000000000..60dc2c1deb0749168d03c5d94136e613
 +    }
 +}
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index a7ebba9de1807c403128854356d41446a8a56f73..5242f861834737876f639195dc259666705411e4 100644
+index e44aac983fb288ea33400687e3a0f9c763228882..881ef0d7a7d0ed2ab63f92358c16d2eb2059f5e7 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
-@@ -38,6 +38,7 @@ import co.aikar.timings.MinecraftTimings;
- import net.minecraft.world.entity.schedule.Activity;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.phys.AABB;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
- import org.galemc.gale.configuration.GaleWorldConfiguration;
- 
- public class ActivationRange
-@@ -94,7 +95,7 @@ public class ActivationRange
+@@ -93,7 +93,7 @@ public class ActivationRange
      // Paper end
  
      // Gale start - variable entity wake-up duration
@@ -567,4 +559,4 @@ index a7ebba9de1807c403128854356d41446a8a56f73..5242f861834737876f639195dc259666
 +    public static java.util.Random wakeUpDurationRandom; // Gale - xor-shift random - set in GaleGlobalConfiguration
  
      private static int getWakeUpDurationWithVariance(Entity entity, int wakeUpDuration) {
-         GaleWorldConfiguration config = entity.level().galeConfig();
+         double deviation = entity.level().galeConfig().gameplayMechanics.entityWakeUpDurationRatioStandardDeviation;

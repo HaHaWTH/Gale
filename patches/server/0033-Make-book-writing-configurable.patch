@@ -22,24 +22,15 @@ you to easily disable books, should you want to preemptively remove this
 functionality before additional exploits are found.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 064d52d4479727c6a32bf357be8da32d1760e7fc..f51939adef4f69d4f8c4a0ec9b9aee55e7a2ec34 100644
+index 064d52d4479727c6a32bf357be8da32d1760e7fc..da0efbf5034a2ccd5e773d2a9ce800ca1dd8cb58 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -193,6 +193,8 @@ import net.minecraft.world.phys.Vec3;
- import net.minecraft.world.phys.shapes.BooleanOp;
- import net.minecraft.world.phys.shapes.Shapes;
- import net.minecraft.world.phys.shapes.VoxelShape;
-+import org.bukkit.craftbukkit.util.permissions.CraftDefaultPermissions;
-+import org.galemc.gale.configuration.GaleGlobalConfiguration;
- import org.slf4j.Logger;
- 
- // CraftBukkit start
-@@ -1157,6 +1159,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1157,6 +1157,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
  
      @Override
      public void handleEditBook(ServerboundEditBookPacket packet) {
 +        // Gale start - Pufferfish - make book writing configurable
-+        if (!(GaleGlobalConfiguration.get().gameplayMechanics.enableBookWriting || this.player.getBukkitEntity().hasPermission(CraftDefaultPermissions.writeBooks) || this.player.getBukkitEntity().hasPermission("pufferfish.usebooks"))) {
++        if (!(org.galemc.gale.configuration.GaleGlobalConfiguration.get().gameplayMechanics.enableBookWriting || this.player.getBukkitEntity().hasPermission(org.bukkit.craftbukkit.util.permissions.CraftDefaultPermissions.writeBooks) || this.player.getBukkitEntity().hasPermission("pufferfish.usebooks"))) {
 +            return;
 +        }
 +        // Gale end - Pufferfish - make book writing configurable
