@@ -13,14 +13,14 @@ As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index d0862e9c83e2b167fe6510fba1a50f0fdb0bf5c7..4eb66937b937d46979a6fa0f24f10d6812e8a436 100644
+index 649a7450e6d0cf6209df35ca2da9d66eb3872254..274c87e23f129e68e50a575b03ee2d88f56717a9 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -483,7 +483,13 @@ public abstract class PlayerList {
+@@ -482,7 +482,13 @@ public abstract class PlayerList {
              scoreboard.addPlayerToTeam(player.getScoreboardName(), collideRuleTeam);
          }
          // Paper end - Configurable player collision
-+        if (GaleGlobalConfiguration.get().logToConsole.playerLoginLocations) { // Gale - JettPack - make logging login location configurable
++        if (org.galemc.gale.configuration.GaleGlobalConfiguration.get().logToConsole.playerLoginLocations) { // Gale - JettPack - make logging login location configurable
          PlayerList.LOGGER.info("{}[{}] logged in with entity id {} at ([{}]{}, {}, {})", player.getName().getString(), s1, player.getId(), worldserver1.serverLevelData.getLevelName(), player.getX(), player.getY(), player.getZ());
 +        // Gale start - JettPack - make logging login location configurable
 +        } else {

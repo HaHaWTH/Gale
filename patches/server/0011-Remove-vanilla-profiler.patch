@@ -164,10 +164,10 @@ index e9775b4506909bee65a74964f0d5391a0513de1d..1c4dd8acdcd571aceffe4b78599ca2c7
      }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 1840332f79c5cfc2a913d80d9885939be92f87d6..161904cc1d802d9b113f68c2eb46a1c7a7c1b425 100644
+index 630a25580b10fb8371c95c61ae2740d3980a1043..5fd175eeeb7237b2e7df9087a3c218221311487b 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -103,18 +103,9 @@ import net.minecraft.util.datafix.DataFixers;
+@@ -106,18 +106,9 @@ import net.minecraft.util.datafix.DataFixers;
  import net.minecraft.util.debugchart.RemoteDebugSampleType;
  import net.minecraft.util.debugchart.SampleLogger;
  import net.minecraft.util.debugchart.TpsDebugDimensions;
@@ -668,10 +668,10 @@ index 8c587f829c5e8c6b6df3150024c4ae704988c47b..9f00cd7d23710787d0cb94377f21a541
          String string = String.format(
              Locale.ROOT, "%s-%s-%s", Util.getFilenameFormattedDateTime(), server.getWorldData().getLevelName(), SharedConstants.getCurrentVersion().getId()
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 8306edb6fb28e90ba4b432a07131e063daa70507..8538024c6345e79d08643e2d68ca146542b7860a 100644
+index a8511bca9d49f470824f258f4c2c423e93c96ae2..ec000ec87a6fffe90d1847f048ce413396797385 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -891,12 +891,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -890,12 +890,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          return this.settings.getProperties().serverResourcePackInfo;
      }
  
@@ -1847,10 +1847,10 @@ index f696afd7e241bf1966a2d505b5d59bff824b43e4..94e0a6cdf5c340dd11374e890963d043
  
          if (this.fire) {
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 32cd737206dd9f2bcfdacfe17dc0621ee34b589a..9dfc38c1b062c8ad52ecff4b0731f0650c1ebeef 100644
+index 1d746872b4292aec800db04a7d224e667207df8c..0f14d14bceb4dd6f1d74ab2ddf05f383050b3a62 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -133,7 +133,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -135,7 +135,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      private final RandomSource threadSafeRandom = RandomSource.createThreadSafe();
      private final Holder<DimensionType> dimensionTypeRegistration;
      public final WritableLevelData levelData;
@@ -1858,7 +1858,7 @@ index 32cd737206dd9f2bcfdacfe17dc0621ee34b589a..9dfc38c1b062c8ad52ecff4b0731f065
      public final boolean isClientSide;
      private final WorldBorder worldBorder;
      private final BiomeManager biomeManager;
-@@ -229,7 +228,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -231,7 +230,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
  
      @Override
      public final <T extends Entity> List<T> getEntitiesOfClass(final Class<T> entityClass, final AABB boundingBox, final Predicate<? super T> predicate) {
@@ -1866,7 +1866,7 @@ index 32cd737206dd9f2bcfdacfe17dc0621ee34b589a..9dfc38c1b062c8ad52ecff4b0731f065
          final List<T> ret = new java.util.ArrayList<>();
  
          ((ca.spottedleaf.moonrise.patches.chunk_system.level.ChunkSystemLevel)this).moonrise$getEntityLookup().getEntities(entityClass, null, boundingBox, ret, predicate);
-@@ -239,7 +237,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -241,7 +239,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
  
      @Override
      public final List<Entity> moonrise$getHardCollidingEntities(final Entity entity, final AABB box, final Predicate<? super Entity> predicate) {
@@ -1874,16 +1874,16 @@ index 32cd737206dd9f2bcfdacfe17dc0621ee34b589a..9dfc38c1b062c8ad52ecff4b0731f065
          final List<Entity> ret = new java.util.ArrayList<>();
  
          ((ca.spottedleaf.moonrise.patches.chunk_system.level.ChunkSystemLevel)this).moonrise$getEntityLookup().getHardCollidingEntities(entity, box, ret, predicate);
-@@ -688,7 +685,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -690,7 +687,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
      // Paper end - optimise random ticking
  
--    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray // Gale - Gale configuration
-+    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray // Gale - Gale configuration // Gale - Purpur - remove vanilla profiler
+-    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, Supplier<ProfilerFiller> supplier, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, org.galemc.gale.configuration.GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray // Gale - Gale configuration
++    protected Level(WritableLevelData worlddatamutable, ResourceKey<Level> resourcekey, RegistryAccess iregistrycustom, Holder<DimensionType> holder, boolean flag, boolean flag1, long i, int j, org.bukkit.generator.ChunkGenerator gen, org.bukkit.generator.BiomeProvider biomeProvider, org.bukkit.World.Environment env, java.util.function.Function<org.spigotmc.SpigotWorldConfig, io.papermc.paper.configuration.WorldConfiguration> paperWorldConfigCreator, java.util.function.Function<org.spigotmc.SpigotWorldConfig, org.galemc.gale.configuration.GaleWorldConfiguration> galeWorldConfigCreator, java.util.concurrent.Executor executor) { // Paper - create paper world config & Anti-Xray // Gale - Gale configuration // Gale - Purpur - remove vanilla profiler
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig(((net.minecraft.world.level.storage.PrimaryLevelData) worlddatamutable).getLevelName()); // Spigot
          this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper - create paper world config
          this.galeConfig = galeWorldConfigCreator.apply(this.spigotConfig); // Gale - Gale configuration
-@@ -703,7 +700,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -705,7 +702,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          }
  
          // CraftBukkit end
@@ -1891,7 +1891,7 @@ index 32cd737206dd9f2bcfdacfe17dc0621ee34b589a..9dfc38c1b062c8ad52ecff4b0731f065
          this.levelData = worlddatamutable;
          this.dimensionTypeRegistration = holder;
          final DimensionType dimensionmanager = (DimensionType) holder.value();
-@@ -1371,9 +1367,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1373,9 +1369,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
  
      protected void tickBlockEntities() {
@@ -1901,7 +1901,7 @@ index 32cd737206dd9f2bcfdacfe17dc0621ee34b589a..9dfc38c1b062c8ad52ecff4b0731f065
          this.timings.tileEntityPending.startTiming(); // Spigot
          this.tickingBlockEntities = true;
          if (!this.pendingBlockEntityTickers.isEmpty()) {
-@@ -1416,7 +1409,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1418,7 +1411,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          this.timings.tileEntityTick.stopTiming(); // Spigot
          this.tickingBlockEntities = false;
          co.aikar.timings.TimingHistory.tileEntityTicks += this.blockEntityTickers.size(); // Paper
@@ -1909,7 +1909,7 @@ index 32cd737206dd9f2bcfdacfe17dc0621ee34b589a..9dfc38c1b062c8ad52ecff4b0731f065
          this.spigotConfig.currentPrimedTnt = 0; // Spigot
      }
  
-@@ -1645,7 +1637,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1647,7 +1639,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
  
      @Override
      public List<Entity> getEntities(@Nullable Entity except, AABB box, Predicate<? super Entity> predicate) {
@@ -1917,7 +1917,7 @@ index 32cd737206dd9f2bcfdacfe17dc0621ee34b589a..9dfc38c1b062c8ad52ecff4b0731f065
          // Paper start - rewrite chunk system
          final List<Entity> ret = new java.util.ArrayList<>();
  
-@@ -1671,8 +1662,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1673,8 +1664,6 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public <T extends Entity> void getEntities(final EntityTypeTest<Entity, T> entityTypeTest,
                                                 final AABB boundingBox, final Predicate<? super T> predicate,
                                                 final List<? super T> into, final int maxCount) {
@@ -1926,7 +1926,7 @@ index 32cd737206dd9f2bcfdacfe17dc0621ee34b589a..9dfc38c1b062c8ad52ecff4b0731f065
          if (entityTypeTest instanceof net.minecraft.world.entity.EntityType<T> byType) {
              if (maxCount != Integer.MAX_VALUE) {
                  ((ca.spottedleaf.moonrise.patches.chunk_system.level.ChunkSystemLevel)this).moonrise$getEntityLookup().getEntities(byType, boundingBox, into, predicate, maxCount);
-@@ -1966,11 +1955,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1968,11 +1957,11 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      }
  
      public ProfilerFiller getProfiler() {

@@ -57,10 +57,10 @@ index 4e9c49496c3d26b59eaa37662aefb73e8a48c5ee..5bfab30730304614bcd0ea3d558ad458
                      }
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 4aa38c29fa18f321b70fa58f308a4c15b03d61d3..0b373e194a4cf1d579165424aee21f4c62ae45b1 100644
+index accd54816b72879d30b52a42b769a16ae8bd14b6..2c42538d5c5334662f5df61c2cad39ae676d067b 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1432,15 +1432,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
+@@ -1433,15 +1433,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
          try {
              tickConsumer.accept(entity);
          } catch (Throwable throwable) {

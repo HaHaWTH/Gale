@@ -14,10 +14,10 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 487130545e58661c7757513f295977407ad19295..2ce40c153a3b08c5c5f1d7743d0135237e4a4d36 100644
+index 949ecc013163b5d33631b9ca54b32ff5bf3d1dae..524c2374d2251edeb171d65e49deebf940e9ef38 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -275,6 +275,13 @@ public abstract class PlayerList {
+@@ -274,6 +274,13 @@ public abstract class PlayerList {
          org.spigotmc.event.player.PlayerSpawnLocationEvent ev = new org.spigotmc.event.player.PlayerSpawnLocationEvent(spawnPlayer, spawnPlayer.getLocation());
          this.cserver.getPluginManager().callEvent(ev);
  

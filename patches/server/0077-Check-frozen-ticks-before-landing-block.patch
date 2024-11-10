@@ -7,7 +7,7 @@ License: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
 Gale - https://galemc.org
 
 This patch is based on the following mixin:
-"me/jellysquid/mods/lithium/mixin/entity/fast_powder_snow_check/LivingEntityMixin.java"
+"net/caffeinemc/mods/lithium/mixin/entity/fast_powder_snow_check/LivingEntityMixin.java"
 By: 2No2Name <2No2Name@web.de>
 As part of: Lithium (https://github.com/CaffeineMC/lithium-fabric)
 Licensed under: LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html)
