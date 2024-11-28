@@ -84,7 +84,7 @@ index cb9e42fea57856f9ab649e33df26071db1b7790f..1f158ed7ed5c115e892311d5f72a9131
  
          }
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index bd3a4bb0192d2af4868bcd96b1b6205c4b05fe20..3c63a956b5b04de5181a1827a4df8a1efb726b0c 100644
+index bd3a4bb0192d2af4868bcd96b1b6205c4b05fe20..d0da1451d41a6b4eee0abc54d93912d432aa05d1 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -242,6 +242,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -96,7 +96,7 @@ index bd3a4bb0192d2af4868bcd96b1b6205c4b05fe20..3c63a956b5b04de5181a1827a4df8a1e
 +        try {
 +            gg.pufferfish.pufferfish.simd.SIMDDetection.initialize();
 +        } catch (Throwable ignored) {}
-+        // Gale start - Pufferfish - SIMD support
++        // Gale end - Pufferfish - SIMD support
 +
          this.setPvpAllowed(dedicatedserverproperties.pvp);
          this.setFlightAllowed(dedicatedserverproperties.allowFlight);
