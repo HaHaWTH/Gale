@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 2f8980abffdff243b85c720b91c4feb30df769aa..3f160c55b356ab943c94c94294fbf4657a45da7f 100644
+index 7759fe7b458b681589b47932197961722676ada7..ffc69e4eab4a28dd0066b322de852577b4c392b9 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -195,6 +195,8 @@ import org.bukkit.event.server.ServerLoadEvent;
@@ -19,7 +19,7 @@ index 2f8980abffdff243b85c720b91c4feb30df769aa..3f160c55b356ab943c94c94294fbf465
      private static MinecraftServer SERVER; // Paper
      public static final Logger LOGGER = LogUtils.getLogger();
      public static final net.kyori.adventure.text.logger.slf4j.ComponentLogger COMPONENT_LOGGER = net.kyori.adventure.text.logger.slf4j.ComponentLogger.logger(LOGGER.getName()); // Paper
-@@ -333,6 +335,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -334,6 +336,11 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          S s0 = serverFactory.apply(thread); // CraftBukkit - decompile error
  
          atomicreference.set(s0);

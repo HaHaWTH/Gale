@@ -37,7 +37,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/item/crafting/ShapelessRecipe.java b/src/main/java/net/minecraft/world/item/crafting/ShapelessRecipe.java
-index 6ec7b234b468755835107be40d0080222c0b9263..4e09c158a3e767754abc0df9410c736016ef0704 100644
+index 12f95bee2a69fd5df7c4a165537e01299e60c5f6..6567b103b27db2841d67c8f296ba6c57781b2b65 100644
 --- a/src/main/java/net/minecraft/world/item/crafting/ShapelessRecipe.java
 +++ b/src/main/java/net/minecraft/world/item/crafting/ShapelessRecipe.java
 @@ -31,8 +31,15 @@ public class ShapelessRecipe implements CraftingRecipe {
@@ -56,7 +56,7 @@ index 6ec7b234b468755835107be40d0080222c0b9263..4e09c158a3e767754abc0df9410c7360
          this.group = group;
          this.category = category;
          this.result = result;
-@@ -80,6 +87,29 @@ public class ShapelessRecipe implements CraftingRecipe {
+@@ -80,6 +87,28 @@ public class ShapelessRecipe implements CraftingRecipe {
      }
  
      public boolean matches(CraftingInput input, Level world) {
@@ -82,10 +82,9 @@ index 6ec7b234b468755835107be40d0080222c0b9263..4e09c158a3e767754abc0df9410c7360
 +            return ingredients.isEmpty();
 +        }
 +        // Gale end - Airplane - simpler ShapelessRecipe comparison for vanilla
-+
-         return input.ingredientCount() != this.ingredients.size() ? false : (input.size() == 1 && this.ingredients.size() == 1 ? ((Ingredient) this.ingredients.getFirst()).test(input.getItem(0)) : input.stackedContents().canCraft((Recipe) this, (StackedContents.Output) null));
-     }
- 
+         // Paper start - Improve exact choice recipe ingredients & unwrap ternary
+         if (input.ingredientCount() != this.ingredients.size()) {
+             return false;
 diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftShapelessRecipe.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftShapelessRecipe.java
 index 7c989318dc7ad89bb0d9143fcaac1e4bba6f5907..a90b294a99072ab576e61ddacb60a036cb7f0f5a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftShapelessRecipe.java

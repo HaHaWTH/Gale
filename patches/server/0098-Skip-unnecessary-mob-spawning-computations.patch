@@ -13,10 +13,10 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index 9b42517eed2dd8644c9db759690f09aeef6ab3b2..4d416ef3a1c528a1ce221aed43b8823f90a3df49 100644
+index 370d8ab3cb7f4b066d94b2f4eeda794b79179fa7..4d0ac11bc9d72821e303ae357cf12576ef5d6993 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-@@ -524,10 +524,15 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -527,10 +527,15 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
      }
  
      private void tickChunks(long timeDelta, List<LevelChunk> chunks) { // Gale - Purpur - remove vanilla profiler
@@ -33,7 +33,7 @@ index 9b42517eed2dd8644c9db759690f09aeef6ab3b2..4d416ef3a1c528a1ce221aed43b8823f
          if ((this.spawnFriendlies || this.spawnEnemies) && this.level.paperConfig().entities.spawning.perPlayerMobSpawns) { // don't count mobs when animals and monsters are disabled
              // re-set mob counts
              for (ServerPlayer player : this.level.players) {
-@@ -550,11 +555,15 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -553,11 +558,15 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
          // Paper end - Optional per player mob spawns
  
          this.lastSpawnState = spawnercreature_d;
@@ -51,7 +51,7 @@ index 9b42517eed2dd8644c9db759690f09aeef6ab3b2..4d416ef3a1c528a1ce221aed43b8823f
              // Paper start - PlayerNaturallySpawnCreaturesEvent
              int chunkRange = level.spigotConfig.mobSpawnRange;
              chunkRange = (chunkRange > level.spigotConfig.viewDistance) ? (byte) level.spigotConfig.viewDistance : chunkRange;
-@@ -593,6 +602,20 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -596,6 +605,20 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
  
      }
  

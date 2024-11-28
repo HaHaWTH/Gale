@@ -19,27 +19,27 @@ require it to be initialized earlier. By moving it to the superclass, we
 initialize it earlier, ensuring that it is available sooner.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 3401602c57337e96012c2768b38f523ca7dd6798..91042db25973e6a9fefebef2bc8f1471ddf34e58 100644
+index af783a62991cf996cf488ac7bdb7335082609337..d0b36a5340776e18469b35e0459b3b5d26c051c2 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -836,8 +836,6 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
+@@ -843,8 +843,6 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
      }
  
      // Paper start - optimise random ticking
--    private final ca.spottedleaf.moonrise.common.util.SimpleRandom simpleRandom = new ca.spottedleaf.moonrise.common.util.SimpleRandom(0L);
+-    private final ca.spottedleaf.moonrise.common.util.SimpleThreadUnsafeRandom simpleRandom = new ca.spottedleaf.moonrise.common.util.SimpleThreadUnsafeRandom(net.minecraft.world.level.levelgen.RandomSupport.generateUniqueSeed());
 -
      private void optimiseRandomTick(final LevelChunk chunk, final int tickSpeed) {
          final LevelChunkSection[] sections = chunk.getSections();
          final int minSection = ca.spottedleaf.moonrise.common.util.WorldUtil.getMinSection((ServerLevel)(Object)this);
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index a0cbeefb01aadfb1aa06d7216d222351c0805422..1e1e3a0951a852171601199524e7181e115d9931 100644
+index 37ed8ec7cac117e674d39a3dbc3ce8b99e4459e9..5419efc40cd27c532acff423edaa259edacd862a 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -185,6 +185,8 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl
      public final Map<ServerExplosion.CacheKey, Float> explosionDensityCache = new HashMap<>(); // Paper - Optimize explosions
      public java.util.ArrayDeque<net.minecraft.world.level.block.RedstoneTorchBlock.Toggle> redstoneUpdateInfos; // Paper - Faster redstone torch rapid clock removal; Move from Map in BlockRedstoneTorch to here
  
-+    public final ca.spottedleaf.moonrise.common.util.SimpleRandom simpleRandom = new ca.spottedleaf.moonrise.common.util.SimpleRandom(0L); // Gale - Pufferfish - move random tick random
++    public final ca.spottedleaf.moonrise.common.util.SimpleThreadUnsafeRandom simpleRandom = new ca.spottedleaf.moonrise.common.util.SimpleThreadUnsafeRandom(net.minecraft.world.level.levelgen.RandomSupport.generateUniqueSeed()); // Gale - Pufferfish - move random tick random
 +
      public CraftWorld getWorld() {
          return this.world;

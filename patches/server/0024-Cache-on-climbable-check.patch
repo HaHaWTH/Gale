@@ -31,10 +31,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 098bedc39031b03a4cab24c0c02983e89174cead..206a1461178706e56f4b3c92c9121dd4177edd4c 100644
+index b1af5a5eafcd7e090beb36b1a1734e3f1a063f03..fbb1b17ade83e0fe043765369d53e140771778c9 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -2109,6 +2109,20 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -2115,6 +2115,20 @@ public abstract class LivingEntity extends Entity implements Attackable {
          return this.lastClimbablePos;
      }
  
@@ -56,7 +56,7 @@ index 098bedc39031b03a4cab24c0c02983e89174cead..206a1461178706e56f4b3c92c9121dd4
          if (this.isSpectator()) {
              return false;
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index bd7c37123c70d2afdef252f39548725d4ef318ed..24536f70309f802d45714e06bace339f1d9f1013 100644
+index 1d438ef44cbe4d1eedfba36d8fe5d2ad53464921..9cee5e8b9188b094a2428da5d9cf42db1c18f7a3 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
 @@ -295,7 +295,7 @@ public class ActivationRange

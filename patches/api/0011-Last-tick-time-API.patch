@@ -23,10 +23,10 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 0dd0d3e2faf82432b621bad95d5d31f7d581ef2b..bc760c528e95a234190f51b2a02101f34f50fb97 100644
+index a1d517e2415a1d4710da39ef5994fe2fbd411db4..68971f1503913175e941ec24db54ab12f023737d 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -2994,6 +2994,20 @@ public final class Bukkit {
+@@ -3017,6 +3017,20 @@ public final class Bukkit {
      }
      // Paper end - Folia region threading API
  
@@ -48,13 +48,13 @@ index 0dd0d3e2faf82432b621bad95d5d31f7d581ef2b..bc760c528e95a234190f51b2a02101f3
      public static Server.Spigot spigot() {
          return server.spigot();
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index e8346ff64783c505456cc7cd2ed91bc2b063e365..27552fd7422602c0f8cfff158064e61a039270be 100644
+index edcd3ce45053568cb90ca7f69ffc23cb1a782d4e..dc02eb4016e3452ccf7b18a52309f921aac6278a 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -2625,4 +2625,30 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
+@@ -2660,4 +2660,29 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
       */
-     boolean isOwnedByCurrentRegion(@NotNull Entity entity);
-     // Paper end - Folia region threading API
+     void allowPausing(@NotNull org.bukkit.plugin.Plugin plugin, boolean value);
+     // Paper end - API to check if the server is sleeping
 +
 +    // Gale start - YAPFA - last tick time - API
 +    /**
@@ -80,5 +80,4 @@ index e8346ff64783c505456cc7cd2ed91bc2b063e365..27552fd7422602c0f8cfff158064e61a
 +     */
 +    long getLastTickOversleepTime();
 +    // Gale end - YAPFA - last tick time - API
-+
  }

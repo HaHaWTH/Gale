@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/animal/MushroomCow.java b/src/main/java/net/minecraft/world/entity/animal/MushroomCow.java
-index feeb7bc34ae02e44d7f13f0bae5d175ef924c53a..8ac72f18edaadba69652f8c2f7d672e81a5433da 100644
+index eea02ea0d99425a60575f5fa729782494d579080..0047c9f3c6dc901944187784e42cd09a3c6b460c 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/MushroomCow.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/MushroomCow.java
 @@ -195,6 +195,15 @@ public class MushroomCow extends Cow implements Shearable, VariantHolder<Mushroo
@@ -54,8 +54,8 @@ index feeb7bc34ae02e44d7f13f0bae5d175ef924c53a..8ac72f18edaadba69652f8c2f7d672e8
 +            }
 +            // Gale end - Purpur - fix cow rotation when shearing mooshroom
              // Paper start - custom shear drops; moved drop generation to separate method
-             drops.forEach(itemstack1 -> {
-                 for (final ItemStack drop : drops) {
+             drops.forEach(drop -> {
+                 ItemEntity entityitem = new ItemEntity(this.level(), this.getX(), this.getY(1.0D), this.getZ(), drop);
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 index fff9f552a9b3cc4913837077857c78826bf1bdb0..3fa354ceef3ec5ab9bca3f13f23aca586dfe09c4 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java

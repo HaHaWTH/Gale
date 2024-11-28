@@ -221,10 +221,10 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index c8c3599a780bbc02a1ead1fe66498733ea4075c2..ead700089f8867e38699db409c13162f1014f58a 100644
+index 1bbd7458f6031cedde5c7efa652481bf4c66b5d6..e3bed8a7f6a9b985c28551b2dfb03456b802380d 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -94,14 +94,14 @@ tasks.jar {
+@@ -108,14 +108,14 @@ tasks.jar {
          val gitBranch = git("rev-parse", "--abbrev-ref", "HEAD").getText().trim() // Paper
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -244,7 +244,7 @@ index c8c3599a780bbc02a1ead1fe66498733ea4075c2..ead700089f8867e38699db409c13162f
              "Build-Number" to (build ?: ""),
              "Build-Time" to Instant.now().toString(),
              "Git-Branch" to gitBranch, // Paper
-@@ -242,3 +242,22 @@ tasks.registerRunTask("runReobfPaperclip") {
+@@ -261,3 +261,22 @@ tasks.registerRunTask("runReobfPaperclip") {
      classpath(rootProject.tasks.named<io.papermc.paperweight.tasks.CreatePaperclipJar>("createReobfPaperclipJar").flatMap { it.outputZip })
      mainClass.set(null as String?)
  }
@@ -486,7 +486,7 @@ index 6fef86e47e37eab6721cfd67d494afb25a2ded68..29aa7549e0082f0061a94b5b2f59aeec
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 83020837e29ee627b1081daddb4bdee147b95af3..71d526cf165ff63a7344e19864eed409f3952fbb 100644
+index 507f908916cbeb592496f963b46e4c2121a7b5e3..e57be8cbe35fdc2ae41b3a0278d244672a303059 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 @@ -505,7 +505,7 @@ public final class CraftMagicNumbers implements UnsafeValues {

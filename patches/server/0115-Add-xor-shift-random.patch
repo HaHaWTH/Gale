@@ -66,10 +66,10 @@ index 6a465d9b12c92b5385c394fef7456630be97c04d..8c2b40b412edc75f7f1f00315c98744c
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index d41c81158c00931e6b11093cce141f6a3085ba05..7fe89b9ffec6d8907d69ed9e7a9859eadfbdb58d 100644
+index 8f234b46c24a0ae08aa5f8190c5b27e1f62dfbab..1ae7a8a1dc5bb6f4c4f4ae9d6024d6a4a792066c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-@@ -295,7 +295,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
+@@ -287,7 +287,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
      }
      // Paper end
  
@@ -548,7 +548,7 @@ index 0000000000000000000000000000000000000000..60dc2c1deb0749168d03c5d94136e613
 +    }
 +}
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index 21363541030d0381a8e139b409453b57a4eb6eaf..93f82e84abad1bdaabf59169415991acaf3f074d 100644
+index f1581caf54012ce4d4b9aecbc56b5b815c67a423..5d1cc9b9150f84bb84cef5dd741e72787c02f089 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
 @@ -92,7 +92,7 @@ public class ActivationRange

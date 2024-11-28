@@ -324,10 +324,10 @@ index 90ca25c4aaf92a5639839a7cdaee2ffcdb75efa7..d3219e3d36ef96bb43c2cb7d86f14ef7
          OptionSpec<Integer> optionspec11 = optionparser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(-1, new Integer[0]);
          OptionSpec<String> optionspec12 = optionparser.accepts("serverId").withRequiredArg();
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 254c80c60bdeaf8d3b65777648f7e863a4480a31..c45121f6c4ed3b6bd9faf3f3d3bbddd647a48eae 100644
+index cd73c5bc1cd56a4e7bbac5171015cd6904acf68d..05a150bd6f29006d0aeaa91356f40deca02cb164 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -1243,7 +1243,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
+@@ -1250,7 +1250,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
  
      public static List<Entity> getCurrentlyTickingEntities() {
          Entity ticking = currentlyTickingEntity.get();
@@ -469,7 +469,7 @@ index 2490a42c9c35c7e080279ef8566288a28362d167..542916b15fd42d8262b24ead91f146cd
              String[] strings = new String[pattern.size() - l - k];
  
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 7352adfa3341efcb1b3342d4055d4def83fad120..51d8b22d30ae2271005a5377e2463a7f6bd85674 100644
+index f019e1eb20a8ec3a57e5d90386cb10244ddfcb66..dd4d40a14cef268fe992f2c5ba523748fb619bd9 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -1748,7 +1748,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable, ca.spottedl

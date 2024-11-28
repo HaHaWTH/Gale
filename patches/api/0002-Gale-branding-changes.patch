@@ -46,10 +46,10 @@ index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898
 -<http://www.gnu.org/philosophy/why-not-lgpl.html>.
 +<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 855a5eb171ce94444de1313eafacf3558c4cf728..40fed07c4f1d6205dd79021641fc1395816e7354 100644
+index 0225bbd7773527a34e267a0404ba7db7809d8e5a..f7ec84606d8e6c3c3af5ba5fe85fea4c35952c2e 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -153,6 +153,12 @@ tasks.jar {
+@@ -166,6 +166,12 @@ tasks.jar {
              "Automatic-Module-Name" to "org.bukkit"
          )
      }

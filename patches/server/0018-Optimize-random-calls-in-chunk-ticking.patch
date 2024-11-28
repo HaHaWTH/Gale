@@ -52,10 +52,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index 0f9ea834c02114ad864abd13382665c02cb69ba4..9b42517eed2dd8644c9db759690f09aeef6ab3b2 100644
+index 2b8c4ee8ad8eb96060e82911c07b01f7b01a4329..370d8ab3cb7f4b066d94b2f4eeda794b79179fa7 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-@@ -465,6 +465,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+@@ -468,6 +468,7 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
  
          this.lastInhabitedUpdate = i;
          if (!this.level.isDebug()) {
@@ -64,19 +64,19 @@ index 0f9ea834c02114ad864abd13382665c02cb69ba4..9b42517eed2dd8644c9db759690f09ae
                  List<LevelChunk> list = this.tickingChunks;
  
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 91042db25973e6a9fefebef2bc8f1471ddf34e58..ac903433a7ab524e1f65f23fa943ee0aeaf8fa6d 100644
+index d0b36a5340776e18469b35e0459b3b5d26c051c2..b424fe78d3c9410e6d6378a7f104cfd5069f0d1e 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -885,6 +885,8 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
+@@ -892,6 +892,8 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
      }
      // Paper end - optimise random ticking
  
 +    private int currentIceAndSnowTick = 0; protected void resetIceAndSnowTick() { this.currentIceAndSnowTick = this.simpleRandom.nextInt(16); } // Gale - Airplane - optimize random calls in chunk ticking
 +
      public void tickChunk(LevelChunk chunk, int randomTickSpeed) {
-         final ca.spottedleaf.moonrise.common.util.SimpleRandom simpleRandom = this.simpleRandom; // Paper - optimise random ticking
+         final ca.spottedleaf.moonrise.common.util.SimpleThreadUnsafeRandom simpleRandom = this.simpleRandom; // Paper - optimise random ticking
          ChunkPos chunkcoordintpair = chunk.getPos();
-@@ -892,7 +894,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
+@@ -899,7 +901,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
          int j = chunkcoordintpair.getMinBlockX();
          int k = chunkcoordintpair.getMinBlockZ();
  
@@ -85,7 +85,7 @@ index 91042db25973e6a9fefebef2bc8f1471ddf34e58..ac903433a7ab524e1f65f23fa943ee0a
              BlockPos blockposition = this.findLightningTargetAround(this.getBlockRandomPos(j, 0, k, 15));
  
              if (this.isRainingAt(blockposition)) {
-@@ -920,7 +922,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
+@@ -927,7 +929,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
              }
          }
  

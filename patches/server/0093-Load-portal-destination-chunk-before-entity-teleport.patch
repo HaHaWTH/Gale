@@ -13,10 +13,10 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 4bea126e025fcb5d8a626ea608d1839f493a3301..bb2e9a6e53dc353685cd914df975f87c27cad29b 100644
+index ce11e73e7a91c9d45f62552ab1cd7bec47b2a879..4865759b5ad05997b7777a8cd036967083c2ef39 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -4042,6 +4042,13 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
+@@ -4006,6 +4006,13 @@ public abstract class Entity implements SyncedDataHolder, Nameable, EntityAccess
          if (entity == null) {
              return null;
          } else {

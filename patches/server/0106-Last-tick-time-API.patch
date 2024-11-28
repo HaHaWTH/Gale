@@ -23,13 +23,13 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 097ed1ea3e3c3a2758ecc1a5cdebab3b70c23fcb..0638dea2736c286b0848a632e7e948ba895e4a35 100644
+index 7308c2177f81455792819d622c3702a140741de2..c11f638e120ae4989d110f55c4569dd67b6f3260 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -3297,4 +3297,22 @@ public final class CraftServer implements Server {
-         return this.potionBrewer;
+@@ -3321,4 +3321,21 @@ public final class CraftServer implements Server {
+         this.console.addPluginAllowingSleep(plugin.getName(), value);
      }
-     // Paper end
+     // Paper end - API to check if the server is sleeping
 +
 +    // Gale start - YAPFA - last tick time - API
 +    @Override
@@ -47,5 +47,4 @@ index 097ed1ea3e3c3a2758ecc1a5cdebab3b70c23fcb..0638dea2736c286b0848a632e7e948ba
 +        return MinecraftServer.lastTickOversleepTime;
 +    }
 +    // Gale end - YAPFA - last tick time - API
-+
  }
