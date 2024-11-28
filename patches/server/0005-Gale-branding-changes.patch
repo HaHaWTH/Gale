@@ -673,7 +673,7 @@ index 0000000000000000000000000000000000000000..fab5d5af9ec6a20810ce5e437dd61768
 +}
 diff --git a/src/main/java/org/galemc/gale/version/GaleVersionFetcher.java b/src/main/java/org/galemc/gale/version/GaleVersionFetcher.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..de2d223b0fb51d2feff5450950d2889dac3bc83c
+index 0000000000000000000000000000000000000000..9a03014be5b95b9f24576e08d533b0b2c4a44fe6
 --- /dev/null
 +++ b/src/main/java/org/galemc/gale/version/GaleVersionFetcher.java
 @@ -0,0 +1,17 @@
@@ -685,7 +685,7 @@ index 0000000000000000000000000000000000000000..de2d223b0fb51d2feff5450950d2889d
 +
 +    public GaleVersionFetcher() {
 +        super(
-+            "ver/1.21.1",
++            "ver/1.21.3",
 +            "https://github.com/Dreeam-qwq/Gale",
 +            "GaleMC",
 +            "Gale",
