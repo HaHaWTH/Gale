@@ -13,7 +13,7 @@ As part of: Pufferfish (https://github.com/pufferfish-gg/Pufferfish)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index badd1433e27e2e95b165618de280cba1ff10a69d..5ebc35cadc960d428e8a91642ddce0875078d790 100644
+index f0d673f7487bb728a294443a224dea594eb8fd5f..83c5a53ac26267f9fb47c9cb5cdb4fd7c52cdc83 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -78,6 +78,7 @@ tasks.withType<JavaCompile> {
@@ -84,7 +84,7 @@ index 66477f772ffb9271cf647dfb7567d75c3d5145fb..13a51c939b8bd17584a4742178231506
  
          }
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index ec000ec87a6fffe90d1847f048ce413396797385..e9523a7a94a26c524e3179f2d8e74be6cad06b1a 100644
+index ec000ec87a6fffe90d1847f048ce413396797385..7dd6379c8aba1846044100725363066a47ac2d1d 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -245,6 +245,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -96,7 +96,7 @@ index ec000ec87a6fffe90d1847f048ce413396797385..e9523a7a94a26c524e3179f2d8e74be6
 +        try {
 +            gg.pufferfish.pufferfish.simd.SIMDDetection.initialize();
 +        } catch (Throwable ignored) {}
-+        // Gale start - Pufferfish - SIMD support
++        // Gale end - Pufferfish - SIMD support
 +
          this.setPvpAllowed(dedicatedserverproperties.pvp);
          this.setFlightAllowed(dedicatedserverproperties.allowFlight);
