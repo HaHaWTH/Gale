@@ -454,10 +454,10 @@ index bb1a60180e58c1333e7bb33e8acf1b0225eda8a8..4d037e899e0b5548be406ad55acd2062
          DamageSource damageSource = this.cloneInstance();
          damageSource.customEventDamager = entity;
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index 78922c3e9a69db1774dd846047b79e9523d7cf41..84bc6585702f8d7a801530b09f18912ac083404d 100644
+index e40665cead218502b44dd49051a53326ed94f061..cbeebb98622025d35557125e784cd8f0b4fbb751 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-@@ -274,7 +274,13 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
+@@ -289,7 +289,13 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
  
      // Paper start
      private static void printOversizedLog(String msg, Path file, int x, int z) {
@@ -473,7 +473,7 @@ index 78922c3e9a69db1774dd846047b79e9523d7cf41..84bc6585702f8d7a801530b09f18912a
  
      private static CompoundTag readOversizedChunk(RegionFile regionfile, ChunkPos chunkCoordinate) throws IOException {
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index 6fef86e47e37eab6721cfd67d494afb25a2ded68..29aa7549e0082f0061a94b5b2f59aeec39b17c6c 100644
+index 1354ccfbf525e5e64483ac5f443cc2325ba63850..f6bc955c3496b52cda1a20aabd78769803ef471f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 @@ -491,7 +491,7 @@ public class CraftScheduler implements BukkitScheduler {

@@ -13,7 +13,7 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index 370d8ab3cb7f4b066d94b2f4eeda794b79179fa7..4d0ac11bc9d72821e303ae357cf12576ef5d6993 100644
+index f6ed3936ebfe60e88160e1ca55589584354456bb..d6cfff8574567d0e3a77871c91be988ecfe31e25 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 @@ -527,10 +527,15 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
@@ -49,9 +49,9 @@ index 370d8ab3cb7f4b066d94b2f4eeda794b79179fa7..4d0ac11bc9d72821e303ae357cf12576
 -        if (flag && (this.spawnEnemies || this.spawnFriendlies)) {
 +        if (flagAndHasNaturalSpawn && (this.spawnEnemies || this.spawnFriendlies)) { // Gale - MultiPaper - skip unnecessary mob spawning computations
              // Paper start - PlayerNaturallySpawnCreaturesEvent
-             int chunkRange = level.spigotConfig.mobSpawnRange;
-             chunkRange = (chunkRange > level.spigotConfig.viewDistance) ? (byte) level.spigotConfig.viewDistance : chunkRange;
-@@ -596,6 +605,20 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
+             for (ServerPlayer entityPlayer : this.level.players()) {
+                 int chunkRange = Math.min(level.spigotConfig.mobSpawnRange, entityPlayer.getBukkitEntity().getViewDistance());
+@@ -595,6 +604,20 @@ public class ServerChunkCache extends ChunkSource implements ca.spottedleaf.moon
  
      }
  

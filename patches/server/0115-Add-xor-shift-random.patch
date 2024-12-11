@@ -53,7 +53,7 @@ index 3f6d60601cbfc138ab004e38bf442d985192fd3f..370266dfa461432b9e22b3ce35d60949
  
      // CraftBukkit start
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
-index 6a465d9b12c92b5385c394fef7456630be97c04d..8c2b40b412edc75f7f1f00315c98744c627493f5 100644
+index 16f07007a0f73ec0c6f421c9b082518e87e8cc7b..b26a5b76cd30c96ce15ced5ac51222a8333bde52 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFile.java
 @@ -109,7 +109,7 @@ public class RegionFile implements AutoCloseable, ca.spottedleaf.moonrise.patche
@@ -66,10 +66,10 @@ index 6a465d9b12c92b5385c394fef7456630be97c04d..8c2b40b412edc75f7f1f00315c98744c
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index 8f234b46c24a0ae08aa5f8190c5b27e1f62dfbab..1ae7a8a1dc5bb6f4c4f4ae9d6024d6a4a792066c 100644
+index 57da11c0da7322e74810e7108e9c8000b0c36520..d39a0785f42c72d7b32af5c1c8067b2857f22a48 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-@@ -287,7 +287,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
+@@ -288,7 +288,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
      }
      // Paper end
  
