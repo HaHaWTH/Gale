@@ -1,0 +1,44 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Dreeam <61569423+Dreeam-qwq@users.noreply.github.com>
+Date: Thu, 12 Dec 2024 02:58:34 -0500
+Subject: [PATCH] Cache ShapePairKey hash
+
+
+diff --git a/src/main/java/net/minecraft/world/level/block/Block.java b/src/main/java/net/minecraft/world/level/block/Block.java
+index b6d6c2cb9b227a17fb4ce42bc75f92206fbea043..ef8d8990a8a98c0cbc3e7aa45d22c6008f0ff2bb 100644
+--- a/src/main/java/net/minecraft/world/level/block/Block.java
++++ b/src/main/java/net/minecraft/world/level/block/Block.java
+@@ -583,8 +583,21 @@ public class Block extends BlockBehaviour implements ItemLike {
+     }
+     // Spigot end
+ 
+-    private static record ShapePairKey(VoxelShape first, VoxelShape second) {
++    // Gale start - cache ShapePairKey hash
++    private static class ShapePairKey {
+ 
++        private final VoxelShape first;
++        private final VoxelShape second;
++        private final int hash;
++
++        private ShapePairKey(VoxelShape first, VoxelShape second) {
++            this.first = first;
++            this.second = second;
++            this.hash = System.identityHashCode(this.first) * 31 + System.identityHashCode(this.second);
++        }
++
++        @Override
++        // Gale end - cache ShapePairKey hash
+         public boolean equals(Object object) {
+             boolean flag;
+ 
+@@ -599,8 +612,9 @@ public class Block extends BlockBehaviour implements ItemLike {
+             return flag;
+         }
+ 
++        @Override // Gale - cache ShapePairKey hash
+         public int hashCode() {
+-            return System.identityHashCode(this.first) * 31 + System.identityHashCode(this.second);
++            return this.hash; // Gale - cache ShapePairKey hash
+         }
+     }
+ }
