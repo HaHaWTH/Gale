@@ -1,5 +1,0 @@
-## TODOs
-Do a benchmark for `Remove streams and iterators from range check`, getEffectiveRange in ChunkMap
-Do benchmark for reduce entity fluid lookup on 1.21.3
-Check gale force load chunk option whether need or whether need to change.
-Apply patches in work
