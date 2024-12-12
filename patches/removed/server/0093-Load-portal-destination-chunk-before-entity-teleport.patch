@@ -3,6 +3,9 @@ From: Martijn Muijsers <martijnmuijsers@live.nl>
 Date: Sun, 25 Dec 2022 16:55:45 +0100
 Subject: [PATCH] Load portal destination chunk before entity teleport
 
+Removed since Gale 1.21.3, entity can teleport cross dimension since 1.21.1
+also see 1.21.1 update in mc wiki for more info
+
 License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 

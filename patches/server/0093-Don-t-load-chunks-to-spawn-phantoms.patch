@@ -34,7 +34,7 @@ index 021221da5d0315f6e371380a705ac6b3f6ac18d3..997f80d332b95bb011cbbc27c065b281
  
                                          if (NaturalSpawner.isValidEmptySpawnBlock(world, blockposition1, iblockdata, fluid, EntityType.PHANTOM)) {
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 63ff60f9d5d9a8a5ea36754dd394696b54082d93..0c1a45ae1e4633a873a37ad4382b3a365331b0fa 100644
+index ecd4cf29a03d6f4ee71450b1c0d952209e40be4a..61d6da8509837bfba30a139a84b0bc452ed4046b 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -92,6 +92,11 @@ public class GaleWorldConfiguration extends ConfigurationPart {
