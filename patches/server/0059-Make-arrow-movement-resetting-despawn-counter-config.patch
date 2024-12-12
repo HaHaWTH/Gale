@@ -42,7 +42,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/projectile/AbstractArrow.java b/src/main/java/net/minecraft/world/entity/projectile/AbstractArrow.java
-index accc246f441c8bf5e1a755cfc0db8f97c0c01c6b..5fbd0612f1d1b0961e03931c26036c74d8265bb3 100644
+index 8ce573042ea87631eb6539f2a0d5036655c2b809..6e313a45356ed2b043ef626c7ca191b294acaf70 100644
 --- a/src/main/java/net/minecraft/world/entity/projectile/AbstractArrow.java
 +++ b/src/main/java/net/minecraft/world/entity/projectile/AbstractArrow.java
 @@ -371,7 +371,7 @@ public abstract class AbstractArrow extends Projectile {
@@ -55,10 +55,10 @@ index accc246f441c8bf5e1a755cfc0db8f97c0c01c6b..5fbd0612f1d1b0961e03931c26036c74
  
      public boolean isInGround() {
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index e3e4459da020a85a66360e761adbf6e55920c6c5..f459d398cf9e274b8551540c8a1f707bd609ecb9 100644
+index 266079aed0610e0fa9e35da81680b7f388a8844a..cc843de2d62bdaadb4efb7032162f8f04b10c286 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-@@ -123,6 +123,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
+@@ -118,6 +118,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {
  
          }
  

@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index bbf501b68afbcedfc49d0742fe71e956a05c5285..ef3906925b29dead10c9040ff96edd3d89bb0d81 100644
+index 2b6621b858961b8ec4ad73fb2db797306adf7251..843f09312888ab91ddd50fa2870ba4dc2236d54a 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -133,10 +133,11 @@ public abstract class PlayerList {
@@ -148,7 +148,7 @@ index bbf501b68afbcedfc49d0742fe71e956a05c5285..ef3906925b29dead10c9040ff96edd3d
          }
  
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index 7dc22be7e2afeafe0292648a9a20422c39833966..0e46efa30dc980a348caed64c4a8734e5a6a095a 100644
+index 61d412c4f1ebd55661cc3f0260468e3ac0efe0bb..d6068324f7926741a490ead6277015b0e69517f8 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
 @@ -208,12 +208,15 @@ public abstract class Player extends LivingEntity {

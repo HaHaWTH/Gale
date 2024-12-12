@@ -46,7 +46,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/animal/Sheep.java b/src/main/java/net/minecraft/world/entity/animal/Sheep.java
-index 432ad1c785e133ef18390108fd342be50ec4dddc..21be4cc1f12d7f8ecadc3be242e1dae1e8c5fa11 100644
+index 0b7f8b8d8cd119d83e67a2cee389bd6117ac4cf7..a021252871fd93d4fb3f23598d6008f25a350150 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/Sheep.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/Sheep.java
 @@ -337,7 +337,99 @@ public class Sheep extends Animal implements Shearable {
@@ -150,7 +150,7 @@ index 432ad1c785e133ef18390108fd342be50ec4dddc..21be4cc1f12d7f8ecadc3be242e1dae1
          DyeColor enumcolor1 = secondParent.getColor();
          CraftingInput craftinginput = Sheep.makeCraftInput(enumcolor, enumcolor1);
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index f459d398cf9e274b8551540c8a1f707bd609ecb9..2692f835321bb16ecd4185970af01bfa97ca9f1f 100644
+index cc843de2d62bdaadb4efb7032162f8f04b10c286..1ba7cc5844236cfa75e7efcbf5a377f8e71fbaca 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -34,6 +34,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {

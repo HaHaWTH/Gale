@@ -7,7 +7,7 @@ License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 Gale - https://galemc.org
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 7759fe7b458b681589b47932197961722676ada7..ffc69e4eab4a28dd0066b322de852577b4c392b9 100644
+index 1f299e98a9efd0f51bace264b0cbb7cbc4845907..24b9711dca7223dd12b24c36cd76f50fbd96fc68 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -195,6 +195,8 @@ import org.bukkit.event.server.ServerLoadEvent;

@@ -31,10 +31,10 @@ index ce11e73e7a91c9d45f62552ab1cd7bec47b2a879..4865759b5ad05997b7777a8cd0369670
              if (this instanceof Leashable leashable) {
                  leashable.dropLeash(true, true); // Paper drop lead
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 93f4be842259ede94c94588f266c2270546e8311..fd5d02f8b1b1e2e84e6bda4885f091a000cbcbc9 100644
+index ecd4cf29a03d6f4ee71450b1c0d952209e40be4a..63ff60f9d5d9a8a5ea36754dd394696b54082d93 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-@@ -124,6 +124,11 @@ public class GaleWorldConfiguration extends ConfigurationPart {
+@@ -119,6 +119,11 @@ public class GaleWorldConfiguration extends ConfigurationPart {
  
          }
  

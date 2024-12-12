@@ -14,7 +14,7 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index eaddeaade352dbc70a4774d584a36d38842764f0..79aaa3aa6ee8d11fb8542822b04e8ed7c2abcc77 100644
+index 75a293b2b27231894fe996a42ff10a1462d640f3..99521abc925e0c7754d9e5aaad52e4fa70383946 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -272,6 +272,13 @@ public abstract class PlayerList {

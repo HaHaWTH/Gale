@@ -13,7 +13,7 @@ As part of: MultiPaper (https://github.com/MultiPaper/MultiPaper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index ada9814d24b32140f365eb01a231bc123d99c72e..36df6a23f1943c55ecc6bed55b48a77ba3b449e4 100644
+index 61ef647d61a8e2df209f79b7518c802feb85ac66..75c6d238fdbe434ea95db2c84da4461a0078327b 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -2399,12 +2399,18 @@ public class ServerPlayer extends net.minecraft.world.entity.player.Player imple
@@ -38,7 +38,7 @@ index ada9814d24b32140f365eb01a231bc123d99c72e..36df6a23f1943c55ecc6bed55b48a77b
  
      @Override
 diff --git a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
-index 17b1a7a2e0b557354f0c4ea2f92d9105bcd5cf2c..1efeb37086f5c897f2f1ae1ecdc713f1e3a55ede 100644
+index a61817385d2874454ba6326898e47ffda2cdaca8..5d26566c0d58fbd61d8f2d01b09343a89b280df5 100644
 --- a/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 +++ b/src/main/java/org/galemc/gale/configuration/GaleWorldConfiguration.java
 @@ -106,6 +106,7 @@ public class GaleWorldConfiguration extends ConfigurationPart {

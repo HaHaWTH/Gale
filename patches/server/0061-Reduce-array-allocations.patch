@@ -324,7 +324,7 @@ index 90ca25c4aaf92a5639839a7cdaee2ffcdb75efa7..d3219e3d36ef96bb43c2cb7d86f14ef7
          OptionSpec<Integer> optionspec11 = optionparser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(-1, new Integer[0]);
          OptionSpec<String> optionspec12 = optionparser.accepts("serverId").withRequiredArg();
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index cd73c5bc1cd56a4e7bbac5171015cd6904acf68d..05a150bd6f29006d0aeaa91356f40deca02cb164 100644
+index d32524da655a615a13a03c8536c1f229547d0c6b..c36e21be642ad24231cdcd0ff20d22e1e449e18e 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -1250,7 +1250,7 @@ public class ServerLevel extends Level implements ServerEntityGetter, WorldGenLe
@@ -337,7 +337,7 @@ index cd73c5bc1cd56a4e7bbac5171015cd6904acf68d..05a150bd6f29006d0aeaa91356f40dec
          return ret;
      }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 25e91c5e5f5cf1a9dbb2931b964c754408926788..534d72803949c75314e9c0d225bb889aa6a3d4c6 100644
+index 13482ce226de563cc2e802cdfeaca22eff8f9096..3455b7f21fee42d21182b8b5f8af7a9a238f646c 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2842,7 +2842,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
