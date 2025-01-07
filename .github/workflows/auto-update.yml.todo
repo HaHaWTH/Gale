@@ -1,0 +1,80 @@
+name: Automatically update Paper commit hash
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Gale repository
+        uses: actions/checkout@main
+        with:
+          path: 'Gale'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout Paper repository
+        uses: actions/checkout@main
+        with:
+          path: 'Paper'
+          repository: "PaperMC/Paper"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get Gale latest commit Hash
+        id: paperRef
+        run: |
+          cd Paper
+          echo "paperRef=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Get Gale Current Paper commit Hash
+        id: currPaperRef
+        run: |
+          cd Gale
+          currPaperRef=$(grep "^paperRef\s*=" gradle.properties | sed 's/^paperRef\s*=\s*//')
+          echo "currPaperRef=$currPaperRef" >> $GITHUB_OUTPUT
+
+      - name: Update paperRef in Gale
+        run: |
+          cd Gale
+          sed -i "s/\(paperRef\s*=\s*\).*/\1$PAPER_REF/" gradle.properties
+        env:
+          PAPER_REF: ${{ steps.paperRef.outputs.paperRef }}
+
+      - name: Grant execute permission for gradlew
+        run: |
+          cd Gale
+          git config --global user.name "Dreeam"
+          git config --global user.email 61569423+Dreeam-qwq@users.noreply.github.com
+          chmod +x gradlew
+
+      - uses: actions/setup-java@main
+        with:
+          distribution: 'zulu'
+          java-version:  21
+
+      - name: Running tests before push
+        run: |
+          cd Gale
+          if ! git diff --quiet; then
+            echo "Running tests...."
+            ./gradlew applyAllPatches
+            ./gradlew createMojmapPaperclipJar
+            ./gradlew rebuildPatches
+          fi
+
+      - name: Check for changes and write to repository
+        run: |
+          cd Gale
+          if ! git diff --quiet; then
+            echo "Writing to repo....."
+            git add .
+            chmod +x ./scripts/upstreamCommit.sh
+            ./scripts/upstreamCommit.sh --paper $CURR_PAPER_REF
+            git push
+          else
+            echo "No changes to commit."
+          fi
+        env:
+          CURR_PAPER_REF: ${{ steps.currPaperRef.outputs.currPaperRef }}

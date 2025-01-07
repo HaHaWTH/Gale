@@ -9,7 +9,7 @@ pluginManagement {
 }
 
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
 }
 
 if (!file(".git").exists()) {
@@ -24,9 +24,9 @@ if (!file(".git").exists()) {
          zip from GitHub.
          
          Built Gale jars are available for download at
-         https://github.com/GaleMC/Gale/actions
+         https://github.com/Dreeam-qwq/Gale/actions
          
-         See https://github.com/PaperMC/Paper/blob/master/CONTRIBUTING.md
+         See https://github.com/PaperMC/Paper/blob/main/CONTRIBUTING.md
          for further information on building and modifying Paper forks.
         ===================================================
     """.trimIndent()
@@ -36,8 +36,26 @@ if (!file(".git").exists()) {
 
 rootProject.name = "gale" // Gale - build changes
 
-for (name in listOf("gale-api", "gale-server", "paper-api-generator")) { // Gale - build changes
+for (name in listOf("gale-api", "gale-server",)) { // Gale - build changes
     val projName = name.lowercase(Locale.ENGLISH)
     include(projName)
     findProject(":$projName")!!.projectDir = file(name)
+}
+
+optionalInclude("paper-api-generator")
+
+fun optionalInclude(name: String, op: (ProjectDescriptor.() -> Unit)? = null) {
+    val settingsFile = file("$name.settings.gradle.kts")
+    if (settingsFile.exists()) {
+        apply(from = settingsFile)
+        findProject(":$name")?.let { op?.invoke(it) }
+    } else {
+        settingsFile.writeText(
+            """
+            // Uncomment to enable the '$name' project
+            // include(":$name")
+
+            """.trimIndent()
+        )
+    }
 }

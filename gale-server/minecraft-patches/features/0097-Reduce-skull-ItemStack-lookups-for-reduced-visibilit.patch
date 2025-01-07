@@ -1,0 +1,65 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martijn Muijsers <martijnmuijsers@live.nl>
+Date: Wed, 30 Aug 2023 20:17:20 +0200
+Subject: [PATCH] Reduce skull ItemStack lookups for reduced visibility
+
+License: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+Gale - https://galemc.org
+
+This patch is based on the following patch:
+"feat: reduce sensor work"
+By: peaches94 <peachescu94@gmail.com>
+As part of: Petal (https://github.com/Bloom-host/Petal)
+Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+
+* Petal description *
+
+this patch is focused around the sensors used for ai
+delete the line of sight cache less often and use a faster nearby comparison
+
+diff --git a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java
+index 4e414a78a6acfb90d5e212398617580a3f34be9b..883a47a9ccd75ea124d45beb1645b3f011962c48 100644
+--- a/net/minecraft/world/entity/LivingEntity.java
++++ b/net/minecraft/world/entity/LivingEntity.java
+@@ -1003,15 +1003,16 @@ public abstract class LivingEntity extends Entity implements Attackable {
+         }
+ 
+         if (lookingEntity != null) {
+-            ItemStack itemBySlot = this.getItemBySlot(EquipmentSlot.HEAD);
++            // Gale start - Petal - reduce skull ItemStack lookups for reduced visibility
+             EntityType<?> type = lookingEntity.getType();
+-            if (type == EntityType.SKELETON && itemBySlot.is(Items.SKELETON_SKULL)
+-                || type == EntityType.ZOMBIE && itemBySlot.is(Items.ZOMBIE_HEAD)
+-                || type == EntityType.PIGLIN && itemBySlot.is(Items.PIGLIN_HEAD)
+-                || type == EntityType.PIGLIN_BRUTE && itemBySlot.is(Items.PIGLIN_HEAD)
+-                || type == EntityType.CREEPER && itemBySlot.is(Items.CREEPER_HEAD)) {
++            if (type == EntityType.SKELETON && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.SKELETON_SKULL)
++                || type == EntityType.ZOMBIE && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.ZOMBIE_HEAD)
++                || type == EntityType.PIGLIN && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.PIGLIN_HEAD)
++                || type == EntityType.PIGLIN_BRUTE && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.PIGLIN_HEAD)
++                || type == EntityType.CREEPER && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.CREEPER_HEAD)) {
+                 d *= 0.5;
+             }
++            // Gale end - Petal - reduce skull ItemStack lookups for reduced visibility
+         }
+ 
+         return d;
+diff --git a/net/minecraft/world/entity/LivingEntity.java.rej b/net/minecraft/world/entity/LivingEntity.java.rej
+new file mode 100644
+index 0000000000000000000000000000000000000000..a1acc8d7b32caf3eebbbfc1a3058157b69dd74f4
+--- /dev/null
++++ b/net/minecraft/world/entity/LivingEntity.java.rej
+@@ -0,0 +1,13 @@
++diff a/net/minecraft/world/entity/LivingEntity.java b/net/minecraft/world/entity/LivingEntity.java	(rejected hunks)
++@@ -1050,10 +1050,9 @@ public abstract class LivingEntity extends Entity implements Attackable {
++         }
++ 
++         if (entity != null) {
++-            ItemStack itemstack = this.getItemBySlot(EquipmentSlot.HEAD);
++             EntityType<?> entitytypes = entity.getType();
++ 
++-            if (entitytypes == EntityType.SKELETON && itemstack.is(Items.SKELETON_SKULL) || entitytypes == EntityType.ZOMBIE && itemstack.is(Items.ZOMBIE_HEAD) || entitytypes == EntityType.PIGLIN && itemstack.is(Items.PIGLIN_HEAD) || entitytypes == EntityType.PIGLIN_BRUTE && itemstack.is(Items.PIGLIN_HEAD) || entitytypes == EntityType.CREEPER && itemstack.is(Items.CREEPER_HEAD)) {
+++            if (entitytypes == EntityType.SKELETON && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.SKELETON_SKULL) || entitytypes == EntityType.ZOMBIE && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.ZOMBIE_HEAD) || entitytypes == EntityType.PIGLIN && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.PIGLIN_HEAD) || entitytypes == EntityType.PIGLIN_BRUTE && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.PIGLIN_HEAD) || entitytypes == EntityType.CREEPER && this.getItemBySlot(EquipmentSlot.HEAD).is(Items.CREEPER_HEAD)) { // Gale - Petal - reduce skull ItemStack lookups for reduced visibility
++                 d0 *= 0.5D;
++             }
++         }

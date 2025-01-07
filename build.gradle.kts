@@ -1,31 +1,41 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
-import io.papermc.paperweight.util.path
-import kotlin.io.path.deleteRecursively
 
 plugins {
     java
     `maven-publish`
-    id("io.papermc.paperweight.patcher") version "1.7.7"
-}
-
-allprojects {
-    apply(plugin = "java")
-    apply(plugin = "maven-publish")
-
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(21))
-        }
-    }
+    id("io.papermc.paperweight.patcher") version "2.0.0-beta.11"
 }
 
 val paperMavenPublicUrl = "https://repo.papermc.io/repository/maven-public/"
 
 subprojects {
-    tasks.withType<JavaCompile>().configureEach {
+    apply(plugin = "java-library")
+    apply(plugin = "maven-publish")
+
+    extensions.configure<JavaPluginExtension> {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    repositories {
+        mavenCentral()
+        maven(paperMavenPublicUrl)
+    }
+
+    dependencies {
+        "testRuntimeOnly"("org.junit.platform:junit-platform-launcher")
+    }
+
+    tasks.withType<AbstractArchiveTask>().configureEach {
+        isPreserveFileTimestamps = false
+        isReproducibleFileOrder = true
+    }
+    tasks.withType<JavaCompile> {
         options.encoding = Charsets.UTF_8.name()
-        options.release.set(21)
+        options.release = 21
+        options.isFork = true
     }
     tasks.withType<Javadoc> {
         options.encoding = Charsets.UTF_8.name()
@@ -40,59 +50,35 @@ subprojects {
             events(TestLogEvent.STANDARD_OUT)
         }
     }
-
-    repositories {
-        mavenCentral()
-        maven(paperMavenPublicUrl)
-    }
-}
-
-repositories {
-    mavenCentral()
-    maven(paperMavenPublicUrl) {
-        content {
-            onlyForConfigurations(configurations.paperclip.name)
-        }
-    }
-}
-
-dependencies {
-    remapper("net.fabricmc:tiny-remapper:0.10.3:fat")
-    decompiler("org.vineflower:vineflower:1.10.1")
-    paperclip("io.papermc:paperclip:3.0.3")
 }
 
 paperweight {
-    serverProject.set(project(":gale-server")) // Gale - build changes
+    upstreams.paper {
+        ref = providers.gradleProperty("paperRef")
 
-    remapRepo.set(paperMavenPublicUrl)
-    decompileRepo.set(paperMavenPublicUrl)
-
-    usePaperUpstream(providers.gradleProperty("paperRef")) {
-        withPaperPatcher {
-            apiPatchDir.set(layout.projectDirectory.dir("patches/api"))
-            apiOutputDir.set(layout.projectDirectory.dir("gale-api")) // Gale - build changes
-
-            serverPatchDir.set(layout.projectDirectory.dir("patches/server"))
-            serverOutputDir.set(layout.projectDirectory.dir("gale-server")) // Gale - build changes
+        patchFile {
+            path = "paper-server/build.gradle.kts"
+            outputFile = file("gale-server/build.gradle.kts") // Gale - build changes
+            patchFile = file("gale-server/build.gradle.kts.patch") // Gale - build changes
         }
-
-        patchTasks.register("generatedApi") {
-            isBareDirectory = true
-            upstreamDirPath = "paper-api-generator/generated"
-            patchDir = layout.projectDirectory.dir("patches/generated-api")
-            outputDir = layout.projectDirectory.dir("paper-api-generator/generated")
+        patchFile {
+            path = "paper-api/build.gradle.kts"
+            outputFile = file("gale-api/build.gradle.kts") // Gale - build changes
+            patchFile = file("gale-api/build.gradle.kts.patch") // Gale - build changes
+        }
+        patchDir("paperApi") {
+            upstreamPath = "paper-api"
+            excludes = setOf("build.gradle.kts")
+            patchesDir = file("gale-api/paper-patches") // Gale - build changes
+            outputDir = file("paper-api")
+        }
+        patchDir("paperApiGenerator") {
+            upstreamPath = "paper-api-generator"
+            patchesDir = file("gale-api-generator/paper-patches") // Gale - build changes
+            outputDir = file("paper-api-generator")
         }
     }
 }
-
-// Uncomment while updating for a new Minecraft version
-//tasks.withType<io.papermc.paperweight.tasks.CollectATsFromPatches> {
-//    extraPatchDir.set(layout.projectDirectory.dir("patches/unapplied/server"))
-//}
-// tasks.withType<io.papermc.paperweight.tasks.RebuildGitPatches> {
-//     filterPatches.set(false)
-// }
 
 tasks.register("printMinecraftVersion") {
     doLast {
@@ -107,11 +93,12 @@ tasks.register("printGaleVersion") { // Gale - branding changes
 }
 
 // Gale start - branding changes - package license into jar
-// Based on io.papermc.paperweight.taskcontainers.BundlerJarTasks
-tasks.named("createMojmapPaperclipJar") {
+// Based on io.papermc.paperweight.taskcontainers.PaperclipTasks
+/*
+tasks.named("createMojmapBundlerJar") {
     doLast {
 
-        // Based on io.papermc.paperweight.taskcontainers.BundlerJarTasks
+        // Based on io.papermc.paperweight.taskcontainers.PaperclipTasks
         val jarName = listOfNotNull(
             project.name,
             "paperclip",
@@ -119,7 +106,7 @@ tasks.named("createMojmapPaperclipJar") {
             "mojmap"
         ).joinToString("-") + ".jar"
 
-        // Based on io.papermc.paperweight.taskcontainers.BundlerJarTasks
+        // Based on io.papermc.paperweight.taskcontainers.PaperclipTasks
         val zipFile = layout.buildDirectory.file("libs/$jarName").path
 
         val rootDir = io.papermc.paperweight.util.findOutputDir(zipFile)
@@ -141,4 +128,5 @@ tasks.named("createMojmapPaperclipJar") {
 
     }
 }
+ */
 // Gale end - branding changes - package license into jar

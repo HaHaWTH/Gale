@@ -1,0 +1,52 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martijn Muijsers <martijnmuijsers@live.nl>
+Date: Tue, 29 Nov 2022 15:33:32 +0100
+Subject: [PATCH] Do not process chat/commands before player has joined
+
+License: MIT (https://opensource.org/licenses/MIT)
+Gale - https://galemc.org
+
+This patch is based on the following patch:
+"Do not process chat/commands before player has joined"
+By: chickeneer <emcchickeneer@gmail.com>
+As part of: EmpireCraft (https://github.com/starlis/empirecraft)
+Licensed under: MIT (https://opensource.org/licenses/MIT)
+
+diff --git a/net/minecraft/server/level/ServerPlayer.java b/net/minecraft/server/level/ServerPlayer.java
+index b349da64650f914db8212e19b3c05ba92e74a1a3..9c2f9bc5e5bef96fb7ad0f04aa1cb72db9d10638 100644
+--- a/net/minecraft/server/level/ServerPlayer.java
++++ b/net/minecraft/server/level/ServerPlayer.java
+@@ -386,6 +386,7 @@ public class ServerPlayer extends Player implements ca.spottedleaf.moonrise.patc
+     public boolean joining = true;
+     public boolean sentListPacket = false;
+     public boolean supressTrackerForLogin = false; // Paper - Fire PlayerJoinEvent when Player is actually ready
++    public boolean didPlayerJoinEvent = false; // Gale - EMC - do not process chat/commands before player has joined
+     // CraftBukkit end
+     public boolean isRealPlayer; // Paper
+     public com.destroystokyo.paper.event.entity.PlayerNaturallySpawnCreaturesEvent playerNaturallySpawnedEvent; // Paper - PlayerNaturallySpawnCreaturesEvent
+diff --git a/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+index 089a903607c0d16dc2744981a6dcb23115df010d..1a2b9a2e2cabf542523982f6f8742840933b0f4a 100644
+--- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
++++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+@@ -2325,7 +2325,7 @@ public class ServerGamePacketListenerImpl
+             this.disconnectAsync(Component.translatable("multiplayer.disconnect.illegal_characters"), org.bukkit.event.player.PlayerKickEvent.Cause.ILLEGAL_CHARACTERS); // Paper - add proper async disconnect
+         } else if (this.player.isRemoved() || this.player.getChatVisibility() == ChatVisiblity.HIDDEN) { // CraftBukkit - dead men tell no tales
+             this.send(new ClientboundSystemChatPacket(Component.translatable("chat.disabled.options").withStyle(ChatFormatting.RED), false));
+-        } else {
++        } else if (player.didPlayerJoinEvent) { // Gale - EMC - do not process chat/commands before player has joined
+             this.player.resetLastActionTime();
+             // CraftBukkit start
+             if (sync) {
+diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
+index 03feaf0adb8ee87e33744a4615dc2507a02f92d7..23645f84f705bfbea29d7eaeaca84d0b115aae5a 100644
+--- a/net/minecraft/server/players/PlayerList.java
++++ b/net/minecraft/server/players/PlayerList.java
+@@ -330,6 +330,8 @@ public abstract class PlayerList {
+             return;
+         }
+ 
++        player.didPlayerJoinEvent = true; // Gale - EMC - do not process chat/commands before player has joined
++
+         final net.kyori.adventure.text.Component jm = playerJoinEvent.joinMessage();
+ 
+         if (jm != null && !jm.equals(net.kyori.adventure.text.Component.empty())) { // Paper - Adventure

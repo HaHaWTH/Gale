@@ -1,0 +1,84 @@
+--- a/paper-api/build.gradle.kts
++++ b/paper-api/build.gradle.kts
+@@ -103,6 +_,20 @@
+     main {
+         java {
+             srcDir(generatedApiPath)
++            // Gale start - project setup
++            srcDir(file("../paper-api/src/main/java"))
++        }
++        resources {
++            srcDir(file("../paper-api/src/main/resources"))
++        }
++    }
++    test {
++        java {
++            srcDir(file("../paper-api/src/test/java"))
++        }
++        resources {
++            srcDir(file("../paper-api/src/test/resources"))
++            // Gale end - project setup
+         }
+     }
+ }
+@@ -150,6 +_,16 @@
+     }
+ }
+ 
++// Gale start - hide irrelevant compilation warnings
++tasks.withType<JavaCompile> {
++    val compilerArgs = options.compilerArgs
++    compilerArgs.add("-Xlint:-module")
++    compilerArgs.add("-Xlint:-removal")
++    compilerArgs.add("-Xlint:-dep-ann")
++    compilerArgs.add("--add-modules=jdk.incubator.vector") // Gale - Pufferfish - SIMD support
++}
++// Gale end - hide irrelevant compilation warnings
++
+ tasks.jar {
+     from(generateApiVersioningFile.map { it.outputs.files.singleFile }) {
+         into("META-INF/maven/${project.group}/${project.name}")
+@@ -159,6 +_,12 @@
+             "Automatic-Module-Name" to "org.bukkit"
+         )
+     }
++
++    // Gale start - package license into jar
++    from("${project.projectDir}/LICENSE.txt") {
++        into("")
++    }
++    // Gale end - package license into jar
+ }
+ 
+ abstract class Services {
+@@ -169,7 +_,7 @@
+ 
+ tasks.withType<Javadoc> {
+     val options = options as StandardJavadocDocletOptions
+-    options.overview = "src/main/javadoc/overview.html"
++    options.overview = "../paper-api/src/main/javadoc/overview.html" // Gale - project setup
+     options.use()
+     options.isDocFilesSubDirs = true
+     options.links(
+@@ -202,16 +_,19 @@
+     }
+ 
+     // workaround for https://github.com/gradle/gradle/issues/4046
+-    inputs.dir("src/main/javadoc").withPropertyName("javadoc-sourceset")
++    inputs.dir("../paper-api/src/main/javadoc").withPropertyName("javadoc-sourceset") // Gale - project setup
+     val fsOps = services.fileSystemOperations
+     doLast {
+         fsOps.copy {
+-            from("src/main/javadoc") {
++            from("../paper-api/src/main/javadoc") { // Gale - project setup
+                 include("**/doc-files/**")
+             }
+             into("build/docs/javadoc")
+         }
+     }
++
++    options.addStringOption("Xdoclint:none", "-quiet") // Gale - hide irrelevant compilation warnings
++    options.addStringOption("-add-modules", "jdk.incubator.vector") // Gale - Pufferfish - SIMD support
+ }
+ 
+ tasks.test {

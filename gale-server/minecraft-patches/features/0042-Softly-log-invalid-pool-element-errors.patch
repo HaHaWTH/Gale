@@ -1,0 +1,36 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martijn Muijsers <martijnmuijsers@live.nl>
+Date: Fri, 25 Nov 2022 16:26:04 +0100
+Subject: [PATCH] Softly log invalid pool element errors
+
+License: MIT (https://opensource.org/licenses/MIT)
+Gale - https://galemc.org
+
+This patch is based on the following patch:
+"Change vanilla structure error to info log level"
+By: chickeneer <emcchickeneer@gmail.com>
+As part of: EmpireCraft (https://github.com/starlis/empirecraft)
+Licensed under: MIT (https://opensource.org/licenses/MIT)
+
+diff --git a/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java b/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java
+index 5c91b11fdb12cd51d9d6c662f4ba7a7f78891e26..c63c357a28e7911c7a227e911a4dc36d914da9b5 100644
+--- a/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java
++++ b/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java
+@@ -27,7 +27,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
+ import org.slf4j.Logger;
+ 
+ public class PoolElementStructurePiece extends StructurePiece {
+-    private static final Logger LOGGER = LogUtils.getLogger();
++    public static final Logger LOGGER = LogUtils.getLogger(); // Gale - EMC - softly log invalid pool element errors - private -> public
+     protected final StructurePoolElement element;
+     protected BlockPos position;
+     private final int groundLevelDelta;
+@@ -80,7 +80,7 @@ public class PoolElementStructurePiece extends StructurePiece {
+         DynamicOps<Tag> dynamicOps = context.registryAccess().createSerializationContext(NbtOps.INSTANCE);
+         StructurePoolElement.CODEC
+             .encodeStart(dynamicOps, this.element)
+-            .resultOrPartial(LOGGER::error)
++            .resultOrPartial(org.galemc.gale.configuration.GaleGlobalConfiguration.get().logToConsole.invalidPoolElementErrorStringConsumer) // Gale - EMC - softly log invalid pool element errors)
+             .ifPresent(elementTag -> tag.put("pool_element", elementTag));
+         tag.putString("rotation", this.rotation.name());
+         ListTag listTag = new ListTag();
