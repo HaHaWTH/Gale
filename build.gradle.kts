@@ -4,7 +4,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 plugins {
     java
     `maven-publish`
-    id("io.papermc.paperweight.patcher") version "2.0.0-beta.11"
+    id("io.papermc.paperweight.patcher") version "2.0.0-beta.12"
 }
 
 val paperMavenPublicUrl = "https://repo.papermc.io/repository/maven-public/"
@@ -91,42 +91,3 @@ tasks.register("printGaleVersion") { // Gale - branding changes
         println(project.version)
     }
 }
-
-// Gale start - branding changes - package license into jar
-// Based on io.papermc.paperweight.taskcontainers.PaperclipTasks
-/*
-tasks.named("createMojmapBundlerJar") {
-    doLast {
-
-        // Based on io.papermc.paperweight.taskcontainers.PaperclipTasks
-        val jarName = listOfNotNull(
-            project.name,
-            "paperclip",
-            project.version,
-            "mojmap"
-        ).joinToString("-") + ".jar"
-
-        // Based on io.papermc.paperweight.taskcontainers.PaperclipTasks
-        val zipFile = layout.buildDirectory.file("libs/$jarName").path
-
-        val rootDir = io.papermc.paperweight.util.findOutputDir(zipFile)
-
-        try {
-            io.papermc.paperweight.util.unzip(zipFile, rootDir)
-
-            val licenseFileName = "LICENSE.txt"
-            project(":gale-server").projectDir.resolve(licenseFileName)
-                .copyTo(rootDir.resolve(licenseFileName).toFile())
-
-            io.papermc.paperweight.util.ensureDeleted(zipFile)
-
-            io.papermc.paperweight.util.zip(rootDir, zipFile)
-        } finally {
-            @OptIn(kotlin.io.path.ExperimentalPathApi::class)
-            rootDir.deleteRecursively()
-        }
-
-    }
-}
- */
-// Gale end - branding changes - package license into jar

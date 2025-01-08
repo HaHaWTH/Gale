@@ -102,7 +102,7 @@
  
      doFirst {
          workingDir.mkdirs()
-@@ -330,3 +_,22 @@
+@@ -330,3 +_,62 @@
      classpath(tasks.createReobfPaperclipJar.flatMap { it.outputZip })
      mainClass.set(null as String?)
  }
@@ -125,3 +125,43 @@
 +    }
 +}
 +// Gale end - package license into jar
++
++// Gale start - branding changes - package license into jar
++// Based on io.papermc.paperweight.core.taskcontainers.PaperclipTasks
++tasks.named("createMojmapPaperclipJar") {
++    val name = rootProject.name
++    val version = project.version
++    val licenseFileName = "LICENSE.txt"
++    val licenseFilePath = layout.projectDirectory.dir("../paper-server/src/main/resources/$licenseFileName").asFile
++
++    // Based on io.papermc.paperweight.core.taskcontainers.PaperclipTasks
++    val jarName = listOfNotNull(
++        name,
++        "paperclip",
++        version,
++        "mojmap"
++    ).joinToString("-") + ".jar"
++
++    // Based on io.papermc.paperweight.core.taskcontainers.PaperclipTasks
++    val zipFile = layout.buildDirectory.file("libs/$jarName").get().path
++
++    val rootDir = findOutputDir(zipFile)
++
++    doLast {
++
++        try {
++            unzip(zipFile, rootDir)
++
++            licenseFilePath.copyTo(rootDir.resolve(licenseFileName).toFile())
++
++            ensureDeleted(zipFile)
++
++            zip(rootDir, zipFile)
++        } finally {
++            @OptIn(kotlin.io.path.ExperimentalPathApi::class)
++            rootDir.toFile().deleteRecursively()
++        }
++
++    }
++}
++// Gale end - branding changes - package license into jar

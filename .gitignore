@@ -27,4 +27,4 @@ gale-server/src/minecraft
 paper-api
 paper-api-generator
 paper-server
-paper-api-generator.settings.gradle
+paper-api-generator.settings.gradle.kts
