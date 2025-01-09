@@ -56,7 +56,7 @@
      implementation("ca.spottedleaf:concurrentutil:0.0.2")
      implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
      implementation("org.jline:jline-terminal-jni:3.27.1") // fall back to jni on java 21
-@@ -180,6 +_,16 @@
+@@ -180,26 +_,36 @@
      implementation("me.lucko:spark-paper:1.10.119-SNAPSHOT")
  }
  
@@ -73,7 +73,13 @@
  tasks.jar {
      manifest {
          val git = Git(rootProject.layout.projectDirectory.path)
-@@ -192,14 +_,14 @@
+         val mcVersion = rootProject.providers.gradleProperty("mcVersion").get()
+         val build = System.getenv("BUILD_NUMBER") ?: null
+-        val buildTime = if (build != null) Instant.now() else Instant.EPOCH
++        val buildTime = Instant.now() // Gale - branding changes - we don't have ci yet
+         val gitHash = git.exec(providers, "rev-parse", "--short=7", "HEAD").get().trim()
+         val implementationVersion = "$mcVersion-${build ?: "DEV"}-$gitHash"
+         val date = git.exec(providers, "show", "-s", "--format=%ci", gitHash).get().trim()
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -109,7 +115,7 @@
 +
 +// Gale start - package license into jar
 +tasks.register<Copy>("copyLicense") {
-+    from(layout.projectDirectory.file("LICENSE.txt"))
++    from(layout.projectDirectory.file("../paper-server/LICENSE.txt"))
 +    into(layout.buildDirectory.dir("tmp/copiedlicense"))
 +}
 +
@@ -132,7 +138,7 @@
 +    val name = rootProject.name
 +    val version = project.version
 +    val licenseFileName = "LICENSE.txt"
-+    val licenseFilePath = layout.projectDirectory.dir("../paper-server/src/main/resources/$licenseFileName").asFile
++    val licenseFilePath = layout.projectDirectory.dir("../paper-server/$licenseFileName").asFile
 +
 +    // Based on io.papermc.paperweight.core.taskcontainers.PaperclipTasks
 +    val jarName = listOfNotNull(

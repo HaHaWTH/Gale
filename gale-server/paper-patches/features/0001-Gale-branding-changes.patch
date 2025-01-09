@@ -181,8 +181,47 @@ index 65c5ca88a67c30becee01c5a8816d964b03862f9..00000000000000000000000000000000
 -apply, that proxy's public statement of acceptance of any version is
 -permanent authorization for you to choose that version for the
 -Library.
+diff --git a/LICENCE.txt b/LICENSE.txt
+similarity index 99%
+rename from LICENCE.txt
+rename to LICENSE.txt
+index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898e26fcf2a 100644
+--- a/LICENCE.txt
++++ b/LICENSE.txt
+@@ -1,7 +1,7 @@
+                     GNU GENERAL PUBLIC LICENSE
+                        Version 3, 29 June 2007
+ 
+- Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
++ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+  Everyone is permitted to copy and distribute verbatim copies
+  of this license document, but changing it is not allowed.
+ 
+@@ -645,7 +645,7 @@ the "copyright" line and a pointer to where the full notice is found.
+     GNU General Public License for more details.
+ 
+     You should have received a copy of the GNU General Public License
+-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
++    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ 
+ Also add information on how to contact you by electronic and paper mail.
+ 
+@@ -664,11 +664,11 @@ might be different; for a GUI interface, you would use an "about box".
+   You should also get your employer (if you work as a programmer) or school,
+ if any, to sign a "copyright disclaimer" for the program, if necessary.
+ For more information on this, and how to apply and follow the GNU GPL, see
+-<http://www.gnu.org/licenses/>.
++<https://www.gnu.org/licenses/>.
+ 
+   The GNU General Public License does not permit incorporating your program
+ into proprietary programs.  If your program is a subroutine library, you
+ may consider it more useful to permit linking proprietary applications with
+ the library.  If this is what you want to do, use the GNU Lesser General
+ Public License instead of this License.  But first, please read
+-<http://www.gnu.org/philosophy/why-not-lgpl.html>.
++<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 532306cacd52579cdf37e4aca25887b1ed3ba6a1..2beea17d87464683faaefa835206f2654df9bde0 100644
+index 532306cacd52579cdf37e4aca25887b1ed3ba6a1..7fab7113821dc5d5f4ba4a2e0ee25968ad5a4439 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 @@ -30,58 +30,35 @@ import org.slf4j.Logger;
@@ -207,7 +246,7 @@ index 532306cacd52579cdf37e4aca25887b1ed3ba6a1..2beea17d87464683faaefa835206f265
 -        return 720000;
 +    public PaperVersionFetcher() {
 +        super(
-+            "master",
++            "main",
 +            "https://papermc.io/downloads/paper",
 +            "PaperMC",
 +            "Paper",
@@ -457,45 +496,6 @@ index a9339f59f81dff307317ae4afdff0dc296febcc9..64e3c7bd0a1ff93dd87e688f9e49e213
                  }
  
                  logger.log(Level.SEVERE, "------------------------------");
-diff --git a/LICENCE.txt b/src/main/resources/LICENSE.txt
-similarity index 99%
-rename from LICENCE.txt
-rename to src/main/resources/LICENSE.txt
-index 94a9ed024d3859793618152ea559a168bbcbb5e2..e60008693e017bec1b4eb49c84be3898e26fcf2a 100644
---- a/LICENCE.txt
-+++ b/src/main/resources/LICENSE.txt
-@@ -1,7 +1,7 @@
-                     GNU GENERAL PUBLIC LICENSE
-                        Version 3, 29 June 2007
- 
-- Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
-+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
-  Everyone is permitted to copy and distribute verbatim copies
-  of this license document, but changing it is not allowed.
- 
-@@ -645,7 +645,7 @@ the "copyright" line and a pointer to where the full notice is found.
-     GNU General Public License for more details.
- 
-     You should have received a copy of the GNU General Public License
--    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
- 
- Also add information on how to contact you by electronic and paper mail.
- 
-@@ -664,11 +664,11 @@ might be different; for a GUI interface, you would use an "about box".
-   You should also get your employer (if you work as a programmer) or school,
- if any, to sign a "copyright disclaimer" for the program, if necessary.
- For more information on this, and how to apply and follow the GNU GPL, see
--<http://www.gnu.org/licenses/>.
-+<https://www.gnu.org/licenses/>.
- 
-   The GNU General Public License does not permit incorporating your program
- into proprietary programs.  If your program is a subroutine library, you
- may consider it more useful to permit linking proprietary applications with
- the library.  If this is what you want to do, use the GNU Lesser General
- Public License instead of this License.  But first, please read
--<http://www.gnu.org/philosophy/why-not-lgpl.html>.
-+<https://www.gnu.org/philosophy/why-not-lgpl.html>.
 diff --git a/src/main/resources/logo.png b/src/main/resources/logo.png
 index 8b924977b7886df9ab8790b1e4ff9b1c04a2af45..e7e9fd9a6077535b89c6c9d7b0164e8b87c54bed 100644
 GIT binary patch
