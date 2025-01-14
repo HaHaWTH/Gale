@@ -40,10 +40,10 @@ index 861bff267cb397e13e8e1c79bd0776b130c6e5da..30972bf7889973cf63b5f32ad166afdc
      private long lastFill = -1;
      private long nextRefill = -1;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index 544305f9d08ece4245810dbcf47a396017adead6..03af99e2fddf3626fec150198bc0b142d3aef0d9 100644
+index ba32db69c95b325a781cb2dff4200e4464a11baf..91156797d0ffed5227851b398d8b896aef71d614 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-@@ -284,7 +284,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
+@@ -286,7 +286,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
      }
      // Paper end
  

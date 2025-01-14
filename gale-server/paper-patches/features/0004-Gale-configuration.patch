@@ -13,7 +13,7 @@ As part of: Paper (https://github.com/PaperMC/Paper)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/io/papermc/paper/configuration/Configurations.java b/src/main/java/io/papermc/paper/configuration/Configurations.java
-index 109e569b7ba6419d60c6490b588937579b4f6878..6b453e3f97629f52c491a0caf79c27a3078aefb7 100644
+index 4a9258b62db3a9d1150f0dfbe916fa549b596686..7c2f3b46f94989e532694ce3fbba90489caceb7f 100644
 --- a/src/main/java/io/papermc/paper/configuration/Configurations.java
 +++ b/src/main/java/io/papermc/paper/configuration/Configurations.java
 @@ -94,7 +94,7 @@ public abstract class Configurations<G, W> {
@@ -70,10 +70,10 @@ index 109e569b7ba6419d60c6490b588937579b4f6878..6b453e3f97629f52c491a0caf79c27a3
 +
  }
 diff --git a/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java b/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java
-index 098ab351de4f84cdc943ebe855dd0022174e1e67..7a67e244cb1cd508a703ecdff5a6ab6ab07ac32b 100644
+index e48fa405d92fab221fa8331b65c8f324e801d439..352d62385e56d5805510596ec9424e5d14336861 100644
 --- a/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java
 +++ b/src/main/java/io/papermc/paper/configuration/PaperConfigurations.java
-@@ -326,7 +326,7 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
+@@ -330,7 +330,7 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
          }
      }
  
@@ -82,7 +82,7 @@ index 098ab351de4f84cdc943ebe855dd0022174e1e67..7a67e244cb1cd508a703ecdff5a6ab6a
          return createWorldContextMap(level.levelStorageAccess.levelDirectory.path(), level.serverLevelData.getLevelName(), level.dimension().location(), level.spigotConfig, level.registryAccess(), level.getGameRules());
      }
  
-@@ -429,17 +429,6 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
+@@ -433,17 +433,6 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
          return Files.exists(legacyConfig) && Files.isRegularFile(legacyConfig);
      }
  
@@ -100,7 +100,7 @@ index 098ab351de4f84cdc943ebe855dd0022174e1e67..7a67e244cb1cd508a703ecdff5a6ab6a
      @Deprecated
      public static YamlConfiguration loadLegacyConfigFile(File configFile) throws Exception {
          YamlConfiguration config = new YamlConfiguration();
-@@ -462,9 +451,16 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
+@@ -466,9 +455,16 @@ public class PaperConfigurations extends Configurations<GlobalConfiguration, Wor
      }
  
      // Symlinks are not correctly checked in createDirectories
@@ -144,10 +144,10 @@ index 05339a176083af667c16f77d76dc1878dafce3f0..9ca55cba185b9de566f911b08d671bee
      }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 381448d8ebd7beaae4be45cd18509042d39fb047..c8a3733d4a964ee10eaafd90657a11d91ef8bca4 100644
+index d2de789967f8f1942e91d9e4c547113a5e31382b..9165b85bfafe404dddcc6634456e4df540bc0df9 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1086,6 +1086,7 @@ public final class CraftServer implements Server {
+@@ -1087,6 +1087,7 @@ public final class CraftServer implements Server {
  
          org.spigotmc.SpigotConfig.init((File) this.console.options.valueOf("spigot-settings")); // Spigot
          this.console.paperConfigurations.reloadConfigs(this.console);
@@ -155,7 +155,7 @@ index 381448d8ebd7beaae4be45cd18509042d39fb047..c8a3733d4a964ee10eaafd90657a11d9
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -3049,6 +3050,14 @@ public final class CraftServer implements Server {
+@@ -3055,6 +3056,14 @@ public final class CraftServer implements Server {
              return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
          }
  

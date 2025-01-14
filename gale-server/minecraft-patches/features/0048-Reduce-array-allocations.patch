@@ -194,7 +194,7 @@ index 2caeb69306a42d02b7a5c27e00fb969e392ac6ba..2b9b683023943435a86c42e3a61e0b33
          return ret;
      }
 diff --git a/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 1fa2bb9e9866ad6f0394327df934388b7fcd7f93..247ff694e3d97365a9149b3c2fc99574a21aa9f9 100644
+index 2ec59747ed7102a90d637f3b6fb6520339b2c57e..f5a36446bc1fd0f5fbbfccb5d331b916d466ea55 100644
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -2767,7 +2767,7 @@ public class ServerGamePacketListenerImpl
@@ -259,10 +259,10 @@ index 028dff862850c63d0b66902e99dd0bf685a7aa0d..b2d8b6883e2527c13794d23d27a4647a
      private EquipmentSlotGroup(final int id, final String key, final Predicate<EquipmentSlot> predicate) {
          this.id = id;
 diff --git a/net/minecraft/world/item/ItemStack.java b/net/minecraft/world/item/ItemStack.java
-index ba31bbdac96e58d299dc260b47aaedf767735a42..badcb066ad66d9d4b17510fb1d633022c19d35d1 100644
+index 76f50437396f8f856381d0fbef52953ef7c263f6..f6c0f9275dd737c0142d6e4be07be71ad50b4732 100644
 --- a/net/minecraft/world/item/ItemStack.java
 +++ b/net/minecraft/world/item/ItemStack.java
-@@ -1126,7 +1126,7 @@ public final class ItemStack implements DataComponentHolder {
+@@ -1145,7 +1145,7 @@ public final class ItemStack implements DataComponentHolder {
      private void addAttributeTooltips(Consumer<Component> tooltipAdder, @Nullable Player player) {
          ItemAttributeModifiers itemAttributeModifiers = this.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
          if (itemAttributeModifiers.showInTooltip()) {
@@ -338,7 +338,7 @@ index 5bc259ad1f9f56f4f596a4ae7b1b324b5e1219e6..0d34839618648bb8c606dd2d9b1f9db9
  
          @Override
 diff --git a/net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java b/net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java
-index 38f145525a8ef4440ab06abb35d5aba1e5746f5d..f772d2542922eddf666ff375fc2546150c39ad32 100644
+index cb4b8567c029e3a53aafda2755e3773ea8b95af7..ad9f009dd6c86e08c193839479b4b3285afd7dfb 100644
 --- a/net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java
 +++ b/net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java
 @@ -44,7 +44,7 @@ public abstract class AbstractFurnaceBlockEntity extends BaseContainerBlockEntit

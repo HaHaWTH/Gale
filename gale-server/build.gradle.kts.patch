@@ -1,6 +1,6 @@
 --- a/paper-server/build.gradle.kts
 +++ b/paper-server/build.gradle.kts
-@@ -21,8 +_,21 @@
+@@ -21,6 +_,23 @@
      // macheOldPath = file("F:\\Projects\\PaperTooling\\mache\\versions\\1.21.4\\src\\main\\java")
      // gitFilePatches = true
  
@@ -15,15 +15,16 @@
 +    }
 +
 +    activeFork = gale
++
++    paper {
++        paperServerDir = upstreamsDirectory().map { it.dir("paper/paper-server") }
++    }
 +    // Gale end - project setup
 +
-     paper {
--        reobfMappingsPatch = layout.projectDirectory.file("../build-data/reobf-mappings-patch.tiny")
-+        paperServerDir = upstreamsDirectory().map { it.dir("paper/paper-server") } // Gale - project setup
-     }
- 
      spigot {
-@@ -105,7 +_,22 @@
+         buildDataRef = "3edaf46ec1eed4115ce1b18d2846cded42577e42"
+         packageVersion = "v1_21_R3" // also needs to be updated in MappingEnvironment
+@@ -101,7 +_,22 @@
      }
  }
  
@@ -47,16 +48,16 @@
  configurations.named(log4jPlugins.compileClasspathConfigurationName) {
      extendsFrom(configurations.compileClasspath.get())
  }
-@@ -123,7 +_,7 @@
+@@ -119,7 +_,7 @@
  }
  
  dependencies {
 -    implementation(project(":paper-api"))
 +    implementation(project(":gale-api")) // Gale - project setup - Depend on own API
-     implementation("ca.spottedleaf:concurrentutil:0.0.2")
+     implementation("ca.spottedleaf:concurrentutil:0.0.3")
      implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
      implementation("org.jline:jline-terminal-jni:3.27.1") // fall back to jni on java 21
-@@ -180,26 +_,36 @@
+@@ -176,26 +_,36 @@
      implementation("me.lucko:spark-paper:1.10.119-SNAPSHOT")
  }
  
@@ -99,7 +100,7 @@
              "Build-Number" to (build ?: ""),
              "Build-Time" to buildTime.toString(),
              "Git-Branch" to gitBranch,
-@@ -285,6 +_,8 @@
+@@ -281,6 +_,8 @@
      val memoryGb = providers.gradleProperty("paper.runMemoryGb").getOrElse("2")
      minHeapSize = "${memoryGb}G"
      maxHeapSize = "${memoryGb}G"
@@ -108,7 +109,7 @@
  
      doFirst {
          workingDir.mkdirs()
-@@ -330,3 +_,62 @@
+@@ -326,3 +_,62 @@
      classpath(tasks.createReobfPaperclipJar.flatMap { it.outputZip })
      mainClass.set(null as String?)
  }

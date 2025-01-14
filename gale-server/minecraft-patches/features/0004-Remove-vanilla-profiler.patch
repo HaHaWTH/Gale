@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/net/minecraft/commands/Commands.java b/net/minecraft/commands/Commands.java
-index 19ccf3abf14c67f72a1ca065e4a304f50e645ef4..22d5c733df234e8fac286809bfb724859a600963 100644
+index fa8c5ba4e0efd0c36613aaa8eaafba0cb70ceb87..93a07d4f82763358089bb45549cf1aa2639a7de8 100644
 --- a/net/minecraft/commands/Commands.java
 +++ b/net/minecraft/commands/Commands.java
 @@ -55,7 +55,6 @@ import net.minecraft.server.commands.CloneCommands;
@@ -169,7 +169,7 @@ index 18071dcc69cc28471dddb7de94e803ec1e5fc2e4..e30bb9c4046200c1a6e4e917d15b205f
      }
  }
 diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
-index d7916d4d4cec9ac376c8b7b4c3432fddd55a1940..d69f6146ed653ec28eae67c0142867ac5d0e21ef 100644
+index d61dcc909a04fb024df509b88dbe5cd455aad622..8b42972dde96f04ba0de53e57e192edf3f5ce054 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
 @@ -114,19 +114,8 @@ import net.minecraft.util.TimeUtil;
@@ -330,7 +330,7 @@ index d7916d4d4cec9ac376c8b7b4c3432fddd55a1940..d69f6146ed653ec28eae67c0142867ac
  
          // CraftBukkit start
          // Run tasks that are waiting on processing
-@@ -1710,17 +1664,12 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1711,17 +1665,12 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              serverLevel.hasEntityMoveEvent = io.papermc.paper.event.entity.EntityMoveEvent.getHandlerList().getRegisteredListeners().length > 0; // Paper - Add EntityMoveEvent
              serverLevel.updateLagCompensationTick(); // Paper - lag compensation
              net.minecraft.world.level.block.entity.HopperBlockEntity.skipHopperEvents = serverLevel.paperConfig().hopper.disableMoveEvent || org.bukkit.event.inventory.InventoryMoveItemEvent.getHandlerList().getRegisteredListeners().length == 0; // Paper - Perf: Optimize Hoppers
@@ -348,7 +348,7 @@ index d7916d4d4cec9ac376c8b7b4c3432fddd55a1940..d69f6146ed653ec28eae67c0142867ac
              try {
                  serverLevel.tick(hasTimeLeft);
              } catch (Throwable var7) {
-@@ -1729,34 +1678,24 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1730,34 +1679,24 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  throw new ReportedException(crashReport);
              }
  
@@ -383,7 +383,7 @@ index d7916d4d4cec9ac376c8b7b4c3432fddd55a1940..d69f6146ed653ec28eae67c0142867ac
      }
  
      public void tickConnection() {
-@@ -1772,14 +1711,9 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1773,14 +1712,9 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      }
  
      public void forceTimeSynchronization() {
@@ -398,7 +398,7 @@ index d7916d4d4cec9ac376c8b7b4c3432fddd55a1940..d69f6146ed653ec28eae67c0142867ac
      }
  
      public boolean isLevelEnabled(Level level) {
-@@ -2599,55 +2533,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2600,55 +2534,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      }
      // CraftBukkit end
  
@@ -454,7 +454,7 @@ index d7916d4d4cec9ac376c8b7b4c3432fddd55a1940..d69f6146ed653ec28eae67c0142867ac
      public Path getWorldPath(LevelResource levelResource) {
          return this.storageSource.getLevelPath(levelResource);
      }
-@@ -2697,24 +2582,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2698,24 +2583,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          return this.isSaving;
      }
  
@@ -479,7 +479,7 @@ index d7916d4d4cec9ac376c8b7b4c3432fddd55a1940..d69f6146ed653ec28eae67c0142867ac
      public int getMaxChainedNeighborUpdates() {
          return 1000000;
      }
-@@ -2820,55 +2687,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2821,55 +2688,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      public record ServerResourcePackInfo(UUID id, String url, String hash, boolean isRequired, @Nullable Component prompt) {
      }
  
